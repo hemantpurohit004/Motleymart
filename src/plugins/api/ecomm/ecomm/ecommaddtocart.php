@@ -62,7 +62,6 @@ class EcommApiResourceEcommAddToCart extends ApiResource
 		$userData = array();
 
 		$data = $service->ecommAddToCart($item, $userData);
-		//$data['userId'] = 952; remove added for testing
 
 		$this->plugin->setResponse($data);
 		return true;

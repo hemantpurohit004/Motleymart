@@ -1635,8 +1635,6 @@ class EcommService
      */
     public function ecommAddToCart($item, $userData)
     {
-        // print_r( JFactory::getUser() );die('ecommAddToCart');
-        // return JFactory::getUser()->id;
         // Clear the previous responses
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
