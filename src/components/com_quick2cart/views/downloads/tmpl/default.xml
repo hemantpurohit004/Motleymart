@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="My Downloads" option="View" >
+		 <message><![CDATA[My Downloads]]></message>
+	</layout>
+	<state>
+		<name>My Downloads</name>
+		<description>My Downloads</description>
+		<params>
+		</params>
+	</state>
+</metadata>

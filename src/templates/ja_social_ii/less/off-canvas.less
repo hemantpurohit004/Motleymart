@@ -1,0 +1,255 @@
+/*
+$JA#COPYRIGHT$
+*/
+
+
+// VARIABLES & MIXINS
+// ------------------
+@import "vars.less"; // Include Variables and Mixins
+
+
+// EXTEND STYLE IN BASE
+// --------------------
+@import "../../../plugins/system/t3/base-bs3/less/off-canvas.less";
+
+
+
+//
+// OFF-CANVAS
+// -------------------------------------
+.off-canvas-right.off-canvas-effect-4.t3-off-canvas {
+  transform: translate3d(@t3-off-canvas-width, 0px, 0px);
+  -moz-transform: translate3d(@t3-off-canvas-width, 0px, 0px);
+  -webkit-transform: translate3d(@t3-off-canvas-width, 0px, 0px);
+}
+
+// Toggle Button
+// -------------------
+.off-canvas-toggle {
+  border-radius: 0;
+  border: 0;
+  padding: 0;
+  width: @navbar-height - 20px;
+  height: @navbar-height - 20px;
+  line-height: @navbar-height - 20px;
+  float: right;
+  margin: 10px 0;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+
+//
+// OFF-CANVAS CONTENT STYLES
+// -------------------------------------
+.t3-off-canvas {
+  // Generic
+  // -----------------------------------
+  background: @t3-off-canvas-background;
+  color: @t3-off-canvas-text-color;
+
+
+  // Header
+  // -----------------------------------
+  .t3-off-canvas-header {
+    background: @t3-off-canvas-header-background;
+    color: @t3-off-canvas-header-text-color;
+    padding: 0 0 0 25px;
+    height: 50px;
+
+    // Title
+    h2 {
+      color: @t3-off-canvas-header-text-color;
+      margin: 0;
+      line-height: 50px;
+      font-size: @font-size-base;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+  }
+
+  // Close Button
+  .close {
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
+    width: 50px;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: @white;
+  }
+
+
+  // Body
+  // -----------------------------------
+  .t3-off-canvas-body {
+
+    padding: 0;
+
+    // Links
+    // ------------
+    a {
+      color: @t3-off-canvas-link-color;
+      text-decoration: none;
+      padding: @padding-large-vertical 25px;
+
+      &:hover,
+      &:focus {
+        background: none;
+        color: @t3-off-canvas-link-hover-color;
+        text-decoration: none;
+      }
+
+      &:focus {
+        .tab-focus();
+      }
+    }
+
+    .dropdown-menu .active a {
+      background: transparent;
+    }
+
+
+    // Navigations
+    // ------------
+    .nav {
+      > li {
+        border-top: 1px solid darken(@t3-off-canvas-background, 3%);
+        padding: 0;
+
+        > a {
+          .caret {
+            border-top-color: @gray-light-lv3;
+            margin-left: 10px;
+          }
+
+          &:hover .caret {
+            border-top-color: @t3-off-canvas-link-hover-color;
+          }
+        }
+
+        &:before {
+          display: none;
+
+          a:hover {
+            color: @white;
+          }
+        }
+
+        &.active {
+          &:before {
+            border-left-color: @brand-primary;
+          }
+
+          
+
+          > a {
+            color: @brand-primary;
+            background: @t3-off-canvas-background;
+
+            .caret {
+              border-top-color: @brand-primary;
+            }
+          }
+        }
+      }
+    }
+
+    // Dropdown Menu
+    .dropdown-menu {
+      background: none;
+      border-top: 1px solid darken(@t3-off-canvas-background, 3%);
+      padding: @padding-large-vertical 25px;
+      margin: 0;
+      font-size: @t3-font-size-smaller;
+      text-transform: uppercase;
+
+      > li {
+        padding: 0;
+        > a {
+          position: relative;
+          padding: @padding-large-vertical @padding-large-horizontal;
+          text-transform: none;
+
+          &:before {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px 0 4px 5px;
+            border-color: transparent transparent transparent @t3-off-canvas-link-color;
+            position: absolute;
+            top: 16px;
+            left: 0;
+          }
+
+          &:after {
+            display: none;
+          }
+
+          &:hover {
+            color: @t3-off-canvas-link-hover-color;
+          }
+        }
+
+        &.active > a {
+          &,
+          &:hover {
+            color: @t3-off-canvas-link-hover-color;
+            font-weight: @font-weight-bold;
+          }
+
+          &:before {
+            border-left-color: @t3-off-canvas-link-hover-color;
+          }
+        }
+      }
+    }
+
+    // Dropdown SubMenu
+    .dropdown-submenu .dropdown-menu {
+      padding: 5px 15px;
+      border: none;
+      text-transform: none;
+    }
+
+
+    // Modules
+    // ------------
+    .t3-module {
+      margin-bottom: @line-height-computed;
+      background: none;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .module-inner {
+        padding: 0;
+        background: none;
+      }
+    }
+
+    .module-title  {
+      background: none;
+      margin-bottom: 0;
+      color: @gray-light-lv3;
+      padding: @line-height-computed*0.75 10px @line-height-computed*0.75 25px;
+    }
+
+    .module-ct {
+      background: none;
+    }
+
+  // End Off-Canvas Body
+  }
+
+// End Off-Canvas Content Styles
+}

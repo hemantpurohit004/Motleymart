@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+
+	<name>Quick2Cart - Content - Widget for Joomla Content</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>Quick2Cart's Add to Cart Widget for Joomla content. This plugin lets you use Quick2Cart with  Joomla content articles. It adds Quick2cart product form in Joomla content articles, also it renders all such Joomla content articles as Quick2cart products.</description>
+
+	<files>
+		<filename plugin="content_quick2cart">content_quick2cart.php</filename>
+		<filename>index.html</filename>
+		<folder>content_quick2cart</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB/en-GB.plg_content_content_quick2cart.ini</language>
+ 	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<!--<field name="buy_text" type="text" default="Buy" label="PLG_BUY" description="PLG_BUY_DESC" />	 -->
+				<field name="btn_pos_method" type="radio" default="normal" label="PLG_BUY_POSITION" description="DES_PLG_BUY_POSITION">
+					<option value="data_tag">DATA_TAG</option>
+					<option value="normal">NORMAL</option>
+				</field>
+				<!--
+				<field name="showprice" type="radio" default="1" label="PLG_PRICE" description="PLG_PRICE_DESC">
+					<option value="0">P_NO</option>
+					<option value="1">P_YES</option>
+				</field>
+				-->
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Store-Shipping" option="View" >
+		<message><![CDATA[Store-Shipping]]></message>
+	</layout>
+	<state>
+		<name>Store-Shipping</name>
+		<description>Store-Shipping</description>
+		<params>
+		</params>
+	</state>
+</metadata>
+
+
+
+

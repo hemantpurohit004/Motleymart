@@ -1,0 +1,52 @@
+.discount-content-wrapper
+{
+	background:#006dac;
+	color:#ffffff;
+	font-size:22px;
+	font-family:Roboto, sans-serif;
+	border-radius:10px;
+	padding:10px;
+	word-break: break-word;
+}
+
+.discount-text-wrapper
+{
+	background:#006dac;
+	margin:15px 20px;
+	padding:4px;
+	word-break: break-word;
+}
+
+.discount-text-wrapper
+{
+	border:right;
+	position:2px dashed #ffffff;
+	padding:18px;
+	font-size:large;
+	color:#ffffff;
+	text-align:center;
+	text-shadow:0 0 20px rgba(255, 255, 255, 1);
+	word-break: break-word;
+}
+
+.code-blur-wrapper
+{
+	color:transparent !important;
+	word-break: break-word;
+}
+
+.code-coupon-wrapper
+{
+	text-shadow:0 0 20px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1);
+	word-break: break-word;
+}
+
+.discount-box-title-wrapper
+{
+	word-break: break-word;
+	font-size: 18px;
+	text-align:center;
+	font-family: Roboto, sans-serif;
+	font-weight: bold;
+	color: #006dac;
+}

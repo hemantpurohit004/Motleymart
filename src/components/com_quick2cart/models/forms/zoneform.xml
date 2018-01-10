@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+		<field name="id" type="text" default="0" label="COM_QUICK2CART_FORM_LBL_ZONE_ID"
+		readonly="true" class="readonly"
+		description="JGLOBAL_FIELD_ID_DESC" />
+
+		<field name="name" type="text"
+			label="COM_QUICK2CART_FORM_LBL_ZONE_ZONE_NAME"
+			description="COM_QUICK2CART_FORM_LBL_ZONE_ZONE_NAME_DESC"
+			hint="COM_QUICK2CART_FORM_ZONE_NAME_PLACEHOLDER"
+			default=""
+			required="true"  />
+
+		<field name="store_id" type="stores"
+			label="COM_QUICK2CART_FORM_LBL_ZONE_STORE_ID"
+			description="COM_QUICK2CART_FORM_DESC_ZONE_STORE_ID"
+				 default="COM_QUICK2CART_SELECT_STORE"
+				 required="true"
+				 class="required" >
+				<option value="">COM_QUICK2CART_ZONES_SELECT_STORE</option>
+		</field>
+
+
+		<field name="filter_store_id" type="list" onchange="this.form.submit();">
+			<option value="">COM_QUICK2CART_ZONES_STORE_ID_FILTER</option>
+			<option value="0">Default</option>
+		</field>
+
+	   <field name="created_by" type="createdby" default=""
+			label="COM_QUICK2CART_FORM_LBL_ZONE_CREATED_BY"
+			description="COM_QUICK2CART_FORM_DESC_ZONE_CREATED_BY"  />
+
+			 <field
+			name="state"
+			type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			size="1"
+			default="1">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="checked_out" type="hidden" filter="unset" />
+		<field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+
+</form>

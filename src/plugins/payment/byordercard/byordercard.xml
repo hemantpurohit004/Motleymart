@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="payment" method="upgrade">
+	<name>Card On Delivery</name>
+	<author>Shivneri Systems</author>
+	<creationDate>26 Nov 2017</creationDate>
+	<copyright>Shivneri Systems. All Rights Reserved.</copyright>
+	<authorEmail>niteshkesarkar136@gmail.com</authorEmail>
+	<authorUrl>http://www.shivnerisystems.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.0.0</version>
+	<description>Card On Delivery Order plugin from Techjoomla.</description>
+	<files>
+		<filename plugin="byordercard">byordercard.php</filename>
+		<folder>byordercard</folder>
+	</files>
+		<languages>
+			<language tag="en-GB">en-GB/en-GB.plg_payment_byordercard.ini</language>
+  	</languages>
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="plugin_name" type="text" default="PayBy Purchase Order Card" label="PLG_NAME" description="" />
+				<field name="plugin_mail" type="textarea" default="" label="PLG_MAIL" description="PLG_MAIL_DES" rows="5" cols="20"  />
+				<field name="log_write" type="radio" default="0" label="PLG_ORDER_WRITE_LOG"	description="PLG_ORDER_WRITE_LOG_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

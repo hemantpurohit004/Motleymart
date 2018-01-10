@@ -1,0 +1,1617 @@
+#cop_tr {
+display:none;
+}
+
+#qtc_admin {
+float:left;
+width:60%;
+}
+
+/*For CART view*/
+#qtc_formactions {
+text-align: center;
+}
+
+#qtc_loginmsg {
+float:left;
+width:40%;
+}
+
+/* added by Vidyasagar to remove inline style from Registration*/
+#qtc_maindiv {
+width:100%;
+}
+
+#qtc_orderblocs {
+clear:both;
+}
+
+#qtc_orderinfo {
+float:left;
+margin-right:8px;
+width:43%;
+}
+
+.btn_margin {
+margin:2px 1px 2px 0 !important;
+}
+
+.q2c-wrapper .cartitems {overflow-y: auto; max-height: 250px; min-height: 150px;}
+
+.category_product_div_size {
+float:left;
+height:190px;
+width:160px;
+}
+
+.checkout-heading {
+/*
+background:#e8e8e8;
+*/
+border-bottom:1px solid #ddd;
+color:#333;
+font-size:13px;
+font-weight:bold;
+margin-bottom:15px;
+padding:8px;
+}
+
+.clr {
+clear:both;
+}
+
+.com_q2c_img_128_128 {
+height:128px!important;
+width:128px!important;
+}
+
+.com_qtc_header_img {
+border:#999 1px solid!important;
+height:100px!important;
+width:580px!important;
+}
+
+.com_qtc_img_border {
+border:#999 1px solid!important;
+}
+
+.com_qtc_mediaAdd_button {
+position:relative;
+right:-83%;
+top:-144px;
+}
+
+.com_qtc_mediaRemove_button {
+position:relative;
+right:-88%;
+top:-130px;
+}
+
+.com_qtc_media_repeat_block {
+padding:2% 0 0 1%;
+}
+
+.com_qtc_prod_img {
+border:#999 1px solid!important;
+height:85px!important;
+width:85px!important;
+}
+
+.com_qtc_prod_img100by100 {
+border:#999 1px solid!important;
+height:100px!important;
+width:100px!important;
+}
+
+.com_qtc_prod_img50by50 {
+border:#999 1px solid!important;
+height:50px!important;
+width:50px!important;
+}
+
+.com_qtc_repeating_block {
+/*border:1px dotted;*/
+padding:2% 0 0 1%;
+width:90%;
+border-radius: 3px;
+}
+
+/*vm*/
+.com_quick2cart_ajax_loading {
+text-align:center;
+ margin: auto;
+}
+
+.com_quick2cart_ajax_loading_img {
+height:72px!important;
+width:72px!important;
+}
+
+.com_quick2cart_ajax_loading_text {
+font-weight:bold;
+}
+
+.curr_margin {
+margin:0 5px 5px 0 !important;
+}
+
+.default_product_div_size {
+float:left;
+height:190px;
+width:110px;
+}
+
+/* filter search css added by kk */
+.filter-search #search_list {
+margin-bottom:0!important;
+}
+
+.floatleft {
+float:left;
+}
+
+.paddleft {
+padding-left:8px;
+}
+
+.q2c_pin_image {
+height: auto;
+width: 100%;
+}
+.q2c_pin_image:hover {
+-webkit-transform: scale(1.1);
+-webkit-transition: all 300ms ease-out;
+transform: scale(1.1);
+}
+
+.q2c_justify {
+text-align: justify;
+}
+
+.q2c-btn-wrapper {
+display: inline-block;
+margin: 0 0 5px 5px;
+}
+
+/* added by kk for registration view */
+.q2c-registration .form-horizontal .control-label {
+text-align:left!important;
+width:140px!important;
+}
+
+.q2c-registration .form-horizontal .controls {
+margin-left:151px!important;
+}
+
+.q2c-registration-btn {
+text-align:right;
+}
+
+/** This adds border */
+.qtcAddBorderToWrapper {
+border:1px solid #ddd; /* LM changed from hsl(0,0%,87%) to #ddd */
+margin-top:5px;
+padding:5px;
+}
+
+.qtcChekoutCurrSelect {
+float:right;
+margin-top:5px;
+}
+
+.qtc_addInvalidate_border .invalid {
+border-color:#e9322d!important;
+}
+
+.qtc_addProduct .tabbable ul li {
+/*background:none repeat scroll 0 0 transparent!important;*/ /*^manoj - to fix chosen list issue*/
+list-style:none outside none!important; /* FOR JA template li styling applied */
+}
+
+.qtc_container .qtc_count {
+margin-bottom:0!important;
+}
+
+.qtc_count {
+margin-bottom:0!important;
+width:43px !important;/*change width by pallavi 43->34*/
+padding:2px !important;/*added by pallavi*/
+text-align:center;/*added by pallavi*/
+}
+
+.qtc_count,.qtc_itemcount,.qtc_buy modal {
+float:left;
+}
+
+.qtc_dropdown_menu ul {
+list-style-position:outside;
+list-style-type:none!important;
+margin:0!important;
+padding:0!important;
+}
+
+/*For ORDER view */
+.qtc_orderemail {
+background-color:#cccccc;
+}
+
+.qtc_ordersite {
+float:left;
+margin-right:8px;
+width:43%;
+}
+
+.qtc_orderstateinfo {
+float:left;
+width:43%;
+}
+
+.qtc_prod_detail_div {
+border:1px solid #ededed!important;
+margin:2px;
+}
+
+.qtc_removeBottomMargin {
+margin-bottom:0!important;
+}
+
+.q2c-wrapper .qtcMarginLeft {
+margin-left:50px !important;
+}
+
+.qtcattributePopUp .row-fluid .span4 {
+float:left!important;
+width:31.9149%!important;
+}
+
+.qtcmod_store_div_size {
+float:left;
+height:136px;
+width:115px;
+}
+
+.quick2cart_coat .checkout-content {
+overflow:auto;
+padding:0 0 15px;
+}
+
+.quick2cart_coat .checkout-content .buttons {
+clear:both;
+}
+
+.quick2cart_coat .checkout-heading a {
+cursor:pointer;
+float:right;
+font-weight:normal;
+margin-top:1px;
+text-decoration:none;
+}
+
+.qtcHandPointer:hover {
+cursor:pointer;
+}
+
+.table-responsive {
+margin-bottom:15px;
+overflow-x:auto;
+overflow-y:hidden;
+width:100%;
+}
+
+/* start image Slider css*/
+.q2c-wrapper #gallery {
+left:0;
+list-style:none outside none;
+position:relative;
+top:0;
+}
+
+.q2c-wrapper #gallery li {
+float:left;
+margin:2px;
+}
+
+.q2c-wrapper #gallery-next {
+left:inherit;
+right:0;
+}
+
+.q2c-wrapper #gallery-prev {
+left:0;
+}
+
+.q2c-wrapper #gallery-prev,#gallery-next {
+cursor:pointer;
+font-size:15px;
+height:25px;
+position:absolute;
+top:50%;
+width:24px;
+z-index:120;
+}
+
+.q2c-wrapper #gallery-wrap {
+margin:0 auto;
+overflow:hidden;
+position:relative;
+}
+
+.q2c-wrapper #qtc_center_margin {
+text-align:center;
+}
+
+.q2c-wrapper #qtc_mainwrapper .qtc_select {
+max-width:180px!important;
+}
+
+.q2c-wrapper .adminlist {
+width:100%;
+}
+
+.q2c-wrapper .btn-mini {
+margin:2px 3px;
+}
+/*
+.q2c-wrapper .btn-primary,.q2c-wrapper .btn-primary:hover,.q2c-wrapper .btn-warning,.q2c-wrapper .btn-warning:hover,.q2c-wrapper .btn-danger,.q2c-wrapper .btn-danger:hover,.q2c-wrapper .btn-success,.q2c-wrapper .btn-success:hover,.q2c-wrapper .btn-info,.q2c-wrapper .btn-info:hover,.q2c-wrapper .btn-inverse,.q2c-wrapper .btn-inverse:hover {
+color:#FFFFFF!important;
+} */
+
+.q2c-wrapper .btn_height {
+height:28px;
+}
+
+.q2c-wrapper .cart-popup {
+background:none repeat scroll 0 0 #FAFAFA;
+border:1px solid #DDDDDD;
+border-radius:4px 4px 4px 4px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+cursor:wait;
+margin-left:10px;
+margin-top:-30px;
+padding:10px 20px;
+position:absolute;
+z-index:9999;/*+manoj*/
+}
+
+.q2c-wrapper .cart-popup .cart-popup_close {
+cursor:pointer;
+position:absolute;
+right:5px;
+text-align:center;
+top:5px;
+width:18px;
+}
+
+.q2c-wrapper .fieldset_block {
+border:1px solid #CCCCCC;
+margin:5px;
+padding:5px;
+}
+
+.q2c-wrapper .filediv {
+margin-bottom:5px;
+}
+
+.q2c-wrapper .form-horizontal .control-label {
+margin-top:0!important;
+}
+
+.q2c-wrapper .form-horizontal .qtc_controls_text {
+padding-top:5px;
+}
+
+.q2c-wrapper .icon-minus:before {
+content:none!important;
+}
+
+.q2c-wrapper .icon-plus:before {
+content:none!important;
+}
+
+.q2c-wrapper .modal.qtc_modal {
+background-clip:padding-box;
+/*background-color:inherit;*/ /*^manoj*/
+border:medium none!important;
+border-radius:6px 6px 6px 6px;
+box-shadow:none!important;
+left:50%;
+margin-left:auto!important;
+outline:0 none;
+position:inherit!important;
+top:10%;
+width:auto!important;
+z-index:1050;
+display:inline !important;
+}
+
+.q2c-wrapper .nav-tabs {
+list-style-type:none!important;
+}
+
+.q2c-wrapper .nav-tabs > li {
+margin-bottom:-1px!important;
+}
+
+.q2c-wrapper .qtcMediaWrapper {
+padding-top:15px!important;
+}
+
+.q2c-wrapper .qtcMediaWrapper .form-horizontal .control-label {
+width:100px!important;
+}
+
+.q2c-wrapper .qtcMediaWrapper .form-horizontal .controls {
+margin-left:120px!important;
+}
+
+.q2c-wrapper .qtcProdPgDownLink {
+margin-left:38px;
+margin-top:10px;
+}
+
+.q2c-wrapper .qtcMarginTop10px {margin-top:10px;}
+.q2c-wrapper .qtc_ForLiStyle
+{
+display:flex !important; /*for ja book product images display in one below other*/
+}
+.q2c-wrapper .qtc_ForLiStyle li {
+background:none repeat scroll 0 0 transparent!important;
+list-style:none outside none!important; /* FOR JA template li styling applied */
+margin-right:.3em;
+}
+
+/* For backend add product view*/
+.q2c-wrapper .qtc_att_hide {
+display:none;
+}
+
+/*
+.q2c-wrapper .qtc_currencey_textbox input[type="text"] {
+height:20px!important;
+padding:4px 6px!important;
+}
+*/
+
+.q2c-wrapper .qtc_dashboard_hr {
+margin:5px!important;
+}
+
+.q2c-wrapper .qtc_float_right {
+float:right;
+}
+.q2c-wrapper .hr-condensed {
+margin:8px 0!important;
+}
+
+
+.q2c-wrapper .qtc_formActionAlign {
+text-align:center;
+}
+
+/*.q2c-wrapper .qtc_icon-minus {*/
+.q2c-wrapper .qtc_icon-minus {
+background-position:-433px -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-ok-circle {*/
+.q2c-wrapper .qtc_icon-ok-circle {
+background-position:-192px -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-plus {*/
+.q2c-wrapper .qtc_icon-plus {
+background-position:-408px -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-qtcminus {*/
+.q2c-wrapper .qtc_icon-qtcminus {
+background-position:-24px -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-qtcplus {*/
+.q2c-wrapper .qtc_icon-qtcplus {
+background-position:0 -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-remove-circle {*/
+.q2c-wrapper .qtc_icon-remove-circle {
+background-position:-168px -96px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-shopping-cart {*/
+.q2c-wrapper .qtc_icon-shopping-cart {
+background-position:-360px -120px !important;
+}
+
+/*.q2c-wrapper .qtc_icon-white {*/
+.q2c-wrapper .qtc_icon-white {
+background-image:url(../../../../media/techjoomla_strapper/img/glyphicons-halflings-white.png);
+/*background-image:url(./../../../../media/techjoomla_strapper/img/glyphicons-halflings.png);*/
+}
+
+.q2c-wrapper .qtc_left_margin {
+margin-left:5px!important;
+}
+
+.q2c-wrapper .qtc_left_top {
+margin-top:5px!important;
+}
+
+/* For backend add product view*/
+.q2c-wrapper .qtc_media_hide {
+display:none;
+}
+
+.q2c-wrapper .qtc_modal .icon-edit:before {
+content:none!important;
+}
+
+/* start STORE OWNER OPTIONS for del edit publish */
+.q2c-wrapper .qtc_owner_opts {
+display:none;
+position:absolute;
+right:5px;
+top:5px;
+}
+
+.q2c-wrapper .qtc_owner_opts_dropdown {
+text-align:left!important;
+}
+
+.q2c-wrapper .qtc_padding_class_attributes {
+padding-top:5px;
+}
+
+/*.q2c-wrapper .qtc_pointerCusrsor {*/
+.q2c-wrapper .qtc_pointerCusrsor {
+cursor:pointer;
+}
+
+/* added by VBmundhe product page changes */
+.q2c-wrapper .qtc_prod_blog_page .form-horizontal .control-label {
+width:75px;
+}
+
+.q2c-wrapper .qtc_prod_blog_page .form-horizontal .controls {
+margin-left:90px;
+}
+
+/* added by vidyasagar for toolbar and thumbnail in J2.5 qtc_ForLiStyle */
+.q2c-wrapper .qtc_productblog ul li {
+/*background:none repeat scroll 0 0 transparent!important;* /*^manoj - for chosen select list*/
+list-style:none outside none!important; /* FOR JA template li styling applied */
+}
+
+.q2c-wrapper .qtc_publish {
+background-image:url(../images/tick.png);
+}
+
+.q2c-wrapper .qtc_putmargin5px {
+margin-right:5px!important;
+}
+
+.q2c-wrapper .qtc_putmarginLeft {
+margin-right:15px!important;
+}
+
+.q2c-wrapper .qtc_putmarginbottom {
+margin-bottom:5px!important;
+}
+
+.q2c-wrapper .qtc_putmarginright {
+margin-right:5px!important;
+}
+
+.q2c-wrapper .qtc_putmargintop {
+margin-top:5px!important;
+}
+
+.q2c-wrapper .qtc_right_margin {
+margin-right:5px!important;
+}
+
+.q2c-wrapper .qtc_textbox_small {
+/*width:25px!important;*/ width:40px!important;/* ^ manoj*/
+}
+
+/* FOR Beex_3 template toolbar popup is not working */
+/*.q2c-wrapper .qtc_toolbar .collapse {*/ /* ^ manoj*/
+/* Commented beacuase it affect for template "vw17 - Par défaut" */
+/*.qtc_toolbarDiv .qtc_toolbar .collapse {
+overflow:auto;
+}*/
+
+/*.q2c-wrapper .qtc_toolbar .nav {*/ /* ^ manoj*/
+.qtc_toolbarDiv .qtc_toolbar .nav {
+list-style:none outside none!important;
+/*margin-bottom:18px;*/ /* ^ manoj*/
+margin-left:0;
+display: inline-block; /* to avoid display each element on new line*/
+
+}
+
+.qtc_toolbarDiv .qtc_toolbar .navbar .nav > li {
+  position: relative;
+  display: inline-block;
+}
+.qtc_toolbarDiv .qtc_toolbar .navbar .nav-collapse { display: inline-block; min-width:80%;}
+/*.q2c-wrapper .qtc_toolbar .navbar .nav > li > a {*/ /* ^ manoj*/
+.qtc_toolbarDiv .qtc_toolbar .navbar .nav > li > a {
+padding:9px!important;
+}
+
+/*.q2c-wrapper .qtc_toolbar .navbar-inner {*/ /* ^ manoj*/
+.qtc_toolbarDiv .qtc_toolbar .navbar-inner {
+height:auto!important; /*height: 40px;*/ /* FOR JA template toolbar ht ^ Sneha */
+}
+
+/*.q2c-wrapper .qtc_toolbar ul li {*/ /* ^ manoj*/
+.qtc_toolbarDiv .qtc_toolbar ul li {
+background:none repeat scroll 0 0 transparent!important; /* FOR JA template li styling applied */
+list-style:none outside none!important;
+overflow:visible!important; /* FOR JA template toolbar popup is not working */
+padding-left:5px!important; /* FOR JA template toolbar */
+}
+
+/*set font for toolbar*/
+.qtc_toolbarDiv .qtc_toolbar ul li {
+font-size: 11px;
+}
+/*.q2c-wrapper .qtc_toolbarDiv .navbar-inner {*/ /*^ manoj*/
+.qtc_toolbarDiv .navbar-inner {
+-webkit-box-shadow:none!important;
+background:hsl(0,0%,98%)!important;
+box-shadow:none!important;
+/*-moz-box-shadow: 0 0 0 0;
+-webkit-box-shadow: 0 0 0 0;
+box-shadow: 0 0 0 0;*/
+}
+
+.q2c-wrapper .qtc_unpublish {
+background-image:url(../images/publish_x.png);
+}
+
+.q2c-wrapper .radio_label input,.q2c-wrapper .radio_label label {
+float:none;
+}
+
+.q2c-wrapper .removeMargin {
+margin:0!important;
+}
+
+.q2c-wrapper .row-fluid .qtc_bottom {
+margin-bottom:10px;
+}
+
+/*.q2c-wrapper .span1 {*/
+.q2c-wrapper .span1 {
+min-width:50px!important;
+}
+
+.q2c-wrapper .table {
+width:100%;
+}
+
+/*^ commented by manoj*/
+/*.q2c-wrapper .table-bordered th,.q2c-wrapper .table-bordered td {
+border-left:medium none!important;
+}*/
+
+.q2c-wrapper .table-tool {
+font-weight:bold;
+padding:5px 10px;
+}
+
+.q2c-wrapper .textalign_left {
+text-align:left;
+}
+
+.q2c-wrapper .thumbnails > li.prodImg_wrapper {
+margin-bottom:1px;
+/*margin-left:2px!;*/
+}
+
+.q2c-wrapper .thumbnails > li.product_wrapper {
+position:relative;
+}
+
+.q2c-wrapper .thumbnails > li.product_wrapper,.q2c-wrapper .thumbnails > li.store_wrapper {
+list-style:none outside none!important;
+margin-bottom:10px!important;
+margin-left:15px!important;
+}
+
+/* added By Vidyasagar to Remove inline style*//* added by vidyasagar for icon for 3.0*/
+/*.q2c-wrapper [class^="qtc_icon-"],.q2c-wrapper [class*=" qtc_icon-"] {*/
+.q2c-wrapper [class^="qtc_icon-"], [class*=" qtc_icon-"] {
+background-image:url(../../../../media/techjoomla_strapper/img/glyphicons-halflings.png);
+background-position:14px 14px;
+background-repeat:no-repeat;
+display:inline-block;
+height:14px;
+min-height:14px;
+width:14px;
+min-width:14px;
+line-height:14px;
+margin-right:.3em;
+vertical-align:text-top;
+ }
+
+/*.q2c-wrapper h1,.q2c-wrapper h2,.q2c-wrapper h3,.q2c-wrapper h4,.q2c-wrapper h5,.q2c-wrapper h6 {
+color:inherit!important;
+font-family:inherit;
+font-weight:bold!important;
+text-rendering:optimizelegibility;
+}*/
+
+/*
+.q2c-wrapper h3 {
+font-size:18px!important;
+line-height:27px;
+}
+*/
+
+.q2c-wrapper table.adminlist td,table.adminlist th {
+padding:4px;
+}
+
+/*^ commented by manoj*/
+/*
+.q2c-wrapper tr,.q2c-wrapper td {
+border:medium none!important;
+}*/
+
+/*for auto suggest*/
+.q2c-wrapper ul.selections {
+margin:0!important;
+}
+
+span.qtc_itemcount {
+float:left;
+margin:0 0 0 3px;
+width:16px; /* + kk*/
+}
+
+span.qtc_itemcount input {
+background:none; /* + kk*/
+border:0;
+height:15px;
+padding:2px 4px;
+width:15px!important;
+}
+
+@media max-width 767px{
+	.table-responsive {
+	margin-bottom:15px;
+	overflow-x:auto;
+	overflow-y:hidden;
+	width:100%;
+	}
+}
+
+@media max-width 979px and min-width 768px{
+	.q2c-wrapper .qtc_toolbar .navbar-inner {
+	width:100%;
+	}
+}
+
+.qtc_action_button button
+{
+margin: 2px !important;
+}
+
+/*+manoj - for pagination selectlist*/
+.q2c-wrapper #limit {
+width: auto !important;
+}
+
+/* Widths */
+.q2c_width_1{width:1%;}
+.q2c_width_5{width:5%;}
+.q2c_width_10{width:10%;}
+.q2c_width_15{width:15%;}
+.q2c_width_20{width:20%;}
+.q2c_width_25{width:25%;}
+.q2c_width_30{width:30%;}
+.q2c_width_35{width:35%;}
+.q2c_width_40{width:40%;}
+.q2c_width_45{width:45%;}
+.q2c_width_50{width:50%;}
+.q2c_width_60{width:50%;}
+.q2c_width_70{width:70%;}
+.q2c_width_75{width:75%;}
+.q2c_width_auto{width: auto !important;}
+.q2c_AttoptionsMaxWidth{max-width: 220px !important;width: auto;}
+
+/* product view and pins */
+.q2c_image{/*height: auto;*/ max-height:400px; width: 100%;}
+.q2c_pin_wrapper{background-color: #fff;}
+.q2c_pin_wrapper:hover {
+background: none repeat scroll 0 0 #FAFAFA;
+border-radius: 4px 4px 4px 4px;
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.q2c_border{
+border: 1px solid #DDDDDD !important;
+padding: 15px;
+margin-bottom: 10px;
+}
+
+/*.q2c_border_box {
+border: 1px solid #DDDDDD !important;
+padding: 3px;
+}*/
+
+.q2c_horizontal_social_buttons{padding:10px 0 10px;}
+.q2c_padding { padding: 0 0.7% 0 0.7%;}
+.checkboxdiv{margin-left: 50px;}
+
+/*+manoj start*/
+/*Backported "list group" from bootstrap 3 by adding namespace "tj-"*/
+.tj-list-group {min-width:50px; margin-bottom: 20px; padding-left: 0;}
+.tj-list-group-item {position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; background-color: #ffffff; border: 1px solid #dddddd;}
+.tj-list-group-item {position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; background-color: #ffffff; border: 1px solid #dddddd;}
+.tj-list-group-item:first-child {border-top-right-radius: 4px; border-top-left-radius: 4px;}
+.tj-list-group-item:last-child {margin-bottom: 0; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;}
+.tj-list-group-item.active, .tj-list-group-item.active:hover, .tj-list-group-item.active:focus {z-index: 2; color: #ffffff; background-color: #0088cc; border-color: #0088cc;}
+.tj-list-group-item > .badge {float: right;}
+a.tj-list-group-item {color: #555555;}
+a.tj-list-group-item.active > .badge, .nav-pills > .active > a > .badge {color: #0088cc; background-color: #ffffff; text-shadow:0 0 0; /*^ manoj*/}
+a.tj-list-group-item:hover, a.tj-list-group-item:focus {text-decoration: none; color: #555555; background-color: #f5f5f5;}
+/*+ manoj - end*/
+
+/* List view publish buttons*/
+.q2c_button_publish{width:16px; height:16px; border:0;}
+
+.q2c-display-none{display:none;}
+.q2c-margin-top{margin-top:9px;}
+.q2c-wrapper .qtc_hideEle { display:none !important; }
+.q2c-wrapper #notify_chk {margin-bottom: 5px;  margin-top: 5px;}
+.q2c-wrapper  #multi_curr{max-width: 100px; margin-bottom: 5px;}
+.q2c-wrapper  .qtcWordWrap{word-wrap: break-word;}
+.q2c-wrapper #qtcOptionsWraper{padding: 0 5% 0 1%; }
+.q2c-wrapper .qtcClearBoth{clear:both; }
+.q2c-wrapper .qtcMaxProductImgHeight{height:350px; }
+#qtcProductPage ul{padding-left:1%; }
+#qtcProductPage .thumbnail {margin-bottom:10px;}
+.qtcDispalyTable {display:table;}
+.qtcVcenter {display:table-cell; vertical-align:middle;}
+.qtcModal{display: inline;}
+.qtcImgAlignCenter{display: block;margin-left: auto;margin-right: auto;}
+
+.q2c-wrapper .qtcPadding{padding: 0px 2%;}
+.q2c-wrapper .qtcMarginBotton{margin-bottom: 7px !important;}
+.q2c-wrapper .textAlignCenter{text-align: center;}
+.q2c-wrapper .sectionTitle{border-top: 1px solid #000000;padding: 7px 0 10px 0;}
+.q2c-wrapper .qtc-btn-toolbar{margin-top: 5px; margin-bottom: 5px}
+.q2c-wrapper .qtc-btn-toolbar .element-invisible{display:none;}
+.q2c-wrapper .qtcUpdateItemImg{display:inline-block; margin:2px 5px;}
+
+/*Some template appliing fix width control lable whichi is inside the form-horizantal: Hinix*/
+/*.tjBs3.q2c-wrapper .form-horizontal .control-label{width:auto;}*/
+.q2c-wrapper .qtcdiscountedprice{color: #999; margin-left:5px;}
+.q2c-wrapper .qtcproductprice{color: #333; margin-left:5px;}
+.q2c-wrapper .qtcproductdiscount{ color: #fff; margin-left:5px; background:#33CC33; padding:1px 4px; line-height:inherit;-webkit-border-radius:4px}
+
+.qtcCarouselIndicator {
+
+}
+.qtcCarouselControl {
+background-image:none !important;
+ top:50% !important;
+
+}
+#qtcProductPage .qtcCarouselControl .qtcPreIcon, #qtcProductPage .qtcCarouselControl .qtcNextIcon{
+	background-color: #333;
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 5px;
+    right:5px;
+}
+
+
+.q2c-wrapper .carousel-inner > .item > img.q2cProdImg {
+	margin: 0 auto;
+/*
+	height:160px;
+*/
+	max-height:160px;
+}
+.q2cProdImgWrapper{height:250px;}
+@media (min-width:768px){
+	.q2cProdImgWrapper{height:250px;}
+	.q2c-wrapper .carousel-inner > .item > img.q2cProdImg {
+		/*height:250px;*/
+		max-height:250px;
+	}
+}
+@media (min-width:992px){
+	.q2cProdImgWrapper{height:320px;}
+	.q2c-wrapper .carousel-inner > .item > img.q2cProdImg {
+		/*height:320px;*/
+		max-height:320px;
+	}
+}
+@media (min-width:1200px){
+	.q2cProdImgWrapper{height:400px;}
+	.q2c-wrapper .carousel-inner > .item > img.q2cProdImg {
+/*
+	height:400px;
+*/
+	max-height:400px;
+	}
+}
+.qtc-prod-img
+{  width: 100%;
+	background-size: contain !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+
+}
+
+/*
+#qtcProductPage .qtcCarouselControl{
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15%;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+*/
+/* for bs -2.5*/
+#qtcProductPage .qtcCarouselControlIcon{
+    padding: 0px;
+    background: #333;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    top:50%;
+    display:inline-block;
+    position:absolute;
+}
+/*Featured Product Tag*/
+.qtc-prod-tag-cover {
+	visibility:hidden;
+}
+.qtc-prod-tag-cover.qtc-feat-prod-visible{
+	visibility:visible;
+}
+/* This used older feature tag: Like polygon look
+.qtc-prod-tag {
+	background: #1BCA62;
+  border-radius: 3px 0 0 3px;
+  color: #fff;
+  display: inline-block;
+  height: 16px;
+  line-height: 18px;
+  padding: 0 10px 0 14px;
+  position: relative;
+  font-size: 10px;
+  font-weight: 600;
+  cursor:pointer;
+}
+.qtc-prod-tag:before {
+	background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  width: 6px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+.qtc-prod-tag:after {
+	background: #fff;
+  border-bottom: 8px solid transparent;
+  border-left: 7px solid #1BCA62;
+  border-top: 8px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+*/
+.qtc-prod-tag {
+	font-size: 10px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  position: absolute;
+  padding: 3px 0;
+  left: -5px;
+  top: 9px;
+  width: 90px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image: -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image: -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+  background-image: -o-linear-gradient(top, #BFDC7A, #8EBF45);
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  text-decoration: none;
+  pointer-events: none;
+
+}
+.qtc-prod-tag:before{
+	  left: 0;
+    content: "";
+    border-top: 3px solid #6e8900;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    position: absolute;
+    bottom: -3px;
+}
+.qtc-prod-tag:after{
+		right: 0;
+    content: "";
+    border-top: 3px solid #6e8900;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    position: absolute;
+    bottom: -3px;
+}
+/*Product Pin*/
+.q2c-wrapper .q2c_pin_container .qtc-prod-pin { padding-left: 4px !important;    padding-right: 4px !important	;}
+.qtc-prod-pin-header {
+	  width: 62px;
+    height: 62px;
+    overflow: hidden;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    z-index: 2;
+}
+.qtc-prod-pin-inner {
+	border:1px solid #ccc;
+/*
+	border-radius:3px;
+*/
+	padding: 3px 10px;
+	margin: 0 auto;
+	position:relative;
+}
+@media (max-width:767px){
+	.qtc-prod-pin-inner {
+			max-width: 280px;
+		}
+}
+.qtc-cv-prod-name {
+	display:block;
+	width:100%;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+.qtc-prod-img-cover {
+	padding:2px 0;
+	border-bottom: 1px solid #ccc;
+}
+.qtc-prod-img-cover.poos{
+	  -webkit-filter: opacity(40%);
+    filter: opacity(40%);
+}
+.q2c-wrapper .label-grey{
+	background-color: #333;
+	font-size: 15px;
+}
+.qtc-prod-img {
+	width: 100%;
+  background-size: contain !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.qtc-prod-footer-cover {
+	text-align:center;
+	min-height: 60px !important;
+}
+.qtc-offer-price {
+	color:#999;
+}
+
+.qtc-prod-disc-tag {
+	background: #1BCA62;
+  border-radius: 3px 0 0 3px;
+  color: #fff;
+  display: inline-block;
+  height: 16px;
+  line-height: 18px;
+  padding: 0 10px 0 14px;
+  position: relative;
+  font-size: 10px;
+  font-weight: 600;
+  cursor:pointer;
+  margin-left:5px;
+}
+.qtc-prod-disc-tag:before {
+	background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  width: 6px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+.qtc-prod-disc-tag:after {
+	background: #fff;
+  border-bottom: 8px solid transparent;
+  border-left: 7px solid #1BCA62;
+  border-top: 8px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.qtc-prod-oos  {
+	visibility:hidden;
+	position:absolute;
+	bottom:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+}
+.qtc-prod-oos.oos  {
+	visibility:visible;
+}
+.q2c_pc_products_from_same_store {
+	margin-bottom: 5px;
+}
+.qtc-pricerange-text {
+	color:#b9cd6d;
+	font-weight:bold;
+}
+.qtcAttriTabLabel{line-height: 25px;}
+/*Cart Popup*/
+.q2c-wrapper .qtc-table .qtcborderedrow{
+	border:1px solid #ddd;
+}
+.q2c-wrapper .qtc-table thead,
+.q2c-wrapper .qtc-table tfoot,
+.q2c-wrapper .table.table-mod-cart>tbody>tr.highlightedrow{
+/*
+	background-color:#e8e8e8;
+*/
+}
+.q2c-wrapper .table.qtc-table>thead>tr>th {
+	border-bottom-width:0;
+}
+
+.q2c-wrapper .table.qtc-table.qtc-noborder tr>td {border-top: none;}
+
+.q2c-wrapper .table.qtc-table>thead>tr>th.rightalign,
+.q2c-wrapper .table.qtc-table>tbody>tr>td.rightalign,
+.q2c-wrapper .table.qtc-table>tfoot>tr>td.rightalign{
+	text-align:right;
+	padding-right:15px;
+}
+.q2ctablewrapper {
+	padding:10px 15px;
+}
+@media screen and (max-width:768px){
+/*
+		#no-more-tables .table.qtc-table>thead>tr,
+		#no-more-tables .table.qtc-table>tbody>tr,
+		#no-more-tables .table.qtc-table>tfoot>tr{
+			border:0px;
+		}
+*/
+		.q2c-wrapper .qtc-table tfoot{
+			display:block;
+		}
+
+}
+/*For cart module start*/
+.q2c-wrapper .table.table-mod-cart>thead>tr>th.rightalign,
+.q2c-wrapper .table.table-mod-cart>tbody>tr>td.rightalign,
+.q2c-wrapper .table.table-mod-cart>tfoot>tr>td.rightalign{
+	text-align:right;
+	padding-right:10px;
+}
+.q2c-wrapper .table.table-checkout>thead>tr>th.rightalign,
+.q2c-wrapper .table.table-checkout>tbody>tr>td.rightalign,
+.q2c-wrapper .table.table-checkout>tfoot>tr>td.rightalign{
+	text-align:right;
+	padding-right:10px;
+}
+.q2c-wrapper .table.table-checkout.table-checkout-footer>tbody>tr>td.rightalign{
+	text-align:right;
+	padding-right:40px;
+}
+.q2c-wrapper .table.table-checkout>tbody>tr.highlightedrow{
+/*
+	background-color:#e8e8e8;
+*/
+}
+/*
+.qtc_chekout_cartdetailWrapper .qtcHandPointer:hover  {
+	color:#666;
+}
+*/
+
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcAttriSetType{ display: inline-block; max-width:165px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtc_currencey_textbox{ display: inline-block;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcOptionNameClass{ max-width: 115px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtc-attribute-option-state{    max-width: 100px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcAttriOptionStock{ max-width: 65px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcAttriOptionSku{    max-width: 100px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtc-attribute-option-prefix{margin-bottom: 5px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtc-attribute-Option-order{ width: 60px;}
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcGlobalOptionsList,
+.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcAddGlobalOption,.q2c-wrapper #qtcAttributeTabContent .qtc_container .globalOptionSelect {margin:6px;}
+
+@media screen and (max-width: 480px){
+	.q2c-wrapper #qtcAttributeTabContent .qtc_container .qtcAttrCheckbox{padding-left:30%;}
+}
+
+/* Check if needed*/
+.tjBs3 .btn-group select{font-size:12px ! important;}
+
+
+.q2c-wrapper .qtc-input-small{width:65px;text-align: right;}
+.qtcAddBorder {
+	border:1px solid #ddd;
+	margin-top:5px;
+}
+.q2c-wrapper.q2c-wrapper legend{padding-bottom:5px;}
+/*
+@media (min-width: 768px) {
+.q2c-wrapper .row-fluid #q2c_pc_category [class*="span"]:first-child {margin-left: 2.127659574%;}
+}
+*/
+/*for fix pin*/
+.q2c-wrapper .qtc-prod-pin {padding-left:5px !important; padding-right:5px !important; margin-bottom:13px !important;}
+
+/* For bootstrap 2 template*/
+.techjoomla-bootstrap .qtc-prod-pin {padding-left:3px !important;}
+
+#qtc_user-info-content{padding: 10px 15px;}
+
+@media all and (min-width: 768px) {
+  .qtc-mobile-filter-apply { display: none; }
+}
+
+@media all and (max-width: 768px) {
+#qtc-product-preview { display: none; }
+}
+.invoice-pdf-img{
+display:inline;
+}
+.qtc_address_pin_margin{
+	padding: 15px;
+}
+
+.qtc_address_pin{
+border:#ddd 1px solid;
+margin-bottom:25px;
+}
+
+.qtc_address_div{
+overflow-y:auto; height:150px; overflow-x:hidden;
+}
+
+.q2c-wrapper #qtc_product_clone{
+border: #ddd 1px solid;
+margin-bottom:30px;
+}
+
+.q2c-wrapper .qtc_product_div{
+margin-top:30px;
+margin-left:30px;
+margin-right:30px;
+margin-bottom:30px;
+}
+
+.q2c-wrapper .qtc_order_total_price{
+font-size:18px;
+}
+/*
+ * CSS for ajax loader 0% transparent background
+ *
+ * */
+.q2c-wrapper #q2c-ajax-call-fade-content
+{
+	display: none;
+	position:absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #EEEEEE;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: 1;
+	filter: alpha(opacity=80);
+}
+
+.q2c-wrapper #q2c-ajax-call-loader-modal
+{
+	display: none;
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	width: 100px;
+	height: 120px;
+	padding:30px 15px 0px;
+	border: 3px solid #ababab;
+	box-shadow:1px 1px 10px #ababab;
+	border-radius:20px;
+	background-color: white;
+	z-index: 1002;
+	text-align:center;
+	overflow: auto;
+}
+/*
+ * CSS for ajax loader transparent background
+ *
+ * */
+.q2c-wrapper #q2c-ajax-call-fade-content-transparent
+{
+	display: none;
+	position:absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #EEEEEE;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: 0.50;
+	filter: alpha(opacity=80);
+}
+
+@media all and (max-width: 768px) {
+	.q2c-wrapper .qtc_prod_price_div{text-align:left;}
+}
+
+.qtcorder_select_chosen{
+width:100% !important;
+}
+
+.qtc_product_shipping_title_div
+{
+	margin-left:0px !important;
+}
+
+.qtc_product_shipping_method_div
+{
+	margin-left:0px !important;
+}
+
+.qtc_coupon_input_box
+{
+	display:inline !important;
+	max-width: 140px!important;
+}
+
+.qtcOrderlist-invoiceIcons a{cursor:pointer; }
+
+@media all and (min-width: 768px) {
+	#q2c_pc_store_products .qtc-stores-view-products { width:25% !important; display:inline-block;}
+}
+
+@media all and (max-width: 768px) {
+	#q2c_pc_store_products .qtc-stores-view-products { width:100% !important; }
+}
+
+#qtc_product_clone .qtc-small-input
+{
+	width: 45px !important;
+}
+
+.qtc_address_pin_wrapper
+{
+	margin-left: 0px !important;
+	margin-right: 9px !important;
+}
+
+.icon-calendar{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-calendar:before {
+content: "\f073";
+}
+
+#qtcProductPage ol.carousel-indicators{    list-style-type: none !important;}
+.section-1.cob-section-1  .q2c-wrapper{min-width: 300px !important;}
+.qtc_prod_blog_page-bs3{ padding-left:20px;}
+
+.q2c-wrapper .qtc-applicable-promotions-wrapper
+{
+	overflow: hidden;
+	border: 1px solid #5bb75b;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.q2c-wrapper .qtc-applicable-promotions
+{
+	color:#F5A623;
+}
+.promDicountTitle{color: #828282;	}
+th.cartitem_tprice{min-width: 90px;}
+
+
+.q2c-wrapper #qtc_user_addresses
+{
+	padding: 0 30px;
+	margin: 0;
+}
+
+.q2c-wrapper #qtc_add_product_wrapper
+{
+	margin-top: 35px;
+}
+
+.q2c-wrapper #qtc_order_error
+{
+	margin-top: 30px;
+}
+
+.q2c-wrapper .qtc-total-order-price
+{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.q2c-wrapper .qtc-createorder-buttons
+{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.q2c-wrapper .qtc_product_attributes
+{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.q2c-wrapper .qtc_product_attributes [class*="span"]:first-child{margin-left: 2.127659574%;}
+.q2c-wrapper select{max-width:220px;}
+
+/* for tab hide issue on some template*/
+.q2c-wrapper #stripedTable a
+{
+	display:block !important;
+}
+/*On some template, for add attribute,add media modal btn taking full screen size. (Whole screen) */
+.q2c-wrapper .qtcAddMediaLink.modal, .q2c-wrapper .qtcAddAttributeLink.modal{position: inherit;}
+.q2c-wrapper .qtc-categorys
+{
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+.q2c-wrapper .qtc-category{zoom:1.3;}
+
+.q2c-wrapper #promotionsTabs a
+{
+	display:block !important;
+}
+
+.q2c-wrapper #promotionrules
+{
+	margin-top:25px;
+}
+
+.q2c-wrapper #conditions
+{
+	margin-top:25px;
+}
+.q2c-wrapper .q2c-inline,.q2c-wrapper .q2c-inlineselect select{display:inline-block;}
+
+.q2c-wrapper .qtcAddBorder .checkout-addresses, .qtcadd_address_button
+{
+	margin:15px;
+}
+/* To align the price to right*/
+.qtcModuleWrapper table tr td:nth-child(2){text-align:right; padding-right:10px;}
+.q2c-wrapper .q2c_address_name{white-space:nowrap; text-overflow:ellipsis;overflow:hidden; width:80%;display:inline-block;}
+
+.q2c-wrapper .filediv input, .q2c-wrapper .filediv button
+{
+	margin-bottom:15px !important;
+}
+
+.q2c-wrapper .filediv
+{
+	margin-left:0px !important;
+}
+
+/* CSS for video responsive*/
+.q2c-wrapper .q2c-videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.q2c-wrapper .q2c-videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.q2c-wrapper .fluid-width-video-wrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px !important;
+	height: 0;
+}
+.q2c-wrapper .fluid-width-video-wrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.q2c-wrapper .q2c-max-width-150
+{
+	max-width: 150px;
+}
+
+.q2c-wrapper .q2c-filter-horizontal-div
+{
+	margin-bottom:15px;
+	overflow-y:auto;
+	max-height:250px;
+	overflow-x:hidden;
+}
+
+.techjoomla-bootstrap .q2c_pin_item_q2c_pc_category
+{
+	margin-left: 0px!important;
+}
+
+/* For arabic language no-more-tables (mobile devices)*/
+@media screen and (max-width:768px)
+{
+	html[dir="rtl"] #no-more-tables td
+	{
+		padding-right: 55%;
+		text-align: right;
+		padding-left:0;
+	}
+
+	html[dir="rtl"] #no-more-tables td:before
+	{
+		left:auto;
+		right:0;
+		text-align: right;
+	}
+
+	html[dir="rtl"] input[type="radio"],
+	html[dir="rtl"] input[type="checkbox"]
+	{
+		float:right;
+	}
+}

@@ -1,0 +1,89 @@
+/*
+$JA#COPYRIGHT$
+*/
+
+// ---------------------------------------------------------
+// STYLE RTL
+// ---------------------------------------------------------
+.off-canvas-left.off-canvas-effect-4.t3-off-canvas {
+  transform: translate3d(0, 0px, 0px);
+  -moz-transform: translate3d(0, 0px, 0px);
+  -webkit-transform: translate3d(0, 0px, 0px);
+}
+
+
+.off-canvas body > .autocompleter-choices {
+  width: 0px;
+  left: auto;
+}
+
+.article-intro,
+.article-content {
+
+  // Add proper margin
+  img[align=left],
+  .img_caption.left,
+  .pull-left.item-image {
+    margin: 0 @t3-global-margin*1.5 @t3-global-margin 0;
+  }  
+
+  img[align=right],
+  .img_caption.right,
+  .pull-right.item-image {
+    margin: 0 0 @t3-global-margin @t3-global-margin*1.5 ;
+  }
+
+}
+
+body {
+  letter-spacing: 0!important;
+}
+
+.fa.fa-chevron-left:before {
+  content: "\f054"!important;
+}
+.fa.fa-chevron-right:before {
+  content: "\f053"!important;
+}
+// Edit Module RTL
+.btn.jmodedit {
+  margin-left: 5px!important;
+}
+
+
+// Header
+#t3-header .logo {
+  float: right;
+}
+
+// Module ACM
+.owl-carousel  {
+  direction: ltr;
+
+  .owl-prev {
+    .fa-angle-left:before {
+      content: "\f105";
+    }
+  }
+
+  .owl-next {
+    .fa-angle-right:before {
+      content: "\f104";
+    }
+  }
+}
+
+#user-registration {
+  #jform_email-lbl {
+    margin-top: -15px;
+  }
+}
+
+// Chosen
+.chzn-rtl.chzn-container-single .chzn-single div b {
+  background-position: 6px (@line-height-computed/2 - 3px) ;
+}
+
+.chzn-rtl.chzn-container-single.chzn-with-drop .chzn-single div b {
+  background-position: -12px (@line-height-computed/2 - 3px) ;
+}

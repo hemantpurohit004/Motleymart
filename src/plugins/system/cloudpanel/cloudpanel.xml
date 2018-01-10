@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="system" method="upgrade">
+    <name>CloudPanel</name>
+    <author>Cloudaccess.net</author>
+    <authorEmail>support@cloudaccess.net</authorEmail>
+    <authorUrl>www.cloudaccess.net</authorUrl>
+    <creationDate>07-Jan-2013</creationDate>
+    <copyright>Copyright (C) 2010 - CloudAccess.net LCC</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>5.0</version>
+    <description>Cloud Control Panel Authentication Plugin</description>
+    <files>
+        <filename plugin="cloudpanel">cloudpanel.php</filename>
+        <folder>update</folder>
+    </files>
+    <scriptfile>install.php</scriptfile>
+</extension>

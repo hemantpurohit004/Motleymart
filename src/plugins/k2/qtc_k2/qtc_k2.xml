@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="k2" method="upgrade">
+
+	<name>Quick2Cart - K2 Plugin</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>Quick2Cart's Add to Cart Widget for K2. This plugin lets you use Quick2Cart with K2. It adds Quick2cart product form in K2 items, also it renders all such items as Quick2cart products.</description>
+
+	<files>
+		<filename plugin="qtc_k2">qtc_k2.php</filename>
+		<filename>index.html</filename>
+		<folder>qtc_k2</folder>
+	</files>
+
+	<!-- Standard plugin parameters for Joomla! 1.6+ -->
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			</fieldset>
+		</fields>
+	</config>
+
+	<fields group="item-content" >
+		<fieldset name="qtc_opts" label="Quick2Cart Options" addfieldpath="/plugins/k2/qtc_k2/qtc_k2">
+		<field name="qtc_option" type="quick2cart" label="Quick2Cart Options" description="" />
+		</fieldset>
+	</fields>
+</extension>

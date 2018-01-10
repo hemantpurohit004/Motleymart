@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="flexicontent_fields" method="upgrade">
+
+	<name>Quick2Cart - FLEXIContent Fields Plugin</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>Quick2Cart's Add to Cart Widget for FLEXIcontent. This plugin lets you use Quick2Cart with FLEXIcontent. It adds Quick2cart product form in FLEXIcontent items, also it renders all such items as Quick2cart products.</description>
+
+	<files>
+		<filename plugin="quick2cart">quick2cart.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<!--
+	<config>
+		<fields name="attribs">
+			<fieldset name="basic">
+				<field name="display_label" type="radio" default="0" label="QUICK2CART_FLEXI_DISPLAY_LABEL" description="QUICK2CART_FLEXI_DISPLAY_LABEL_DESC">
+					<option value="0">QUICK2CART_FLEXI_NO</option>
+					<option value="1">QUICK2CART_FLEXI_YES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+	-->
+</extension>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Store-Tax Profiles" option="View" >
+		<message><![CDATA[Store-Tax Profiles]]></message>
+	</layout>
+	<state>
+		<name>Store-Tax Profiles</name>
+		<description>Store-Tax Profiles</description>
+		<params>
+		</params>
+	</state>
+</metadata>
+
+
+
+

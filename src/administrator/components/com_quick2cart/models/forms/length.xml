@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text"
+			size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_LENGTH_CLASS_ID"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_LENGTH_CLASS_ID"
+			filter="safehtml" />
+
+		<field name="title" type="text"
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_LENGTH_TITLE"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_LENGTH_TITLE"
+			default=""
+			required="true"
+			filter="text" />
+
+		<field name="unit" type="text"
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_LENGTH_UNIT"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_LENGTH_UNIT"
+			default=""
+			required="true"  />
+
+		<field name="value" type="text"
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_LENGTH_VALUE"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_LENGTH_VALUE"
+			required="true"  />
+
+		<field name="store_id" type="list"
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_STORE_ID"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_STORE_ID"
+			default="">
+			<option value="0">Default</option>
+		</field>
+
+		<field name="created_by" type="createdby"
+			default=""
+			label="COM_QUICK2CART_FORM_LBL_LENGTH_CREATED_BY"
+			description="COM_QUICK2CART_FORM_DESC_LENGTH_CREATED_BY"  />
+
+		<field name="state" type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox" size="1" default="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field name="checked_out" type="hidden" filter="unset" />
+		<field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+</form>

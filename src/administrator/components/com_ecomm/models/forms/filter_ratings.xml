@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <form>
+	<fields name="filter">
+		<field
+			name="search"
+			type="text"
+			label="search"
+			hint="search"
+			class="js-stools-search-string"
+			/>
+		<field
+			name="rating"
+			type="text"
+			label="Rating"
+			description="Enter rating"
+			default=""
+			onchange="this.form.submit();"
+			/>
+	</fields>
+</form>

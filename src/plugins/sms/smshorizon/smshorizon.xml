@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="sms" method="upgrade">
+	<name>PLG_SMS_SMSHORIZON_NAME</name>
+	<author>TechJoomla</author>
+	<creationDate>8th March 2016</creationDate>
+	<copyright>Techjoomla. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<version>1.0.1</version>
+	<isapplication>true</isapplication>
+	<description>PLG_SMS_SMSHORIZON_DESC</description>
+	<files>
+		<file plugin="smshorizon">smshorizon.php</file>
+		<folder>smshorizon</folder>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_sms_smshorizon.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_sms_smshorizon.ini</language>
+	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic" label="PLG_SMS_SMSHORIZON_API_PARAMETER" addfieldpath="/plugins/sms/smshorizon/smshorizon/element/pathapi">
+				<field name="user" type="text" default="" label="PLG_SMS_SMSHORIZON_USER_NAME" description="PLG_SMS_SMSHORIZON_API_USER_NAME_DESC"/>
+				<field name="apikey" type="text" default="" label="PLG_SMS_SMSHORIZON_API_PASSWORD_KEY" description="PLG_SMS_SMSHORIZON_API_PASSWORD_KEY_DESC"/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

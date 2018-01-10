@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Cart Checkout" >
+		<message><![CDATA[Cart Checkout]]></message>
+		<options var="task">
+ 			<default name="Cart Checkout" msg="Cart Checkout" />
+		</options>
+	</view>
+</metadata>

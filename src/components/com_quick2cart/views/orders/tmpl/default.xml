@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="My Orders" option="View" >
+		<message><![CDATA[My Orders]]></message>
+	</layout>
+	<state>
+		<name>My Orders</name>
+		<description>My Orders</description>
+		<params>
+		</params>
+	</state>
+</metadata>
+

@@ -1,0 +1,286 @@
+/* View icons */
+.icon-48-dashboard{background-image:url(../images/quick2cart_48.png); padding-left:60px!important;}
+.icon-48-store{background-image:url(../images/stores_48.png); padding-left:60px!important;}
+.icon-48-stores{background-image:url(../images/stores_48.png);padding-left:60px!important;}
+.icon-48-product{background-image:url(../images/products_48.png);padding-left:60px!important;}
+.icon-48-products{background-image:url(../images/products_48.png);padding-left:60px!important;}
+.icon-48-order{background-image:url(../images/orders_48.png);padding-left:60px!important;}
+.icon-48-orders{background-image:url(../images/orders_48.png);padding-left:60px!important;}
+.icon-48-salesreport{background-image:url(../images/orders_48.png);padding-left:60px!important;}
+.icon-48-payout{background-image:url(../images/payouts_48.png);padding-left:60px!important;}
+.icon-48-payouts{background-image:url(../images/payouts_48.png);padding-left:60px!important;}
+.icon-48-coupon{background-image:url(../images/coupons_48.png);padding-left:60px!important;}
+.icon-48-coupons{background-image:url(../images/coupons_48.png);padding-left:60px!important;}
+.icon-48-lengths{background-image:url(../images/quick2cart_48.png);padding-left:60px!important;}
+.icon-48-length{background-image:url(../images/quick2cart_48.png);padding-left:60px!important;}
+
+/* Other icons */
+.icon-32-quick2cart-unfeature{background:url(../images/unfeature.png) no-repeat;}
+.icon-32-quick2cart-feature{background:url(../images/feature.png) no-repeat;}
+
+/* Widths */
+.q2c_width_1{width:1%;}
+.q2c_width_5{width:5%;}
+.q2c_width_10{width:10%;}
+.q2c_width_15{width:15%;}
+.q2c_width_20{width:20%;}
+.q2c_width_25{width:25%;}
+.q2c_width_30{width:30%;}
+.q2c_width_35{width:35%;}
+.q2c_width_50{width:50%;}
+.q2c_width_60{width:60%;}
+.q2c_width_70{width:70%;}
+.q2c_width_75{width:75%;}
+.q2c_width_auto{width: auto !important;}
+
+.q2c-btn-wrapper{display:inline-block;margin:0 0 5px 5px;}
+
+.setting-td input, .setting-td label {display:inline;float:none;}
+
+.item_attris{float:left;}
+
+
+/*for dashboard*/
+.pagination a{text-decoration:none;}
+#container_left1, #container_right1{ min-height:88px;}
+/*#container_right1, #container_right2, #container_left1, #container_left2 { border:1px solid #ccc; margin-bottom:10px;}*/
+#container_right1, #container_right2, #container_left1, #container_left2 { margin-bottom:10px;}
+.commentBodyLeft, .boxBody, .tbBottomMiddle{ border:none!important;}
+
+/* qtc_dashboard_graph for pai and bar chart in dashboard view	*/
+.qtc_dashboard_graph30{width:150px; margin-left:5px;overflow-x:auto;overflow-y:hidden;}
+.qtc_dashboard_graph25{width:150px;  margin-left:5px;}
+.q2c-wrapper .tbTitle {width:100%;}
+.q2c-wrapper .qtc_marginleft {margin-left:15px;}
+
+/* product page*/
+.com_qtc_repeating_block{border:1px dotted;padding:2% 0px 0px 1%;width:80%;}
+.com_qtc_add_button{/*position:relative;top:-80px;right:-85%;*/}
+.com_qtc_remove_button{/*position:relative;top:-85px;right:-85%; */}
+
+/** START PRODUCT MEDIA FILE CHANGE */
+.com_qtc_media_repeat_block{border:1px dotted;padding:2% 0px 0px 1%;width:85%;}
+.com_qtc_mediaAdd_button{position:relative;right:-87%;top:-144px;}
+.com_qtc_mediaRemove_button{position:relative;right:-90%;top:-182px;}
+.q2c-wrapper .qtcProdPgDownLink{margin-top:10px;margin-left:38px;}
+/** END PRODUCT MEDIA FILE CHANGE */
+
+/*bootstrap override */
+/*for product attributes*/
+.q2c-wrapper .span1 {min-width:50px!important;}
+
+/** hack for media tab*/
+.q2c-wrapper .qtcMediaWrapper {border:hsl(0, 0%, 0%) 1px dotted;padding-top:15px !important;}
+.q2c-wrapper .qtcMediaWrapper .form-horizontal .controls {margin-left:120px !important;}
+.q2c-wrapper .qtcMediaWrapper .form-horizontal .control-label {width:100px !important;text-align:right !important;}
+/** end hack */
+
+.q2c-wrapper .qtc_media_hide{display:none;}
+
+/*+manoj - Hack for component options form starts*/
+/*For J3x*/
+#component-form .control-label {width: 250px !important;}
+/*For J2.5.x*/
+#component-form div.current label, div.current span.faux-label {min-width: 250px !important;}
+#component-form div.current fieldset.radio label {min-width: 45px !important;}
+/*+manoj - Hack for component options form ends*/
+
+/*Custom elements style*/
+.q2cHeaderOuterDiv{clear:both;float:left;background-color:#ADD8E6;width:100%;}
+.q2cHeaderInnerDiv{padding:5px 5px;font-weight:bold;color:black;}
+.q2c-elements-legend-hint{clear:both; float:left; color:#000 !important; opacity: 0.65; font-size: 1.2em !important;}
+.q2c-elements-legend{display: block; width: 100%; padding: 0; margin-bottom: 18px; font-size: 19.5px; line-height: 36px; color: #333; border: 0; border-bottom: 1px solid #e5e5e5;}
+.q2c-elements-gateways-link{clear:none; float:left;}
+
+.newVersionNotice{font-size:1.5em;}
+
+/* Amol */
+.q2c-wrapper .q2c-display-none{display:none !important;}
+.q2c-wrapper .q2c-margin-top{margin-top:9px;}
+
+/*
+    Page: Invoice
+*/
+.q2c-wrapper .invoice {
+  position: relative;
+  width: 90%;
+  margin: 10px auto;
+  background: #fff;
+  border: 1px solid #f4f4f4;
+}
+.q2c-wrapper .invoice-title {
+  margin-top: 0;
+}
+
+/** Don't display when printing & Enhancement for printing  */
+@media print {
+   .no-print {
+    display: none !important;
+  }
+  .q2c-wrapper .print-this {
+    display: block !important;
+  }
+  .left-side,
+  .header,
+  .content-header {
+    display: none;
+  }
+  .q2c-wrapper .right-side {
+    margin: 0;
+  }
+
+  .q2c-wrapper .invoice {
+    width: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .q2c-wrapper .invoice-span {
+    float: left !important;
+    width: 24% !important;
+  }
+  .q2c-wrapper .table-responsive {
+    overflow: auto;
+  }
+  .q2c-wrapper .table-responsive > .table tr th,
+  .q2c-wrapper .table-responsive > .table tr td {
+    white-space: normal!important;
+  }
+}
+/* Amol */
+.q2c-wrapper #notify_chk {margin-bottom: 5px;  margin-top: 5px;}
+.q2c-wrapper #limit, .q2c-wrapper #list_limit{width: inherit;}
+.q2c-wrapper .qtcMarginBothSide{margin-right:5px;margin-left:5px;}
+.qtc-attributeset-name {margin-right:30px;}
+.qtc-global-attribute-option-input {margin-right:3px;}
+.curr_margin { margin:0 5px 5px 0 !important;}
+.qtc-btn-wrapper{margin:5px !important;}
+
+/*
+ * CSS for ajax loader transparent background
+ *
+ * */
+.q2c-wrapper #q2c-ajax-call-fade-content-transparent
+{
+	display: none;
+	position:absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #EEEEEE;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: 0.50;
+	filter: alpha(opacity=80);
+}
+.q2c-wrapper #q2c-ajax-call-loader-modal
+{
+	display: none;
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	width: 100px;
+	height: 120px;
+	padding:30px 15px 0px;
+	border: 3px solid #ababab;
+	box-shadow:1px 1px 10px #ababab;
+	border-radius:20px;
+	background-color: white;
+	z-index: 1002;
+	text-align:center;
+	overflow: auto;
+}
+
+.q2c-wrapper .qtc-radio-button
+{
+	padding-left:0px !important;
+}
+
+.q2c-wrapper .qtc-add-quantity-condition-padding-left
+{
+	padding-left:30px;
+}
+
+.q2c-wrapper #qtc-promotion-condition-compulsory select
+{
+	width:75px;
+}
+
+.q2c-wrapper .qtc-promotion-condition-text
+{
+	font-size:18px;
+	font-weight:bold;
+	color:#333;
+}
+
+.q2c-wrapper .qtc_condition_attribute_value
+{
+	width:80px;
+}
+
+.q2c-wrapper .qtc_condition_quantity
+{
+	width:80px;
+}
+
+.q2c-wrapper .qtc_promotion_rule_description_div
+{
+	margin-top:35px;
+	font-size:18px;
+	font-weight:bold;
+	color:#333;
+}
+
+.q2c-wrapper .qtc-button-top-margin
+{
+	margin-top:30px;
+}
+
+.q2c-wrapper .qtc_currency_price_discount
+{
+	width:50px;
+}
+
+.q2c-wrapper .qtc_currency_price_discount_lbl
+{
+	width:125px !important;
+}
+
+.q2c-wrapper .qtc-product-attribute-selector-hide
+{
+	display:none;
+}
+
+.q2c-wrapper .qtc-promotion-margin
+{
+	margin:10px;
+}
+
+.q2c-wrapper .table.qtc-table th.rightalign,
+.q2c-wrapper .table.qtc-table td.rightalign,
+.q2c-wrapper .table.qtc-table td.rightalign{
+	text-align:right;
+	padding-right:15px;
+}
+
+.q2c-wrapper .q2c-inline-table
+{
+	display:inline-table;
+}
+
+.q2c-wrapper .q2c-inlineblock
+{
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.q2c-wrapper .width160px
+{
+	width:160px;
+}
+
+.q2c-wrapper .filediv
+{
+	margin-left:0px !important;
+}

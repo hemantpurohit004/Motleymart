@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Orders" >
+		<message><![CDATA[Orders]]></message>
+		<options var="layout">
+			<option value="default" name="My Orders" msg="My Orders" />
+			<option value="mycustomer" name="My Store Customers" msg="Store Customers" />
+			<option value="storeorder" name="My Store Orders" msg="My Store Orders" />
+		</options>
+	</view>
+</metadata>

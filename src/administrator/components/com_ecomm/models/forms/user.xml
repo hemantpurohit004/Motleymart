@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="mobile_no"
+				type="text"
+				label="Mobile No."
+				description="Enter your mobile no"
+				size="10"
+				required="true"
+				default=""
+				/>
+		<field
+				name="password"
+				type="password"
+				label="Password"
+				description="Enter your password"
+				size="10"
+				required="true"
+				default=""
+				/>
+		<field
+				name="first_name"
+				type="text"
+				label="First Name"
+				description="Enter your first name"
+				default=""
+				/>
+		<field
+				name="middle_name"
+				type="text"
+				label="Middle Name"
+				description="Enter your middle name"
+				default=""
+				/>
+		<field
+				name="last_name"
+				type="text"
+				label="Last Name"
+				description="Enter your last name"
+				default=""
+				/>
+		<field
+				name="username"
+				type="text"
+				label="Username"
+				description="Enter your username"
+				default=""
+				/>
+		<field
+				name="email"
+				type="email"
+				label="Email"
+				description="Enter your email"
+				default=""
+				/>
+		<field
+				name="home_lattitude"
+				type="text"
+				label="Home 	Lattitude"
+				description="Enter your home lattitude"
+				default=""
+				/>
+		<field
+				name="home_longitude"
+				type="text"
+				label="Home Longitude"
+				description="Enter your home longitude"
+				default=""
+				/>
+		<field
+				name="home_address"
+				type="textarea"
+				label="Home Address"
+				description="Enter your home address"
+				default=""
+				rows="5"
+				/>
+		<field
+				name="current_lattitude"
+				type="text"
+				label="Current Lattitude"
+				description="Enter your current lattitude"
+				default=""
+				/>
+		<field
+				name="current_longitude"
+				type="text"
+				label="Current Longitude"
+				description="Enter your current longitude"
+				default=""
+				/>
+		<field
+				name="current_address"
+				type="textarea"
+				label="Current Address"
+				description="Enter your current address"
+				default=""
+				rows="5"
+				/>
+		<field
+				name="current_address"
+				type="textarea"
+				label="Current Address"
+				description="Enter your current address"
+				default=""
+				rows="5"
+				/>
+
+		<field name="profile_photo"
+				type="file"
+				label="Profile Photo"
+				filter="raw"
+				description="Upload image"
+				accept="image/jpeg,image/png,image/jpg"
+				/>
+		<field
+				name="created_date"
+				type="hidden"
+				/>
+		<field
+				name="id"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

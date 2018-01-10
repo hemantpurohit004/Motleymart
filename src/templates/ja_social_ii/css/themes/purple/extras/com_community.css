@@ -1,0 +1,1576 @@
+html .jomsocial-wrapper .jomsocial {
+  padding: 0;
+  background: none;
+  text-align: left !important;
+}
+html .joms-toolbar--desktop .joms-popover {
+  padding: 10px;
+}
+html .joms-page {
+  padding: 24px;
+}
+html .joms-page .joms-page__title + .joms-centered {
+  text-align: left;
+}
+html .joms-js--logout {
+  display: none;
+}
+html .joms-pagination:before,
+html .joms-pagination:after {
+  content: " ";
+  display: table;
+}
+html .joms-pagination:after {
+  clear: both;
+}
+html .joms-list__item img {
+  width: 100%;
+}
+html .joms-ribbon {
+  font-size: 8px;
+  line-height: 17px;
+}
+@media (min-width: 480px) {
+  html .joms-ribbon {
+    left: -34px;
+    top: 7px;
+  }
+}
+@media (max-width: 767px) {
+  html .joms-gallery__options .joms-button--options {
+    right: auto;
+  }
+}
+html select.inputbox {
+  border: 1px solid #dddddd;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-button--primary,
+html .joms-button--add,
+html .joms-button--login,
+html .joms-button__reject,
+html .joms-postbox-tab .joms-postbox-save,
+html .joms-postbox-tab .joms-postbox-done,
+html .joms-focus__button--add {
+  color: #ffffff;
+  background-color: #f23d79;
+  border-color: #f23d79;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-button--primary:hover,
+html .joms-button--add:hover,
+html .joms-button--login:hover,
+html .joms-button__reject:hover,
+html .joms-postbox-tab .joms-postbox-save:hover,
+html .joms-postbox-tab .joms-postbox-done:hover,
+html .joms-focus__button--add:hover,
+html .joms-button--primary:focus,
+html .joms-button--add:focus,
+html .joms-button--login:focus,
+html .joms-button__reject:focus,
+html .joms-postbox-tab .joms-postbox-save:focus,
+html .joms-postbox-tab .joms-postbox-done:focus,
+html .joms-focus__button--add:focus,
+html .joms-button--primary.focus,
+html .joms-button--add.focus,
+html .joms-button--login.focus,
+html .joms-button__reject.focus,
+html .joms-postbox-tab .joms-postbox-save.focus,
+html .joms-postbox-tab .joms-postbox-done.focus,
+html .joms-focus__button--add.focus,
+html .joms-button--primary:active,
+html .joms-button--add:active,
+html .joms-button--login:active,
+html .joms-button__reject:active,
+html .joms-postbox-tab .joms-postbox-save:active,
+html .joms-postbox-tab .joms-postbox-done:active,
+html .joms-focus__button--add:active,
+html .joms-button--primary.active,
+html .joms-button--add.active,
+html .joms-button--login.active,
+html .joms-button__reject.active,
+html .joms-postbox-tab .joms-postbox-save.active,
+html .joms-postbox-tab .joms-postbox-done.active,
+html .joms-focus__button--add.active,
+.open > .dropdown-togglehtml .joms-button--primary,
+.open > .dropdown-togglehtml .joms-button--add,
+.open > .dropdown-togglehtml .joms-button--login,
+.open > .dropdown-togglehtml .joms-button__reject,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-save,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-done,
+.open > .dropdown-togglehtml .joms-focus__button--add {
+  color: #ffffff;
+  background-color: #ec1059;
+  border-color: #e30f55;
+}
+html .joms-button--primary:active,
+html .joms-button--add:active,
+html .joms-button--login:active,
+html .joms-button__reject:active,
+html .joms-postbox-tab .joms-postbox-save:active,
+html .joms-postbox-tab .joms-postbox-done:active,
+html .joms-focus__button--add:active,
+html .joms-button--primary.active,
+html .joms-button--add.active,
+html .joms-button--login.active,
+html .joms-button__reject.active,
+html .joms-postbox-tab .joms-postbox-save.active,
+html .joms-postbox-tab .joms-postbox-done.active,
+html .joms-focus__button--add.active,
+.open > .dropdown-togglehtml .joms-button--primary,
+.open > .dropdown-togglehtml .joms-button--add,
+.open > .dropdown-togglehtml .joms-button--login,
+.open > .dropdown-togglehtml .joms-button__reject,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-save,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-done,
+.open > .dropdown-togglehtml .joms-focus__button--add {
+  background-image: none;
+}
+html .joms-button--primary.disabled,
+html .joms-button--add.disabled,
+html .joms-button--login.disabled,
+html .joms-button__reject.disabled,
+html .joms-postbox-tab .joms-postbox-save.disabled,
+html .joms-postbox-tab .joms-postbox-done.disabled,
+html .joms-focus__button--add.disabled,
+html .joms-button--primary[disabled],
+html .joms-button--add[disabled],
+html .joms-button--login[disabled],
+html .joms-button__reject[disabled],
+html .joms-postbox-tab .joms-postbox-save[disabled],
+html .joms-postbox-tab .joms-postbox-done[disabled],
+html .joms-focus__button--add[disabled],
+fieldset[disabled] html .joms-button--primary,
+fieldset[disabled] html .joms-button--add,
+fieldset[disabled] html .joms-button--login,
+fieldset[disabled] html .joms-button__reject,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done,
+fieldset[disabled] html .joms-focus__button--add,
+html .joms-button--primary.disabled:hover,
+html .joms-button--add.disabled:hover,
+html .joms-button--login.disabled:hover,
+html .joms-button__reject.disabled:hover,
+html .joms-postbox-tab .joms-postbox-save.disabled:hover,
+html .joms-postbox-tab .joms-postbox-done.disabled:hover,
+html .joms-focus__button--add.disabled:hover,
+html .joms-button--primary[disabled]:hover,
+html .joms-button--add[disabled]:hover,
+html .joms-button--login[disabled]:hover,
+html .joms-button__reject[disabled]:hover,
+html .joms-postbox-tab .joms-postbox-save[disabled]:hover,
+html .joms-postbox-tab .joms-postbox-done[disabled]:hover,
+html .joms-focus__button--add[disabled]:hover,
+fieldset[disabled] html .joms-button--primary:hover,
+fieldset[disabled] html .joms-button--add:hover,
+fieldset[disabled] html .joms-button--login:hover,
+fieldset[disabled] html .joms-button__reject:hover,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save:hover,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done:hover,
+fieldset[disabled] html .joms-focus__button--add:hover,
+html .joms-button--primary.disabled:focus,
+html .joms-button--add.disabled:focus,
+html .joms-button--login.disabled:focus,
+html .joms-button__reject.disabled:focus,
+html .joms-postbox-tab .joms-postbox-save.disabled:focus,
+html .joms-postbox-tab .joms-postbox-done.disabled:focus,
+html .joms-focus__button--add.disabled:focus,
+html .joms-button--primary[disabled]:focus,
+html .joms-button--add[disabled]:focus,
+html .joms-button--login[disabled]:focus,
+html .joms-button__reject[disabled]:focus,
+html .joms-postbox-tab .joms-postbox-save[disabled]:focus,
+html .joms-postbox-tab .joms-postbox-done[disabled]:focus,
+html .joms-focus__button--add[disabled]:focus,
+fieldset[disabled] html .joms-button--primary:focus,
+fieldset[disabled] html .joms-button--add:focus,
+fieldset[disabled] html .joms-button--login:focus,
+fieldset[disabled] html .joms-button__reject:focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save:focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done:focus,
+fieldset[disabled] html .joms-focus__button--add:focus,
+html .joms-button--primary.disabled.focus,
+html .joms-button--add.disabled.focus,
+html .joms-button--login.disabled.focus,
+html .joms-button__reject.disabled.focus,
+html .joms-postbox-tab .joms-postbox-save.disabled.focus,
+html .joms-postbox-tab .joms-postbox-done.disabled.focus,
+html .joms-focus__button--add.disabled.focus,
+html .joms-button--primary[disabled].focus,
+html .joms-button--add[disabled].focus,
+html .joms-button--login[disabled].focus,
+html .joms-button__reject[disabled].focus,
+html .joms-postbox-tab .joms-postbox-save[disabled].focus,
+html .joms-postbox-tab .joms-postbox-done[disabled].focus,
+html .joms-focus__button--add[disabled].focus,
+fieldset[disabled] html .joms-button--primary.focus,
+fieldset[disabled] html .joms-button--add.focus,
+fieldset[disabled] html .joms-button--login.focus,
+fieldset[disabled] html .joms-button__reject.focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save.focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done.focus,
+fieldset[disabled] html .joms-focus__button--add.focus,
+html .joms-button--primary.disabled:active,
+html .joms-button--add.disabled:active,
+html .joms-button--login.disabled:active,
+html .joms-button__reject.disabled:active,
+html .joms-postbox-tab .joms-postbox-save.disabled:active,
+html .joms-postbox-tab .joms-postbox-done.disabled:active,
+html .joms-focus__button--add.disabled:active,
+html .joms-button--primary[disabled]:active,
+html .joms-button--add[disabled]:active,
+html .joms-button--login[disabled]:active,
+html .joms-button__reject[disabled]:active,
+html .joms-postbox-tab .joms-postbox-save[disabled]:active,
+html .joms-postbox-tab .joms-postbox-done[disabled]:active,
+html .joms-focus__button--add[disabled]:active,
+fieldset[disabled] html .joms-button--primary:active,
+fieldset[disabled] html .joms-button--add:active,
+fieldset[disabled] html .joms-button--login:active,
+fieldset[disabled] html .joms-button__reject:active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save:active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done:active,
+fieldset[disabled] html .joms-focus__button--add:active,
+html .joms-button--primary.disabled.active,
+html .joms-button--add.disabled.active,
+html .joms-button--login.disabled.active,
+html .joms-button__reject.disabled.active,
+html .joms-postbox-tab .joms-postbox-save.disabled.active,
+html .joms-postbox-tab .joms-postbox-done.disabled.active,
+html .joms-focus__button--add.disabled.active,
+html .joms-button--primary[disabled].active,
+html .joms-button--add[disabled].active,
+html .joms-button--login[disabled].active,
+html .joms-button__reject[disabled].active,
+html .joms-postbox-tab .joms-postbox-save[disabled].active,
+html .joms-postbox-tab .joms-postbox-done[disabled].active,
+html .joms-focus__button--add[disabled].active,
+fieldset[disabled] html .joms-button--primary.active,
+fieldset[disabled] html .joms-button--add.active,
+fieldset[disabled] html .joms-button--login.active,
+fieldset[disabled] html .joms-button__reject.active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-save.active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-done.active,
+fieldset[disabled] html .joms-focus__button--add.active {
+  background-color: #f23d79;
+  border-color: #f23d79;
+}
+html .joms-button--primary .badge,
+html .joms-button--add .badge,
+html .joms-button--login .badge,
+html .joms-button__reject .badge,
+html .joms-postbox-tab .joms-postbox-save .badge,
+html .joms-postbox-tab .joms-postbox-done .badge,
+html .joms-focus__button--add .badge {
+  color: #f23d79;
+  background-color: #ffffff;
+}
+html .joms-button--primary .joms-icon,
+html .joms-button--add .joms-icon,
+html .joms-button--login .joms-icon,
+html .joms-button__reject .joms-icon,
+html .joms-postbox-tab .joms-postbox-save .joms-icon,
+html .joms-postbox-tab .joms-postbox-done .joms-icon,
+html .joms-focus__button--add .joms-icon {
+  fill: #ffffff;
+}
+html .joms-button--add {
+  vertical-align: top;
+  position: static;
+}
+html .joms-button__next,
+html .joms-button--secondary,
+html .joms-button--signup,
+html .joms-focus__button--message {
+  color: #ffffff;
+  background-color: #669900;
+  border-color: #669900;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-button__next:hover,
+html .joms-button--secondary:hover,
+html .joms-button--signup:hover,
+html .joms-focus__button--message:hover,
+html .joms-button__next:focus,
+html .joms-button--secondary:focus,
+html .joms-button--signup:focus,
+html .joms-focus__button--message:focus,
+html .joms-button__next.focus,
+html .joms-button--secondary.focus,
+html .joms-button--signup.focus,
+html .joms-focus__button--message.focus,
+html .joms-button__next:active,
+html .joms-button--secondary:active,
+html .joms-button--signup:active,
+html .joms-focus__button--message:active,
+html .joms-button__next.active,
+html .joms-button--secondary.active,
+html .joms-button--signup.active,
+html .joms-focus__button--message.active,
+.open > .dropdown-togglehtml .joms-button__next,
+.open > .dropdown-togglehtml .joms-button--secondary,
+.open > .dropdown-togglehtml .joms-button--signup,
+.open > .dropdown-togglehtml .joms-focus__button--message {
+  color: #ffffff;
+  background-color: #446600;
+  border-color: #3d5c00;
+}
+html .joms-button__next:active,
+html .joms-button--secondary:active,
+html .joms-button--signup:active,
+html .joms-focus__button--message:active,
+html .joms-button__next.active,
+html .joms-button--secondary.active,
+html .joms-button--signup.active,
+html .joms-focus__button--message.active,
+.open > .dropdown-togglehtml .joms-button__next,
+.open > .dropdown-togglehtml .joms-button--secondary,
+.open > .dropdown-togglehtml .joms-button--signup,
+.open > .dropdown-togglehtml .joms-focus__button--message {
+  background-image: none;
+}
+html .joms-button__next.disabled,
+html .joms-button--secondary.disabled,
+html .joms-button--signup.disabled,
+html .joms-focus__button--message.disabled,
+html .joms-button__next[disabled],
+html .joms-button--secondary[disabled],
+html .joms-button--signup[disabled],
+html .joms-focus__button--message[disabled],
+fieldset[disabled] html .joms-button__next,
+fieldset[disabled] html .joms-button--secondary,
+fieldset[disabled] html .joms-button--signup,
+fieldset[disabled] html .joms-focus__button--message,
+html .joms-button__next.disabled:hover,
+html .joms-button--secondary.disabled:hover,
+html .joms-button--signup.disabled:hover,
+html .joms-focus__button--message.disabled:hover,
+html .joms-button__next[disabled]:hover,
+html .joms-button--secondary[disabled]:hover,
+html .joms-button--signup[disabled]:hover,
+html .joms-focus__button--message[disabled]:hover,
+fieldset[disabled] html .joms-button__next:hover,
+fieldset[disabled] html .joms-button--secondary:hover,
+fieldset[disabled] html .joms-button--signup:hover,
+fieldset[disabled] html .joms-focus__button--message:hover,
+html .joms-button__next.disabled:focus,
+html .joms-button--secondary.disabled:focus,
+html .joms-button--signup.disabled:focus,
+html .joms-focus__button--message.disabled:focus,
+html .joms-button__next[disabled]:focus,
+html .joms-button--secondary[disabled]:focus,
+html .joms-button--signup[disabled]:focus,
+html .joms-focus__button--message[disabled]:focus,
+fieldset[disabled] html .joms-button__next:focus,
+fieldset[disabled] html .joms-button--secondary:focus,
+fieldset[disabled] html .joms-button--signup:focus,
+fieldset[disabled] html .joms-focus__button--message:focus,
+html .joms-button__next.disabled.focus,
+html .joms-button--secondary.disabled.focus,
+html .joms-button--signup.disabled.focus,
+html .joms-focus__button--message.disabled.focus,
+html .joms-button__next[disabled].focus,
+html .joms-button--secondary[disabled].focus,
+html .joms-button--signup[disabled].focus,
+html .joms-focus__button--message[disabled].focus,
+fieldset[disabled] html .joms-button__next.focus,
+fieldset[disabled] html .joms-button--secondary.focus,
+fieldset[disabled] html .joms-button--signup.focus,
+fieldset[disabled] html .joms-focus__button--message.focus,
+html .joms-button__next.disabled:active,
+html .joms-button--secondary.disabled:active,
+html .joms-button--signup.disabled:active,
+html .joms-focus__button--message.disabled:active,
+html .joms-button__next[disabled]:active,
+html .joms-button--secondary[disabled]:active,
+html .joms-button--signup[disabled]:active,
+html .joms-focus__button--message[disabled]:active,
+fieldset[disabled] html .joms-button__next:active,
+fieldset[disabled] html .joms-button--secondary:active,
+fieldset[disabled] html .joms-button--signup:active,
+fieldset[disabled] html .joms-focus__button--message:active,
+html .joms-button__next.disabled.active,
+html .joms-button--secondary.disabled.active,
+html .joms-button--signup.disabled.active,
+html .joms-focus__button--message.disabled.active,
+html .joms-button__next[disabled].active,
+html .joms-button--secondary[disabled].active,
+html .joms-button--signup[disabled].active,
+html .joms-focus__button--message[disabled].active,
+fieldset[disabled] html .joms-button__next.active,
+fieldset[disabled] html .joms-button--secondary.active,
+fieldset[disabled] html .joms-button--signup.active,
+fieldset[disabled] html .joms-focus__button--message.active {
+  background-color: #669900;
+  border-color: #669900;
+}
+html .joms-button__next .badge,
+html .joms-button--secondary .badge,
+html .joms-button--signup .badge,
+html .joms-focus__button--message .badge {
+  color: #669900;
+  background-color: #ffffff;
+}
+html .joms-button__next .joms-icon,
+html .joms-button--secondary .joms-icon,
+html .joms-button--signup .joms-icon,
+html .joms-focus__button--message .joms-icon {
+  fill: #ffffff;
+}
+html .joms-button--neutral,
+html .joms-button--privacy,
+html .joms-button--more,
+html .joms-button--comment,
+html .joms-button__approve,
+html .joms-postbox-tab .joms-postbox-cancel,
+html .joms-focus__button--options {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-button--neutral:hover,
+html .joms-button--privacy:hover,
+html .joms-button--more:hover,
+html .joms-button--comment:hover,
+html .joms-button__approve:hover,
+html .joms-postbox-tab .joms-postbox-cancel:hover,
+html .joms-focus__button--options:hover,
+html .joms-button--neutral:focus,
+html .joms-button--privacy:focus,
+html .joms-button--more:focus,
+html .joms-button--comment:focus,
+html .joms-button__approve:focus,
+html .joms-postbox-tab .joms-postbox-cancel:focus,
+html .joms-focus__button--options:focus,
+html .joms-button--neutral.focus,
+html .joms-button--privacy.focus,
+html .joms-button--more.focus,
+html .joms-button--comment.focus,
+html .joms-button__approve.focus,
+html .joms-postbox-tab .joms-postbox-cancel.focus,
+html .joms-focus__button--options.focus,
+html .joms-button--neutral:active,
+html .joms-button--privacy:active,
+html .joms-button--more:active,
+html .joms-button--comment:active,
+html .joms-button__approve:active,
+html .joms-postbox-tab .joms-postbox-cancel:active,
+html .joms-focus__button--options:active,
+html .joms-button--neutral.active,
+html .joms-button--privacy.active,
+html .joms-button--more.active,
+html .joms-button--comment.active,
+html .joms-button__approve.active,
+html .joms-postbox-tab .joms-postbox-cancel.active,
+html .joms-focus__button--options.active,
+.open > .dropdown-togglehtml .joms-button--neutral,
+.open > .dropdown-togglehtml .joms-button--privacy,
+.open > .dropdown-togglehtml .joms-button--more,
+.open > .dropdown-togglehtml .joms-button--comment,
+.open > .dropdown-togglehtml .joms-button__approve,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-cancel,
+.open > .dropdown-togglehtml .joms-focus__button--options {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+html .joms-button--neutral:active,
+html .joms-button--privacy:active,
+html .joms-button--more:active,
+html .joms-button--comment:active,
+html .joms-button__approve:active,
+html .joms-postbox-tab .joms-postbox-cancel:active,
+html .joms-focus__button--options:active,
+html .joms-button--neutral.active,
+html .joms-button--privacy.active,
+html .joms-button--more.active,
+html .joms-button--comment.active,
+html .joms-button__approve.active,
+html .joms-postbox-tab .joms-postbox-cancel.active,
+html .joms-focus__button--options.active,
+.open > .dropdown-togglehtml .joms-button--neutral,
+.open > .dropdown-togglehtml .joms-button--privacy,
+.open > .dropdown-togglehtml .joms-button--more,
+.open > .dropdown-togglehtml .joms-button--comment,
+.open > .dropdown-togglehtml .joms-button__approve,
+.open > .dropdown-togglehtml .joms-postbox-tab .joms-postbox-cancel,
+.open > .dropdown-togglehtml .joms-focus__button--options {
+  background-image: none;
+}
+html .joms-button--neutral.disabled,
+html .joms-button--privacy.disabled,
+html .joms-button--more.disabled,
+html .joms-button--comment.disabled,
+html .joms-button__approve.disabled,
+html .joms-postbox-tab .joms-postbox-cancel.disabled,
+html .joms-focus__button--options.disabled,
+html .joms-button--neutral[disabled],
+html .joms-button--privacy[disabled],
+html .joms-button--more[disabled],
+html .joms-button--comment[disabled],
+html .joms-button__approve[disabled],
+html .joms-postbox-tab .joms-postbox-cancel[disabled],
+html .joms-focus__button--options[disabled],
+fieldset[disabled] html .joms-button--neutral,
+fieldset[disabled] html .joms-button--privacy,
+fieldset[disabled] html .joms-button--more,
+fieldset[disabled] html .joms-button--comment,
+fieldset[disabled] html .joms-button__approve,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel,
+fieldset[disabled] html .joms-focus__button--options,
+html .joms-button--neutral.disabled:hover,
+html .joms-button--privacy.disabled:hover,
+html .joms-button--more.disabled:hover,
+html .joms-button--comment.disabled:hover,
+html .joms-button__approve.disabled:hover,
+html .joms-postbox-tab .joms-postbox-cancel.disabled:hover,
+html .joms-focus__button--options.disabled:hover,
+html .joms-button--neutral[disabled]:hover,
+html .joms-button--privacy[disabled]:hover,
+html .joms-button--more[disabled]:hover,
+html .joms-button--comment[disabled]:hover,
+html .joms-button__approve[disabled]:hover,
+html .joms-postbox-tab .joms-postbox-cancel[disabled]:hover,
+html .joms-focus__button--options[disabled]:hover,
+fieldset[disabled] html .joms-button--neutral:hover,
+fieldset[disabled] html .joms-button--privacy:hover,
+fieldset[disabled] html .joms-button--more:hover,
+fieldset[disabled] html .joms-button--comment:hover,
+fieldset[disabled] html .joms-button__approve:hover,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel:hover,
+fieldset[disabled] html .joms-focus__button--options:hover,
+html .joms-button--neutral.disabled:focus,
+html .joms-button--privacy.disabled:focus,
+html .joms-button--more.disabled:focus,
+html .joms-button--comment.disabled:focus,
+html .joms-button__approve.disabled:focus,
+html .joms-postbox-tab .joms-postbox-cancel.disabled:focus,
+html .joms-focus__button--options.disabled:focus,
+html .joms-button--neutral[disabled]:focus,
+html .joms-button--privacy[disabled]:focus,
+html .joms-button--more[disabled]:focus,
+html .joms-button--comment[disabled]:focus,
+html .joms-button__approve[disabled]:focus,
+html .joms-postbox-tab .joms-postbox-cancel[disabled]:focus,
+html .joms-focus__button--options[disabled]:focus,
+fieldset[disabled] html .joms-button--neutral:focus,
+fieldset[disabled] html .joms-button--privacy:focus,
+fieldset[disabled] html .joms-button--more:focus,
+fieldset[disabled] html .joms-button--comment:focus,
+fieldset[disabled] html .joms-button__approve:focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel:focus,
+fieldset[disabled] html .joms-focus__button--options:focus,
+html .joms-button--neutral.disabled.focus,
+html .joms-button--privacy.disabled.focus,
+html .joms-button--more.disabled.focus,
+html .joms-button--comment.disabled.focus,
+html .joms-button__approve.disabled.focus,
+html .joms-postbox-tab .joms-postbox-cancel.disabled.focus,
+html .joms-focus__button--options.disabled.focus,
+html .joms-button--neutral[disabled].focus,
+html .joms-button--privacy[disabled].focus,
+html .joms-button--more[disabled].focus,
+html .joms-button--comment[disabled].focus,
+html .joms-button__approve[disabled].focus,
+html .joms-postbox-tab .joms-postbox-cancel[disabled].focus,
+html .joms-focus__button--options[disabled].focus,
+fieldset[disabled] html .joms-button--neutral.focus,
+fieldset[disabled] html .joms-button--privacy.focus,
+fieldset[disabled] html .joms-button--more.focus,
+fieldset[disabled] html .joms-button--comment.focus,
+fieldset[disabled] html .joms-button__approve.focus,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel.focus,
+fieldset[disabled] html .joms-focus__button--options.focus,
+html .joms-button--neutral.disabled:active,
+html .joms-button--privacy.disabled:active,
+html .joms-button--more.disabled:active,
+html .joms-button--comment.disabled:active,
+html .joms-button__approve.disabled:active,
+html .joms-postbox-tab .joms-postbox-cancel.disabled:active,
+html .joms-focus__button--options.disabled:active,
+html .joms-button--neutral[disabled]:active,
+html .joms-button--privacy[disabled]:active,
+html .joms-button--more[disabled]:active,
+html .joms-button--comment[disabled]:active,
+html .joms-button__approve[disabled]:active,
+html .joms-postbox-tab .joms-postbox-cancel[disabled]:active,
+html .joms-focus__button--options[disabled]:active,
+fieldset[disabled] html .joms-button--neutral:active,
+fieldset[disabled] html .joms-button--privacy:active,
+fieldset[disabled] html .joms-button--more:active,
+fieldset[disabled] html .joms-button--comment:active,
+fieldset[disabled] html .joms-button__approve:active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel:active,
+fieldset[disabled] html .joms-focus__button--options:active,
+html .joms-button--neutral.disabled.active,
+html .joms-button--privacy.disabled.active,
+html .joms-button--more.disabled.active,
+html .joms-button--comment.disabled.active,
+html .joms-button__approve.disabled.active,
+html .joms-postbox-tab .joms-postbox-cancel.disabled.active,
+html .joms-focus__button--options.disabled.active,
+html .joms-button--neutral[disabled].active,
+html .joms-button--privacy[disabled].active,
+html .joms-button--more[disabled].active,
+html .joms-button--comment[disabled].active,
+html .joms-button__approve[disabled].active,
+html .joms-postbox-tab .joms-postbox-cancel[disabled].active,
+html .joms-focus__button--options[disabled].active,
+fieldset[disabled] html .joms-button--neutral.active,
+fieldset[disabled] html .joms-button--privacy.active,
+fieldset[disabled] html .joms-button--more.active,
+fieldset[disabled] html .joms-button--comment.active,
+fieldset[disabled] html .joms-button__approve.active,
+fieldset[disabled] html .joms-postbox-tab .joms-postbox-cancel.active,
+fieldset[disabled] html .joms-focus__button--options.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+html .joms-button--neutral .badge,
+html .joms-button--privacy .badge,
+html .joms-button--more .badge,
+html .joms-button--comment .badge,
+html .joms-button__approve .badge,
+html .joms-postbox-tab .joms-postbox-cancel .badge,
+html .joms-focus__button--options .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+html .joms-input[type="text"],
+html .joms-input[type="password"],
+html .joms-select--wrapper,
+html .joms-textarea,
+html .joms-select--wrapper,
+html .joms-notifications__label {
+  border-radius: 0;
+}
+html .joms-select--wrapper {
+  padding: 0;
+  border: 0 !important;
+}
+html .joms-select--wrapper:after {
+  right: 24px;
+}
+html .joms-select--wrapper .joms-select {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-select--wrapper .joms-select:hover,
+html .joms-select--wrapper .joms-select:focus,
+html .joms-select--wrapper .joms-select.focus,
+html .joms-select--wrapper .joms-select:active,
+html .joms-select--wrapper .joms-select.active,
+.open > .dropdown-togglehtml .joms-select--wrapper .joms-select {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+html .joms-select--wrapper .joms-select:active,
+html .joms-select--wrapper .joms-select.active,
+.open > .dropdown-togglehtml .joms-select--wrapper .joms-select {
+  background-image: none;
+}
+html .joms-select--wrapper .joms-select.disabled,
+html .joms-select--wrapper .joms-select[disabled],
+fieldset[disabled] html .joms-select--wrapper .joms-select,
+html .joms-select--wrapper .joms-select.disabled:hover,
+html .joms-select--wrapper .joms-select[disabled]:hover,
+fieldset[disabled] html .joms-select--wrapper .joms-select:hover,
+html .joms-select--wrapper .joms-select.disabled:focus,
+html .joms-select--wrapper .joms-select[disabled]:focus,
+fieldset[disabled] html .joms-select--wrapper .joms-select:focus,
+html .joms-select--wrapper .joms-select.disabled.focus,
+html .joms-select--wrapper .joms-select[disabled].focus,
+fieldset[disabled] html .joms-select--wrapper .joms-select.focus,
+html .joms-select--wrapper .joms-select.disabled:active,
+html .joms-select--wrapper .joms-select[disabled]:active,
+fieldset[disabled] html .joms-select--wrapper .joms-select:active,
+html .joms-select--wrapper .joms-select.disabled.active,
+html .joms-select--wrapper .joms-select[disabled].active,
+fieldset[disabled] html .joms-select--wrapper .joms-select.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+html .joms-select--wrapper .joms-select .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+html .joms-postbox-tab .joms-postbox-cancel,
+html .joms-postbox-tab .joms-postbox-save {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+html .joms-form__group .joms-input {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-form__group .joms-input:hover,
+html .joms-form__group .joms-input:focus,
+html .joms-form__group .joms-input.focus,
+html .joms-form__group .joms-input:active,
+html .joms-form__group .joms-input.active,
+.open > .dropdown-togglehtml .joms-form__group .joms-input {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+html .joms-form__group .joms-input:active,
+html .joms-form__group .joms-input.active,
+.open > .dropdown-togglehtml .joms-form__group .joms-input {
+  background-image: none;
+}
+html .joms-form__group .joms-input.disabled,
+html .joms-form__group .joms-input[disabled],
+fieldset[disabled] html .joms-form__group .joms-input,
+html .joms-form__group .joms-input.disabled:hover,
+html .joms-form__group .joms-input[disabled]:hover,
+fieldset[disabled] html .joms-form__group .joms-input:hover,
+html .joms-form__group .joms-input.disabled:focus,
+html .joms-form__group .joms-input[disabled]:focus,
+fieldset[disabled] html .joms-form__group .joms-input:focus,
+html .joms-form__group .joms-input.disabled.focus,
+html .joms-form__group .joms-input[disabled].focus,
+fieldset[disabled] html .joms-form__group .joms-input.focus,
+html .joms-form__group .joms-input.disabled:active,
+html .joms-form__group .joms-input[disabled]:active,
+fieldset[disabled] html .joms-form__group .joms-input:active,
+html .joms-form__group .joms-input.disabled.active,
+html .joms-form__group .joms-input[disabled].active,
+fieldset[disabled] html .joms-form__group .joms-input.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+html .joms-form__group .joms-input .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+html .joms-form__group.has-privacy .joms-button--privacy {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-form__group.has-privacy .joms-button--privacy:hover,
+html .joms-form__group.has-privacy .joms-button--privacy:focus,
+html .joms-form__group.has-privacy .joms-button--privacy.focus,
+html .joms-form__group.has-privacy .joms-button--privacy:active,
+html .joms-form__group.has-privacy .joms-button--privacy.active,
+.open > .dropdown-togglehtml .joms-form__group.has-privacy .joms-button--privacy {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+html .joms-form__group.has-privacy .joms-button--privacy:active,
+html .joms-form__group.has-privacy .joms-button--privacy.active,
+.open > .dropdown-togglehtml .joms-form__group.has-privacy .joms-button--privacy {
+  background-image: none;
+}
+html .joms-form__group.has-privacy .joms-button--privacy.disabled,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled],
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy,
+html .joms-form__group.has-privacy .joms-button--privacy.disabled:hover,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled]:hover,
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy:hover,
+html .joms-form__group.has-privacy .joms-button--privacy.disabled:focus,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled]:focus,
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy:focus,
+html .joms-form__group.has-privacy .joms-button--privacy.disabled.focus,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled].focus,
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy.focus,
+html .joms-form__group.has-privacy .joms-button--privacy.disabled:active,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled]:active,
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy:active,
+html .joms-form__group.has-privacy .joms-button--privacy.disabled.active,
+html .joms-form__group.has-privacy .joms-button--privacy[disabled].active,
+fieldset[disabled] html .joms-form__group.has-privacy .joms-button--privacy.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+html .joms-form__group.has-privacy .joms-button--privacy .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+html .com_community .input-mini {
+  display: inline-block;
+}
+html .joms-button--full-small + .joms-button--full-small {
+  margin-left: 5px;
+}
+html .joms-input--datepicker {
+  cursor: text;
+}
+html .joms-list__search .joms-page__title {
+  margin: 0 24px 0 0;
+}
+html .joms-list__search .joms-list__utilities {
+  text-align: left;
+}
+html .joms-list__search .joms-list__utilities .joms-inline--desktop {
+  display: inline-block !important;
+}
+html .joms-list__search .joms-list__utilities .joms-input--search {
+  width: auto;
+}
+html .joms-list__search .joms-list__utilities form span {
+  width: auto;
+}
+html .joms-list__search .joms-list__utilities form span:first-child {
+  padding: 0 5px 0 0;
+}
+html .joms-list__search .joms-list__utilities form button {
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+  margin-right: 5px;
+}
+html .joms-input--search[type="text"] {
+  padding: 4px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 0;
+}
+html .joms-sortings .joms-select--wrapper:first-child {
+  margin-left: 0;
+}
+html #community-wrap .joms-focus__header__actions--desktop .joms-icon {
+  height: 24px;
+}
+html #community-wrap .joms-landing .joms-landing__action {
+  padding: 24px;
+}
+html #community-wrap .joms-form_fb_group {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 36px;
+  padding-top: 36px;
+  position: relative;
+  text-align: center;
+}
+html #community-wrap .joms-form_fb_group:before {
+  content: "Or";
+  background: #ffffff;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-left: -20px;
+  top: -20px;
+  left: 50%;
+  border-radius: 50%;
+}
+html #community-wrap.cRegister .joms-page__title {
+  margin-top: 0;
+}
+html #community-wrap.cRegister .joms-form__group > span:first-child {
+  padding-left: 0;
+  text-align: right;
+  padding-right: 20px;
+}
+html #community-wrap.cRegister .joms-form__group .joms-button__next {
+  background-color: #669900;
+  border: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 3px;
+}
+html .joms-input--append svg {
+  top: 14px;
+}
+html .joms-input--append .joms-input[type="text"],
+html .joms-input--append .joms-input[type="password"] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+html .joms-button--login {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+html .joms-landing {
+  margin-bottom: 24px;
+}
+html .joms-focus {
+  margin-bottom: 24px;
+}
+html .joms-gap {
+  height: 20px;
+}
+html .joms-stream,
+html .joms-stream--notifications {
+  margin-bottom: 24px;
+}
+html .joms-stream {
+  margin-bottom: 20px !important;
+}
+html .joms-stream .joms-stream__body.no-head {
+  padding: 24px;
+}
+html .joms-stream .joms-stream__header {
+  padding: 24px;
+}
+html .joms-stream .joms-stream__body {
+  padding: 0 24px 24px;
+}
+html .joms-stream .joms-stream__actions {
+  padding: 0 24px 24px 0;
+  text-align: right;
+}
+html .joms-stream .joms-stream__status--mobile {
+  padding: 0 0 24px 24px;
+}
+html .joms-stream .joms-comment__reply,
+html .joms-stream .joms-js--newcomment {
+  padding: 24px;
+}
+html .joms-stream .joms-comment__reply .joms-icon--add,
+html .joms-stream .joms-js--newcomment .joms-icon--add {
+  top: 34px;
+  right: 34px !important;
+}
+@media (max-width: 480px) {
+  html .joms-stream .joms-comment__reply .joms-icon--add,
+  html .joms-stream .joms-js--newcomment .joms-icon--add {
+    right: 90px !important;
+  }
+}
+html .joms-stream .joms-comment__item {
+  padding: 0;
+  border-top: 0;
+}
+html .joms-stream .joms-comment__header {
+  padding: 12px 24px;
+}
+html .joms-comment__reply,
+html .joms-postbox {
+  background: #ebedf0;
+  border: 0;
+  border-bottom: 2px solid #d7d9db;
+}
+html .joms-comment {
+  background: #ebedf0;
+  border-bottom: 1px solid #f1f3f5;
+}
+html .joms-media {
+  background: #ebf4fc;
+}
+html .joms-media__body {
+  padding: 12px 20px;
+}
+html .joms-media__body .joms-media__desc {
+  max-height: 41.16px;
+  line-height: 1.715;
+  margin-bottom: 0;
+}
+html .joms-list--video {
+  margin: 0 -10px;
+}
+html .joms-list--video .joms-list__item {
+  margin: 0 0 24px;
+  text-align: center;
+  position: relative;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+@media (min-width: 992px) {
+  html .joms-list--video .joms-list__item {
+    float: left;
+    width: 33.33333333%;
+  }
+}
+html .joms-list--video .joms-text--title {
+  margin-top: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html .joms-list--video .joms-text--title a {
+  color: #44494c;
+}
+html .joms-list--video .joms-text--title a:hover,
+html .joms-list--video .joms-text--title a:focus,
+html .joms-list--video .joms-text--title a:active {
+  color: #f02568;
+}
+html .joms-list--video .joms-block {
+  display: inline-block;
+  font-size: 12px;
+}
+html .joms-list--video .joms-block + small {
+  font-size: 12px;
+}
+html .joms-list--friend .joms-list__item {
+  background: none;
+  border: 0;
+  padding-left: 0;
+  padding-bottom: 42px;
+}
+html .joms-list--friend .joms-list__button--dropdown {
+  right: auto;
+  left: 78px;
+}
+@media (max-width: 767px) {
+  html .joms-list--friend .joms-ribbon__wrapper {
+    position: relative;
+  }
+  html .joms-list--friend .joms-ribbon__wrapper .joms-ribbon {
+    left: auto;
+    width: auto;
+    padding: 2px 8px;
+  }
+}
+html .joms-list--friend .joms-avatar img {
+  padding: 0;
+  border: 0;
+}
+html .joms-list--friend .joms-text--username {
+  font-size: 18px;
+  color: #44494c;
+}
+html .joms-list--friend .joms-text--username:hover,
+html .joms-list--friend .joms-text--username:focus,
+html .joms-list--friend .joms-text--username:active {
+  color: #f02568;
+}
+html .joms-media.like,
+html .joms-media--image,
+html .joms-media--images,
+html .joms-media--event {
+  max-width: 100%;
+}
+html .joms-list--card .joms-list__item {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #d7d9db;
+  margin-bottom: 24px;
+}
+html .joms-list--card .joms-list__item .joms-list__title {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+html .joms-list--card .joms-list__item .joms-list__title a {
+  color: #44494c;
+}
+html .joms-list--card .joms-list__item .joms-list__title a:hover,
+html .joms-list--card .joms-list__item .joms-list__title a:focus,
+html .joms-list--card .joms-list__item .joms-list__title a:active {
+  color: #f02568;
+}
+html .joms-list--card .joms-list__content {
+  padding: 0 20px 24px;
+}
+html .joms-list--card .joms-list__body {
+  margin: 12px 0;
+}
+html .joms-list--card .joms-list__body > a {
+  margin-bottom: 6px;
+}
+html .joms-list--card .joms-list__cover {
+  margin-bottom: 24px;
+}
+html .joms-list--card .joms-focus__date {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  border-radius: 0;
+  background: #88cc00;
+}
+html .joms-focus__date {
+  background: #88cc00;
+  border-radius: 0;
+  padding: 12px;
+}
+html .joms-focus__date span:last-child {
+  margin-top: 0;
+}
+html .joms-focus__title {
+  padding-left: 20px;
+}
+html.view-events #starttime select,
+html.view-events #endtime select {
+  display: inline-block;
+}
+html.view-events .joms-checkbox {
+  display: block;
+}
+html .joms-gallery .joms-gallery__body .joms-gallery__title {
+  font-size: 18px;
+  color: #44494c;
+}
+html .joms-gallery .joms-gallery__body .joms-gallery__title:hover,
+html .joms-gallery .joms-gallery__body .joms-gallery__title:focus,
+html .joms-gallery .joms-gallery__body .joms-gallery__title:active {
+  color: #f02568;
+}
+html .picker__header:before,
+html .picker__header:after {
+  content: " ";
+  display: table;
+}
+html .picker__header:after {
+  clear: both;
+}
+html .picker__header .picker__select--month {
+  display: inline-block;
+}
+html .picker__header .picker__select--year {
+  display: inline-block;
+}
+html.task-activation .jomsocial-wrapper .jomsocial {
+  background: #ffffff;
+}
+html .joms-popup__content {
+  padding: 15px;
+}
+html .joms-popup__content .joms-stream__meta {
+  text-align: left;
+}
+html .joms-popup__content .joms-stream__meta .joms-checkbox {
+  display: inline-block;
+}
+html .joms-popup__content--single ul {
+  padding-left: 0;
+}
+html .joms-popup .joms-popover {
+  border-radius: 0;
+  padding: 2px 0;
+}
+@media (max-width: 767px) {
+  html .joms-popup .joms-popover {
+    max-height: 300px;
+  }
+}
+html .joms-popup--dropdown .joms-dropdown.more-button {
+  position: static;
+  margin: 0;
+}
+html .joms-focus__link > a {
+  padding: 8px 22px;
+}
+html .joms-postbox-input div.inputbox {
+  height: auto;
+}
+html #inbox-listing.joms-list--message .joms-list--message__time {
+  position: static;
+}
+@media (max-width: 767px) {
+  html #inbox-listing .joms-list__item {
+    padding: 12px 0;
+  }
+  html #inbox-listing .joms-list__item .joms-list--message__time {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+  }
+}
+html .content-mass-top #cModule-HelloMe .joms-module--hellome {
+  background: #ffffff;
+}
+html .content-mass-top #cModule-HelloMe .joms-hcard {
+  max-width: unset;
+}
+html .content-mass-top #cModule-HelloMe .joms-button--hellome {
+  position: relative;
+}
+html .content-mass-top #cModule-HelloMe .joms-button--hellome span {
+  background: #f22613;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 9px;
+  line-height: 14px;
+  min-width: 12px;
+  padding: 0 3px;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  word-break: normal;
+}
+html .content-mass-top #cModule-HelloMe .joms-button--hellome small:empty {
+  display: none;
+}
+html .content-mass-top #cModule-HelloMe .joms-button--hellome.logout {
+  float: none;
+  width: auto;
+}
+html .content-mass-top #cModule-HelloMe .joms-button--hellome.logout .joms-icon {
+  fill: #ffffff;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome {
+  background: #ffffff;
+  padding: 24px;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li {
+  text-align: left;
+  padding: 12px 0;
+  border: 0;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li a {
+  color: #44494c;
+  font-size: 16px;
+  display: block;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li a:hover,
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li a:focus,
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li a:active {
+  color: #f23d79;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li span {
+  float: right;
+}
+html .content-mass-top #cModule-HelloMe .joms-list--hellome li .joms-icon {
+  fill: #f23d79;
+}
+html .content-mass-top .section-sign #cModule-HelloMe .joms-list--hellome {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+html .content-mass-top .section-sign #cModule-HelloMe .joms-hcard__info {
+  display: block;
+  top: 0;
+  padding-top: 35px;
+}
+html .t3-sidebar .cHello-Header {
+  margin-bottom: 24px;
+}
+html .t3-sidebar .cHello-Header a {
+  color: #ffffff;
+}
+html .t3-sidebar #cModule-HelloMe {
+  margin: -24px;
+}
+html .t3-sidebar #cModule-HelloMe .joms-hcard__info {
+  display: block;
+  top: 0;
+}
+html .t3-sidebar .joms-action--hellome {
+  margin-bottom: 0;
+  background: #f56d9a;
+  width: auto;
+  display: block;
+}
+html .t3-sidebar .joms-action--hellome > div {
+  display: inline-block;
+  width: 20%;
+  position: relative;
+}
+html .t3-sidebar .joms-action--hellome .joms-button--hellome {
+  background: none;
+}
+html .t3-sidebar .joms-action--hellome .joms-button--hellome span {
+  background: #f22613;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 9px;
+  line-height: 14px;
+  min-width: 12px;
+  padding: 0 3px;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  word-break: normal;
+}
+html .t3-sidebar .joms-action--hellome a .joms-icon {
+  fill: #ffffff;
+}
+html .t3-sidebar .joms-list--hellome {
+  background: #ffffff;
+  padding: 24px;
+}
+html .t3-sidebar .joms-list--hellome li {
+  text-align: left;
+  padding: 12px 0;
+  border: 0;
+}
+html .t3-sidebar .joms-list--hellome li a {
+  color: #44494c;
+  font-size: 16px;
+  display: block;
+}
+html .t3-sidebar .joms-list--hellome li a:hover,
+html .t3-sidebar .joms-list--hellome li a:focus,
+html .t3-sidebar .joms-list--hellome li a:active {
+  color: #f23d79;
+}
+html .t3-sidebar .joms-list--hellome li span {
+  float: right;
+}
+html .t3-sidebar .joms-list--hellome li .joms-icon {
+  fill: #f23d79;
+}
+html .t3-sidebar .joms-form {
+  padding: 24px;
+}
+html .t3-sidebar .top-gap {
+  margin-top: 10px;
+}
+html .t3-sidebar .top-gap li {
+  display: inline-block;
+  line-height: 1;
+  margin: 0 3px;
+}
+html .t3-sidebar .top-gap li a {
+  border-width: 1px;
+  display: inline-block;
+  padding: 6px;
+}
+html .t3-sidebar .module-primary .joms-checkbox span {
+  color: #ffffff;
+}
+html .t3-sidebar .module-primary .btn-primary {
+  background-color: #f02568;
+}
+html .t3-sidebar .module-primary a {
+  color: #ffffff;
+}
+html .t3-sidebar .module-primary .top-gap li a {
+  background-color: #f02568;
+  border-color: #ec1059;
+}
+html .js-module #datingsearch_agefrom,
+html .js-module #datingsearch_ageto {
+  display: inline-block;
+}
+html .t3-sidebar .joms-module__body,
+html .t3-sidebar .joms-stream__header {
+  padding: 0;
+}
+html .t3-sidebar .joms-stream__header + .joms-stream__header {
+  padding-top: 12px;
+}
+html .joms-js--module-activegroup .joms-avatar--stream img {
+  border-radius: 0;
+  border: 0;
+  padding: 0;
+}
+html .joms-js--module-activegroup .joms-text--title,
+html .joms-popover__content a {
+  color: #44494c;
+  font-size: 16px;
+}
+html .joms-js--module-activegroup .joms-text--title:hover,
+html .joms-js--module-activegroup .joms-text--title:focus,
+html .joms-js--module-activegroup .joms-text--title:active,
+html .joms-popover__content a:hover,
+html .joms-popover__content a:focus,
+html .joms-popover__content a:active {
+  color: #f23d79;
+}
+html .joms-js--module-activegroup .joms-block {
+  color: #b6c2cc;
+}
+html .t3-sidebar ul {
+  padding: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+html .t3-sidebar ul.joms-list--event {
+  margin-left: 0;
+}
+html .joms-list--event .joms-media--event {
+  padding: 0;
+  margin: 0;
+  border-bottom: 0;
+}
+html .joms-list--event .joms-media--event + .joms-media--event {
+  padding-top: 24px;
+}
+html .joms-list--event .joms-media--event .joms-media__body {
+  padding-left: 12px;
+  padding-right: 0;
+  vertical-align: top;
+}
+html .joms-list--event .joms-media--event .joms-media__body a {
+  color: #44494c;
+  font-size: 16px;
+}
+html .joms-list--event .joms-media--event .joms-media__body a:hover,
+html .joms-list--event .joms-media--event .joms-media__body a:focus,
+html .joms-list--event .joms-media--event .joms-media__body a:active {
+  color: #f23d79;
+}
+html .joms-list--event .joms-media--event .joms-media__body .joms-block,
+html .joms-list--event .joms-media--event .joms-media__body .joms-block + a {
+  color: #b6c2cc;
+  font-size: 14px;
+}
+html .t3-sidebar ul.joms-list--thumbnail {
+  margin: -6px;
+}
+html .t3-sidebar ul.joms-list--thumbnail .joms-list__item {
+  width: 50%;
+  padding: 6px;
+}
+html .t3-header .joms-noti__notify {
+  margin: 0;
+  padding: 0;
+  background: none;
+  display: block;
+  float: right;
+  text-align: right;
+}
+html .t3-header .joms-noti__notify a {
+  display: inline-block;
+  color: #ffffff;
+  width: 30px;
+  line-height: 50px;
+}
+html .t3-header .joms-noti__notify .joms-icon {
+  fill: #ffffff;
+}
+html .t3-sidebar .joms-list--half .joms-list__item {
+  width: 100%;
+  padding: 0;
+}
+html .t3-sidebar .joms-list--half .joms-list__item + .joms-list__item {
+  margin-top: 24px;
+}
+html .t3-sidebar .joms-button--link small {
+  font-size: 100%;
+}
+@media (min-width: 992px) {
+  html .js-register-profile .joms-form__group > span:first-child {
+    width: 100px;
+    text-align: left !important;
+  }
+}
+html .js-register-profile .joms-textarea {
+  min-height: 100px;
+}
+html .js-register-profile #btnSubmit {
+  margin-top: 12px;
+}
+.ie8 .joms-comment__actions {
+  text-align: left;
+  padding-left: 0;
+}
+.ie8 .joms-comment__actions > a {
+  display: inline;
+}
+.ie8 .joms-list--event .joms-media__calendar {
+  display: table-cell;
+  height: 80px;
+  vertical-align: top;
+  width: 60px;
+}
+.ie8 .joms-list--event .joms-media__body {
+  padding-top: 0;
+}
+.ie8 .jomsocial .joms-toolbar--desktop {
+  display: block;
+  border: 1px solid #d7d9db;
+}
+.ie8 .jomsocial .joms-toolbar {
+  display: none;
+}
+.ie8 .jomsocial .joms-body .joms-module__wrapper,
+.ie8 .jomsocial .joms-body .joms-module__wrapper--stacked {
+  display: none;
+}
+.ie8 .jomsocial .joms-body .joms-focus .joms-focus__actions,
+.ie8 .jomsocial .joms-body .joms-focus .joms-focus__badges {
+  display: none;
+}
+.ie8 .jomsocial .joms-body .joms-stream__wrapper .joms-stream .joms-stream__status--mobile {
+  display: none;
+}
+.ie8 .jomsocial .joms-body .joms-stream__wrapper .joms-stream .joms-stream__status {
+  background: #f7f7f7;
+}
+.ie8 .jomsocial .joms-body .joms-stream__wrapper .joms-stream .joms-stream__actions {
+  text-align: left;
+}
+.ie8 .jomsocial .joms-body .joms-stream__wrapper .joms-stream .joms-comment__reply > span {
+  display: none;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__cover:before {
+  padding-top: 40%;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__cover .joms-landing__image {
+  background-size: cover;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__cover .joms-landing__content {
+  background: rgba(0, 0, 0, 0.6);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+  zoom: 1;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__cover .joms-landing__content .joms-landing__text,
+.ie8 .jomsocial .joms-landing .joms-landing__cover .joms-landing__content .joms-landing__signup {
+  width: 50%;
+  display: table-cell;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__cover .joms-landing__content .joms-button--signup {
+  float: right;
+  width: auto;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__action .joms-input--append,
+.ie8 .jomsocial .joms-landing .joms-landing__action .joms-button--login {
+  display: inline-block;
+  width: 32%;
+  margin-right: 10px;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__action .joms-button--login {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.ie8 .jomsocial .joms-landing .joms-landing__action .joms-js-form--login > a,
+.ie8 .jomsocial .joms-landing .joms-landing__action .joms-checkbox {
+  display: inline-block;
+  margin-right: 10px;
+}
+.ie8 button {
+  border-style: solid !important;
+}
+.ie8 .joms-text--light {
+  display: inline-block;
+  border: 1px solid #f22613;
+}
+.joms-popover__actions .joms-button__reject {
+  color: #ffffff !important;
+}
+.joms-popover__actions .joms-button__approve {
+  color: #44494c !important;
+}
+#cModule-HelloMe input.joms-input {
+  padding-bottom: 20px\9;
+}
+.ie10 #cModule-HelloMe input.joms-input {
+  padding-bottom: 20px;
+}
+@supports (-ms-accelerator:true) {
+  #cModule-HelloMe input.joms-input {
+    padding-bottom: 20px;
+  }
+}

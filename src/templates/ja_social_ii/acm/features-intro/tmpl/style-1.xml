@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <title>Features Intro Style 1</title>
+	<sampledata><![CDATA[
+        {":type":"ja_social_ii:features-intro","features-intro":{"jatools-layout-features-intro":"style-1","features-intro[block-intro]":[""],"features-intro[block-extra-class]":[" section-border"],"features-intro[block-bg]":[""],"features-intro[features-style]":["style-light"],"features-intro[align]":["1"],"features-intro[img-features]":["images/joomlart/features/social-network.png"],"features-intro[data-s1]":{"features-intro[data-s1][title]":["We are the No.1 Community."],"features-intro[data-s1][description]":["Felis nibh sed auctor semper orci Sed lorem feugiat mauris vestibulum. Ligula Donec est Nulla nibh convallis eu leo risus dolor gravida. Nec mauris dui ac et eget tristique ornare a Donec Maecenas. Lorem id augue vitae at pretium non sem commodo et metus. Purus eu interdum convallis condimentum tristique Nam dignissim sed.((br /))((br /))\n\nEget urna hendrerit dolor sit a mauris ut Nam eros auctor. Aliquet interdum eget sollicitudin nunc et est et lacus vel adipiscing. Convallis nec penatibus id pretium Sed non ipsum velit condimentum sed."],"features-intro[data-s1][button]":["Learn More"],"features-intro[data-s1][title-link]":[""],"rows":1,"cols":5,"type":"list"}}}
+    ]]></sampledata>
+	<fields name="features-intro">
+		<fieldset name="basic" label="FEATURES_BASIC_LABEL" description="FEATURES_BASIC_DESC">
+			<field name="block-intro" type="textarea" default="" rows="5" cols="40"  label="BLOCK_INTRO_LABEL" description="BLOCK_INTRO_DESC" />
+			<field name="features-style" type="list" default="style-light"
+			  global="1"
+			  label="FEATURES_STYLE_LABEL"
+			  description="FEATURES_STYLE_DESC">
+				<option value="style-light">LAYOUT_FEATURES_LIGHT</option>
+				<option value="style-dark">LAYOUT_FEATURES_DARK</option>
+			</field>
+			
+			<field name="align" type="list" label="FEATURES_ALIGN_LABEL" description="FEATURES_ALIGN_DESC" >
+				<option value="0">Left</option>
+				<option value="1">Right</option>
+				<option value="2">Center</option>
+			</field>
+			
+			<field name="img-features" type="media" default="" label="FEATURES_BACKGROUND_LABEL" description="FEATURES_BACKGROUND_LABEL_DESC" ></field>
+
+		</fieldset>
+		
+		<fieldset name="section-features" label="FEATURES_SECTION_LABEL" description="FEATURES_SECTION_DESC">
+			<field name="data-s1" type="jalist" >
+				<item name="title" type="text" default="" size="40" label="FEATURES_TITLE_LABEL" description="FEATURES_TITLE_DESC" required="1" />
+				<item name="description" type="textarea" default="" label="FEATURES_DESCRIPTION_LABEL" description="FEATURES_DESCRIPTION_DESC" rows="5" cols="40" />
+				<item name="button" type="text" default="" label="FEATURES_BUTTON_LABEL" description="FEATURES_BUTTON_DESC" rows="5" cols="40"  />
+				<item name="title-link" type="text" default="" size="40" label="FEATURES_TITLE_LINK_LABEL" description="FEATURES_TITLE_LINK_DESC"  />
+			</field>
+		</fieldset>
+		
+  </fields>
+</form>

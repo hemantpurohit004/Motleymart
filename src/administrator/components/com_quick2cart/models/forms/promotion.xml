@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id"
+			type="text"
+			default="0"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_ID"
+			readonly="true"
+			class="readonly"
+			description="JGLOBAL_FIELD_ID_DESC"
+		/>
+
+		<field name="store_id"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_STORE_ID"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_STORE_ID"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_STORE_ID"
+			required="required"
+		/>
+
+		<field name="state"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_PUBLISHED"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_PUBLISHED"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_PUBLISHED"
+		/>
+
+		<field name="name"
+			type="textarea"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_NAME"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_NAME"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_NAME"
+			required="required"
+			maxlength="70"
+		/>
+
+		<field name="description"
+			type="textarea"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_DESCRIPTION"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_DESCRIPTION"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_DESCRIPTION"
+			required="required"
+			maxlength="650"
+		/>
+
+		<field name="from_date"
+			type="calendar"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_FROM_DATE"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_FROM_DATE"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_FROM_DATE"
+			filter="user_utc"
+			format="%Y-%m-%d %H:%M:%S"
+			class="validate-datetime"
+		/>
+
+		<field name="exp_date"
+			type="calendar"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_EXP_DATE"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_EXP_DATE"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_EXP_DATE"
+			filter="user_utc"
+			format="%Y-%m-%d %H:%M:%S"
+			class="validate-datetime"
+		/>
+
+		<field name="coupon_required"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_COUPON_REQUIRED"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_COUPON_REQUIRED"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_COUPON_REQUIRED"
+		/>
+
+		<field name="coupon_code"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_CODE"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_CODE"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_CODE"
+		/>
+
+		<field name="discount_type"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_VAL_TYPE"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_VAL_TYPE"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_VAL_TYPE"
+		/>
+
+		<field name="max_use"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_MAX_USE"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_MAX_USE"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_MAX_USE"
+			class="validate-numeric"
+		/>
+
+		<field name="max_per_user"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_MAX_PER_USER"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_MAX_PER_USER"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_MAX_PER_USER"
+			class="validate-numeric"
+		/>
+
+		<field name="terms_and_conditions"
+			type="textarea"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_TERMS_AND_CONDITIONS"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_TERMS_AND_CONDITIONS"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_TERMS_AND_CONDITIONS"
+			maxlength="650"
+		/>
+
+		<field name="extra_params"
+			type="text"
+			label="COM_QUICK2CART_FORM_LBL_PROMOTION_EXTRA_PARAMS"
+			description="COM_QUICK2CART_FORM_DESC_PROMOTION_EXTRA_PARAMS"
+			hint="COM_QUICK2CART_FORM_LBL_PROMOTION_EXTRA_PARAMS"
+		/>
+
+	</fieldset>
+</form>

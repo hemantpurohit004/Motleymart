@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toolbar>
+	<items>
+		<item>
+			<name>COM_QUICK2CART_MY_STORE</name>
+			<alias>my-store</alias>
+			<link><![CDATA[index.php?option=com_quick2cart&view=vendor&layout=cp]]></link>
+			<access>1</access>
+			<childs>
+				<item>
+					<name>COM_QUICK2CART_MY_ORDERS</name>
+					<alias>orders</alias>
+					<access>2</access>
+					<link><![CDATA[index.php?option=com_quick2cart&view=orders&layout=storeorder]]></link>
+				</item>
+
+				<item>
+					<name>COM_QUICK2CART_MY_PRODUCTS</name>
+					<alias>products</alias>
+					<access>2</access>
+					<link><![CDATA[index.php?option=com_quick2cart&view=category]]></link>
+				</item>
+
+				<item>
+					<name>COM_QUICK2CART_MY_COUPONS</name>
+					<alias>coupons</alias>
+					<access>2</access>
+					<link><![CDATA[index.php?option=com_quick2cart&view=coupons]]></link>
+				</item>
+
+				<item>
+					<name>COM_QUICK2CART_MY_CUSTOMERS</name>
+					<alias>customers</alias>
+					<access>2</access>
+					<link><![CDATA[index.php?option=com_quick2cart&view=orders&layout=mycustomer]]></link>
+				</item>
+			</childs>
+		</item>
+	</items>
+</toolbar>

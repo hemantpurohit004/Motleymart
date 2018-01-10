@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Quick2Cart All Products View" option="View" >
+		 <message><![CDATA[Quick2Cart All Products View]]></message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="advanced" label="COM_MENUS_LAYOUT_FEATURED_OPTIONS">
+			<field name="defaultCatId" type="category"
+				label="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SELECT_CAT"
+				description="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SELECT_CAT_DESC"
+				extension="com_quick2cart"
+				>
+					<option value=''>COM_QUICK2CART_MENU_PRODUCTS_FIELD_OPTION_SELECT_CAT</option>
+			</field>
+			<field name="show_subcat_products" type="list"
+				label="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SHOW_SUBCATS"
+				description="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SHOW_SUBCATS_DESC"
+				default="0"
+				>
+					<option value='1'>JYES</option>
+					<option value='0'>JNO</option>
+			</field>
+			<field name="cat_all_prod_pagination_limit" type="text" default="20" label="QTC_MENU_ALL_PROD_PAGINATION_LIMIT" description="QTC_MENU_ALL_PROD_PAGINATION_LIMIT_DESC" />
+
+			<field name="qtcShowCatStoreList" class="btn-group" type="radio" default="1" description="COM_QUICK2CART_SHOR_CATSTORE_LIST_DESC" label="COM_QUICK2CART_SHOR_CATSTORE_LIST">
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			<field name="qtcCategorySearch" class="btn-group" type="test" default="" description="COM_QUICK2CART_CATEGORY_SEARCH_DESC" label="COM_QUICK2CART_CATEGORY_SEARCH" />
+		</fieldset>
+	</fields>
+
+	<state>
+		<name>All Products (pin view)</name>
+		<description>All Products (pin view)</description>
+	</state>
+</metadata>

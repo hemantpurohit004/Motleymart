@@ -1,0 +1,11 @@
+[
+	{
+		"title"			: "COM_QUICK2CART_POINTS_ADD_STORE_TITLE",
+		"alias"			: "create_store",
+		"description"	: "COM_QUICK2CART_POINTS_ADD_STORE_TITLE_DESC",
+		"command"		: "create_store",
+		"extension"		: "com_quick2cart",
+		"state"			: true,
+		"points"		: 1
+	}
+]

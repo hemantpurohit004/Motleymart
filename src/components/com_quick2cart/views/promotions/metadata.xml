@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Stores">
+		<message>
+			<![CDATA[
+				Promotions View
+			]]>
+		</message>
+		<options var="layout">
+			<option value="default" name="My Promotions" msg="My Promotions" />
+		</options>
+	</view>
+</metadata>

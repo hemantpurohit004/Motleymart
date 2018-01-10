@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field name="search" type="text"
+			label="COM_QUICK2CART_FILTER_SEARCH_DESC"
+			description="COM_QUICK2CART_FILTER_SEARCH_DESC_PRODUCTS"
+			hint="COM_QUICK2CART_FILTER_SEARCH_DESC_PRODUCTS"/>
+
+		<field name="client" type="list"
+			label="COM_QUICK2CART_FILTER_CLIENT"
+			description="COM_QUICK2CART_FILTER_CLIENT_DESC"
+			onchange="this.form.submit();">
+				<option value="">COM_QUICK2CART_FILTER_SELECT_CLIENT</option>
+				<option value="com_quick2cart">COM_QUICK2CART_NATIVE</option>
+				<option value="com_content">COM_QUICK2CART_CONTENT_ARTICLES</option>
+				<option value="com_flexicontent">COM_QUICK2CART_FLEXICONTENT</option>
+				<option value="com_k2">COM_QUICK2CART_K2</option>
+				<option value="com_zoo">COM_QUICK2CART_ZOO</option>
+				<option value="com_cobalt">COM_QUICK2CART_COBALT</option>
+		</field>
+
+		<field name="category" type="category"
+			label="JOPTION_FILTER_CATEGORY"
+			extension="COM_quick2cart"
+			description="JOPTION_FILTER_CATEGORY_DESC"
+			onchange="this.form.submit();">
+				<option value="">JOPTION_SELECT_CATEGORY</option>
+		</field>
+
+		<field name="store" type="stores"
+			label="COM_QUICK2CART_STORE_SELECT"
+			description="COM_QUICK2CART_STORE_SELECT_DESC"
+			onchange="this.form.submit();">
+				<option value="">COM_QUICK2CART_STORE_SELECT</option>
+		</field>
+
+		<field name="published" type="list"
+			label="COM_QUICK2CART_FILTER_PUBLISHED"
+			description="COM_QUICK2CART_FILTER_PUBLISHED_DESC"
+			onchange="this.form.submit();">
+				<option value="">JOPTION_SELECT_PUBLISHED</option>
+				<option value="1">COM_QUICK2CART_PUBLISH</option>
+				<option value="0">COM_QUICK2CART_UNPUBLISH</option>
+		</field>
+	</fields>
+
+	<fields name="list">
+		<field name="limit" type="limitbox"
+			class="input-mini" default="25"
+			label="COM_QUICK2CART_LIST_LIMIT"
+			description="COM_QUICK2CART_LIST_LIMIT_DESC"
+			onchange="this.form.submit();"/>
+	</fields>
+</form>

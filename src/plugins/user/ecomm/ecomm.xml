@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="user" method="upgrade">
+	<name>plg_ecomm_user</name>
+	<author>Ecomm! Project</author>
+	<creationDate>September 2017</creationDate>
+	<copyright>(C) 2005 - 2017 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>niteshkesarkar136@gmail.com</authorEmail>
+	<authorUrl>www.shivnerisystems.com</authorUrl>
+	<version>3.0.0</version>
+	<description>This plugin is used in ecomm for user activities.</description>
+	<files>
+		<filename plugin="ecomm">ecomm.php</filename>
+	</files>
+</extension>

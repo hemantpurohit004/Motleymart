@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<name>plg_system_qtcamazon_easycheckout</name>
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-15 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+	<description>PLG_SYSTEM_QTCAMAZON_EASYCHECKOUT_DESC</description>
+	<files>
+		<filename plugin="qtcamazon_easycheckout">qtcamazon_easycheckout.php</filename>
+		<folder>qtcamazon_easycheckout</folder>
+		<folder>lib</folder>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_system_qtcamazon_easycheckout.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_system_qtcamazon_easycheckout.ini</language>
+	</languages>
+	 <config>
+		<fields name="params">
+			<fieldset name="basic">
+			<field name="workingMode" type="radio" default="0" label="PLUG_AMAZON_CHECKOUT_WORKINGMODE" description="PLUG_AMAZON_CHECKOUT_WORKINGMODE_DESC">
+				<option value="1">PLUG_AMAZON_CHECKOUT_PRODUCTIONMODE</option>
+				<option value="0">PLUG_AMAZON_CHECKOUT_SANDBOXMODE</option>
+			</field>
+
+			<field name="merchantID" type="text" default="" label="PLUG_AMAZON_CHECKOUT_MERCHAND_ID" description="PLUG_AMAZON_CHECKOUT_MERCHAND_ID_DESC"/>
+			<field name="accessKeyID" type="text" default="" label="PLUG_AMAZON_CHECKOUT_ACCESS_KEYID" description="PLUG_AMAZON_CHECKOUT_ACCESS_KEYID_DESC"/>
+			<field name="secretKeyID" type="text" default="" label="PLUG_AMAZON_CHECKOUT_SECREAT_KEYID" description="PLUG_AMAZON_CHECKOUT_SECREAT_KEYID_DESC"/>
+			<field name="returnVisitPage" type="text" default="" label="PLUG_AMAZON_CHECKOUT_RET_VISIT_PAGE" description="PLUG_AMAZON_CHECKOUT_RET_VISIT_PAGE_DESC"/>
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

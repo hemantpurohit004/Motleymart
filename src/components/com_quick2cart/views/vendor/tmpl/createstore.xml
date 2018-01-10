@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Quick2Cart Create Store" option="View" >
+		 <message><![CDATA[Create a new Store for Quick2Cart]]></message>
+
+	</layout>
+	<state>
+		<name>Quick2Cart Create Store</name>
+		<description>Create a new Store for Quick2Cart</description>
+		<params>
+		</params>
+	</state>
+
+</metadata>
+

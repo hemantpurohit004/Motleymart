@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic" addfieldpath="/administrator/components/com_ecomm/models/fields">
+		<field
+				name="img_name"
+				type="text"
+				label="Image Name"
+				description="Enter image name"
+				required="true"
+				/>
+		<field
+				name="category_id"
+				type="ecommmaincategories"
+				label="Parent"
+				description="Select the parent category"
+				/>
+		<field
+				name="img_order"
+				type="number"
+				label="Image Position"
+				description="Enter image position"
+				required="true"
+				/>
+		<field
+				name="img"
+				type="file"
+				label="Upload Banner Image"
+				description="Choose an image from your computer with maximum 100KB"
+				size="20"
+				accept="image/*" />
+		<field
+				name="img_path"
+				type="hidden"
+				/>
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="extension"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

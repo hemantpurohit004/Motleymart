@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text" default="0" label="COM_QUICK2CART_FORM_LBL_ATTRIBUTE_ID" readonly="true" class="readonly" description="JGLOBAL_FIELD_ID_DESC" />
+		<field name="attribute_name" type="text" class="required" label="COM_QUICK2CART_FORM_LBL_ATTRIBUTE_ATTRIBUTE_NAME" description="COM_QUICK2CART_FORM_DESC_ATTRIBUTE_ATTRIBUTE_NAME" />
+		<field name="display_name" type="text" class="required" label="COM_QUICK2CART_FORM_LBL_ATTRIBUTE_DISPLAY_NAME" description="COM_QUICK2CART_FORM_DESC_ATTRIBUTE_DISPLAY_NAME" />
+		<field name="state" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox" size="1" default="1">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASHED</option>
+		</field>
+	</fieldset>
+</form>

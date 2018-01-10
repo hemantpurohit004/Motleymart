@@ -1,0 +1,1187 @@
+ul.unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cb_template .col-xs-1,
+.cb_template .col-sm-1,
+.cb_template .col-md-1,
+.cb_template .col-lg-1,
+.cb_template .col-xs-2,
+.cb_template .col-sm-2,
+.cb_template .col-md-2,
+.cb_template .col-lg-2,
+.cb_template .col-xs-3,
+.cb_template .col-sm-3,
+.cb_template .col-md-3,
+.cb_template .col-lg-3,
+.cb_template .col-xs-4,
+.cb_template .col-sm-4,
+.cb_template .col-md-4,
+.cb_template .col-lg-4,
+.cb_template .col-xs-5,
+.cb_template .col-sm-5,
+.cb_template .col-md-5,
+.cb_template .col-lg-5,
+.cb_template .col-xs-6,
+.cb_template .col-sm-6,
+.cb_template .col-md-6,
+.cb_template .col-lg-6,
+.cb_template .col-xs-7,
+.cb_template .col-sm-7,
+.cb_template .col-md-7,
+.cb_template .col-lg-7,
+.cb_template .col-xs-8,
+.cb_template .col-sm-8,
+.cb_template .col-md-8,
+.cb_template .col-lg-8,
+.cb_template .col-xs-9,
+.cb_template .col-sm-9,
+.cb_template .col-md-9,
+.cb_template .col-lg-9,
+.cb_template .col-xs-10,
+.cb_template .col-sm-10,
+.cb_template .col-md-10,
+.cb_template .col-lg-10,
+.cb_template .col-xs-11,
+.cb_template .col-sm-11,
+.cb_template .col-md-11,
+.cb_template .col-lg-11,
+.cb_template .col-xs-12,
+.cb_template .col-sm-12,
+.cb_template .col-md-12,
+.cb_template .col-lg-12 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.cb_template .row {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.cb_template .navbar-toggle {
+  width: auto;
+}
+.cb_template .page-header h3 {
+  margin-top: 0;
+}
+.cb_template .btn {
+  border-radius: 0;
+}
+.cb_template .btn-success {
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #ffffff;
+  background-color: #669900;
+  border-color: #669900;
+}
+.cb_template .btn-success:hover,
+.cb_template .btn-success:focus,
+.cb_template .btn-success.focus,
+.cb_template .btn-success:active,
+.cb_template .btn-success.active,
+.open > .dropdown-toggle.cb_template .btn-success {
+  color: #ffffff;
+  background-color: #446600;
+  border-color: #3d5c00;
+}
+.cb_template .btn-success:active,
+.cb_template .btn-success.active,
+.open > .dropdown-toggle.cb_template .btn-success {
+  background-image: none;
+}
+.cb_template .btn-success.disabled,
+.cb_template .btn-success[disabled],
+fieldset[disabled] .cb_template .btn-success,
+.cb_template .btn-success.disabled:hover,
+.cb_template .btn-success[disabled]:hover,
+fieldset[disabled] .cb_template .btn-success:hover,
+.cb_template .btn-success.disabled:focus,
+.cb_template .btn-success[disabled]:focus,
+fieldset[disabled] .cb_template .btn-success:focus,
+.cb_template .btn-success.disabled.focus,
+.cb_template .btn-success[disabled].focus,
+fieldset[disabled] .cb_template .btn-success.focus,
+.cb_template .btn-success.disabled:active,
+.cb_template .btn-success[disabled]:active,
+fieldset[disabled] .cb_template .btn-success:active,
+.cb_template .btn-success.disabled.active,
+.cb_template .btn-success[disabled].active,
+fieldset[disabled] .cb_template .btn-success.active {
+  background-color: #669900;
+  border-color: #669900;
+}
+.cb_template .btn-success .badge {
+  color: #669900;
+  background-color: #ffffff;
+}
+.cb_template .btn-primary {
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #ffffff;
+  background-color: #f23d79;
+  border-color: #f23d79;
+}
+.cb_template .btn-primary:hover,
+.cb_template .btn-primary:focus,
+.cb_template .btn-primary.focus,
+.cb_template .btn-primary:active,
+.cb_template .btn-primary.active,
+.open > .dropdown-toggle.cb_template .btn-primary {
+  color: #ffffff;
+  background-color: #ec1059;
+  border-color: #e30f55;
+}
+.cb_template .btn-primary:active,
+.cb_template .btn-primary.active,
+.open > .dropdown-toggle.cb_template .btn-primary {
+  background-image: none;
+}
+.cb_template .btn-primary.disabled,
+.cb_template .btn-primary[disabled],
+fieldset[disabled] .cb_template .btn-primary,
+.cb_template .btn-primary.disabled:hover,
+.cb_template .btn-primary[disabled]:hover,
+fieldset[disabled] .cb_template .btn-primary:hover,
+.cb_template .btn-primary.disabled:focus,
+.cb_template .btn-primary[disabled]:focus,
+fieldset[disabled] .cb_template .btn-primary:focus,
+.cb_template .btn-primary.disabled.focus,
+.cb_template .btn-primary[disabled].focus,
+fieldset[disabled] .cb_template .btn-primary.focus,
+.cb_template .btn-primary.disabled:active,
+.cb_template .btn-primary[disabled]:active,
+fieldset[disabled] .cb_template .btn-primary:active,
+.cb_template .btn-primary.disabled.active,
+.cb_template .btn-primary[disabled].active,
+fieldset[disabled] .cb_template .btn-primary.active {
+  background-color: #f23d79;
+  border-color: #f23d79;
+}
+.cb_template .btn-primary .badge {
+  color: #f23d79;
+  background-color: #ffffff;
+}
+.cb_template .btn-default {
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.cb_template .btn-default:hover,
+.cb_template .btn-default:focus,
+.cb_template .btn-default.focus,
+.cb_template .btn-default:active,
+.cb_template .btn-default.active,
+.open > .dropdown-toggle.cb_template .btn-default {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+.cb_template .btn-default:active,
+.cb_template .btn-default.active,
+.open > .dropdown-toggle.cb_template .btn-default {
+  background-image: none;
+}
+.cb_template .btn-default.disabled,
+.cb_template .btn-default[disabled],
+fieldset[disabled] .cb_template .btn-default,
+.cb_template .btn-default.disabled:hover,
+.cb_template .btn-default[disabled]:hover,
+fieldset[disabled] .cb_template .btn-default:hover,
+.cb_template .btn-default.disabled:focus,
+.cb_template .btn-default[disabled]:focus,
+fieldset[disabled] .cb_template .btn-default:focus,
+.cb_template .btn-default.disabled.focus,
+.cb_template .btn-default[disabled].focus,
+fieldset[disabled] .cb_template .btn-default.focus,
+.cb_template .btn-default.disabled:active,
+.cb_template .btn-default[disabled]:active,
+fieldset[disabled] .cb_template .btn-default:active,
+.cb_template .btn-default.disabled.active,
+.cb_template .btn-default[disabled].active,
+fieldset[disabled] .cb_template .btn-default.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.cb_template .btn-default .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+.cb_template .cbPosCanvasMainMiddle.col-sm-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.cb_template.cbProfile .cbPosTabMain {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template.cbProfile.cbProfile.cb_template_default {
+  background: #ffffff;
+}
+.cb_template .cbBlogsInner {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template .cbBlogs .blogsContainer {
+  border-collapse: separate;
+}
+.cb_template.cbEditProfile {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template.cbManageConnections {
+  background: #ffffff;
+  padding: 24px;
+}
+@media (max-width: 767px) {
+  .cb_template #cbtabpaneconnections .table-responsive thead {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .cb_template #cbtabpaneconnections .table-responsive tbody .text-center {
+    display: block;
+  }
+}
+.cb_template.cbEmailUser {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template.cbUsersList {
+  padding: 24px;
+  background: #ffffff;
+}
+.cb_template.cbUsersList .cbUserListFT_avatar {
+  display: none;
+}
+.cb_template.cbUsersList .cbUserListFC_onlinestatus {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+}
+.cb_template.cbUsersList .cb_offline,
+.cb_template.cbUsersList .cb_online {
+  background: #f22613;
+  border: 2px solid #dddddd;
+  border-radius: 50%;
+  color: transparent;
+  font-size: 0;
+  height: 20px;
+  overflow: hidden;
+  position: absolute;
+  width: 20px;
+}
+.cb_template.cbUsersList .cb_online {
+  background: #669900;
+}
+.cb_template.cbUsersList .cbUserListRow .cb_offline,
+.cb_template.cbUsersList .cbUserListRow .cb_online {
+  top: 9px;
+  height: 13px;
+  width: 13px;
+}
+.cb_template.cbPendingApprovalUsers {
+  padding: 24px;
+  background: #ffffff;
+}
+.cb_template.cbRegistration {
+  background: #ffffff;
+}
+.cb_template.cbRegistration #registrationTable,
+.cb_template.cbRegistration .cbRegistrationConclusion {
+  padding-right: 24px;
+  padding-left: 24px;
+  border: 0;
+}
+.cb_template.cbRegistration .cbIconsBottom {
+  padding: 24px;
+}
+.cb_template.cbLostPassForm {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template .cbArticles {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template .cbArticles .articlesContainer,
+.cb_template .cbArticles .cbPaginationLinks {
+  margin-bottom: 0;
+}
+.cb_template .cbArticles .articlesContainer {
+  border-collapse: separate;
+}
+.cb_template.cbReportUserForm {
+  background: #ffffff;
+  padding: 24px;
+}
+.cb_template .cb_tab_menu_nested {
+  padding: 24px;
+}
+.cb_template .cb_tab_menu_nested button {
+  margin-left: 6px;
+}
+.cb_template .cbGallery {
+  background: #ffffff;
+}
+.cb_template .cbGallery .photosItemsContainer,
+.cb_template .cbGallery .photosFoldersContainer,
+.cb_template .cbGallery .filesFoldersContainer,
+.cb_template .cbGallery .videosFoldersContainer,
+.cb_template .cbGallery .musicFoldersContainer {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.cb_template .cbGallery .photosItemsContainer:before,
+.cb_template .cbGallery .photosFoldersContainer:before,
+.cb_template .cbGallery .filesFoldersContainer:before,
+.cb_template .cbGallery .videosFoldersContainer:before,
+.cb_template .cbGallery .musicFoldersContainer:before,
+.cb_template .cbGallery .photosItemsContainer:after,
+.cb_template .cbGallery .photosFoldersContainer:after,
+.cb_template .cbGallery .filesFoldersContainer:after,
+.cb_template .cbGallery .videosFoldersContainer:after,
+.cb_template .cbGallery .musicFoldersContainer:after {
+  content: " ";
+  display: table;
+}
+.cb_template .cbGallery .photosItemsContainer:after,
+.cb_template .cbGallery .photosFoldersContainer:after,
+.cb_template .cbGallery .filesFoldersContainer:after,
+.cb_template .cbGallery .videosFoldersContainer:after,
+.cb_template .cbGallery .musicFoldersContainer:after {
+  clear: both;
+}
+.cb_template .cbGallery .img-thumbnail {
+  margin: 0 0 20px;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  float: right;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+@media (min-width: 768px) {
+  .cb_template .cbGallery .img-thumbnail {
+    float: right;
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .cb_template .cbGallery .img-thumbnail {
+    float: right;
+    width: 33.33333333%;
+  }
+}
+.cb_template .cbGallery .img-thumbnail .galleryContainerInner {
+  border: 1px solid #d7d9db;
+  width: 100% !important;
+  height: 100% !important;
+}
+.cb_template .cbGallery .img-thumbnail .galleryContainerContent {
+  padding: 24px;
+}
+.cb_template .cbGallery .img-thumbnail .galleryContainerBottom {
+  height: 85px !important;
+}
+.cb_template .cbGallery .img-thumbnail .galleryContainerMenu {
+  left: 10px;
+}
+.cb_template.galleryImageModal th,
+.cb_template.galleryImageModal td {
+  vertical-align: middle;
+  border-top: 0;
+}
+.cb_template .galleryItemsHeader {
+  margin-bottom: 24px !important;
+}
+.cb_template .cbpbBlog .cbpbSnglMsgAll,
+.cb_template .cbpbBlog .cbpbTopSep {
+  width: 100%;
+  margin: 0;
+}
+.cb_template .cbpbBlog .cbpbControlArea {
+  margin: 12px 0 0;
+}
+.cb_template .cbpbSnglMsgAll .cbpbControlArea {
+  margin: 12px 0 0;
+}
+.cb_template .cbpbSnglMsgAll .cbpbHead {
+  padding: 12px 0 0;
+}
+.cb_template hr.cbpbSepMsg {
+  margin: 12px 0;
+}
+.cbLoginForm .control-group {
+  margin-bottom: 24px;
+}
+.cbLoginForm .control-group .input-append {
+  display: block;
+  padding-right: 38px;
+  position: relative;
+}
+.cbLoginForm .control-group .input-append .add-on {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 38px;
+  width: 39px;
+  line-height: 36px;
+  margin: 0;
+}
+.cbLoginForm .control-group .input-append .add-on span {
+  line-height: 1;
+}
+.cbLoginForm #modlgn-remember {
+  height: auto;
+  line-height: auto;
+  top: 0;
+  right: 0;
+  width: auto;
+  margin-right: 0;
+}
+.cbLoginForm #form-login-remember {
+  margin-bottom: 12px;
+}
+.cbLoginForm #form-login-submit .btn {
+  display: block;
+  width: 100%;
+}
+.cbLoginForm #form-login-links {
+  list-style: none;
+  margin: 0;
+  padding: 0 !important;
+  text-align: center;
+}
+.cbLoginForm #form-login-links li {
+  display: inline-block;
+}
+.cbLoginForm #form-login-links li a {
+  background-color: #eeeeee;
+  border-radius: 2px;
+  display: inline-block;
+  color: #555555;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 2px;
+  text-align: center;
+  width: 32px;
+}
+.cbLoginForm #form-login-links li a:hover,
+.cbLoginForm #form-login-links li a:focus,
+.cbLoginForm #form-login-links li a:active {
+  background-color: #f02568;
+  color: #ffffff;
+}
+.section-sign .cbLoginForm {
+  color: #44494c;
+  padding: 36px 24px;
+  text-align: right;
+}
+.module-primary .cbLoginForm {
+  background: #f23d79;
+}
+.module-primary .cbLoginForm #form-login-remember .control-label {
+  color: #ffffff;
+}
+.module-primary .cbLoginForm #form-login-submit .btn {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.module-primary .cbLoginForm #form-login-submit .btn:hover,
+.module-primary .cbLoginForm #form-login-submit .btn:focus,
+.module-primary .cbLoginForm #form-login-submit .btn.focus,
+.module-primary .cbLoginForm #form-login-submit .btn:active,
+.module-primary .cbLoginForm #form-login-submit .btn.active,
+.open > .dropdown-toggle.module-primary .cbLoginForm #form-login-submit .btn {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+.module-primary .cbLoginForm #form-login-submit .btn:active,
+.module-primary .cbLoginForm #form-login-submit .btn.active,
+.open > .dropdown-toggle.module-primary .cbLoginForm #form-login-submit .btn {
+  background-image: none;
+}
+.module-primary .cbLoginForm #form-login-submit .btn.disabled,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled],
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn,
+.module-primary .cbLoginForm #form-login-submit .btn.disabled:hover,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled]:hover,
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn:hover,
+.module-primary .cbLoginForm #form-login-submit .btn.disabled:focus,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled]:focus,
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn:focus,
+.module-primary .cbLoginForm #form-login-submit .btn.disabled.focus,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled].focus,
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn.focus,
+.module-primary .cbLoginForm #form-login-submit .btn.disabled:active,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled]:active,
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn:active,
+.module-primary .cbLoginForm #form-login-submit .btn.disabled.active,
+.module-primary .cbLoginForm #form-login-submit .btn[disabled].active,
+fieldset[disabled] .module-primary .cbLoginForm #form-login-submit .btn.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.module-primary .cbLoginForm #form-login-submit .btn .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+.moduletable.module-primary #login-form {
+  padding: 24px;
+}
+.cbLogoutForm#login-form ul.unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  text-align: center;
+}
+.cbLogoutForm#login-form ul.unstyled li {
+  display: inline-block;
+  width: 32px;
+  margin-left: 10px;
+}
+.cbLogoutForm#login-form ul.unstyled li:last-child {
+  margin-left: 0;
+}
+.cbLogoutForm#login-form ul.unstyled a {
+  background-color: #eeeeee;
+  border-radius: 2px;
+  color: #555555;
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  position: relative;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+.cbLogoutForm#login-form ul.unstyled a:hover,
+.cbLogoutForm#login-form ul.unstyled a:focus,
+.cbLogoutForm#login-form ul.unstyled a:active {
+  background-color: #f02568;
+  color: #ffffff;
+}
+.cbLogoutForm#login-form ul.unstyled a sup {
+  display: inline-block;
+  font-weight: normal;
+  line-height: 13px;
+  padding-right: 4px;
+  padding-left: 4px;
+  position: absolute;
+  background: #f22613;
+  color: #ffffff;
+  z-index: 2;
+  border-radius: 50%;
+}
+.section-sign .cbLogoutForm {
+  color: #44494c;
+  padding: 36px 24px;
+  text-align: right;
+}
+.section-sign .cbLogoutForm .login-avatar,
+.section-sign .cbLogoutForm .login-greeting,
+.section-sign .cbLogoutForm .logout-button {
+  text-align: center;
+}
+.module-primary .cbLogoutForm {
+  background: #f23d79;
+  text-align: center;
+}
+.module-primary .cbLogoutForm .login-avatar {
+  margin-top: 24px;
+}
+.module-primary .cbLogoutForm .login-greeting {
+  color: #ffffff;
+}
+.module-primary .cbLogoutForm .logout-button .btn {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.module-primary .cbLogoutForm .logout-button .btn:hover,
+.module-primary .cbLogoutForm .logout-button .btn:focus,
+.module-primary .cbLogoutForm .logout-button .btn.focus,
+.module-primary .cbLogoutForm .logout-button .btn:active,
+.module-primary .cbLogoutForm .logout-button .btn.active,
+.open > .dropdown-toggle.module-primary .cbLogoutForm .logout-button .btn {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #bebebe;
+}
+.module-primary .cbLogoutForm .logout-button .btn:active,
+.module-primary .cbLogoutForm .logout-button .btn.active,
+.open > .dropdown-toggle.module-primary .cbLogoutForm .logout-button .btn {
+  background-image: none;
+}
+.module-primary .cbLogoutForm .logout-button .btn.disabled,
+.module-primary .cbLogoutForm .logout-button .btn[disabled],
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn,
+.module-primary .cbLogoutForm .logout-button .btn.disabled:hover,
+.module-primary .cbLogoutForm .logout-button .btn[disabled]:hover,
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn:hover,
+.module-primary .cbLogoutForm .logout-button .btn.disabled:focus,
+.module-primary .cbLogoutForm .logout-button .btn[disabled]:focus,
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn:focus,
+.module-primary .cbLogoutForm .logout-button .btn.disabled.focus,
+.module-primary .cbLogoutForm .logout-button .btn[disabled].focus,
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn.focus,
+.module-primary .cbLogoutForm .logout-button .btn.disabled:active,
+.module-primary .cbLogoutForm .logout-button .btn[disabled]:active,
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn:active,
+.module-primary .cbLogoutForm .logout-button .btn.disabled.active,
+.module-primary .cbLogoutForm .logout-button .btn[disabled].active,
+fieldset[disabled] .module-primary .cbLogoutForm .logout-button .btn.active {
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
+.module-primary .cbLogoutForm .logout-button .btn .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+.com_comprofiler.view-login .moduletable {
+  background: #ffffff;
+  width: 400px;
+  margin: 0 auto;
+}
+.com_comprofiler.view-login .moduletable > h3 {
+  padding: 36px 24px 0;
+  margin: 0;
+}
+.com_comprofiler.view-login .cbLoginForm {
+  color: #44494c;
+  padding: 36px 24px;
+  text-align: right;
+}
+.com_comprofiler.view-login .cbLoginForm #modlgn-remember {
+  top: 3px;
+}
+.com_comprofiler.view-login .cbLoginForm #form-login-links li > a {
+  text-indent: -999em;
+  position: relative;
+}
+.com_comprofiler.view-login .cbLoginForm #form-login-links li > a:after {
+  content: "";
+  display: block;
+  font-family: FontAwesome;
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-indent: 0;
+}
+.com_comprofiler.view-login .cbLoginForm #form-login-links #form-login-forgot a:after {
+  content: "\f13e";
+}
+.com_comprofiler.view-login .cbLoginForm #form-login-links #form-login-register a:after {
+  content: "\f044";
+}
+#mod_cbpblatest_a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#mod_cbpblatest_a > li + li {
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #d7d9db;
+}
+@media (max-width: 767px) {
+  .cbpbEditorContainer .pbCommentInput .cbpbEditorTexts td {
+    display: block;
+    padding: 5px 0;
+    width: 100% !important;
+  }
+  .cbpbEditorContainer .pbCommentInput .cbpbEditorTexts td textarea {
+    width: 100% !important;
+  }
+}
+
+
+.cb_template .col-xs-1,
+.cb_template .col-sm-1,
+.cb_template .col-md-1,
+.cb_template .col-lg-1,
+.cb_template .col-xs-2,
+.cb_template .col-sm-2,
+.cb_template .col-md-2,
+.cb_template .col-lg-2,
+.cb_template .col-xs-3,
+.cb_template .col-sm-3,
+.cb_template .col-md-3,
+.cb_template .col-lg-3,
+.cb_template .col-xs-4,
+.cb_template .col-sm-4,
+.cb_template .col-md-4,
+.cb_template .col-lg-4,
+.cb_template .col-xs-5,
+.cb_template .col-sm-5,
+.cb_template .col-md-5,
+.cb_template .col-lg-5,
+.cb_template .col-xs-6,
+.cb_template .col-sm-6,
+.cb_template .col-md-6,
+.cb_template .col-lg-6,
+.cb_template .col-xs-7,
+.cb_template .col-sm-7,
+.cb_template .col-md-7,
+.cb_template .col-lg-7,
+.cb_template .col-xs-8,
+.cb_template .col-sm-8,
+.cb_template .col-md-8,
+.cb_template .col-lg-8,
+.cb_template .col-xs-9,
+.cb_template .col-sm-9,
+.cb_template .col-md-9,
+.cb_template .col-lg-9,
+.cb_template .col-xs-10,
+.cb_template .col-sm-10,
+.cb_template .col-md-10,
+.cb_template .col-lg-10,
+.cb_template .col-xs-11,
+.cb_template .col-sm-11,
+.cb_template .col-md-11,
+.cb_template .col-lg-11,
+.cb_template .col-xs-12,
+.cb_template .col-sm-12,
+.cb_template .col-md-12,
+.cb_template .col-lg-12 {
+  float: right;
+}
+.cb_template .navbar-toggle {
+  float: left;
+  margin-right: 0;
+  margin-left: 15px;
+}
+.cb_template form .cb_form_line .radio-inline > input,
+.cb_template .cb_template form .cb_form_line .checkbox-inline > input {
+  margin-right: 0;
+  right: 0;
+}
+.cb_template .cbRepeat div.cbRepeatRow .cbRepeatRowMove {
+  right: 10px;
+  left: auto;
+}
+.cb_template .cbRepeat div.cbRepeatRow .cbRepeatRowAddRemove {
+  left: 10px;
+  right: auto;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowParams {
+  margin-left: 90px;
+  margin-right: 0;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowSort + .cbRepeatRowParams {
+  margin-right: 45px;
+  margin-left: 0;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowRemove + .cbRepeatRowAdd {
+  margin-right: 10px;
+  margin-left: 0;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowRemove.hidden + .cbRepeatRowAdd {
+  margin-right: 0;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowAdd + .cbRepeatRowRemove {
+  margin-right: 10px;
+  margin-left: 0;
+}
+.cb_template .cbRepeat .cbRepeatRow .cbRepeatRowAdd.hidden + .cbRepeatRowRemove {
+  margin-right: 0;
+}
+.cb_template .cbFieldSpan > .cbValidationMessage {
+  margin: 0 5px 0 0;
+}
+.cb_template .cbValidationMessage {
+  margin: 5px 0 0 0;
+}
+.cb_template .cbValidationMessage .cbValidationIcon {
+  margin-left: 5px;
+  margin-right: 0;
+}
+.cb_template .cbSingleCntrl,
+.cb_template .cbSnglCtrlLbl {
+  margin-left: 10px;
+  margin-right: 0;
+}
+.cb_template .cbSingleCntrl:last-child,
+.cb_template .cbSnglCtrlLbl:last-child {
+  margin-left: 0;
+}
+.cb_template .cbSingleCntrl + .cbFieldIcons,
+.cb_template .cbSnglCtrlLbl + .cbFieldIcons {
+  margin-right: -7px;
+  margin-left: 0;
+}
+.cb_template .cbScroller .cbScrollerLeft {
+  right: 5px;
+  text-align: right;
+  left: auto;
+}
+.cb_template .cbScroller .cbScrollerRight {
+  left: 5px;
+  text-align: left;
+  right: auto;
+}
+.cb_template .cbScroller.cbScrollerWidth {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+.cb_template .cbMoreLess .cbMoreLessOpen,
+.cb_template .cbMoreLess .cbMoreLessClose {
+  left: 0;
+  text-align: left;
+  right: auto;
+}
+.cb_template .cbTabsMenuNav > li > a,
+.cb_template .cbMenuNav > li > a {
+  text-align: right;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats {
+  padding-right: 225px;
+  padding-left: 20px;
+  text-align: left;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_tab_content.panel-body {
+  padding: 0 5px 0 5px;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_form_line,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats tr {
+  text-align: left;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_form_line > .cb_field > div,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats tr > .cb_field > div,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_form_line > .fieldCell > div,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats tr > .fieldCell > div {
+  left: 0;
+  right: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_table_line_title,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cb_form_line + .cb_form_line,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats tr + tr {
+  margin-right: 5px;
+  margin-left: 0;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats.cbScrollerWidth {
+  padding-left: 28px;
+  padding-right: 0;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasTitle {
+  padding-right: 225px;
+  padding-left: 0;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasMenu .cbMenuNavBar {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .cb_field,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .fieldCell,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .fieldCell {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .cb_field .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .fieldCell .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .fieldCell .cbImgCanvas {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .cb_field img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .cb_field img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground .cb_form_line > .fieldCell img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasBackground tr > .fieldCell img {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .cb_field,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .fieldCell,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .fieldCell {
+  right: 15px;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .cb_field .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .fieldCell .cbImgCanvas,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .fieldCell .cbImgCanvas {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .cb_field img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .fieldCell img,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .fieldCell img {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cb_online,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .cb_field .cb_online,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .fieldCell .cb_online,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .fieldCell .cb_online,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .cb_field .cb_offline,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .cb_field .cb_offline,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto .cb_form_line > .fieldCell .cb_offline,
+.cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasPhoto tr > .fieldCell .cb_offline {
+  right: -9px;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainMiddle .cbTabsMenuNavBar {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainMiddle .cbTabsMenuNavBar .navbar-collapse {
+  margin-right: 200px;
+  margin-left: 0;
+}
+.cb_template div.alert,
+.cb_template span.alert {
+  margin: 5px 0 5px 0;
+}
+.cb_template .cbFieldIcons {
+  margin-right: 3px;
+  margin-left: 0;
+}
+.cb_template .containerBox {
+  margin: 0 0 5px 5px;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 {
+  text-align: right;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont {
+  right: 0;
+  padding-right: 95px;
+  left: auto;
+  padding-left: 0;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont.cbUserListFC_canvas {
+  right: 0;
+  padding-right: 0;
+  left: auto;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont.cbUserListFC_avatar {
+  right: 10px;
+  padding-right: 0;
+  left: auto;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont.cbUserListFC_onlinestatus {
+  right: 10px;
+  padding-right: 0;
+  left: auto;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont.cbUserListFC_onlinestatus .cb_online,
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 .cbUserListFieldLine > .cbListFieldCont.cbUserListFC_onlinestatus .cb_offline {
+  left: -5px;
+  right: auto;
+}
+.cb_template .cbUserListDiv.cbUserListLayoutGrid.cbUserListCanvas .cbUserListRowCol1 ~ .cbUserListRowColumn {
+  text-align: right;
+}
+.cb_template .cbPagination .cbPaginationLimit,
+.cb_template .cbPagination .cbPaginationCounter {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.cb_template.cbRegistrationCanvas .cbRegistrationHeader {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.cb_template.cbRegistrationCanvas .cbRegistrationHeader .cbRegistrationHeaderInner {
+  right: 0;
+  left: auto;
+}
+.cb_template .cbAdminMainInner .cbTableHeader > .cbTableBrowserLabel {
+  padding-right: 50px;
+  padding-left: 0;
+}
+.cb_template .cbAdminMainInner .cbTableHeader .cbTableBrowserTools > * {
+  margin: 0 0 10px 0;
+}
+.cb_template .cbAdminMainInner .cbFilters,
+.cb_template .cbAdminMainInner .cbBatchProcess {
+  margin: 0 0 10px 0;
+}
+.cb_template .cbButtonMenu {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.cb_template .cbButtonMenu .cbButtonMenuItem.fa:before,
+.cb_template .cb_template .cbButtonMenu .cbButtonMenuItem.fa-before:before {
+  right: 0;
+  left: auto;
+}
+.cbRegistrationContainer .cbRegistrationLogin {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.cbRegistrationContainer .cbRegistrationLogin + .cbRegistration {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.cb_button_wrapper + .cb_button_wrapper {
+  margin-right: 5px;
+  margin-left: 0;
+}
+.cbStarRatingOn.pull-left,
+.cbStarRatingOff.pull-left {
+  margin-left: .3em;
+  margin-right: 0;
+}
+.cbStarRatingOn.pull-right,
+.cbStarRatingOff.pull-right {
+  margin-right: .3em;
+  margin-left: 0;
+}
+.pagetitle.icon-48-communitybuilder {
+  padding-right: 0;
+}
+.pagetitle .cb_template span {
+  margin-left: 16px;
+  margin-right: 0;
+}
+.cbbejeoptionsintro {
+  right: 0;
+  left: auto;
+}
+.cbadminHorizontal.cbadminSecondaryValue:after {
+  right: -0.2em;
+  left: auto;
+}
+.cbadminRowButton,
+.cbadminRowMinorButton {
+  margin-right: 6px;
+  margin-left: 0;
+}
+div.cbWarning:not(.cb_form_line),
+span.cbWarning {
+  margin: 5px 0 5px 0;
+}
+div.cbSmallWarning:not(.cb_form_line),
+span.cbSmallWarning {
+  margin: 5px 0 5px 0;
+}
+@media (min-width: 767px) {
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats.cbScrollerWidth {
+    padding-right: 243px;
+    padding-left: 0;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cbScrollerLeft {
+    right: 220px;
+    left: auto;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainMiddle .cbTabsMenuNavBar .cbScrollerWidth .cbScrollerContent {
+    margin-right: 23px !important;
+    margin-left: 70px !important;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainMiddle .cbTabsMenuNavBar .cbScrollerWidth .cbScrollerLeft {
+    right: 216px;
+    left: auto;
+  }
+}
+@media (max-width: 767px) {
+  .cb_template .cbTabsMenuNav .dropdown-menu > li > a,
+  .cb_template .cbMenuNav .dropdown-menu > li > a {
+    text-align: right;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats {
+    padding-right: 125px;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats.cbScrollerWidth {
+    padding-right: 141px;
+    padding-left: 0;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasStats .cbScrollerLeft {
+    right: 118px;
+    left: auto;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasTitleTop {
+    padding-right: 10px;
+    padding-left: 0;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasTitleMiddle {
+    padding-right: 10px;
+    padding-left: 0;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasTitleBottom {
+    padding-right: 125px;
+    padding-left: 0;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasHeader .cbPosCanvasMenu .cbMenuNavBar {
+    right: 0;
+    left: auto;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainMiddle .cbTabsMenuNavBar .navbar-collapse {
+    margin-right: -15px;
+    margin-left: 0;
+  }
+  .cb_template .cbAdminMainInner .cbTableBrowserSorting {
+    text-align: right;
+  }
+}
+@media (min-width: 768px) {
+  .cb_template .cbTabsMenuNavBar .cbScrollerWidth .cbScrollerContent {
+    margin-left: 23px !important;
+    margin-right: 0 !important;
+  }
+  .cb_template .cbTabsMenuNavBar.cbTabsMenuNavBarMore .cbScrollerWidth .cbScrollerContent {
+    margin-left: 58px !important;
+    margin-right: 0 !important;
+  }
+  .cb_template .cbTabsMenuNavBar.cbTabsMenuNavBarMore .cbScrollerRight {
+    left: 63px;
+    right: auto;
+  }
+  .cb_template .cbTabsMenuNav .cbTabNavMenuMore,
+  .cb_template .cbMenuNav .cbTabNavMenuMore,
+  .cb_template .cbTabsMenuNav .cbMenuNavMore,
+  .cb_template .cbMenuNav .cbMenuNavMore {
+    left: 0;
+    right: auto;
+  }
+  .cb_template .cbTabsMenuNav .cbTabNavMenuMore .navbar-toggle,
+  .cb_template .cbMenuNav .cbTabNavMenuMore .navbar-toggle,
+  .cb_template .cbTabsMenuNav .cbMenuNavMore .navbar-toggle,
+  .cb_template .cbMenuNav .cbMenuNavMore .navbar-toggle {
+    margin-right: 0;
+    margin-left: 15px;
+  }
+  .cb_template .cbTabsMenuNav.cbTabsMenuNavMore,
+  .cb_template .cbMenuNav.cbTabsMenuNavMore,
+  .cb_template .cbTabsMenuNav.cbMenuNavMore,
+  .cb_template .cbMenuNav.cbMenuNavMore {
+    margin-left: 50px !important;
+    margin-right: 0 !important;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainLeft .cb_form_line,
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainLeft tr {
+    text-align: right;
+  }
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainRight .cb_form_line,
+  .cb_template .cbPosCanvas .cbPosCanvasMain .cbPosCanvasMainRight tr {
+    text-align: left;
+  }
+  .cbRegistrationContainer .cbRegistrationLogin + .cbRegistration {
+    float: right;
+  }
+  .cbRegistrationContainer .cbRegistrationLogin {
+    float: right;
+  }
+}

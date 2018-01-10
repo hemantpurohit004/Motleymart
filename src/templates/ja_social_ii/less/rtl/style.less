@@ -1,0 +1,214 @@
+/*
+$JA#COPYRIGHT$
+*/
+
+// RTL STYLES
+// ------------------------------------------------------
+
+// Article Images
+// --------------
+article img[align=left],
+.img_caption.left,
+.pull-left.item-image {
+  @media (max-width: @screen-sm) {
+    float: none !important;
+  }
+}
+
+article img[align=right],
+.img_caption.right,
+.pull-right.item-image {
+  @media (max-width: @screen-sm) {
+    float: none !important;
+  }
+}
+
+.languageswitcherload {
+  ul {
+    float: left;
+  }
+}
+
+.com_k2 .k2SearchBlock .inputbox,
+.form-search #mod-search-searchword {
+	background-position: 10px center;
+}
+
+// EASYSOCIAL
+// -----------------------------
+body div#fd.es .es-stream-content ul, body div#fd.es .es-stream-content ol {
+	margin-right: 20px;
+	margin-left: 0;
+}
+
+body div#fd.es .es-stream-list .stream-context-discussions .es-stream-content .media-object ul li + li {
+	margin-left: 0;
+	margin-right: 15px;
+}
+
+body div#fd.es .stream-apps-content .stream-apps-meta li i {
+	margin-right: 0;
+	margin-left: 3px;
+}
+
+body div#fd.es.mod-es-leaderboard .leader-rank {
+	float: left!important;
+}
+
+body div#fd.es.mod-es-leaderboard .leader-info .username {
+	padding-right: 0!important;
+	padding-left: 10px!important;
+}
+
+body div#fd.es .es-album-meta-field .es-album-location > span {
+	padding-left: 0;
+	padding-right: 15px;
+}
+
+body div#fd.es .es-photo-title-field {
+	padding-left: 0!important;
+	padding-right: 10px!important;
+}
+
+body div#fd.es.w480 .es-toolbar .fd-nav.pull-right {
+	right: auto;
+	left: 0;
+}
+
+body div#fd.es .es-profile-header-meta span {
+	border-left: 1px dotted #d7d7d7;
+	display: inline-block;
+	float: none;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+ul.es-item-grid {
+	padding: 0;
+}
+
+
+// JOOMSOCIAL
+// --------------------------
+.joms-hide {
+	display: none;
+}
+
+.joms-icon.joms-icon--add {
+	position: absolute;
+}
+
+.joms-textarea__wrapper .joms-textarea {
+	padding-right: 8px;
+	padding-left: 25px;
+}
+
+.joms-icon {
+    display: inline-block;
+    height: 14px;
+    position: relative;
+    vertical-align: middle;
+    width: 14px;
+}
+
+.joms-no-touch .joms-icon--add {
+  left: 25px;
+  right: auto;
+}
+
+.joms-icon--add {
+	right: 30px;
+}
+
+.joms-postbox-charcount {
+	right: auto;
+	left: 0;
+}
+
+.joms-select--wrapper:after,
+html .joms-stream .joms-comment__reply .joms-icon--add,
+html .joms-stream .joms-js--newcomment .joms-icon--add {
+	right: auto;
+}
+
+.joms-checkbox span {
+	margin-left: 0;
+	margin-right: @t3-global-margin;
+}
+
+.joms-list__search .joms-list__utilities,
+.joms-list--message .joms-list--message__remove,
+.joms-list--message .joms-postbox-tab,
+.joms-list--message .joms-list--message__checkbox {
+	text-align: left;
+}
+
+.joms-postbox-tab .joms-postbox-action {
+	left: 3px;
+	right: auto;
+}
+
+.joms-postbox-tab .joms-postbox-action.event-action {
+	text-align: left;
+	left: 14px;
+}
+
+.joms-list--friend .joms-list__body {
+	padding-left: 0;
+	padding-right: 14px;
+}
+
+.joms-list--message .joms-list__item {
+	 padding: 14px 14px 14px 0;
+}
+
+.joms-page--inbox .joms-icon--add {
+	right: auto;
+	left: 14px;
+}
+
+// Show menu on Mobie
+.jomsocial-wrapper.show-menu .jomsocial {
+    @media (max-width: @screen-md) {
+    	transform: translateX(-220px);
+    }
+}
+
+.jomsocial-wrapper.show-menu--user .jomsocial {
+    @media (max-width: @screen-md) {
+    	transform: translateX(220px);
+    }
+}
+
+.joms-menu {
+    @media (max-width: @screen-md) {
+		left: auto;
+		right: -220px;
+    }
+}
+
+.joms-menu--user {
+    @media (max-width: @screen-md) {
+		left: -220px;
+		right: auto;
+    }
+}
+
+.joms-menu span, 
+.joms-menu--user span {
+    @media (max-width: @screen-md) {
+		left: 0;
+		right: auto;
+    }
+}
+
+.joms-comment__actions {
+  padding-right: 0;
+  text-align: right;
+}
+
+
+// Modules
+.content-mass-top .mod-thumb-list .item .item-title h3 a::after {
+	content: "\f177";
+}

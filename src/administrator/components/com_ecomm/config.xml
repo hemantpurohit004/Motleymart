@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset name="component">
+		<field
+				name="way2sms_username"
+				type="text"
+				label="Username"
+				description="Enter way2sms account username"
+				required="true"
+				/>
+		<field
+				name="way2sms_password"
+				type="password"
+				label="Password"
+				description="Enter way2sms account username"
+				required="true"
+				/>
+		<field
+				name="otp_timeout"
+				type="number"
+				label="OTP Timeout (in seconds)"
+				description="Enter otp timeout in seconds"
+				required="true"
+				default="120"
+				/>
+		<field
+				name="text_limit"
+				type="number"
+				label="Text limit in title"
+				description="Enter text limit in title"
+				required="true"
+				default="30"
+				/>
+		<field
+				name="banner_store_path"
+				type="text"
+				label="Banner store path"
+				description="Enter banner store path"
+				required="true"
+				/>
+		<field
+				name="googleAddressKey"
+				type="text"
+				label="Google Address Key"
+				description="Enter Google Address Key"
+				required="true"
+				/>
+	</fieldset>
+	<fieldset name="Environment">
+		<field
+				name="localhost_url"
+				type="url"
+				label="Localhost"
+				description="Enter localhost URL"
+				required="true"
+				/>
+		<field
+				name="localhost_admin_key"
+				type="text"
+				label="Localhost Admin Key"
+				description="Enter localhost admin key"
+				required="true"
+				/>
+		<field
+				name="stagging_url"
+				type="url"
+				label="Stagging"
+				description="Enter stagging URL"
+				required="true"
+				/>
+		<field
+				name="stagging_admin_key"
+				type="text"
+				label="Stagging Admin Key"
+				description="Enter stagging admin key"
+				required="true"
+				/>
+		<field
+				name="production_url"
+				type="url"
+				label="Production"
+				description="Enter production URL"
+				required="true"
+				/>
+		<field
+				name="production_admin_key"
+				type="text"
+				label="Production Admin Key"
+				description="Enter production admin key"
+				required="true"
+				/>
+	</fieldset>
+</config>

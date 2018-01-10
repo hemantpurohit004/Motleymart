@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0" method="upgrade">
+	<name>Quick2cart Package</name>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-16 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+	<packagename>quick2cart</packagename>
+	<packager>Techjoomla Team</packager>
+	<description>
+	</description>
+	<files>
+		<file type="component" id="com_tjfields">com_tjfields.zip</file>
+		<file type="component" id="com_quick2cart">com_quick2cart.zip</file>
+	</files>
+	<scriptfile>script.pkg_quick2cart.php</scriptfile>
+	<updateservers>
+		<server type="collection" priority="1" name="Quick2Cart"><![CDATA[https://techjoomla.com/updates/packages/all?dummy=quick2cart.xml]]></server>
+	</updateservers>
+</extension>

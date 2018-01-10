@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Payouts">
+		<message>
+			<![CDATA[
+				Payouts View
+			]]>
+		</message>
+		<options var="layout">
+			<option value="my" name="My Payouts" msg="My payouts" />
+		</options>
+	</view>
+</metadata>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Add New Product" option="View" >
+		<message><![CDATA[Add New Product]]></message>
+	</layout>
+	<state>
+		<name>Add New Product</name>
+		<description>Add New Product</description>
+		<params>
+		</params>
+	</state>
+</metadata>

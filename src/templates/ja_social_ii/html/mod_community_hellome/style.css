@@ -1,0 +1,27 @@
+.notifcount {
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.joms-hellome__notify {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 8px;
+    background: rgba(0,0,0,0.02);
+    margin-bottom: 8px;
+
+}
+
+.joms-hellome__menu li {
+    padding: 4px;
+    border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+.joms-hellome__menu li:first-child {
+    border-top: 0;
+}
+
+.joms-hellome__notify a {
+    display: table-cell;
+}
