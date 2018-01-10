@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="community" method="upgrade">
+	<name>PLG_QUICK2CART_MY_PRODUCTS</name>
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<isapplication>true</isapplication>
+
+	<description>PLG_COMMUNITY_QUICK2CARTPRODUCT_XML_DESCRIPTION</description>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_community_quick2cartproduct.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_community_quick2cartproduct.sys.ini</language>
+	</languages>
+
+	<files>
+		<file plugin="quick2cartproduct">quick2cartproduct.php</file>
+		<file>index.html</file>
+	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="coreapp" type="list" default="1" label="PLG_QUICK2CARTPRODUCT_CORE_APPLICATION" description="PLG_QUICK2CARTPRODUCT_CORE_APPLICATION_DESC">
+					<option value="0">PLG_QUICK2CARTPRODUCT_NO</option>
+					<option value="1">PLG_QUICK2CARTPRODUCT_YES</option>
+				</field>
+				<field name="position" type="list" default="sidebar-top" label="PLG_QUICK2CARTPRODUCT_AVAILABLE_POSITION" description="PLG_QUICK2CARTPRODUCT_AVAILABLE_POSITION_DESC">
+					<option value="content">Content</option>
+					<option value="sidebar-top">Sidebar Top</option>
+					<option value="sidebar-bottom">Sidebar Bottom</option>
+				</field>
+				<field name="no_of_prod" type="text" default="2" label="PLG_QUICK2CARTPRODUCT_NO_OF_PROD" description="PLG_QUICK2CARTPRODUCT_NO_OF_PROD_DESC"/>
+				<field name="layout_to_load" type="list" description="PLG_QUICK2CARTPRODUCT_LAYOUT_TO_SHOW_DESC" label="PLG_QUICK2CARTPRODUCT_LAYOUT_TO_SHOW" class="btn-group" default="flexible_layout">
+					<option value="fixed_layout">PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT</option>
+					<option value="flexible_layout">PLG_QUICK2CARTPRODUCT_FLEXIBLE_PIN_LAYOUT</option>
+				</field>
+				<!--For fixed layout-->
+				<field name="fix_pin_height" type="text" description="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_HEIGHT_DESC" label="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_HEIGHT" default="200" showon="layout_to_load:fixed_layout" />
+				<field name="pin_for_lg" type="list" description="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_LS_DESC" label="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_LS" class="btn-group" default="12" showon="layout_to_load:fixed_layout">
+					<option value="12">1</option>
+					<option value="6">2</option>
+					<option value="4">3</option>
+					<option value="3">4</option>
+				</field>
+				<field name="pin_for_md" type="list" description="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_MS_DESC" label="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_MS" class="btn-group" default="12" showon="layout_to_load:fixed_layout">
+					<option value="12">1</option>
+					<option value="6">2</option>
+					<option value="4">3</option>
+					<option value="3">4</option>
+				</field>
+				<field name="pin_for_sm" type="list" description="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_SS_DESC" label="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_SS" class="btn-group" default="12" showon="layout_to_load:fixed_layout">
+					<option value="12">1</option>
+					<option value="6">2</option>
+					<option value="4">3</option>
+					<option value="3">4</option>
+				</field>
+				<field name="pin_for_xs" type="list" description="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_XSS_DESC" label="PLG_QUICK2CARTPRODUCT_FIXED_PIN_LAYOUT_PINS_IN_XSS" class="btn-group" default="12" showon="layout_to_load:fixed_layout">
+					<option value="12">1</option>
+					<option value="6">2</option>
+					<option value="4">3</option>
+					<option value="3">4</option>
+				</field>
+				<field name="pin_width" type="text" default="120" label="PLG_QUICK2CARTPRODUCT_PIN_WIDTH" description="PLG_QUICK2CARTPRODUCT_PIN_WIDTH_DESC" showon="layout_to_load:flexible_layout"/>
+				<field name="pin_padding" type="text" default="3" label="PLG_QUICK2CARTPRODUCT_PIN_PADDING" description="PLG_QUICK2CARTPRODUCT_PIN_PADDING_DESC" showon="layout_to_load:flexible_layout"/>
+				<field name="cache" type="list" default="0" label="PLG_QUICK2CARTPRODUCT_CACHING_LBL" description="PLG_QUICK2CARTPRODUCT_CACHING_DESC">
+					<option value="0">PLG_QUICK2CARTPRODUCT_NO</option>
+					<option value="1">PLG_QUICK2CARTPRODUCT_YES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

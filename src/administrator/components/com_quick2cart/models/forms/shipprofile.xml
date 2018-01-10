@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+<fieldset addfieldpath="/administrator/components/com_quick2cart/models/fields" >
+
+		<field name="id" type="text" default="0" label="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_ID"
+			readonly="true" class="readonly"
+			description="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_NAME_ID_DESC" />
+
+	   <field name="name" type="text" size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_NAME"
+			description="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_NAME_DESC"
+			hint="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_NAME_PLACEHOLDER"
+			required="true" filter="safehtml" />
+
+		<field name="store_id" type="userstores"  class=""
+			label="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_STORE_NAME"
+			description="COM_QUICK2CART_FORM_LBL_SHIPPROFILE_STORE_NAME_DESC"
+			default="0"  filter="safehtml" />
+
+		<field name="state" type="list" 	label="JSTATUS" description="JFIELD_PUBLISHED_DESC" 	class="inputbox"
+			size="1"
+			default="1">
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+
+	</fieldset>
+
+</form>

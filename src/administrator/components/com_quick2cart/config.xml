@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+	<!--Settings-->
+	<fieldset name="settings" label="QTC_SETTING" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<field name="multivendor" class="btn-group" type="radio" default="0" description="QTC_MULTIVENDER_DESC" label="QTC_MULTIVENDER">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="storeLimitPerUser" type="text" default="1" label="QTC_STORE_LIMIT_FOR_PER_USER" description="QTC_STORE_LIMIT_FOR_PER_USER_DESC" />
+
+		<field name="storeDescriptionLimit" type="text" default="100" label="QTC_STORE_DESCRIPTION_LIMIT" description="QTC_STORE_DESCRIPTION_LIMIT_DES" />
+		<field name="bssetupInstruction" type="Bssetup"  label="COM_QUICK2CART_BS_SETUP_INSTRUCTION" description="COM_QUICK2CART_BS_SETUP_INSTRUCTION_DES" />
+
+		<field name="currentBSViews" class="btn-group" type="radio" default="bs2" description="QTC_CURR_BS_VIEWS_DESC" label="QTC_CURR_BS_VIEWS" >
+			<option value="bs2">COM_QUICK2CART_BS2</option>
+			<option value="bs3">COM_QUICK2CART_BS3</option>
+		</field>
+		<field name="qtcLoadBootstrap" class="btn-group" type="radio" default="1" description="QTC_BOOTSTRAP_LOAD_DESC" label="QTC_BOOTSTRAP_LOAD" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field name="qtc_shop_cat" class="btn-group" type="radio" default="1" description="QTC_STORE_CATEGORY" label="COM_QUICK2CART_STORE_CATEGORY">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field menu="hide" type="legend" id="q2c-general_prod_option" name="q2c-general_prod_option" label="" default="COM_QUICK2CART_PROD_PAGE_GEN_SETTING" hint="" />
+		<field name="usedisc" class="btn-group" type="radio" default="0" description="QTC_USE_DISCOUNT_DES" label="QTC_USE_DISCOUNT">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="usestock" class="btn-group" type="radio" default="0" description="QTC_USE_STOCK_DES" label="QTC_USE_STOCK">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field name="outofstock_allowship" class="btn-group" type="radio" default="0" description="QTC_ALLOW_SHIP_AFTER_OUTOF_STOCK_DES" label="QTC_ALLOW_SHIP_AFTER_OUTOF_STOCK" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="minmax_quantity" class="btn-group" type="radio" default="0" description="QTC_MIN_MAX_QUANTITY_DES" label="QTC_MIN_MAX_QUANTITY_LEB">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="qty_buynow" class="btn-group" type="radio" default="1" description="QTC_QTYBUYNOW_DESC" label="QTC_QTYBUYNOW" >
+			<option value="1">COM_QTC_SHOW</option>
+			<option value="0">COM_QTC_HIDE</option>
+		</field>
+		<field name="popup_buynow" class="btn-group" type="radio" default="1" description="QTC_CART_POP_DESC" label="QTC_CART_POP" >
+			<option value="1">COM_QTC_DETAILED</option>
+			<option value="2">COM_QTC_COMPACT</option>
+		</field>
+	</fieldset>
+
+	<!--Checkout Settings-->
+	<fieldset name="checkout-settings" label="COM_QUICK2CART_SETTINGS_CHECKOUT" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<field name="singleStoreCkout" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_SINGLE_STORE_CKOUT_DESC" label="COM_QUICK2CART_SINGLE_STORE_CKOUT">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field name="qtc_middlenmae" class="btn-group" type="radio" default="0" description="QTC_SHOW_MIDDLE_NAME_DESC" label="QTC_SHOW_MIDDLE_NAME">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field name="guest" class="btn-group" type="radio" default="1" description="QTC_GUEST_DESC" label="QTC_ADMIN_GUEST">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		<field name="useGuestCheckoutOnly" class="btn-group" type="radio" default="0" showon="guest:1" description="QTC_ONLY_GUEST_CHECKOUT_DESC" label="QTC_ONLY_GUEST_CHECKOUT">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+
+		<field name="orderWithZeroPrice" class="btn-group" type="radio" default="0" label="COM_QTC_ALLOW_TO_ORDER_WITH_ZERO_PRICE" description="COM_QTC_ALLOW_TO_ORDER_WITH_ZERO_PRICE_DES" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="set_default_country" type="countries" default="" label="COM_QUICK2CART_SELECT_DEFAULT_COUNTRY" description="COM_QUICK2CART_SELECT_DEFAULT_COUNTRY_DES" />
+
+		<field name="termsConditons" class="btn-group" type="radio" default="0" description="QTC_TERSM_CONDTIONS_DESC" label="QTC_TERSM_CONDTIONS" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="termsConditonsArtId" class="btn-group" type="text" default="" showon="termsConditons:1" description="QTC_TERSM_CONDTIONS_ARTICLE_ID_DESC" label="QTC_TERSM_CONDTIONS_ARTICLE_ID"	/>
+
+		<!-- Shipping and taxation settings -->
+		<field menu="hide" type="legend" id="q2c-taxation" name="q2c-taxation" label="" default="COM_QUICK2CART_SETTINGS_TAXATION" hint="" />
+
+		<field name="enableTaxtion" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_ENABLE_TAXATION_LABLE" description="COM_QUICK2CART_ENABLE_TAXATION_DES" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="shipping" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_SHIPPING_OPTION_DES" label="COM_QUICK2CART_SHIPPING_OPTION_LEB">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="shippingMode" class="btn-group" type="radio" default="itemLevel" description="COM_QUICK2CART_SHIPPING_MODE_DESC" label="COM_QUICK2CART_SHIPPING_MODE">
+			<option value="itemLevel">COM_QUICK2CART_ITEM_LEVAL</option>
+			<option value="orderLeval">COM_QUICK2CART_ORDER_LEVAL</option>
+		</field>
+
+		<field menu="hide" type="legend" id="order_emails" name="order_emails" label="" default="COM_QUICK2CART_EMAIL_SETTINGS_FOR_ORDER" hint="" />
+
+		<field name="send_email_to_customer" class="btn-group" type="radio" default="1" label="QTC_SETUP_EMAIL_SENT_OPTION" description="QTC_SETUP_EMAIL_SENT_OPTION_DESC" >
+			<option value="1">COM_QTC_ENABLE</option>
+			<option value="0">COM_QTC_DISABLE</option>
+		</field>
+
+		<field name="send_email_to_customer_after_order_placed" type="radio" default="1" class="btn-group" showon="send_email_to_customer:1" label="QTC_SETUP_PENDING_ORDER_EMAIL" description="QTC_SETUP_PENDING_ORDER_EMAIL_DESC">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+	</fieldset>
+
+	<!--Payment settings options -->
+	<fieldset name="payment_settings" label="COM_QTC_PAYMENT_SETTINGS" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<field name="sale_mail" type="text" default="" label="QTC_SALES_EMAIL" description="QTC_SALES_EMAIL_DESC" />
+
+		<field name="commission" type="text" default="0" class="validate-numeric" label="COM_QTC_SALES_COMMISSION" description="COM_QTC_SALES_COMMISSION_DESC" />
+
+		<field name="gateways" type="gatewayplg" multiple="multiple" label="SELECT_GATEWAY" description="SELECT_GATEWAY_DES" />
+
+		<field name="send_payments_to_store_owner" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_SEND_PAYMENTS_TO_OWNER" description="COM_QUICK2CART_SEND_PAYMENTS_TO_OWNER_DESC" >
+			<option value="1">JENABLED</option>
+			<option value="0">JDISABLED</option>
+		</field>
+
+		<!--
+		 <field name="send_payments_to_owner" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_SEND_PAYMENTS_TO_OWNER" description="COM_QUICK2CART_SEND_PAYMENTS_TO_OWNER_DESC" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+		 -->
+
+		<!-- Currency settings -->
+		<field menu="hide" type="legend" id="q2c-currencies" name="q2c-currencies" label="" default="COM_QUICK2CART_SETTINGS_CURRENCIES" hint="" />
+
+		<field name="addcurrency" type="text" default="USD" label="QTC_ADDCURRENCY" description="QTC_ADDCURRENCY_DESC" />
+
+		<field name="addcurrency_sym" type="text" default="$" label="QTC_ADDCURRENCY_SYM" description="QTC_ADDCURRENCY_SYM_DESC" />
+
+		<field name="currency_display_format" type="text" default="{SYMBOL} {AMOUNT}" label="COM_QUICK2CART_CURRENCY_DISPLAY_FORMAT" description="COM_QUICK2CART_CURRENCY_DISPLAY_FORMAT_DESC" />
+
+		<!-- Order Id settings -->
+		<field menu="hide" type="legend" id="q2c-orderid" name="q2c-orderid" label="" default="COM_QTC_ORDER_SETTINGS" hint="COM_QUICK2CART_SETTINGS_ORDERID_HINT"/>
+
+		<field name="order_prefix" type="text" default="OID" maxlength="5" label="COM_QTC_ORDER_PREFIX" description="COM_QTC_ORDER_PREFIX_DESC" />
+
+		<field name="separator" type="text" default="-" maxlength="1" label="COM_QTC_SEPARATOR" description="COM_QTC_SEPARATOR_DESC" />
+
+		<field name="random_orderid" class="btn-group" type="radio" default="1" label="COM_QTC_RANDOM_OREDRID" description="COM_QTC_RANDOM_OREDRID_DESC" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="padding_count" type="text" default="10" class="validate-numeric" label="COM_QTC_PADDING_COUNT" description="COM_QTC_PADDING_COUNT_DESC" />
+
+		<!-- VAT and Invoice settings -->
+		<field menu="hide" type="legend" id="q2c-invoice" name="q2c-invoice" label="" default="COM_QUICK2CART_SETTINGS_INVOICE" hint=""/>
+
+		<field name="mainSiteAdress" type="textarea" cols="60" rows="5" default="" label="COM_QUICK2CART_MAIN_SITEADDRESS" description="COM_QUICK2CART_MAIN_SITEADDRESS_DESC" />
+
+		<field name="vat_num" type="text" default="" label="QTC_VAT_NUM" description="QTC_VAT_NUM_DESC" />
+
+		<field name="enable_bill_vat" class="btn-group" type="radio" default="1" label="QTC_BILL_VAT_NUM" description="QTC_BILL_VAT_NUM_DESC" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+<!--
+		<field name="useinvoice" class="btn-group" type="radio" default="1" label="QTC_INVOICE_MAIL" description="QTC_INVOICE_MAIL_DESC" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+-->
+
+	</fieldset>
+
+	<!--SMS Notification-->
+	<fieldset name="sms_settings" label="COM_QTC_SMS_NOTIFICATION_SETTINGS" addfieldpath="/administrator/components/com_quick2cart/assets/elements">
+		<field name="smsNotificationSetup" type="smssetup"  label="COM_QUICK2CART_SMS_NOTIFICATION_SETUP_NAME" description="COM_QUICK2CART_SMS__NOTIFICATION_SETUP_DES" />
+	</fieldset>
+
+	<!-- Native Product Manager Settings -->
+	<fieldset name="NativeProdManager" label="QTC_NATIVE_PROD_MANAGER" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<!-- Product options -->
+		<field menu="hide" type="legend" id="q2c-product-form" name="q2c-product-form" default="COM_QTC_PRODUCT_OPTIONS_SETTINGS" hint="COM_QUICK2CART_SETTINGS_PRODUCT_FORM_HINT" label="" />
+
+		<field name="enable_editor" class="btn-group" type="radio" default="0" description="QTC_ENABLE_EDITOR_DESC" label="QTC_ENABLE_EDITOR">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<!-- Admin approval and email settings -->
+		<field menu="hide" type="legend" id="q2c-approval-emails" name="q2c-approval-emails" default="COM_QUICK2CART_SETTINGS_APPROVAL_EMAILS" hint="COM_QUICK2CART_SETTINGS_APPROVAL_EMAILS_HINT" label="" />
+
+		<field name="admin_approval_stores" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_ADMIN_APPROVAL_STORES_DESC" label="COM_QUICK2CART_ADMIN_APPROVAL_STORES">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="admin_approval" class="btn-group" type="radio" default="0" description="QTC_ADMIN_APPROVAL_DESC" label="QTC_ADMIN_APPROVAL">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field menu="hide" type="legend" id="q2c-emailsSetting" name="q2c-emailsSetting" default="COM_QUICK2CART_SETTINGS_EMAILS" hint="COM_QUICK2CART_SETTINGS_EMAILS_HINT" label="" />
+
+		<field name="mail_on_store_create" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_MAIL_ADMIN_ON_CREATE_STORE_DESC" label="COM_QUICK2CART_MAIL_ADMIN_ON_CREATE_STORE">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="mail_on_store_edit" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_MAIL_ADMIN_ON_STORE_EDIT_DESC" label="COM_QUICK2CART_MAIL_ADMIN_ON_STORE_EDIT">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="mail_on_edit" class="btn-group" type="radio" default="0" description="QTC_MAIL_ADMIN_ON_EDIT_DESC" label="QTC_MAIL_ADMIN_ON_EDIT">
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<!-- Store home page settings -->
+		<field menu="hide" type="legend" id="q2c-store-homepage" name="q2c-store-homepage" default="COM_QUICK2CART_STORE_HOMEPAGE_SETTING" hint="COM_QUICK2CART_SETTINGS_STORE_HOMEPAGE_HINT" label="" />
+
+		<field name="featured_limit" type="text" default="4" label="QTC_FEATURED_PROD_LIMIT" description="QTC_FEATURED_PROD_LIMIT_DESC" />
+
+		<field name="topSeller_limit" type="text" default="4" label="QTC_TOP_SELLER_PROD_LIMIT" description="QTC_TOP_SELLER_FEATURED_PROD_LIMIT_DESC" />
+
+		<field name="storeProdPage_limit" type="text" default="10" label="QTC_STORE_PROD_PAGINATION_LIMIT" description="QTC_STORE_PROD_PAGINATION_LIMIT_DESC" />
+<!--
+		<field menu="hide" type="legend" id="q2c-store-all-products" name="q2c-all-products" default="COM_QUICK2CART_OPTION_CATEGORY_SETTING" hint="" label="" /> -->
+
+		<field name="all_prod_pagination_limit" type="text" default="15" label="QTC_ALL_PROD_PAGINATION_LIMIT" description="QTC_ALL_PROD_PAGINATION_LIMIT_DESC" />
+
+		<!-- Product Details Page Display and Other Display Settings-->
+		<field menu="hide" type="legend" id="q2c-product-display" name="q2c-product-display" default="COM_QUICK2CART_DISPLAY_SETTINGS" hint="COM_QUICK2CART_DISPLAY_SETTINGS_HINT" label="" />
+
+		<field name="ProductTitleLimit" type="text" default="15" label="QTC_PROD_TITLE_LIMIT" description="QTC_PROD_TITLE_LIMIT_DES" />
+
+
+		<field name="who_bought" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_WHO_BOUGHT_DESC" label="COM_QUICK2CART_WHO_BOUGHT_LBL" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="product_filter" type="text" default="tj-filters-mod-pos" label="COM_QUICK2CART_FILTER_MODULE_POSITION" description="COM_QUICK2CART_FILTER_MODULE_POSITION_DESC" />
+
+		<field name="who_bought_limit" class="btn-group" type="text" default="2" showon="who_bought:1" description="COM_QUICK2CART_WHO_BOUGHT_LIMIT_DESC" label="COM_QUICK2CART_WHO_BOUGHT_LIMIT_LBL"/>
+
+		<field name="spacer3" type="spacer" hr="true" />
+
+		<!--Added in 2.5-->
+		<field name="layout_to_load" type="list" description="COM_QUICK2CART_LAYOUT_TO_SHOW_DESC" label="COM_QUICK2CART_LAYOUT_TO_SHOW" class="btn-group" default="flexible_layout">
+			<option value="fixed_layout">COM_QUICK2CART_FIXED_PIN_LAYOUT</option>
+			<option value="flexible_layout">COM_QUICK2CART_FLEXIBLE_PIN_LAYOUT</option>
+		</field>
+
+		<!--For fixed layout-->
+		<field name="fix_pin_height" type="text" description="COM_QUICK2CART_FIXED_PIN_LAYOUT_HEIGHT_DESC" label="COM_QUICK2CART_FIXED_PIN_LAYOUT_HEIGHT" default="200" showon="layout_to_load:fixed_layout" />
+		<!-- How much grid should be used for different devices(values are in grid like col-lg-4 ) -->
+		<field name="pin_for_lg" type="list" description="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_LS_DESC" label="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_LS" class="btn-group" default="3" showon="layout_to_load:fixed_layout">
+			<option value="12">1</option>
+			<option value="6">2</option>
+			<option value="4">3</option>
+			<option value="3">4</option>
+		</field>
+
+		<field name="pin_for_md" type="list" description="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_MS_DESC" label="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_MS" class="btn-group" default="4" showon="layout_to_load:fixed_layout">
+			<option value="12">1</option>
+			<option value="6">2</option>
+			<option value="4">3</option>
+			<option value="3">4</option>
+		</field>
+
+		<field name="pin_for_sm" type="list" description="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_SS_DESC" label="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_SS" class="btn-group" default="6" showon="layout_to_load:fixed_layout">
+			<option value="12">1</option>
+			<option value="6">2</option>
+			<option value="4">3</option>
+			<option value="3">4</option>
+		</field>
+
+		<field name="pin_for_xs" type="list" description="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_XSS_DESC" label="COM_QUICK2CART_FIXED_PIN_LAYOUT_PINS_IN_XSS" class="btn-group" default="12" showon="layout_to_load:fixed_layout">
+			<option value="12">1</option>
+			<option value="6">2</option>
+			<option value="4">3</option>
+			<option value="3">4</option>
+		</field>
+
+		<!--For flexible layout-->
+		<field name="pin_width" type="text" default="170" label="COM_QUICK2CART_PIN_WIDTH" description="COM_QUICK2CART_PIN_WIDTH_DESC" showon="layout_to_load:flexible_layout"/>
+
+		<field name="pin_padding" type="text" default="3" label="COM_QUICK2CART_PIN_PADDING" description="COM_QUICK2CART_PIN_PADDING_DESC" showon="layout_to_load:flexible_layout"/>
+
+		<field menu="hide" type="legend" id="q2c-social-sharing" name="q2c-social-sharing" default="COM_QUICK2CART_SETTINGS_SOCIAL_SHARING" hint="" label="" />
+
+		<field name="social_sharing" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_ENABLE_SOCIAL_SHARING" description="COM_QUICK2CART_ENABLE_SOCIAL_SHARING_DES" >
+			<option value="1">JENABLED</option>
+			<option value="0">JDISABLED</option>
+		</field>
+
+		<field name="social_shring_type" class="btn-group" type="radio" default="native" label="COM_QUICK2CART_SOCIAL_SHARING_TYPE" description="COM_QUICK2CART_SOCIAL_SHARING_TYPE_DESC" >
+			<option value="addthis">COM_QUICK2CART_ADDTHIS_SOCIAL</option>
+			<option value="native">COM_QUICK2CART_NATIVE_NATIVE</option>
+		</field>
+
+		<field name="addthis_publishid" type="text" default="" label="COM_QUICK2CART_SELECT_ADDTHIS_PUBLISHED_ID" description="COM_QUICK2CART_SELECT_ADDTHIS_PUBLISHED_ID_DES" />
+
+		<!-- Media settings -->
+		<field menu="hide" type="legend" id="q2c-media" name="q2c-media" default="COM_QUICK2CART_OPTION_MEDIA_SETTING" hint="COM_QUICK2CART_SETTINGS_MEDIA_HINT" label="" />
+
+		<field name="storeavatar_width" type="text" default="128" label="QTC_STOREAVATAR_WIDTH" description="QTC_STOREAVATAR_WIDTH_DESC" />
+
+		<field name="storeavatar_height" type="text" default="128" label="QTC_STOREAVATAR_HT" description="QTC_STOREAVATAR_HT_DESC" />
+
+		<field name="spacer4" type="spacer" hr="true" />
+
+		<field name="maxProdImgUpload_limit" type="text" default="6" label="QTC_MAX_PROD_IMG_LIMIT" description="QTC_MAX_PROD_IMG_LIMIT_DESC" />
+
+		<field name="max_size" type="text" default="1024" label="QTC_MAX_SIZE" description="QTC_MAX_SIZE_DESC" />
+
+		<field name="spacer5" type="spacer" hr="true" />
+
+		<field name="small_width" type="text" default="64" label="QTC_SMALL_WIDTH" description="QTC_SMALL_WIDTH_DESC" />
+
+		<field name="small_height" type="text" default="64" label="QTC_SMALL_HT" description=
+		"QTC_SMALL_HT_DESC" />
+
+		<field name="medium_width" type="text" default="128" label="QTC_MED_WIDTH" description="QTC_MED_WIDTH_DESC" />
+
+		<field name="medium_height" type="text" default="128" label="QTC_MED_HT" description="QTC_MED_HT_DESC" />
+
+		<field name="large_width" type="text" default="512" label="QTC_LARG_WIDTH" description="QTC_LARG_WIDTH_DESC" />
+
+		<field name="large_height" type="text" default="512" label="QTC_LARG_HT" description="QTC_LARG_HT_DESC" />
+
+	</fieldset>
+
+	<!--Digital Products Settings-->
+	<fieldset name="media_settings" label="COM_QUICK2CART_SETTINGS_E_PRODUCTS" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<field name="eProdSupport" class="btn-group" type="radio" default="1" label="COM_QUICK2CART_E_PROD_SUPPORT" description="COM_QUICK2CART_E_PROD_SUPPORT_DESC" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="allowedFileExtensions" type="textarea" cols="60" rows="5" default="aac,avi,bmp,csv,doc,docx,epg,epub,fla,flac,flv,gif,gz,gzip,ico,jpg,mkv,mov,mp3,mp4,odg,odp,ods,odt,ogg,pdf,png,pps,ppt,rar,swf,tar.gz,txt,wav,wma,wmv,xcf,xls,xlsx,zip" label="COM_QUICK2CART_E_PROD_FILE_TPYE" description="COM_QUICK2CART_E_PROD_FILE_TPYE_DESC" />
+
+		<!--
+		<field name="eProdUploadMode" class="btn-group" type="radio" default="1" label="COM_QUICK2CART_E_PROD_UPLOAD_MODE" description="COM_QUICK2CART_E_PROD_UPLOAD_MODE_DESC" >
+			<option value="1">COM_QTC_FILE_UPLOADER</option>
+			<option value="2">COM_QTC_EXITING_FILE_PATH</option>
+			<option value="3">COM_QTC_UPLOAD_BOTH</option>
+		</field> -->
+
+		<field name="eProdUploadDir" type="text" default="media/com_quick2cart/productfiles" class="" label="COM_QUICK2CART_E_PROD_DIRECTORY" description="COM_QUICK2CART_E_PROD_DIRECTORY_DESC" />
+
+		<field name="eProdMaxSize" type="text" default="500" class="" label="COM_QUICK2CART_E_PROD_MAX_SIZE" description="COM_QUICK2CART_E_PROD_MAX_SIZE_DESC" />
+
+		<field name="eProdMaxFileLimit" type="text" default="5" class="" label="COM_QUICK2CART_E_PROD_FILE_LIMIT" description="COM_QUICK2CART_E_PROD_FILE_LIMIT_DESC" />
+
+		<field name="eProdUExpiryMode" class="btn-group" type="radio" default="epMaxDownload" label="COM_QUICK2CART_E_PROD_EXPIRY_MODE" description="COM_QUICK2CART_E_PROD_EXPIRY_MODE_DESC" >
+			<option value="epMaxDownload">COM_QTC_MAX_DOWNLOAD</option>
+			<option value="epDateExpiry">COM_QTC_DATE_EXIPRIRY</option>
+			<option value="epboth">COM_QTC_UPLOAD_BOTH</option>
+		</field>
+
+		<field name="eProdExpFormat" class="btn-group" type="radio" default="epDateExp" label="DATE_EXPIRATION_FORMAT" description="DATE_EXPIRATION_FORMAT_DESC" >
+			<option value="epDateExp">COM_QTC_EP_DATE_EXPIRATION</option>
+			<option value="epMonthExp">COM_QTC_EP_MONTH_EXPIRATION</option>
+		</field>
+
+	</fieldset>
+
+	<!--Integrations Settings-->
+	<fieldset name="integrations" label="COM_QUICK2CART_SOCIAL_INTEGRATION_MANAGER" description="" addfieldpath="/administrator/components/com_quick2cart/assets/elements" >
+
+		<field name="integrate_with" class="btn-group" type="radio" default="none" description="COM_QUICK2CART_INTEGRATE_WITH_DESC" label="COM_QUICK2CART_INTEGRATE_WITH" >
+			<option value="none">COM_QUICK2CART_NONE</option>
+			<option value="EasySocial">COM_QUICK2CART_ES</option>
+			<option value="JomSocial">COM_QUICK2CART_JS</option>
+		</field>
+
+		<field name="point_system" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_ENABLE_POINT_DESC" label="COM_QUICK2CART_ENABLE_POINT">
+				<option value="1">COM_QTC_YES</option>
+				<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="displaySocialToolbar" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_DISPLAY_SOCIAL_TOOLBAR_DESC" label="COM_QUICK2CART_DISPLAY_SOCIAL_TOOLBAR">
+				<option value="1">COM_QTC_YES</option>
+				<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field menu="hide" type="legend" id="q2c-integration-activity" name="q2c-integration-activity" default="COM_QUICK2CART_ACTIVITY_STREAM_INTEGRATION" hint="COM_QUICK2CART_ACTIVITY_STREAM_INTEGRATION_HINT" label="" />
+
+		<field name="streamAddProd" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_ACTIVITY_STREAM_ADD_PRODUCT" description="COM_QUICK2CART_ACTIVITY_STREAM_ADD_PRODUCT_DESC"  >
+				<option value="1">COM_QTC_YES</option>
+				<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="streamCeateStore" class="btn-group" type="radio" default="0" label="COM_QUICK2CART_ACTIVITY_CREATE_STORE" description="COM_QUICK2CART_ACTIVITY_CREATE_STORE_DESC" >
+				<option value="1">COM_QTC_YES</option>
+				<option value="0">COM_QTC_NO</option>
+		</field>
+
+		<field name="streamBuyProd" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_ACTIVITY_BUY_PROD_DESC" label="COM_QUICK2CART_ACTIVITY_BUY_PROD" >
+				<option value="1">COM_QTC_YES</option>
+				<option value="0">COM_QTC_NO</option>
+		</field>
+	</fieldset>
+
+	<fieldset name="updates" label="COM_QUICK2CART_OPTIONS_UPDATES_LBL">
+		<field name="downloadid" type="text" default="" size="30" label="COM_QUICK2CART_OPTIONS_DOWNLOADID_LBL" description="COM_QUICK2CART_OPTIONS_DOWNLOADID_DESC" />
+	</fieldset>
+
+	<!--ACL-->
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC" >
+		<field name="rules" type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL" class="inputbox" validate="rules"
+			filter="rules" component="com_quick2cart" section="component" />
+	</fieldset>
+</config>

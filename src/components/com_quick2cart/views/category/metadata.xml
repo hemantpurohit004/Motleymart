@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="Category">
+		<message>
+			<![CDATA[
+				Category Pin View
+			]]>
+		</message>
+		<options var="layout">
+			<option value="default" name="Category Pin View (Native Quick2Cart Products)" msg="View all Products from Native Product Manager" />
+		</options>
+	</view>
+</metadata>

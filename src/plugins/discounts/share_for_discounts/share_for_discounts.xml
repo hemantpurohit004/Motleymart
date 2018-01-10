@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="discounts" method="upgrade">
+	<name>plg_share_for_discounts</name>
+	<author>TechJoomla</author>
+	<creationDate>29 April 2016</creationDate>
+	<copyright>Techjoomla. All Rights Reserved.</copyright>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>http://www.techjoomla.com</authorUrl>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.0</version>
+	<description>PLG_SHARE_FOR_DISCOUNTS_DESC</description>
+	<files>
+		<filename plugin="share_for_discounts">share_for_discounts.php</filename>
+		<folder>assets</folder>
+	</files>
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_discounts_share_for_discounts.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_discounts_share_for_discounts.ini</language>
+	</languages>
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="button_text" type="text" default="PLG_SHARE_FOR_DISCOUNTS_DEFAULT_BUTTON_TEXT" label="PLG_SHARE_FOR_DISCOUNTS_BUTTON_TEXT" description="PLG_SHARE_FOR_DISCOUNTS_BUTTON_TEXT_DESC" />
+				<field name="box_title" type="text" default="PLG_SHARE_FOR_DISCOUNTS_DEFAULT_BOX_TITLE_TEXT" label="PLG_SHARE_FOR_DISCOUNTS_BOX_TITLE" description="PLG_SHARE_FOR_DISCOUNTS_BOX_TITLE_DESC" />
+				<field name="box_text" type="text" default="PLG_SHARE_FOR_DISCOUNTS_DEFAULT_BOX_TEXT" label="PLG_SHARE_FOR_DISCOUNTS_BOX_TEXT" description="PLG_SHARE_FOR_DISCOUNTS_BOX_TEXT_DESC" />
+				<field name="coupon_code" type="text" default="" label="PLG_SHARE_FOR_DISCOUNTS_COUPON_CODE" description="PLG_SHARE_FOR_DISCOUNTS_COUPON_CODE_DESC" />
+				<field name="parent_css_class" type="text" default="" label="PLG_SHARE_FOR_DISCOUNTS_PARENT_CLASS" description="PLG_SHARE_FOR_DISCOUNTS_PARENT_CLASS_DESC" />
+				<field name="button_css_class" type="text" default="" label="PLG_SHARE_FOR_DISCOUNTS_BUTTON_CLASS" description="PLG_SHARE_FOR_DISCOUNTS_BUTTON_CLASS_DESC" />
+				<field name="facebook_app_id" type="text" default="" label="PLG_SHARE_FOR_DISCOUNTS_FACEBOOK_APP_ID" description="PLG_SHARE_FOR_DISCOUNTS_FACEBOOK_APP_ID_DESC" />
+				<field name="load_fb_sdk_js" type="list" default="0" label="PLG_SHARE_FOR_DISCOUNTS_LOAD_FACEBOOK_SDK" description="PLG_SHARE_FOR_DISCOUNTS_LOAD_FACEBOOK_SDK_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

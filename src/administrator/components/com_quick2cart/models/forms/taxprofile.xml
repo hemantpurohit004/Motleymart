@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field name="id" type="text" default="0"
+			label="COM_QUICK2CART_FORM_LBL_TAXPROFILE_ID"
+			readonly="true" class="readonly"
+			description="JGLOBAL_FIELD_ID_DESC" />
+
+		<field name="name" type="text" size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_TAXPROFILE_TAXPROFILE_NAME"
+			description="COM_QUICK2CART_FORM_DESC_TAXPROFILE_TAXPROFILE_NAME"
+			required="true" filter="safehtml" />
+
+		<field name="store_id" type="taxprofilestorelist"
+			class=""
+			id="jform_store_id"
+			label="COM_QUICK2CART_FORM_LBL_PROFILE_STORE_ID"
+			description="COM_QUICK2CART_FORM_DESC_PROFILESTORE_ID"
+			default="0"
+			required="true" filter="safehtml" />
+
+		<field name="state" type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox" size="1" default="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+		</field>
+	</fieldset>
+</form>

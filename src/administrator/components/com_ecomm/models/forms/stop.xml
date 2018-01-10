@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="StopDetails">
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="name"
+				label="Name"
+				description="Enter stop name"
+				type="text"
+				required="true"
+				/>
+		<field
+				name="address"
+				type="textarea"
+				row="5"
+				column="40"
+				label="Address"
+				description="Enter your address"
+				size="100"
+				default=""
+				/>
+		<field
+				name="lat"
+				type="text"
+				label="Lattitude"
+				description="Enter Lattitude"
+				size="15"
+				required="true"
+				default=""
+				/>
+				
+		<field
+				name="lon"
+				type="text"
+				label="Longitude"
+				description="Enter Longitude."
+				size="15"
+				required="true"
+				default=""
+				/>
+
+		<field
+				name="pin"
+				type="text"
+				label="Pin"
+				description="Enter Pin."
+				size="10"
+				required="true"
+				default=""
+				/>
+	</fieldset>
+
+</form>

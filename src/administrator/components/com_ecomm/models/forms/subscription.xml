@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+				name="title"
+				type="text"
+				label="Title"
+				description="Enter subscription title"
+				size="50"
+				required="true"
+				/>
+		<field
+				name="duration"
+				type="number"
+				label="Duration"
+				description="Enter subscription duration in months"
+				required="true"
+				/>
+		<field
+				name="price"
+				type="text"
+				label="Price"
+				description="Enter subscription price in rupees"
+				required="true"
+				/>
+		<field 
+				name="state" 
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="Status"
+				description="Choose the status of subscription"
+				default="1"
+				required="true"
+			>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+		</field>
+		<field
+				name="id"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

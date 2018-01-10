@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="tjshipping" method="upgrade">
+	<name>Default Zone based Shipping Provider</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>PLG_TJSHIPPING_QTC_DEFAULT_ZONESHIPPING_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="qtc_default_zoneshipping">qtc_default_zoneshipping.php</filename>
+		<filename>index.html</filename>
+		<folder>qtc_default_zoneshipping</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB/en-GB.plg_tjshipping_qtc_default_zoneshipping.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjshipping_qtc_default_zoneshipping.sys.ini</language>
+	</languages>
+
+</extension>

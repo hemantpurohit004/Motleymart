@@ -1,0 +1,172 @@
+/*
+$JA#COPYRIGHT$
+*/
+
+// VARIABLES & MIXINS
+// ------------------
+@import "vars.less"; // Modify this for custom colors, font-sizes, etc
+
+body.features-page {
+  .t3-wrapper {
+    height: 100%;
+
+    @media (max-width: @screen-xs-max) {
+      padding-top: @navbar-height*2;
+    }
+  }
+
+  .features-loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../images/preloader.gif) center no-repeat @white;
+  }
+
+  // Background
+  // -----------
+  .features-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+
+    .mask {
+      background: rgba(0,0,0,0.4);
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+  }
+
+  // Header
+  // -----------
+  .t3-header {
+    position: fixed;
+    z-index: 3;
+    background: none;
+    padding: @t3-global-padding 0;
+    top: 0;
+    width: 100%;
+    transition: padding 300ms, top 300ms;
+    -moz-transition: padding 300ms, top 300ms;
+    -webkit-transition: padding 300ms, top 300ms;
+
+    @media (max-width: @screen-sm-max) {
+      padding: 0;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      .logo {
+        background: @brand-primary;
+
+        & + .actions {
+          background: @white;
+        }
+      }
+    }
+  }
+
+  .head-menu #cModule-Notify {
+    right: 87px;
+  }
+
+  .head-login {
+    margin-right: 10px;
+  }
+
+  // Mainbody
+  // ----------
+  .t3-mainbody {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+
+    @media (min-width: @screen-sm-min) {
+      left: 50%;
+      margin-left: -@container-sm/2;
+      width: @container-sm;
+    }
+
+    @media (min-width: @screen-md-min) {
+      left: 50%;
+      margin-left: -@container-md/2;
+      width: @container-md;
+    }
+
+    @media (min-width: @screen-lg-min) {
+      left: 50%;
+      margin-left: -@container-lg/2;
+      width: @container-lg;
+    }
+  }
+
+  // Login Form
+  // ------------
+  .login-wrap,
+  .logout {
+    .page-header {
+      border-bottom: 0;
+      text-align: center;
+      padding-bottom: 0;
+    }
+
+    .login-description,
+    .logout-description {
+      text-align: center;
+      margin-bottom: @t3-global-margin;
+    }
+
+    .control-label {
+      text-align: left;
+      padding-top: 0;
+    }
+  }
+
+  .logout {
+    .form-horizontal .control-group .controls {
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+
+  // Features Intro
+  // --------------
+  .features-intro {
+    position: relative;
+    z-index: 2;
+  }
+
+
+  // Footer
+  // ---------
+  .t3-footer {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// MISC
+// -----------
+.no-js #loader { display: none;  }
+
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+
+.scrollDown,
+.scrollUp {
+  body.features-page .t3-header {
+    background: rgba(0,0,0,0.6);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

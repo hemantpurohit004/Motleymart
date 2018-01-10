@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="My Store Customers" option="View" >
+		<message><![CDATA[My Store Customers]]></message>
+	</layout>
+	<state>
+		<name>My Store Customers</name>
+		<description>My Store Customers</description>
+		<params>
+		</params>
+	</state>
+</metadata>

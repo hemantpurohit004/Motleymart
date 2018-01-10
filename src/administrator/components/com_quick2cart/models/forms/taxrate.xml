@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_quick2cart/models/fields" >
+		<field name="id" type="text" size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_TAXTRATE_TAXRATE_ID"
+			description="COM_QUICK2CART_FORM_DESC_TAXTRATE_TAXRATE_ID"
+			filter="safehtml" />
+
+		<field name="name" type="text" size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_TAXTRATE_TAXRATE_NAME"
+			description="COM_QUICK2CART_FORM_DESC_TAXTRATE_TAXRATE_NAME"
+			required="true" filter="safehtml" />
+
+		<field name="percentage" type="text" size="40" class="inputbox validate-numeric input-mini"
+			label="COM_QUICK2CART_FORM_LBL_TAXTRATE_TAX_PERCENT"
+			description="COM_QUICK2CART_FORM_DESC_TAXTRATE_TAX_PERCENT"
+			required="true" filter="safehtml"  />
+
+
+		<field name="zone_id" type="zonelist" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_TAXTRATE_ZONE_ID"
+			description="COM_QUICK2CART_FORM_DESC_TAXTRATE_ZONE_ID"
+			required="true" filter="safehtml" />
+
+		<!--
+		<field name="created_by" type="createdby" default=""
+			label="COM_QUICK2CART_FORM_LBL_TAXTRATE_CREATED_BY"
+			description="COM_QUICK2CART_FORM_DESC_TAXTRATE_CREATED_BY" />
+		-->
+
+		<field name="state" type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox" size="1" default="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+		</field>
+	</fieldset>
+</form>

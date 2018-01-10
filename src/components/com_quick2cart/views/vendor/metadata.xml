@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="vendor">
+		<message>
+			<![CDATA[
+				Vendor view
+			]]>
+		</message>
+		<options var="layout">
+			<option value="cp" name="Store Dashboard" msg="Store Dashboard for Vendor" />
+			<option value="createstore" name="Add New Store" msg="Add New Store" />
+		</options>
+	</view>
+</metadata>

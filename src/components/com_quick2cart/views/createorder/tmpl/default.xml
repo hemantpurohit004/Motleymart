@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Quick2Cart Manual Orders View" option="View" >
+		 <message><![CDATA[Quick2Cart Manual Orders View]]></message>
+	</layout>
+	<state>
+		<name>Manual Orders</name>
+		<description>Manual Orders (For Vendors)</description>
+	</state>
+</metadata>

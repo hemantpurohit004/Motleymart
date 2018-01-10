@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="mobile_no"
+				type="text"
+				label="Mobile No."
+				description="Enter your mobile no"
+				size="10"
+				required="true"
+				default=""
+				/>
+		<field
+				name="otp"
+				type="text"
+				label="OTP"
+				description="Enter your otp"
+				size="10"
+				required="true"
+				default=""
+				/>
+		<field
+				name="id"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

@@ -1,0 +1,16 @@
+.clear{ clear: both; padding-top: 8px;}
+.commentBodyLeft, .boxBody{border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC; margin-right:0px; margin-left:0px; margin-top:0px; margin-bottom:0px;}
+.current fieldset img{float:none;}
+.icon-48-icon-48-social{background-image:url(../images/icon-48-social.png)!important;}
+.icon-reset{background:url(../images/social-reset.png) no-repeat center !important;}
+.invalid{border-color:red;}
+.plug_enabled{color:green;}
+.plug_disabled{color:red;}
+.setting-td{width:50%;}
+.setting-td input, .setting-td label{display:inline; float:none;}
+.tbBottomMiddle{border-right: 1px solid #CCCCCC; border-left: 1px solid #CCCCCC; border-bottom: 1px solid #CCCCCC; padding:0pt;}
+.tbTitleMiddle{background:none repeat scroll 0 0 #F0F0F0; border-left: 1px solid #F0F0F0; border-right: 1px solid #F0F0F0; padding:3px 1px;}
+.tbTitleMiddle h5, .tbTitleMiddleRed h5{color: #666666; font-size:120%; margin:0px; padding:2px 10px; overflow:none; text-align: left; vertical-align: middle;}
+.titleComment, .tbTitle{border-collapse:collapse; border-spacing:0pt 0pt; line-height:20px; color:#000000;width:100%; margin-top:10px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;}
+span.latestbutton{color:#0B55C4;cursor: pointer;}
+span.latestbutton:hover{text-decoration:underline;}

@@ -1,0 +1,11 @@
+[
+	{
+		"title"			: "COM_QUICK2CART_POINTS_ADD_PRODUCT_TITLE",
+		"alias"			: "add_product",
+		"description"	: "COM_QUICK2CART_POINTS_ADD_PRODUCT_TITLE_DESC",
+		"command"		: "add_product",
+		"extension"		: "com_quick2cart",
+		"state"			: true,
+		"points"		: 1
+	}
+]

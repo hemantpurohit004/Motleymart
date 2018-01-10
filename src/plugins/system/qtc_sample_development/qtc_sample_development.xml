@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+
+	<name>Quick2Cart - System - Sample Development</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>This system plugin is used for extending Quick2cart functionalty via plugin triggers.</description>
+
+	<files>
+		<filename plugin="qtc_sample_development">qtc_sample_development.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB/en-GB.plg_system_qtc_sample_development.ini</language>
+ 	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="affiliate_status" class="btn-group" type="radio" default="0" label="COM_SAMPLE_DEV_AFFILIATE_PROG_SATUS" description="COM_SAMPLE_DEV_AFFILIATE_PROG_SATUS_DESC">
+					<option value="1">COM_SAMPLE_DEV_ENABLE</option>
+					<option value="0">COM_SAMPLE_DEV_DISABLE</option>
+				</field>
+				<field name="affiliate" class="btn-group" type="radio" default="iDevAffi" label="COM_SAMPLE_DEV_AFFILIATE_PROG"
+					description="COM_SAMPLE_DEV_AFFILIATE_PROG_DESC">
+					<option value="iDevAffi">COM_SAMPLE_DEV_IDEV_AFFILIATE_SYS</option>
+					<option value="PostAffiPro">COM_SAMPLE_DEV_IDEV_POST_AFFILIATE_PRO_SYS</option>
+				</field>
+				<field name="baseurl" type="text" default="" label="COM_BASE_URL_FOR_AFFILIATE_PROG"
+					description="COM_BASE_URL_FOR_AFFILIATE_PROG_DESC"  showon="affiliate:iDevAffi"/>
+
+
+				<field name="qtcCookieExp" type="text" default="420" label="COM_SAMPLE_DEV_COOKIE_EXP_MIN" description="COM_SAMPLE_DEV_COOKIE_EXP_MIN_DESC" showon="affiliate:iDevAffi"/>
+
+				<field name="idev_affiliate_method" class="btn-group" type="radio" default="basedOnAffiliateId" label="COM_SAMPLE_DEV_IDEV_AFFILIATE_INTEGRATION_METHOD"
+					description="COM_SAMPLE_DEV_IDEV_AFFILIATE_INTEGRATION_METHOD_DESC"  showon="affiliate:iDevAffi">
+					<option value="basedOnAffiliateId">COM_SAMPLE_DEV_IDEV_AFFILIATE_METHOD_BASED_ON_AFFILIATE_ID</option>
+					<option value="basedOnCoupon">COM_SAMPLE_DEV_IDEV_AFFILIATE_METHOD_BASED_ON_COUPON_CODE</option>
+				</field>
+
+
+				<field name="amount_consideration" class="btn-group" type="radio" default="totCartAmt" label="COM_SAMPLE_DEV_AMOUNT_TO_CONSIDER"
+					description="COM_SAMPLE_DEV_AMOUNT_TO_CONSIDER_DESC"  showon="affiliate:iDevAffi">
+					<option value="totCartAmt">COM_SAMPLE_DEV_IDEV_CONSIDER_TOT_CART_AMOUNT</option>
+					<option value="applicableAmt">COM_SAMPLE_DEV_IDEV_CONSIDER_APPLICABLE_ITEMS_AMOUNT</option>
+				</field>
+
+<!--
+				<field name="usd_exchange_status" type="radio" default="0" label="USD Exchange Rate Status ?" description="Select USD Exchange Rate Status">
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+				<field name="usd_exchange" type="text" default="50" label="USD Exchange Rate" description="Exchange Rate of 1 USD for INR"/>
+-->
+
+				<field name="jlike" class="btn-group" type="radio" default="1" label="COM_SAMPLE_DEV_JLIKE_INTEGRATION" description="COM_SAMPLE_DEV_JLIKE_INTEGRATION_DESC">
+					<option value="1">Enable</option>
+					<option value="0">Disable</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

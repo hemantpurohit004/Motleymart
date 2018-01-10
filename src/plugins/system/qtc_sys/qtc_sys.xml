@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+
+	<name>Quick2Cart - System Plugin</name>
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>
+		<![CDATA[
+			This plugin loads required helper files for Quick2cart component. Also it maintains the cart data between guest session and after login. <strong>Make sure you enable it to use Quick2cart.</strong>
+		]]>
+	</description>
+
+	<files>
+		<filename plugin="qtc_sys">qtc_sys.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<languages >
+		<language tag="en-GB">en-GB/en-GB.plg_system_qtc_sys.ini</language>
+	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="loadBS3js" class="btn-group" type="radio" default="0" description="QTC_SYS_LOAD_BS3_JS_DESC" label="QTC_SYS_LOAD_BS3_JS" >
+					<option value="1">QTC_SYS_YES</option>
+					<option value="0">QTC_SYS_NO</option>
+				</field>
+				<field name="loadmasonryJs" class="btn-group" type="radio" default="1" description="QTC_SYS_LOAD_MASONRY_JS_DESC" label="QTC_SYS_LOAD_MASONRY_JS" >
+					<option value="1">QTC_SYS_YES</option>
+					<option value="0">QTC_SYS_NO</option>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

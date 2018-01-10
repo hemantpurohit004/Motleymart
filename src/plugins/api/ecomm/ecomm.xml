@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="api" method="upgrade">
+	<name>Api - Ecomm</name>
+	<author>Joomla! Project</author>
+	<creationDate>April 2015</creationDate>
+	<copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.shivnerisystems.com</authorUrl>
+	<version>3.1.0</version>
+	<description>This plugin exposes users to the Joomla! API</description>
+	<files>
+		<filename plugin="ecomm">ecomm.php</filename>
+		<folder>ecomm</folder>
+	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="Item_Limit" type="text" size="5" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

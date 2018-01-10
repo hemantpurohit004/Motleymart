@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="sms" method="upgrade">
+	<name>PLG_SMS91_NAME</name>
+	<author>Techjoomla</author>
+	<creationDate>3rd October 2017</creationDate>
+	<copyright>(C)techjoomla.com</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>contact@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<version>1.0.0</version>
+	<isapplication>true</isapplication>
+	<description>PLG_SMS_SMS91_DESC</description>
+	<files>
+		<file plugin="sms91">sms91.php</file>
+	</files>
+
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_sms_sms91.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_sms_sms91.ini</language>
+	</languages>
+
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="sms91_base_url" type="text" label="PLG_SMS91_BASE_URL" description="PLG_SMS91_BASE_URL_DESC" default="https://control.msg91.com/api"/>
+				<field name="sms91_auth_key" type="text" label="PLG_SMS91_AUTH_KEY" description="PLG_SMS91_AUTH_KEY_DESC" default="177472Ay9QN5TXCJE59d345a3"/>
+				<field name="sms91_sender_id" type="text" label="PLG_SMS91_SENDER_ID" description="PLG_SMS91_SENDER_ID_DESC" default="MOTLEY"/>
+				<field name="sms91_route" type="text" label="PLG_SMS91_ROUTE" description="PLG_SMS91_ROUTE_DESC" default="4"/>
+				<!--<field name="sms91_use_xml_format" type="radio" label="PLG_SMS91_USE_XML_FORMAT" description="PLG_SMS91_USE_XML_FORMAT_DESC" class="btn-group btn-group-yesno" default="1">
+					<option value="1">JYES</option><option value="0">JNO</option>
+				</field>
+				<field name="sms91_use_unicode" type="radio" label="PLG_SMS91_USE_UNICODE" description="PLG_SMS91_USE_UNICODE_DESC" class="btn-group btn-group-yesno" default="0">
+					<option value="1">JYES</option><option value="0">JNO</option>
+				</field>-->
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+<fieldset addfieldpath="/administrator/components/com_quick2cart/models/fields" >
+
+		<field name="id" type="text" size="40" class="inputbox"
+			label="COM_QUICK2CART_FORM_LBL_ZONE_ZONE_ID"
+			description="COM_QUICK2CART_FORM_DESC_ZONE_ZONE_ID"
+			filter="safehtml" />
+
+		<field name="name" type="text" size="40" class="inputbox"
+
+			label="COM_QUICK2CART_FORM_LBL_ZONE_ZONE_NAME"
+			description="COM_QUICK2CART_FORM_DESC_ZONE_ZONE_NAME"
+			default=""
+
+			required="true"
+			filter="safehtml" />
+
+       <field name="store_id" type="zonestorelist"  class=""
+            label="COM_QUICK2CART_FORM_LBL_ZONE_STORE_ID"
+            description="COM_QUICK2CART_FORM_DESC_ZONE_STORE_ID"
+         default="0"
+        filter="safehtml" />
+
+
+       <field name="created_by" type="createdby" default=""
+            label="COM_QUICK2CART_FORM_LBL_ZONE_CREATED_BY"
+            description="COM_QUICK2CART_FORM_DESC_ZONE_CREATED_BY"  />
+
+         <field
+        name="state"
+        type="list"
+        label="JSTATUS"
+        description="JFIELD_PUBLISHED_DESC"
+        class="inputbox"
+        size="1"
+        default="1">
+        <option value="1">JPUBLISHED</option>
+        <option value="0">JUNPUBLISHED</option>
+    </field>
+
+ </fieldset>
+
+<!--
+ <fieldset
+                        name="accesscontrol">
+                       <field name="asset_id" type="hidden" filter="unset" />
+                       <field name="rules"
+                            type="rules"
+                            label="JFIELD_RULES_LABEL"
+                            translate_label="false"
+                            filter="rules"
+                            validate="rules"
+                            class="inputbox"
+                            component="com_quick2cart"
+                            section="zone"
+                        />
+
+	</fieldset> -->
+
+</form>

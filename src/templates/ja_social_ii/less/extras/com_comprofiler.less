@@ -1,0 +1,638 @@
+/**
+ * $JA#COPYRIGHT$
+ */
+
+// VARIABLES & MIXINS
+// ------------------
+@import "../vars.less"; // Modify this for custom colors, font-sizes, etc
+
+// --------------------
+// COMMUNITY BUILDER 
+// --------------------
+ul.unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// GENERAL
+// --------------
+.cb_template {
+  .col-xs-1, 
+  .col-sm-1, 
+  .col-md-1, 
+  .col-lg-1, 
+  .col-xs-2, 
+  .col-sm-2, 
+  .col-md-2, 
+  .col-lg-2, 
+  .col-xs-3, 
+  .col-sm-3, 
+  .col-md-3, 
+  .col-lg-3, 
+  .col-xs-4, 
+  .col-sm-4, 
+  .col-md-4, 
+  .col-lg-4, 
+  .col-xs-5, 
+  .col-sm-5, 
+  .col-md-5, 
+  .col-lg-5, 
+  .col-xs-6, 
+  .col-sm-6, 
+  .col-md-6, 
+  .col-lg-6, 
+  .col-xs-7, 
+  .col-sm-7, 
+  .col-md-7, 
+  .col-lg-7, 
+  .col-xs-8, 
+  .col-sm-8, 
+  .col-md-8, 
+  .col-lg-8, 
+  .col-xs-9, 
+  .col-sm-9, 
+  .col-md-9, 
+  .col-lg-9, 
+  .col-xs-10, 
+  .col-sm-10, 
+  .col-md-10, 
+  .col-lg-10, 
+  .col-xs-11, 
+  .col-sm-11, 
+  .col-md-11, 
+  .col-lg-11, 
+  .col-xs-12, 
+  .col-sm-12, 
+  .col-md-12, 
+  .col-lg-12 {
+    padding-right: @grid-gutter-width/2;
+    padding-left: @grid-gutter-width/2;
+  }
+
+  .row {
+    .make-row();
+  }
+
+  .navbar-toggle {
+    width: auto;
+  }
+
+  .page-header h3 {
+    margin-top: 0;
+  }
+
+  .btn {
+    border-radius: 0;
+  }
+
+  .btn-success {
+    background-image: none;
+    text-shadow: none;
+    .box-shadow(none);
+    .button-variant(@btn-success-color; @btn-success-bg; @btn-success-border);
+  }
+
+  .btn-primary {
+    background-image: none;
+    text-shadow: none;
+    .box-shadow(none);
+    .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+  }
+
+  .btn-default {
+    background-image: none;
+    text-shadow: none;
+    .box-shadow(none);
+    .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+  }
+
+  .table-responsive {
+  }
+}
+
+
+// MAIN
+// --------------
+.cb_template {
+  
+  // Profile Page
+  .cbPosCanvasMainMiddle {
+    &.col-sm-12 {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  &.cbProfile {
+    .cbPosTabMain {
+      background: @white;
+      padding: @t3-global-padding;
+    }
+
+  &.cbProfile.cb_template_default {
+    background: @white;
+  }
+    
+  }
+
+
+
+  // Create Blog
+  .cbBlogsInner {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  .cbBlogs {
+    .blogsContainer {
+      border-collapse: separate;
+    }
+  }
+
+  // Edit Profie
+  &.cbEditProfile {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  // Manage COnnections
+  &.cbManageConnections {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  #cbtabpaneconnections {
+    .table-responsive {
+      thead {
+        // Mobile view
+        @media (max-width: @screen-xs-max) {
+          display: none;
+        }
+      }
+      tbody {
+        // Mobile view
+        @media (max-width: @screen-xs-max) {
+          .text-center {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  // Send Email
+  &.cbEmailUser {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  // User List
+  &.cbUsersList {
+    padding: @t3-global-padding;
+    background: @white;
+
+    .cbUserListFT_avatar {
+      display: none;
+    }
+
+    .cbUserListFC_onlinestatus {
+      position: relative;
+      display: inline-block;
+      height: 20px;
+    }
+
+    .cb_offline,
+    .cb_online {
+      background: @red;
+      border: 2px solid #dddddd;
+      border-radius: 50%;
+      color: transparent;
+      font-size: 0;
+      height: 20px;
+      overflow: hidden;
+      position: absolute;
+      width: 20px;
+    }
+
+    .cb_online {
+      background: @green;
+    }
+
+    .cbUserListRow {
+      .cb_offline,
+      .cb_online {
+        top: 9px;
+        height: 13px;
+        width: 13px;
+      }
+    }
+  }
+
+  // User Approval
+  &.cbPendingApprovalUsers {
+    padding: @t3-global-padding;
+    background: @white;
+  }
+
+  // Register
+  &.cbRegistration {
+    background: @white;
+
+    #registrationTable,
+    .cbRegistrationConclusion {
+      padding-left: @t3-global-padding;
+      padding-right: @t3-global-padding;
+      border: 0;
+    }
+
+    .cbIconsBottom {
+      padding: @t3-global-padding;
+    }
+  }
+
+  // Lost Pass Form
+  &.cbLostPassForm {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  // List Articles
+  .cbArticles {
+    background: @white;
+    padding: @t3-global-padding;
+
+    .articlesContainer,
+    .cbPaginationLinks {
+      margin-bottom: 0;
+    }
+
+    .articlesContainer {
+      border-collapse: separate;
+    }
+  }
+
+  // Report User
+  &.cbReportUserForm {
+    background: @white;
+    padding: @t3-global-padding;
+  }
+
+  .cb_tab_menu_nested {
+    padding: @t3-global-padding;
+
+    button {
+      margin-right: @t3-global-margin / 4;
+    }
+  }
+
+  // Gallery
+  .cbGallery {
+    background: @white;
+
+    .photosItemsContainer,
+    .photosFoldersContainer,
+    .filesFoldersContainer,
+    .videosFoldersContainer,
+    .musicFoldersContainer {
+      .clearfix();
+      .make-row();
+    }
+
+    .img-thumbnail {
+      margin: 0 0 @grid-gutter-width;
+      border: 0;
+      .box-shadow(none);
+      .make-xs-column(12);
+      .make-sm-column(6);
+      .make-md-column(4);
+
+      .galleryContainerInner {
+        border: 1px solid @t3-border-color;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .galleryContainerContent {
+        padding: @t3-global-padding;
+      }
+
+      .galleryContainerBottom {
+        height: 85px !important;
+      }
+
+      .galleryContainerMenu {
+        right: @grid-gutter-width/2;
+      }
+    }
+  }
+
+  &.galleryImageModal {
+    th,td {
+      vertical-align: middle;
+      border-top: 0;
+    }
+  }
+
+  .galleryItemsHeader {
+    margin-bottom: @t3-global-margin !important;
+  }
+
+  // Blogs
+  .cbpbBlog {
+    .cbpbSnglMsgAll, 
+    .cbpbTopSep {
+      width: 100%;
+      margin: 0;
+    }
+
+    .cbpbControlArea {
+      margin: @t3-global-margin/2 0 0;
+    }
+  }
+
+  .cbpbSnglMsgAll {
+    .cbpbControlArea {
+      margin: @t3-global-margin/2 0 0;
+    }
+
+    .cbpbHead {
+      padding: @t3-global-padding/2 0 0;
+    }
+  }
+
+  hr.cbpbSepMsg {
+    margin: @t3-global-margin/2 0;
+  }
+}
+
+
+// MODULES
+// --------------
+
+// Login Form
+.cbLoginForm {
+  .control-group {
+    margin-bottom: @t3-global-margin;
+
+    .input-append {
+      display: block;
+      padding-left: @input-height-base;
+      position: relative;
+
+      .add-on {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: @input-height-base;
+        width: @input-height-base + 1px;
+        line-height: @input-height-base - 2px;
+        margin: 0;
+
+        span {
+          line-height: 1;
+        }
+      }
+    }
+  }
+
+  #modlgn-remember {
+    height: auto;
+    line-height: auto;
+    top: 0;
+    left: 0;
+    width: auto;
+    margin-left: 0;
+  }
+
+  #form-login-remember {
+    margin-bottom: @t3-global-margin/2;
+  }
+
+  #form-login-submit {
+    .btn {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  #form-login-links {
+    list-style: none;
+    margin: 0;
+    padding: 0 !important;
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      a {
+        background-color: @gray-lighter;
+        border-radius: 2px;
+        display: inline-block;
+        color: @gray;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 2px;
+        text-align: center;
+        width: 32px;
+
+        &:hover, &:focus, &:active {
+          background-color: @link-hover-color;
+          color: @white;
+        }
+      }
+    }
+  }
+}
+
+.section-sign .cbLoginForm {
+  color: @text-color;
+  padding: (@t3-global-padding * 1.5) @t3-global-padding;
+  text-align: left;
+}
+
+.module-primary .cbLoginForm {
+  background: @brand-primary;
+
+  #form-login-remember {
+    .control-label {
+      color: @white;
+    }
+  }
+
+  #form-login-submit {
+    .btn {
+      .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+    }
+  }
+}
+
+.moduletable.module-primary #login-form {
+  padding: @t3-global-padding;
+}
+
+// Logout Form
+.cbLogoutForm {
+  &#login-form ul.unstyled {
+    list-style: none;
+    padding: 0;
+    margin: @t3-global-margin 0 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      width: 32px;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    a {
+      background-color: @gray-lighter;
+      border-radius: 2px;
+      color: @gray;
+      display: block;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      position: relative;
+      .transition(all 0.35s);
+
+      &:hover, &:focus, &:active {
+        background-color: @link-hover-color;
+        color: @white;
+      }
+
+      sup {
+        display: inline-block;
+        font-weight: normal;
+        line-height: 13px;
+        padding-left: 4px;
+        padding-right: 4px;
+        position: absolute;
+        background: @red;
+        color: @white;
+        z-index: 2;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.section-sign .cbLogoutForm {
+  color: @text-color;
+  padding: (@t3-global-padding * 1.5) @t3-global-padding;
+  text-align: left;
+
+  .login-avatar,
+  .login-greeting,
+  .logout-button {
+    text-align: center;
+  }
+}
+
+.module-primary .cbLogoutForm {
+  background: @brand-primary;
+  text-align: center;
+
+  .login-avatar {
+    margin-top: @t3-global-margin;
+  }
+
+  .login-greeting {
+    color: @white;
+  }
+
+  .logout-button {
+    .btn {
+      .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+    }
+  }
+}
+
+// CB Login
+.com_comprofiler {
+  &.view-login {
+    .moduletable {
+      background: @white;
+      width: 400px;
+      margin: 0 auto;
+      
+      > h3 {
+        padding:(@t3-global-padding * 1.5) @t3-global-padding 0;
+        margin: 0;
+      }
+    }
+    .cbLoginForm {
+      color: @text-color;
+      padding: (@t3-global-padding * 1.5) @t3-global-padding;
+      text-align: left;
+      
+      #modlgn-remember {
+        top: 3px;
+      }
+      
+      #form-login-links {
+        li > a {
+          text-indent: -999em;
+          position: relative;
+          
+          &:after {
+            content: "";
+            display: block;
+            font-family: FontAwesome;
+            height: 32px;
+            width: 32px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-indent: 0;
+          }
+        }
+        
+        #form-login-forgot a:after {
+          content: "\f13e";
+        }
+        
+        #form-login-register a:after {
+          content: "\f044";
+        }
+      }
+    }
+  }
+}
+
+// PB Latest
+#mod_cbpblatest_a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    & + li {
+      padding-top: @t3-global-padding/2;
+      margin-top: @t3-global-margin/2;
+      border-top: 1px solid @t3-border-color;
+    }
+  }
+}
+
+// PB New Blog Entry
+.cbpbEditorContainer {
+  .pbCommentInput {
+
+     @media (max-width: @screen-xs-max) {
+      .cbpbEditorTexts td {
+        display: block;
+        padding: 5px 0;
+        width: 100%!important;
+
+        textarea {
+          width: 100%!important;
+        }
+      }
+    }
+  }
+}

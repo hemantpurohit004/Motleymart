@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="2.5" type="template" method="upgrade" client="site">
+	<name>Ja_Social_II</name>
+	<version>1.0.6</version>
+	<creationDate>22 November 2016</creationDate>
+	<author>JoomlArt.com</author>
+	<authorEmail>webmaster@joomlart.com</authorEmail>
+	<authorUrl>http://www.t3-framework.org</authorUrl>
+	<copyright>Copyright (C), J.O.O.M Solutions Co., Ltd. All Rights Reserved.</copyright>
+	<license>license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<t3>
+		<base>base-bs3</base>
+	</t3>
+	<description>
+		<![CDATA[
+		<div align="center">
+			<div class="alert alert-success" style="background-color:#DFF0D8;border-color:#D6E9C6;color: #468847;padding: 1px 0;">
+				<h3><a href="http://www.joomlart.com/joomla/templates/ja-social-ii">Responsive Joomla social template - JA Social II</a></h3>
+				<h4><a href="http://ja-social-ii.demo.joomlart.com/" title="">Demo</a> | <a href="http://www.joomlart.com/documentation/joomla-templates/ja-social-ii" title="">Document</a> | <a href="http://pm.joomlart.com/browse/JASOCIALII" title="">Changelog</a></h4>
+				<p>JA Social II is all new responsive Joomla template to build a social network for your community. Social II derives its name from JA Social I, one of our best Joomla social template for years. Social II is designed to help you create your own social network with Joomla. </p>
+				<p>Support both of the best Joomla extensions for social networks JomSocial, EasySocial. JA Social II is the ultimate ingredient for a successful community project. You can build a full fledged social media site with both style and functionality.</p>
+				<p>Moreover, JA Social II is not only a social media Joomla template but also a multipurpose responsive Joomla template. The template's custom styles and layouts allow you to create a beautiful layout with the power of JoomlArt Advanced Custom Modules extension. JA Social II also features Joomla blogging component - K2.</p>
+				<p>With T3 Framework and Bootstrap 3 at core, JA Social II is friendly and easy to customize. You can freely design the responsive Joomla template with MagicTheme, and Layout Configuration.</p>
+				<p>JA Social II supports RTL language layouts.</p>
+				<span style="color:#FF0000">Note: T3 blank requires T3 plugin to be installed and enabled.</span><p></p>
+				<p>Copyright 2004 - 2016 <a href='http://www.joomlart.com/' title='Visit Joomlart.com!'>JoomlArt.com</a>.</p>
+			</div>
+			<style>table.adminform{width: 100%;}</style>
+		</div>
+		]]>
+	</description>
+	<files>
+		<filename>component.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<filename>thememagic.xml</filename>
+		<filename>templateInfo.php</filename>
+		<filename>templateHook.php</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>error.php</filename>
+		<filename>offline.php</filename>
+		<folder>acm</folder>
+		<folder>etc</folder>
+		<folder>fonts</folder>
+		<folder>html</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>less</folder>
+		<folder>language</folder>
+		<folder>images</folder>
+		<folder>tpls</folder>
+	</files>
+	
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_ja_social_ii.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_ja_social_ii.sys.ini</language>
+	</languages>
+
+	<positions>
+		<position>languageswitcherload</position>
+		<position>head-search</position>
+		<position>mainnav</position>
+		<position>navhelper</position>
+		<position>breadcrumbs</position>
+		<position>off-canvas</position>
+		<position>sidebar-1</position>
+		<position>sidebar-2</position>
+		<position>mast-col</position>
+		<position>acm-features</position>
+		<position>contact-map</position>
+		<position>content-mass-top</position>
+		<position>es-dashboard-sidebar-bottom</position>
+		<position>es-users-sidebar-bottom</position>
+		<position>head-login</position>
+		<position>head-menu</position>
+		<position>js_side_frontpage</position>
+		<position>js_side_frontpage_top</position>
+		<position>masthead</position>
+		<position>section</position>
+		<position>testimonials-inner</position>
+		<position>footer</position>
+		<position>footer-0</position>
+		<position>footer-1</position>
+		<position>footer-2</position>
+		<position>footer-3</position>
+		<position>debug</position>
+	</positions>
+
+	<config>
+		<fields name="params" addfieldpath="/plugins/system/t3/includes/depend">
+
+			<fieldset name="theme_params" label="T3_THEME_LABEL" description="T3_THEME_DESC">
+	        <field name="theme_params_logolink" type="t3depend" function="@group">
+	            <option for="logolink" value="page">
+	                logolink_id
+	            </option>
+	        </field>
+
+	        <field name="logolink" type="list" default="default"
+	               label="T3_THEME_LOGOLINK_LABEL"
+	               description="T3_THEME_LOGOLINK_DESC">
+	            <option value="default">T3_THEME_LOGOLINK_DEFAULT</option>
+	            <option value="page">T3_THEME_LOGOLINK_PAGE</option>
+	        </field> 
+	         
+	        <field name="logolink_id" type="text" default=""
+	               label="T3_THEME_LOGOLINK_ID_LABEL"
+	               description="T3_THEME_LOGOLINK_ID_DESC"/>
+	        <field name="theme_params_default" type="t3depend" function="@group">
+    				<option for="bodybackground" value="image">
+    					bodybackgroundimage
+    				</option>
+    				<option for="logotype" value="image">
+    					logoimage, logoimage_sm, enable_logoimage_sm
+    				</option>
+    				<option for="enable_logoimage_sm" value="1">
+    					logoimage_sm
+    				</option>
+    			</field>
+    			<field name="bodybackground" type="list" default="image"
+          						 label="T3_THEME_BODY_BACKGROUND_LABEL"
+          						 description="T3_THEME_BODY_BACKGROUND_DESC">
+          				<option value="default">T3_THEME_BODY_BACKGROUND_DEFAULT</option>
+          				<option value="image">T3_THEME_BODY_BACKGROUND_IMAGE</option>
+          			</field>   
+          <field name="bodybackgroundimage" type="t3media" default=""
+					 label="T3_THEME_BODY_BACKGROUND_IMAGE_LABLE"
+					 description="T3_THEME_BODY_BACKGROUND_IMAGE_DESC"/> 
+	    </fieldset>
+			
+		</fields>
+	</config>
+
+	<updateservers>
+		<server type="collection">http://update.joomlart.com/service/tracking/list.xml</server>
+	</updateservers>
+
+</extension>

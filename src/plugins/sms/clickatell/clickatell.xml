@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="sms" method="upgrade">
+	<name>PLG_CLICKATELL_NAME</name>
+	<author>Techjoomla</author>
+	<creationDate>19th March 2016</creationDate>
+	<copyright>(C)techjoomla.com</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>contact@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<version>2.9.8</version>
+	<isapplication>true</isapplication>
+	<description>PLG_SMS_CLICKATELL_DESC</description>
+	<files>
+		<file plugin="clickatell">clickatell.php</file>
+		<folder>clickatell</folder>
+	</files>
+
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_sms_clickatell.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_sms_clickatell.ini</language>
+	</languages>
+
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic" label="PLG_CLICKATELL_API_PARAMETER" addfieldpath="/plugins/sms/clickatell/clickatell/element/pathapi">
+				<field name="pathapi_clickatell" type="pathapi" label="PLG_CLICKATELL_API_GET_KEY" description="PLG_CLICKATELL_API_GET_KEY_DESC" />
+				<field name="appUsername" type="text" default="" label="PLG_CLICKATELL_USER_NAME" description="PLG_CLICKATELL_API_SECRETE_KEY_DESC" />
+				<field name="appPassword" type="text" default="" label="PLG_CLICKATELL_API_PASSWORD_KEY" description="PLG_CLICKATELL_API_PASSWORD_KEY_DESC" />
+				<field name="appkey" type="text" default="" label="PLG_CLICKATELL_API_KEY" description="PLG_CLICKATELL_API_KEY_DESC" />
+				<field name="from" type="text" default="" label="PLG_CLICKATELL_FROM_CONTACT" description="PLG_CLICKATELL_FROM_CONTACT_DESC" />
+				<field name="mobileoriginated" type="radio" class="btn-group" default="0" label="PLG_CLICKATELL_MO" description="PLG_CLICKATELL_MO_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

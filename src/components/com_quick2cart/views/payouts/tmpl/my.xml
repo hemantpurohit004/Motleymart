@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="My Payouts">
+		<message>
+			<![CDATA[My Payouts]]>
+		</message>
+	</layout>
+	<state>
+		<name>My Payouts</name>
+		<description>My Payouts</description>
+		<params>
+		</params>
+	</state>
+</metadata>

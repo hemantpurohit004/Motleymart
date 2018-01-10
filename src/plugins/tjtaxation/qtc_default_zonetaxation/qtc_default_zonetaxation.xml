@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="tjtaxation" method="upgrade">
+
+	<name>Taxation - Default Zone based Taxation</name>
+
+	<author>TechJoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<creationDate>6th July 2017</creationDate>
+	<version>2.9.6</version>
+
+	<description>This is Default Zone based Taxation plugin which lets you configure and apply different tax rates based on geographic zones you create.</description>
+
+	<files>
+		<filename plugin="qtc_default_zonetaxation">qtc_default_zonetaxation.php</filename>
+		<filename>index.html</filename>
+		<folder>qtc_default_zonetaxation</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB/en-GB.plg_tjtaxation_qtc_default_zonetaxation.ini</language>
+	</languages>
+
+</extension>

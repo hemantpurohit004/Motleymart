@@ -1,0 +1,95 @@
+/*Filter Module*/
+.qtcfiltername {
+	font-weight:600;
+}
+.qtcfilterlist {
+	list-style:none;
+	padding: 0;
+}
+.qtcfilteritem input{
+	float:left;
+	margin:5px 5px 0 0;
+
+}
+/*Stylish Checkbox*/
+#qtc-filters_stylishcheckbox .qtcfilteritem {
+	position: relative;
+	cursor: pointer;
+	text-align:left;
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"],
+#qtc-filters_size .qtcfilteritem input[type="checkbox"] {
+	opacity:0;
+	height:100%;
+	width: 100%;
+	z-index: 20000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	cursor: pointer;
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"]+label {
+	position: relative;
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"].bs3+label:before {
+	color: #333;
+	content: "\e157";
+	margin-right:5px;
+	font-family: 'Glyphicons Halflings';
+	font-weight: 400;
+	line-height: 1;
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"].bs3:checked+label:before {
+	color: #5cb85c;
+	content: "\e067";
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"].bs2+label:before {
+	height:16px;
+	width:16px;
+	background-position:50% 50%;
+	background-repeat:no-repeat;
+	background-size:13px 13px;
+	background-image:url('../images/check-unchecked.png');
+	display:inline-block;
+	content: '';
+	margin-bottom: -2px;
+	position:relative;
+}
+#qtc-filters_stylishcheckbox .qtcfilteritem input[type="checkbox"].bs2:checked+label:before {
+	background-size:16px 16px;
+	background-image:url('../images/check-checked.png');
+}
+#qtc-filters_size li.qtcfilteritem {
+	margin: 0 4px 4px 0;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	padding: 0;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	transition: all .2s;
+	position: relative;
+ }
+#qtc-filters_size .qtcfilteritem input[type="checkbox"]+label {
+	color: #999;
+	border: 1px solid #999;
+	background: #fff;
+	border-radius: 0px;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 0 5px;
+	margin: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+#qtc-filters_size .qtcfilteritem input[type="checkbox"]:checked+label {
+	color: #5cb85c;
+	border: 1px solid #5cb85c;
+	font-weight: bold;
+}
+
+.filterhrizontal {
+	display:inline-block;
+	margin-right:50px;
+}

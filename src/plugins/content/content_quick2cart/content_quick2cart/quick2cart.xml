@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- $Id: .xml 20156 2011-01-07 13:10:16Z eddieajau $ -->
+<form>
+	<fields name="attribs" addfieldpath="/plugins/content/content_quick2cart/content_quick2cart/fields">
+		<fieldset name="qtc"
+			label="PLG_QTC_SLIDER_LABEL"				
+		>
+			<field
+				name="qtc_options"
+				type="quick2cart"
+				id="qtc_options"
+				description="PLG_QTC_ITEM_OPTION_DESC"	
+				label="PLG_QTC_ITEM_OPTION"
+			/>
+	
+		</fieldset>
+	</fields>
+</form>

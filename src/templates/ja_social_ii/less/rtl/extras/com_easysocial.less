@@ -1,0 +1,138 @@
+/**
+ * $JA#COPYRIGHT$
+ */
+
+// VARIABLES & MIXINS
+// ------------------
+@import "../vars.less"; // Modify this for custom colors, font-sizes, etc
+
+// --------------------
+// EASYSOCIAL 
+// --------------------
+html {
+	
+	div#fd .input-group-addon:first-child {
+		border-left: 0;
+		border-right: 1px solid @t3-border-color;
+	}
+	
+	div#fd.es .es-widget .es-widget-tab > li + li {
+		padding: 0 8px 0 0;
+		margin: 0 4px 0 0;
+	}
+	
+	body div#fd.es .es-content-wrap.ml-20, 
+	body div#fd.es .col-md-12.ml-20 {
+		margin-left: 0 !important;
+	}
+	
+	div#fd.es .es-action-wrap > ul > li {
+		float: right;
+	}
+	
+	div#fd.es .es-action-feedback > li {
+    margin-left: 12px;
+    margin-right: 0;
+	}
+	
+	div#fd.es .es-comments-form .es-form-attach {
+		left: 0;
+		right: auto;
+		bottom: 6px;
+	}
+	
+	&.view-albums {
+		div#fd .pagination > li {
+			display: inline-block;
+			margin-right: -3px;
+		
+			&:first-child > a, 
+			&:first-child > span {
+				border-radius: 0 4px 4px 0;
+			}
+		
+			&:last-child > a, 
+			&:last-child > span {
+				border-radius: 4px 0 0 4px;
+			}
+		}
+	}
+	
+	div#fd.es {
+		// event
+		.es-profile-header-calendar {
+			left: inherit;
+			right: 10px;
+		}
+
+		//search top bar 
+		.es-toolbar .fd-navbar-search {
+			.fa-search {
+				left: inherit;
+				right: 16px;
+			}
+
+			.search-query {
+				padding: 0 36px 0 14px;
+			}
+		}
+
+		.es-navbar-search-filter {
+			left: 0;
+			right: inherit;
+		}
+
+		.es-navbar-dropdown {
+			left: -1px !important;
+			right: inherit !important;
+
+			&::after {
+				left: 10px !important;
+    			right: inherit !important;	
+			}
+
+			li {
+				float: right;
+
+				.es-checkbox > label {
+					padding-left: 8px!important;
+					padding-right: 40px!important;
+
+					&::before , &::after {
+						margin-left: inherit;
+						margin-right: -20px;
+						left: inherit;
+						right: 35px;
+					}
+				}
+			}
+
+		}
+
+		.es-navbar-dropdown-head .es-filter-helper .col-cell {
+			padding-left: 9px;
+			padding-right: 0;
+		}
+
+		.es-navbar-dropdown-head .es-filter-helper .col-cell + .col-cell {
+			padding-left: 0;
+			padding-right: 10px;
+
+			&::before {
+				left: inherit;
+				right: 0;
+			}
+		}
+
+		&.w320 {
+			.es-story-panel-button {
+				padding-left: 0;
+				padding-right: 15px;
+				span {
+					padding-left: 0;
+					padding-right: 5px;				
+				}
+			}
+		}
+	}
+}

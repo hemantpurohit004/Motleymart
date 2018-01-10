@@ -1,0 +1,42 @@
+/**
+ * $JA#COPYRIGHT$
+ */
+
+// VARIABLES & MIXINS
+// ------------------
+@import "../vars.less"; // Modify this for custom colors, font-sizes, etc
+
+// --------------------
+// JA SOCIAL II CUSTOM 
+// --------------------
+html {
+
+	.joms-ribbon__wrapper {
+		right: 0;
+		left: auto;
+	}
+	
+	.joms-ribbon {
+    @media (min-width: @screen-xs-min) {
+      transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+	}
+
+	.joms-comment__reply {
+		.joms-icon--add  {
+			left: @t3-global-padding+10px;
+			right: inherit!important;
+		}
+	}
+
+	.joms-online a::after {
+		left: 3px;
+		right: inherit;
+	}
+
+  .mfp-close {
+    right: auto;
+    left: 0;
+  }
+}

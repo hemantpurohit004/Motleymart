@@ -1,0 +1,114 @@
+/**
+ * $JA#COPYRIGHT$
+ */
+
+// ------------------------------------
+// FEATURES INTRO STYLE 6
+// ------------------------------------
+.acm-features {
+	&.style-3 {
+    margin-right: 0;
+    margin-left: 0;
+
+    .col-md-6 {
+      padding: 0;
+    }
+
+    // Features Image
+    .features-image {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+    
+    // Features Content
+    .features-content {
+      padding: @grid-gutter-width;
+      max-width: 988px;
+
+      // Control screen medium screen
+      @media screen and (min-width: @screen-md-min) {
+      }
+
+      // Control large screen / wide desktop
+      @media screen and (min-width: @screen-lg-min) {
+        padding: (@grid-gutter-width * 4);
+      }
+
+      // Features top
+      .ft-top {
+        h3 {
+          font-size: @font-size-h3;
+          margin-top: @t3-global-margin / 2;
+          margin-bottom: @t3-global-margin / 2;
+          // Control screen mobile
+          @media screen and (min-width: @screen-sm-min) {
+            font-size: @font-size-h2;
+          }
+        }
+
+        .lead {
+          line-height: 2;
+          font-size: @font-size-large;
+          // Control screen medium screen
+          @media screen and (min-width: @screen-md-min) {
+          }
+          // Control large screen / wide desktop
+          @media screen and (min-width: @screen-lg-min) {
+          }
+        }
+      }
+
+      // Features bottom
+      .ft-bottom {
+
+        .col-sm-4 {
+          margin-top: @t3-global-margin;
+          padding-left: @t3-global-padding;
+          padding-right: @t3-global-padding;
+        }
+
+        .icon {
+          font-size: 32px;
+          span {
+            border: 1px solid @gray;
+            border-radius: 50%;
+            display: inline-block;
+            height: 72px;
+            line-height: 72px;
+            text-align: center;
+            width: 72px;
+          }
+        }
+
+        // Control screen mobile
+        @media screen and (max-width: @screen-xs-max) {
+          .col-sm-4 {
+            margin-bottom: @t3-global-margin;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        // Title
+        h4 {
+          font-size: @font-size-large + 2;
+          font-weight: @font-weight-bold;
+          margin-top: @t3-global-margin;
+          margin-bottom: @t3-global-margin / 2;
+        }
+
+        // Description
+        .description {
+        }
+      }
+    }
+  }
+}
+
+

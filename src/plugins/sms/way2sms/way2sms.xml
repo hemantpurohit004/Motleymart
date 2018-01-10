@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="sms" method="upgrade">
+	<name>PLG_WAY2SMS_NAME</name>
+	<author>Techjoomla</author>
+	<creationDate>26th September 2017</creationDate>
+	<copyright>(C)techjoomla.com</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>contact@techjoomla.com</authorEmail>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<version>1.0.0</version>
+	<isapplication>true</isapplication>
+	<description>PLG_SMS_WAY2SMS_DESC</description>
+	<files>
+		<file plugin="way2sms">way2sms.php</file>
+	</files>
+
+	<languages folder="language/en-GB">
+		<language tag="en-GB">en-GB.plg_sms_way2sms.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_sms_way2sms.ini</language>
+	</languages>
+
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="way2sms_username" type="text" label="PLG_WAY2SMS_USERNAME" description="PLG_WAY2SMS_USERNAME_DESC" />
+				<field name="way2sms_password" type="text" label="PLG_WAY2SMS_PASSWORD" description="PLG_WAY2SMS_PASSWORD_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>

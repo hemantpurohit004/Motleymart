@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <form>
+	<fields name="filter" addfieldpath="/administrator/components/com_ecomm/models/fields">
+		<field
+			name="search"
+			type="text"
+			label="search"
+			hint="search"
+			class="js-stools-search-string" 
+			/>
+		<field
+				name="duration"
+				type="subscriptionslist"
+				label="Duration"
+				description="Choose subscription plan"
+				default=""
+				onchange="this.form.submit();"
+				>
+				<option >Choose subscription plan</option>
+		</field>
+	</fields>
+</form>

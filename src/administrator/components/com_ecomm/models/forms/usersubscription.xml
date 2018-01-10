@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+				name="user_id"
+				type="user"
+				label="User"
+				description="Choose the user"
+				size="50"
+				required="true"
+				/>
+		<field
+				name="subscription_id"
+				type="subscriptionslist"
+				label="Subscription Plan"
+				description="Choose subscription plan"
+				required="true"
+				/>
+		<field
+				name="purchase_date"
+				type="calendar"
+				label="Purchase Date"
+				description="Choose the purchase date"
+				size="50"
+				required="true"
+				/>
+		<field
+				name="expiration_date"
+				type="calendar"
+				label="Expiration Date"
+				description="Choose the expiration date"
+				size="50"
+				/>
+		<field
+				name="state"
+				type="hidden"
+				default="0"
+				/>
+		<field
+				name="id"
+				type="hidden"
+				/>
+	</fieldset>
+</form>

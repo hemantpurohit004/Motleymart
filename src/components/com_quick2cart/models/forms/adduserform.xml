@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+	<field name="id" type="text" default="0" label="COM_QUICK2CART_FORM_LBL_CUSTOMER_ADDRESS_ID" readonly="true" class="readonly" description="JGLOBAL_FIELD_ID_DESC" />
+	<field name="name" type="text" label="QTC_CUST_NAME" filter="string" required="true" description="QTC_CUST_NAME_DESC">
+	</field>
+	<field name="username" type="text" label="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_LBL" description="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_DESC" class="validate-username" filter="username" message="COM_USERS_REGISTER_USERNAME_MESSAGE" required="true" validate="username">
+	</field>
+	<field name="password1" label="COM_QUICK2CART_CHECKOUT_PASSWORD" description="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_PASSWORD_DESC" type="password" autocomplete="off" class="validate-password" field="password1" filter="raw" size="30" validate="password" required="true">
+	</field>
+	<field name="password2" type="password" autocomplete="off" class="validate-password" field="password1" filter="raw" size="30" validate="equals" required="true" label="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_CNF_PASSWORD_LBL" description="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_CNF_PASSWORD_DESC" message="COM_USERS_PROFILE_PASSWORD1_MESSAGE">
+	</field>
+	<field name="email" type="email" filter="string" required="true" size="30" unique="true" validate="email" label="QTC_BILLIN_EMAIL" description="COM_QUICK2CART_CREATE_ORDER_ADD_NEW_CLIENT_EMAIL_DESC">
+	</field>
+  </fieldset>
+</form>

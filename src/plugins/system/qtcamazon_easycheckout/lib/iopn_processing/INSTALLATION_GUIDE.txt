@@ -1,0 +1,52 @@
+INSTALLATION INSTRUCTIONS:
+CHECKOUT BY AMAZON INSTANT ORDER PROCESSING NOTIFICATION SAMPLE CODE FOR PHP
+Copyright: 2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+*-*-**-***-*****-********-*************
+
+*-*-**-***-*****-********-*************
+PREREQUISITES
+*-*-**-***-*****-********-*************
+Please have the following software packages available on your system
+before running the demo.
+
+ PHP 3.0 or above
+ 
+You will also need a working Apache (2.0 or greater)
+installation < http://httpd.apache.org/ >.
+ 
+
+*-*-**-***-*****-********-*************
+FRESH INSTALL
+*-*-**-***-*****-********-*************
+1. Install Apache.
+
+2. Download Checkout by Amazon Instant Order Processing Notification sample code.
+
+3. Unzip the code. 
+
+4. Create a folder <ROOT> under your document root and copy the unzipped code in <ROOT> directory. Then copy the CBAIOPN.php and config.php from the source directory 
+   to the <ROOT> directory.   
+
+5.  Update the merchant.properties file in prop folder with your (AWSAccessKeyId,AWSSecretKey) pairs. You can get this from
+    http://sellercentral.amazon.com > Integration > Access Key. You can change your configuration related to "signed carts" in config.php by setting
+    the constant variable 'SUPPORT_SIGNED_CARTS' to 'true' or 'false', default setting is 'true'.
+
+6. Give write permission for log folder and in particular cbaiopn.log file. If the file is not present, create it.
+
+7. Start the apache server and Navigate to https://<yourwebserver.com>/<ROOT>/CBAIOPN.php.
+
+8. Give your merchant url or integrator url (https://<yourwebserver.com>/<ROOT>/CBAIOPN.php) in the Checkout Pipeline
+    Settings window in the Seller Central. You can also refer to Instant Order Payment Notification API documentation for more detailed information
+    on Checkout By Amazon Instant Order Payment Notification and related settings at merchant endpoint.
+
+9. Once you are done with the above settings, you should be able to receive notifications and it will be logged into cbaiopn.log file.
+
+
+*-*-**-***-*****-********-*************
+How to Debug
+*-*-**-***-*****-********-*************
+1. You have log folder which contains cbaiopn.log
+2. CBAIOPNProcessor.php file logs all the request that you receive from amazon server.
+3. When your Instant Order Processing Notification is not working as expected, please provide the request from the log in the amazon seller central forum.
+
+

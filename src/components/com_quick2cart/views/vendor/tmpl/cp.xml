@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Quick2Cart My Dashboard" option="View" >
+		 <message><![CDATA[Store Dashboard for Quick2Cart]]></message>
+
+	</layout>
+	<state>
+		<name>Quick2Cart Vendor Dashboard</name>
+		<description>Vendor Store Dashboard for Quick2Cart</description>
+		<params>
+		</params>
+	</state>
+
+</metadata>
+

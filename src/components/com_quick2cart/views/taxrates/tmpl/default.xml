@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Store-Tax rates" option="View" >
+		<message><![CDATA[Store-Tax rates]]></message>
+	</layout>
+	<state>
+		<name>Store-Tax rates</name>
+		<description>Store-Tax rates</description>
+		<params>
+		</params>
+	</state>
+</metadata>
+
+
+
+
