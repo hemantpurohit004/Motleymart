@@ -35,7 +35,7 @@ class plgPaymentAdaptivePaypalHelper
 
 		JLog::addLogger(
 			array(
-				'text_file' => $logdata['JT_CLIENT'] . '_' . $name.'.log',
+				'text_file' => $logdata['JT_CLIENT'] . '_' . $name.'.php',
 				'text_entry_format' => $options
 			),
 			JLog::INFO,
@@ -106,7 +106,7 @@ class plgPaymentAdaptivePaypalHelper
       // script.
        // append ipn command
       // open the connection to paypal
-      $fp = fsockopen($url_parsed['host'],"80",$err_num,$err_str,30); 
+      $fp = fsockopen($url_parsed['host'],"80",$err_num,$err_str,30);
      // $fp = fsockopen ($this->paypal_url, 80, $errno, $errstr, 30);
 
       if(!$fp) {

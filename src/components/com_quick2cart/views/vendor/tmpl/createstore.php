@@ -148,7 +148,13 @@ $qtcshiphelper = new qtcshiphelper;
 
 		if (vanityCheck)
 		{
-			var newvanityURL=document.qtcCreateStoreForm.storeVanityUrl.value;
+			var newvanityURL = techjoomla.jQuery('#storeVanityUrl').value;
+
+			if (typeof newvanityURL === 'undefined')
+			{
+				newvanityURL = '';
+			}
+
 			var n = newvanityURL.replace(/([0-9]*)(:)/i,"$1-");
 			techjoomla.jQuery('#store_alias span').html(n);
 			techjoomla.jQuery('#store_alias').show();
@@ -206,41 +212,43 @@ $qtcshiphelper = new qtcshiphelper;
 	function ckUniqueVanityURL()
 	{
 		var editstore="<?php echo $store_edit;?>";
-		var newvanityURL=document.qtcCreateStoreForm.storeVanityUrl.value;
+		var newvanityURL = techjoomla.jQuery('#storeVanityUrl').value;
+
+		if (typeof newvanityURL === 'undefined')
+		{
+			newvanityURL = '';
+		}
+
 		var oldVanity="<?php echo $store_vanity;?>";
 
 		var status = false;
-		/*if not a edit task and not empty sku value then only call ajax*/
-		/*if (editstore==0 && skuval)*/
-		if (newvanityURL)
-		{
-			if (oldVanity != newvanityURL)
-			{
-				techjoomla.jQuery.ajax({
-					url: '?option=com_quick2cart&task=vendor.ckUniqueVanityURL&vanityURL='+newvanityURL+'&tmpl=component',
-					cache: false,
-					type: 'GET',
-					async:false,
-					success: function(data)
-					{
-						/* already exist*/
-						if (data == '1')
-						{
-							status = false;
-						}
-						else
-						{
-							status = true;
-						}
-					}
-				});
 
-				return status;
-			}
-			else
-			{
-				return true;
-			}
+		if (oldVanity != newvanityURL)
+		{
+			techjoomla.jQuery.ajax({
+				url: '?option=com_quick2cart&task=vendor.ckUniqueVanityURL&vanityURL='+newvanityURL+'&tmpl=component',
+				cache: false,
+				type: 'GET',
+				async:false,
+				success: function(data)
+				{
+					/* already exist*/
+					if (data == '1')
+					{
+						status = false;
+					}
+					else
+					{
+						status = true;
+					}
+				}
+			});
+
+			return status;
+		}
+		else
+		{
+			return true;
 		}
 	}
 

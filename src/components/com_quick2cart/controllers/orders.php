@@ -288,12 +288,14 @@ class Quick2cartControllerOrders extends quick2cartController
 		$app     = JFactory::getApplication();
 		$jinput  = $app->input;
 
+		// Get order id and store id
+		$orderid = $jinput->get('orderid', '', 'INT');
+		$store_id = $jinput->get('store_id', '', 'INT');
+
 		$lang = JFactory::getLanguage();
 		$lang->load('com_quick2cart', JPATH_SITE);
 		$storeHelper = new storeHelper;
-		$storeHelper->generateInvoicePDF();
-
-		$orderid = $jinput->get("orderid");
+		$storeHelper->generateInvoicePDF($orderid, $store_id);
 
 		// IF not multi-vendor then redirect to my order list layout
 		if (empty($multivendor_enable))

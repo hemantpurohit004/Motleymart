@@ -252,6 +252,10 @@
 
 		<field name="ProductTitleLimit" type="text" default="15" label="QTC_PROD_TITLE_LIMIT" description="QTC_PROD_TITLE_LIMIT_DES" />
 
+		<field name="show_addtocart_on_pin" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_ADD_TO_CART_PIN_DESC" label="COM_QUICK2CART_ADD_TO_CART_PIN_LBL" >
+			<option value="1">COM_QTC_YES</option>
+			<option value="0">COM_QTC_NO</option>
+		</field>
 
 		<field name="who_bought" class="btn-group" type="radio" default="0" description="COM_QUICK2CART_WHO_BOUGHT_DESC" label="COM_QUICK2CART_WHO_BOUGHT_LBL" >
 			<option value="1">COM_QTC_YES</option>

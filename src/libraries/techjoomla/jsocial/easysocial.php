@@ -54,34 +54,54 @@ class JSocialEasysocial implements JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getProfileUrl(JUser $user)
+	public function getProfileUrl(JUser $user, $relative = false)
 	{
 		$user = Foundry::user($user->id);
+		$link = $user->getPermalink('', true);
 
-		return $link = JRoute::_($user->getPermalink('', true));
+		if ($relative)
+		{
+			$link = str_replace(JUri::root(), '', $link);
+		}
+		else
+		{
+			$link = JRoute::_($link);
+		}
+
+		$link = str_replace('/administrator/', '/', $link);
+
+		return $link;
 	}
 
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar(JUser $user, $gravatar_size = '')
+	public function getAvatar(JUser $user, $gravatar_size = '', $relative = false)
 	{
 		$user   = Foundry::user($user->id);
 		$uimage = $user->getAvatar();
+
+		if ($relative)
+		{
+			$uimage = str_replace(JUri::root(), '', $uimage);
+		}
 
 		return $uimage;
 	}
@@ -568,6 +588,35 @@ class JSocialEasysocial implements JSocial
 		if (!$table->store())
 		{
 			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId)
+	{
+		$path = JPATH_ADMINISTRATOR . '/components/com_easysocial/includes/easysocial.php';
+		JLoader::register('ES', $path, true);
+		$esUser = ES::user($userId);
+
+		foreach ($fieldsArray as $fieldKey => $fieldValue)
+		{
+			$state = $esUser->setFieldValue($fieldKey, $fieldValue);
+
+			if ($state != 1)
+			{
+				return json_encode($state);
+			}
 		}
 
 		return true;

@@ -13,7 +13,7 @@ defined('_JEXEC') or die();
 jimport('joomla.form.formvalidator');
 jimport('joomla.html.pane');
 jimport('joomla.html.parameter');
-JHtml::_('formbehavior.chosen', 'select');
+//~ JHtml::_('formbehavior.chosen', 'select');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.modal');

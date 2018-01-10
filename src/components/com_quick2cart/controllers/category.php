@@ -37,7 +37,7 @@ class Quick2cartControllerCategory extends quick2cartController
 	{
 		$comquick2cartHelper = new comquick2cartHelper;
 
-		$this->my_products_itemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=category&layout=my');
+		$this->my_products_itemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&view=vendor&layout=cp');
 
 		parent::__construct($config);
 	}

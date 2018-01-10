@@ -1451,7 +1451,7 @@ class EcommService
      * Function to get all the categories
      * return array containig status as true and the categories
      */
-    public function ecommGetAllCategories($level = 1)
+    public function ecommGetAllCategories($level = 2)
     {
         // Clear data
         $this->returnData            = array();

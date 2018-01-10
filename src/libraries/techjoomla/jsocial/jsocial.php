@@ -33,26 +33,29 @@ interface JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getProfileUrl(JUser $user);
+	public function getProfileUrl(JUser $user, $relative = false);
 
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar(JUser $user, $gravatar_size = '');
+	public function getAvatar(JUser $user, $gravatar_size = '', $relative = false);
 
 	/**
 	 * The function to get friends of a User
@@ -201,5 +204,15 @@ interface JSocial
 	 */
 	public function advPushActivity($streamOption);
 
-
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId);
 }

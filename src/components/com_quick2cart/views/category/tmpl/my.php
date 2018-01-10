@@ -281,7 +281,7 @@ $store_details = $this->store_details;
 									<td class="q2c_width_15 hidden-xs small">
 										<?php
 											$catname = $comquick2cartHelper->getCatName($row->category);
-											echo !empty($catname) ? $catname : $row->category;
+											echo !empty($catname) ? JText::_(trim($catname)) : $row->category;
 										 ?>
 									</td>
 

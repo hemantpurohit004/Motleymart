@@ -82,7 +82,7 @@ $modules  = JModuleHelper::getModules($com_params->get('product_filter', 'tj-fil
 					<div class="">
 						<legend>
 							<?php
-							echo JText::_($this->productPageTitle);
+							echo JText::_(trim($this->productPageTitle));
 							?>
 						</legend>
 					</div>
@@ -105,11 +105,9 @@ $modules  = JModuleHelper::getModules($com_params->get('product_filter', 'tj-fil
 								<button type="button" onclick="this.form.submit();" class="btn btn-default "  title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">
 									<i class="<?php echo QTC_ICON_SEARCH; ?>"></i>
 								</button>
-<!--
 								<button onclick="document.id('filter_search').value='';this.form.submit();" type="button" class="btn btn-default"  title="<?php echo JText::_('JSEARCH_FILTER_CLEAR');?>">
 									<i class="<?php echo QTC_ICON_REMOVE; ?>"></i>
 								</button>
--->
 							</span>
 						</div>
 					</div>

@@ -9,6 +9,8 @@
 
 defined('JPATH_BASE') or die;
 jimport('joomla.filesystem.file');
+jimport('techjoomla.jsocial.helper');
+
 /**
  * Interface to handle Social Extensions
  *
@@ -30,7 +32,7 @@ class JSocialJoomla implements JSocial
 
 	private $gravatar_rating = 'g';
 
-	private $gravatar_secure = false;
+	private $gravatar_secure = true;
 
 	/**
 	 * The constructor
@@ -45,15 +47,17 @@ class JSocialJoomla implements JSocial
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar (JUser $user , $gravatar_size = 50)
+	public function getAvatar (JUser $user , $gravatar_size = 50, $relative = false)
 	{
 		$email = $user->email;
 		$url = ($this->gravatar_secure) ? $this->gravatar_surl : $this->gravatar_url;
@@ -78,17 +82,33 @@ class JSocialJoomla implements JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getProfileUrl(JUser $user)
+	public function getProfileUrl(JUser $user, $relative = false)
 	{
-		$profileUrl = JUri::root() . 'index.php?option=com_users&view=profile&userid=' . $user->id;
+		$link = 'index.php?option=com_users&view=profile';
+		$itemid = JSocialHelper::getItemId($link);
 
-		return JRoute::_($profileUrl, false);
+		if ($relative)
+		{
+			$link = 'index.php?option=com_users&view=profile&userid=' . $user->id;
+		}
+		else
+		{
+			$link = JRoute::_('index.php?option=com_users&view=profile&userid=' . $user->id . '&Itemid=' . $itemid);
+
+			if (strpos($link, JUri::root()) === false)
+			{
+				$link = JUri::root() . substr($link, strlen(JUri::base(true)) + 1);
+			}
+		}
+
+		return $link;
 	}
 
 	/**
@@ -240,6 +260,7 @@ class JSocialJoomla implements JSocial
 	 *
 	 * @param   ARRAY   $groupId      Data
 	 * @param   OBJECT  $groupmember  User object
+	 * @param   INT     $state        User state
 	 *
 	 * @return  void
 	 *
@@ -259,6 +280,20 @@ class JSocialJoomla implements JSocial
 	 * @since   1.0
 	 */
 	public function advPushActivity($streamOption)
+	{
+	}
+
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId)
 	{
 	}
 }

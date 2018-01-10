@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 $params = JComponentHelper::getParams('com_quick2cart');
 $currentBSViews = $params->get("currentBSViews","bs2","STRING");
 $comquick2cartHelper = new comquick2cartHelper;
-
+$q2cbaseUrl = $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=category&layout=default');
 $checkout = JUri::root().substr($comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=cartcheckout',false),strlen(JUri::base(true))+1);
 
 $data = new stdclass;
@@ -58,7 +58,7 @@ foreach ($this->cart as $citem)
 		<hr>
 		<div class="form-actions" id="qtc_formactions">
 			<a class="btn btn-success" onclick="window.parent.document.location.href='<?php echo $checkout; ?>';" ><?php echo JText::_('QTC_CHKOUT'); ?></a>
-			<a class="btn btn-primary" onclick="qtcCartContinueBtn()" ><?php echo JText::_('QTC_BACK'); ?></a>
+			<a class="btn btn-primary" onclick="qtcCartContinueBtn('<?php echo $q2cbaseUrl;?>')" ><?php echo JText::_('QTC_BACK'); ?></a>
 		</div>
 		<input type="hidden" name="task" id="task" value="cartcheckout.qtc_autoSave" />
 	</form>
@@ -70,7 +70,7 @@ $AllProductItemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2
 $allProdLink = JUri::root() . substr(JRoute::_('index.php?option=com_quick2cart&view=category&Itemid=' . $AllProductItemid, false), strlen(JUri::base(true)) + 1);
 ?>
 <script>
-	function qtcCartContinueBtn()
+	function qtcCartContinueBtn(q2cBaseUrl)
 	{
 		var popup = true;
 		try
@@ -93,6 +93,7 @@ $allProdLink = JUri::root() . substr(JRoute::_('index.php?option=com_quick2cart&
 		}
 		else
 		{
+			window.parent.location = q2cBaseUrl;
 			window.parent.SqueezeBox.close();
 		}
 	}

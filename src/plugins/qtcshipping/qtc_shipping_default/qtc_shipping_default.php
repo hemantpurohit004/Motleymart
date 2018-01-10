@@ -25,7 +25,7 @@ $lang->load('plg_qtcshipping_qtc_shipping_default', JPATH_ADMINISTRATOR);
  * @subpackage  site
  * @since       1.0
  */
-class PlgQtcshippingqtc_Shipping_Sefault extends JPlugin
+class PlgQtcshippingqtc_Shipping_Default extends JPlugin
 {
 	/**
 	 * [Gives applicable Shipping charges.]
@@ -35,7 +35,7 @@ class PlgQtcshippingqtc_Shipping_Sefault extends JPlugin
 	 *
 	 * @return  [type]         [it should return array that contain [charges]=>>shipcharges [DetailMsg]=>after_ship_totalamt or return empty array]
 	 */
-	function qtcshipping($amt, $vars='')
+	public function qtcshipping($amt, $vars='')
 	{
 		$shipping_limit = $this->params->get('shipping_limit');
 		$return = array();

@@ -779,6 +779,7 @@ class Quick2cartModelAttributes extends JModelLegacy
 		$client = $curr_post->get('client', '', 'STRING');
 		$itemId = $this->getitemid($pid, $client);
 		$alias = trim($alias);
+		$db = JFactory::getDbo();
 
 		if (empty($alias))
 		{

@@ -7,8 +7,8 @@
 	<copyright>Copyright(C)2012-15 TechJoomla</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>extensions@techjoomla.com</authorEmail>
-	<creationDate>6th July 2017</creationDate>
-	<version>2.9.6</version>
+	<creationDate>12th Sep 2017</creationDate>
+	<version>2.9.7</version>
 	<description>PLG_SYSTEM_QTCAMAZON_EASYCHECKOUT_DESC</description>
 	<files>
 		<filename plugin="qtcamazon_easycheckout">qtcamazon_easycheckout.php</filename>

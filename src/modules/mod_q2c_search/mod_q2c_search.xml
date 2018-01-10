@@ -6,8 +6,8 @@
 	<authorUrl>www.techjoomla.com</authorUrl>
 	<copyright>Copyright(C)2012-15 TechJoomla</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<creationDate>6th July 2017</creationDate>
-	<version>2.9.6</version>
+	<creationDate>12th Sep 2017</creationDate>
+	<version>2.9.7</version>
 	<description>Module to search quick2cart products</description>
 	<files>
 		<filename module="mod_q2c_search">mod_q2c_search.php</filename>

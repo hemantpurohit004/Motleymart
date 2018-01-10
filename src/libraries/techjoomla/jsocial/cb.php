@@ -10,8 +10,8 @@
 
 defined('JPATH_BASE') or die;
 jimport('joomla.filesystem.folder');
-
-require_once JPATH_ROOT . '/libraries/techjoomla/jsocial/helper.php';
+jimport('techjoomla.jsocial');
+jimport('techjoomla.jsocial.helper');
 
 /**
  * Interface to handle Social Extensions
@@ -51,32 +51,48 @@ class JSocialCB implements JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0.4
 	 */
-	public function getProfileUrl(JUser $user)
+	public function getProfileUrl(JUser $user, $relative = false)
 	{
-		$link = 'com_comprofiler&view=userprofile';
-		$itemid = JSocialHelper::getItemId($link);
+		if ($relative)
+		{
+			$link = 'index.php?option=com_comprofiler&task=userprofile&user=' . $user->id;
+		}
+		else
+		{
+			$link = 'index.php?com_comprofiler&view=userprofile';
+			$itemid = JSocialHelper::getItemId($link);
+			$link = JRoute::_('index.php?option=com_comprofiler&task=userprofile&user=' . $user->id . '&Itemid=' . $itemid);
 
-		return $link = JRoute::_('index.php?option=com_comprofiler&task=userprofile&user=' . $user->id . '&Itemid=' . $itemid, 0, -1);
+			if (strpos($link, JUri::root()) === false)
+			{
+				$link = JUri::root() . substr($link, strlen(JUri::base(true)) + 1);
+			}
+		}
+
+		return $link;
 	}
 
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar(JUser $user, $gravatar_size = '')
+	public function getAvatar(JUser $user, $gravatar_size = '', $relative = false)
 	{
 		$db = JFactory::getDbo();
 		$q = "SELECT a.id,a.username,a.name, b.avatar, b.avatarapproved
@@ -106,6 +122,11 @@ class JSocialCB implements JSocial
 		{
 			// No avatar
 			$uimage = JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
+		}
+
+		if ($relative)
+		{
+			$uimage = str_replace(JUri::root(), '', $uimage);
 		}
 
 		return $uimage;
@@ -378,6 +399,20 @@ class JSocialCB implements JSocial
 	 * @since   1.0
 	 */
 	public function addMemberToGroup($groupId, JUser $groupmember)
+	{
+	}
+
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId)
 	{
 	}
 }

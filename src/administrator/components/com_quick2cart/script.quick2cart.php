@@ -203,6 +203,7 @@ class com_quick2cartInstallerScript
 
 		$this->migrateTaxShipDetails();
 		$this->migrateCouponChangesTO28version();
+		$this->deleteLog();
 	}
 
 	/**
@@ -3388,6 +3389,37 @@ class com_quick2cartInstallerScript
 			$db = JFactory::getDbo();
 			$db->updateObject('#__kart_items', $item, 'item_id');
 			$db->insertid();
+		}
+	}
+
+	/***
+	* Delete Payment plugin logs on installation
+	*
+	* @since 2.0.5
+	* return void
+	*/
+	public function deleteLog()
+	{
+		// Get log config path
+		$config = new JConfig();
+		$config->log_path;
+
+		$logsPath = array("cpg__paypal.log","com_quick2cart_paypal.log", "com_quick2cart_authorizenet.log", "com_quick2cart_amazon.log", "com_quick2cart_2checkout.log", "com_quick2cart_adaptive_paypal.log", "com_quick2cart_alphauserpoints.log", "com_quick2cart_bycheck.log", "com_quick2cart_byorder.log", "com_quick2cart_jomsocialpoints.log", "com_quick2cart_linkpoint.log", "com_quick2cart_payu.log");
+
+		foreach($logsPath as $path)
+		{
+			// 1. detele log
+			if(!JFile::delete($config->log_path . '/' . $path))
+			{
+				// 2. if not 1 then clear content
+				$output -= file_put_contents($config->log_path . '/' . $path, "");
+
+				//3. if not 2 then create htaccess
+				if ($output == false)
+				{
+					file_put_contents($config->log_path . '/.htaccess', "Deny from all");
+				}
+			}
 		}
 	}
 }

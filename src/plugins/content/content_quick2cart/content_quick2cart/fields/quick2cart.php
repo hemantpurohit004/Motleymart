@@ -36,7 +36,7 @@ class JFormFieldQuick2cart extends JFormFieldList
 	 *
 	 * @return  [type]  [description]
 	 */
-	function getInput ()
+	public function getInput()
 	{
 		$lang = JFactory::getLanguage();
 		$lang->load('com_quick2cart', JPATH_ADMINISTRATOR);
@@ -81,6 +81,15 @@ class JFormFieldQuick2cart extends JFormFieldList
 		{
 			$path = $comquick2cartHelper->getViewpath('attributes', '', 'SITE', 'SITE');
 		}
+
+		// Load component models
+		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
+
+		$Quick2cartModelWeights = JModelLegacy::getInstance('Weights', 'Quick2cartModel');
+		$Quick2cartModelLengths = JModelLegacy::getInstance('Lengths', 'Quick2cartModel');
+
+		$this->weightClasses = $Quick2cartModelWeights->getItems();
+		$this->lengthClasses = $Quick2cartModelLengths->getItems();
 
 		ob_start();
 		include $path;

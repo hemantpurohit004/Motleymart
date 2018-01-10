@@ -210,7 +210,7 @@ class StoreHelper
 			$linkArray[] = $link = JUri::root() . substr(JRoute::_($link), strlen(JUri::base(true)) + 1);
 
 			// CAT LINKS html code
-			$linkHtmlArray[] = '<a href="' . $link . '">' . $parentCatArray[$i]["title"] . '</a>';
+			$linkHtmlArray[] = '<a href="' . $link . '">' . JText::_(trim($parentCatArray[$i]["title"])) . '</a>';
 		}
 
 		return $CatHierarchyLink = implode(' >', $linkHtmlArray);
@@ -267,7 +267,6 @@ class StoreHelper
 	public function getStoreLink($store_id)
 	{
 		$helperobj = new comquick2cartHelper;
-		$Itemid    = $helperobj->getitemid('index.php?option=com_quick2cart&view=category');
 		$Itemid = $helperobj->getitemid('index.php?option=com_quick2cart&view=category');
 		$mainlink      = 'index.php?option=com_quick2cart&view=vendor&layout=store&store_id=' . $store_id . '&Itemid=' . $Itemid;
 
@@ -1197,19 +1196,16 @@ class StoreHelper
 	/**
 	 * This function is to generate, store wise invoice PDF
 	 *
+	 * @param   INT  $orderid   order id.
+	 * @param   INT  $store_id  store id.
+	 *
 	 * @return  ''
 	 *
 	 * @since	2.6
 	 */
-	public function generateInvoicePDF()
+	public function generateInvoicePDF($orderid, $store_id)
 	{
 		$app   = JFactory::getApplication();
-		$jinput    = JFactory::getApplication()->input;
-		$post = $jinput->post;
-
-		// Get order id and store id
-		$orderid = $jinput->get('orderid', '', 'INT');
-		$store_id = $jinput->get('store_id', '', 'INT');
 
 		if (empty($orderid) || empty($store_id))
 		{
