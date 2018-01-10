@@ -14,6 +14,13 @@
 				>
 					<option value=''>COM_QUICK2CART_MENU_PRODUCTS_FIELD_OPTION_SELECT_CAT</option>
 			</field>
+			<field name="defaultStoreId" type="stores"
+				label="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SELECT_STORE"
+				description="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SELECT_STORE_DESC"
+				addfieldpath="/administrator/components/com_quick2cart/models/fields"
+				>
+					<option value=''>COM_QUICK2CART_MENU_PRODUCTS_FIELD_OPTION_SELECT_STORE</option>
+			</field>
 			<field name="show_subcat_products" type="list"
 				label="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SHOW_SUBCATS"
 				description="COM_QUICK2CART_MENU_PRODUCTS_FIELD_SHOW_SUBCATS_DESC"

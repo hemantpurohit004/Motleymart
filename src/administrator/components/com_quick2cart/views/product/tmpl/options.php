@@ -533,7 +533,7 @@ $js_key="
 
 				<div class="clearfix">&nbsp;</div>
 				<div class="text-warning">
-					<p><?php echo JText::sprintf('COM_QUICK2CART_ALLOWED_IMG_FORMATS', 'gif, jpeg, jpg, png');?></p>
+					<p><?php echo JText::sprintf('COM_QUICK2CART_ALLOWED_IMG_FORMATS', 'gif, jpeg, jpg, png', $this->params->get('max_size', '1024'));?></p>
 				</div>
 			</div>
 			<!--END OF ROW FLUID -->

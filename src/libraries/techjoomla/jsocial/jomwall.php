@@ -48,34 +48,56 @@ class JSocialJomwall implements JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getProfileUrl(JUser $user)
+	public function getProfileUrl(JUser $user, $relative = false)
 	{
-		$awduser = new AwdwallHelperUser;
-		$Itemid = $awduser->getComItemId();
-		$link = JRoute::_('index.php?option=com_awdwall&view=awdwall&layout=mywall&wuid=' . $user->id . '&Itemid=' . $Itemid);
+		if ($relative)
+		{
+			$link = 'index.php?option=com_awdwall&view=mywall&wuid=' . $user->id;
+		}
+		else
+		{
+			$awduser = new AwdwallHelperUser;
+			$Itemid = $awduser->getComItemId();
+			$link = JRoute::_('index.php?option=com_awdwall&view=mywall&wuid=' . $user->id . '&Itemid=' . $Itemid);
+
+			if (strpos($link, JUri::root()) === false)
+			{
+				$link = JUri::root() . substr($link, strlen(JUri::base(true)) + 1);
+			}
+		}
+
+		return $link;
 	}
 
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar(JUser $user, $gravatar_size = '')
+	public function getAvatar(JUser $user, $gravatar_size = '', $relative = false)
 	{
 		$awduser = new AwdwallHelperUser;
 		$uimage = $awduser->getAvatar($user->id);
+
+		if ($relative)
+		{
+			$uimage = str_replace(JUri::root(), '', $uimage);
+		}
 
 		return $uimage;
 	}
@@ -280,6 +302,20 @@ class JSocialJomwall implements JSocial
 	 * @since   1.0
 	 */
 	public function addMemberToGroup($groupId, JUser $groupmember)
+	{
+	}
+
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId)
 	{
 	}
 }

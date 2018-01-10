@@ -9,6 +9,7 @@
 
 defined('JPATH_BASE') or die;
 jimport('joomla.filesystem.file');
+jimport('techjoomla.common');
 
 /**
  * Interface to handle Social Extensions
@@ -65,31 +66,42 @@ class JSocialJomsocial implements JSocial
 	/**
 	 * The function to get profile link User
 	 *
-	 * @param   MIXED  $user  JUser Objcet
+	 * @param   MIXED    $user      JUser Objcet
+	 * @param   BOOLEAN  $relative  returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getProfileUrl(JUser $user)
+	public function getProfileUrl(JUser $user, $relative = false)
 	{
-		$temp = 'index.php?option=com_community&view=profile&userid=' . $user->id;
+		if ($relative)
+		{
+			$link = 'index.php?option=com_community&view=profile&userid=' . $user->id;
+		}
+		else
+		{
+			$link = JUri::root() . 'index.php?option=com_community&view=profile&userid=' . $user->id;
+			$link = CRoute::_($link);
+		}
 
-		return CRoute::_($temp);
+		return $link;
 	}
 
 	/**
 	 * The function to get profile AVATAR of a User
 	 *
-	 * @param   MIXED  $user           JUser Objcet
+	 * @param   MIXED    $user           JUser Objcet
 	 *
-	 * @param   INT    $gravatar_size  Size of the AVATAR
+	 * @param   INT      $gravatar_size  Size of the AVATAR
+	 *
+	 * @param   BOOLEAN  $relative       returns relative URL if true
 	 *
 	 * @return  STRING
 	 *
 	 * @since   1.0
 	 */
-	public function getAvatar(JUser $user, $gravatar_size = '')
+	public function getAvatar(JUser $user, $gravatar_size = '', $relative = false)
 	{
 		$uimage = '';
 		$cuser = CFactory::getUser($user->id);
@@ -111,6 +123,11 @@ class JSocialJomsocial implements JSocial
 			// $uimage = str_replace('/' . basename(JPATH_SITE), '', $uimage);
 			$uimage = str_replace(JUri::root(true) . '/', '', $uimage);
 			$uimage = JUri::root() . $uimage;
+		}
+
+		if ($relative)
+		{
+			$uimage = str_replace(JUri::root(), '', $uimage);
 		}
 
 		return $uimage;
@@ -405,10 +422,20 @@ class JSocialJomsocial implements JSocial
 	 *
 	 * @return ARRAY success 0 or 1
 	 */
-	public function addpoints(JUser $receiver,$options=array())
+	public function addpoints(JUser $receiver, $options = array())
 	{
+		$techjoomlaCommon = new TechjoomlaCommon;
+		$jomSocialVersion = $techjoomlaCommon->getExtensionVersion('component', 'Community');
+
 		CFactory::load('libraries', 'userpoints');
 		CFactory::load('libraries', 'notification');
+
+		// From JS version 4.1 the assign points API was changed
+		if (version_compare($jomSocialVersion, '4.1', 'ge'))
+		{
+			$options['command'] = $options['extension'] . "." . $options['command'];
+		}
+
 		CuserPoints::assignPoint($options['command'], $receiver->id);
 	}
 
@@ -455,6 +482,7 @@ class JSocialJomsocial implements JSocial
 	 *
 	 * @param   ARRAY   $groupId      Data
 	 * @param   OBJECT  $groupmember  User object
+	 * @param   INT     $state        User state
 	 *
 	 * @return  void
 	 *
@@ -477,5 +505,19 @@ class JSocialJomsocial implements JSocial
 		$member->store();
 
 		return true;
+	}
+
+	/**
+	 * The function to update the custom fields
+	 *
+	 * @param   ARRAY   $fieldsArray  Custom field array
+	 * @param   OBJECT  $userId       User Id
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function addUserFields($fieldsArray, $userId)
+	{
 	}
 }

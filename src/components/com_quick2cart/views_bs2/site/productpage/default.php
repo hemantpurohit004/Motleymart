@@ -38,6 +38,7 @@ $slab = (! empty($this->itemdetail->slab)) ? $this->itemdetail->slab : 1 ;
 $client = $this->client;
 
 $comquick2cartHelper = new comquick2cartHelper;
+$q2cbaseUrl = $comquick2cartHelper->quick2CartRoute('index.php?option=com_quick2cart&view=category&layout=default');
 $productHelper = new productHelper;
 require_once (JPATH_SITE . '/components/com_quick2cart/helpers/media.php');
 $media = new qtc_mediaHelper();
@@ -703,6 +704,9 @@ $productDetailsUrl = JUri::root() . substr(JRoute::_($productDetailsUrl, false),
 												<a class="btn btn-success" href="<?php echo $action_link; ?>">
 													<?php echo JText::_('COM_QUICK2CART_VIEW_CART')?>
 												</a>
+												<a class="btn btn-primary" href="<?php echo $q2cbaseUrl; ?>">
+													<?php echo JText::_('QTC_BACK');?>
+												</a>
 											</div>
 											<i class="<?php echo QTC_ICON_REMOVE; ?> cart-popup_close" onclick="techjoomla.jQuery(this).parent().slideUp().hide();"></i>
 										</div>
@@ -1112,7 +1116,7 @@ $productDetailsUrl = JUri::root() . substr(JRoute::_($productDetailsUrl, false),
 					?>
 				<div class="row-fluid">
 					<div class="span12 ">
-					<h4 class="sectionTitle"><?php echo JText::sprintf('QTC_SIMILAR_CAT_PRODUCTS', $prodCatName); ?></h4>
+					<h4 class="sectionTitle"><?php echo JText::sprintf('QTC_SIMILAR_CAT_PRODUCTS', JText::_(trim($prodCatName))); ?></h4>
 
 					<?php
 					$random_container = 'q2c_pc_similar_products';

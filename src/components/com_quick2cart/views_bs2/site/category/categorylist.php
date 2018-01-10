@@ -177,29 +177,32 @@ $catItemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&' 
 
 			foreach ($cats as $cat)
 			{
-				// Making value = '' to value = 0 for all product
-				$cat->value = !empty ($cat->value) ? $cat->value : 0;
-
-				// GETTING ITEM ID
-				$catItemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&' . $qtc_linkparam . "&prod_cat=" . $cat->value);
-
-				$catlink = JUri::root().substr(JRoute::_('index.php?option=com_quick2cart&' . $qtc_linkparam . '&' . $qtc_catname . '=' . $cat->value . '&Itemid=' . $catItemid . $itsStoreOwner), strlen(JUri::base(true)) + 1);
-
-				$activecat = "";
-
-				if ($selectedcat == $cat->value)
+				if (!empty($categoryProductsCount[$cat->value]['count']))
 				{
-					$activecat = "active";
-				}
-				?>
+					// Making value = '' to value = 0 for all product
+					$cat->value = !empty ($cat->value) ? $cat->value : 0;
 
-				<a class="tj-list-group-item <?php echo $activecat;?>" href="<?php echo $catlink ;?>">
-					<?php if (isset($categoryProductsCount[$cat->value]['count'])): ?>
-						<span class="badge"><?php echo $categoryProductsCount[$cat->value]['count'];?></span>
-					<?php endif; ?>
-					<?php echo $cat->text; ?>
-				</a>
-			<?php
+					// GETTING ITEM ID
+					$catItemid = $comquick2cartHelper->getitemid('index.php?option=com_quick2cart&' . $qtc_linkparam . "&prod_cat=" . $cat->value);
+
+					$catlink = JUri::root().substr(JRoute::_('index.php?option=com_quick2cart&' . $qtc_linkparam . '&' . $qtc_catname . '=' . $cat->value . '&Itemid=' . $catItemid . $itsStoreOwner), strlen(JUri::base(true)) + 1);
+
+					$activecat = "";
+
+					if ($selectedcat == $cat->value)
+					{
+						$activecat = "active";
+					}
+					?>
+
+					<a class="tj-list-group-item <?php echo $activecat;?>" href="<?php echo $catlink ;?>">
+						<?php if (isset($categoryProductsCount[$cat->value]['count'])): ?>
+							<span class="badge"><?php echo $categoryProductsCount[$cat->value]['count'];?></span>
+						<?php endif; ?>
+						<?php echo $cat->text; ?>
+					</a>
+				<?php
+				}
 			}
 		?>
 		</div>

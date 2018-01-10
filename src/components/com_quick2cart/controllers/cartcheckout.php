@@ -690,6 +690,7 @@ class Quick2cartControllercartcheckout extends Quick2cartController
 	 */
 	public function qtc_gatewayHtml()
 	{
+		// TODO :- Remove this function if not used anywhere
 		$db     = JFactory::getDBO();
 		$jinput = JFactory::getApplication()->input;
 

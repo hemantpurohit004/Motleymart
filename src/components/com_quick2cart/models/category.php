@@ -69,6 +69,30 @@ class Quick2cartModelCategory extends JModelList
 		$jinput = JFactory::getApplication()->input;
 		$layout = $jinput->get('layout', 'default', 'STRING');
 
+		// Variable to store prices for price filter
+		$min_limit = $jinput->get('min_price', '', 'int');
+		$max_limit = $jinput->get('max_price', '', 'int');
+
+		if (!empty($min_limit) && !empty($max_limit))
+		{
+			if ($min_limit > $max_limit)
+			{
+				$temp = $min_limit;
+				$min_limit = $max_limit;
+				$max_limit = $temp;
+			}
+		}
+
+		if (!empty($min_limit))
+		{
+			$this->setState('filter.min_limit', $min_limit);
+		}
+
+		if (!empty($max_limit))
+		{
+			$this->setState('filter.max_limit', $max_limit);
+		}
+
 		// List state information.
 		parent::populateState('a.item_id', 'desc');
 
@@ -114,9 +138,9 @@ class Quick2cartModelCategory extends JModelList
 
 		$this->setState('list.direction', $listOrder);
 
-		/* Load the filter state.
+		// Load the filter state.
 		$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '', 'string');
-		$this->setState('filter.search', $search);*/
+		$this->setState('filter.search', $search);
 
 		$prod_sorting = $app->getUserStateFromRequest($this->context . '.sort_products', 'sort_products', '', 'string');
 		$this->setState('sort_products', $prod_sorting);
@@ -129,10 +153,6 @@ class Quick2cartModelCategory extends JModelList
 			// Filter category.
 			$category = $app->getUserStateFromRequest($this->context . '.filter.category', 'filter_category', '', 'string');
 			$this->setState('filter.category', $category);
-
-			// Load the filter state.
-			$search = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '', 'string');
-			$this->setState('filter.search', $search);
 		}
 		else
 		{
@@ -144,6 +164,10 @@ class Quick2cartModelCategory extends JModelList
 			// Category menu
 			$menu_category = $app->getParams()->get('defaultCatId');
 			$this->setState('filter.menu_category', $menu_category);
+
+			// Store menu
+			$menu_store = $app->getParams()->get('defaultStoreId');
+			$this->setState('filter.menu_store', $menu_store);
 
 			// Category search
 			$menu_category_search = $app->getParams()->get('qtcCategorySearch');
@@ -271,22 +295,26 @@ class Quick2cartModelCategory extends JModelList
 					$i++;
 				}
 			}
+
+			$min_limit = $this->getState('filter.min_limit');
+			$max_limit = $this->getState('filter.max_limit');
+
+			if (!empty($min_limit))
+			{
+				$query->where('a.price >= ' . $min_limit);
+			}
+
+			if (!empty($max_limit))
+			{
+				$query->where('a.price <= ' . $max_limit);
+			}
 		}
 
 		// Show product only if display_in_product_catlog set to 1
 		$query->where('a.display_in_product_catlog = 1');
 
-		/* TODO : Use between clause instead of for loop
-		Price range for products
-		if (!empty($min_limit) && !empty($max_limit))
-		{
-		$query->where('a.price BETWEEN ' . $min_limit . ' AND ' . $max_limit);
-		}*/
-
-		// Added now end
-
 		// Filter by search in title.
-		$search = $jinput->get('filter_search', '', 'STRING');
+		$search = $this->getState('filter.search');
 
 		if (!empty($search))
 		{
@@ -343,6 +371,7 @@ class Quick2cartModelCategory extends JModelList
 			{
 				$filter_menu_category = $this->state->get("filter.menu_category");
 				$filter_menu_category_search = $this->state->get("filter.qtcCategorySearch");
+				$filter_menu_store = $this->state->get("filter.menu_store");
 
 				if ($filter_menu_category)
 				{
@@ -372,6 +401,11 @@ class Quick2cartModelCategory extends JModelList
 					$filter_menu_category_search = $db->Quote('%' . $db->escape($filter_menu_category_search, true) . '%');
 					$query->where('( a.name LIKE ' . $filter_menu_category_search
 					. ' OR a.description LIKE ' . $filter_menu_category_search . ' OR a.metakey LIKE ' . $filter_menu_category_search . ')');
+				}
+
+				if ($filter_menu_store)
+				{
+					$query->where($db->quoteName("a.store_id") . "=" . (INT) $db->escape($filter_menu_store));
 				}
 			}
 
@@ -403,13 +437,7 @@ class Quick2cartModelCategory extends JModelList
 			}
 			else
 			{
-				// TODO: move this code below for ordering
-				$currentLayout = $jinput->get('layout', '', 'string');
-
-				if ($currentLayout = "my")
-				{
-					$query->order('a.cdate ASC');
-				}
+				$query->order($db->qn('a.ordering') . 'ASC');
 			}
 		}
 		else
@@ -509,8 +537,13 @@ class Quick2cartModelCategory extends JModelList
 		{
 			$query->order($db->escape($orderCol . ' ' . $orderDirn));
 		}
-
-		$query->order($db->qn('a.ordering') . 'ASC');
+		else
+		{
+			if ($layout = "my")
+			{
+				$query->order('a.item_id DESC');
+			}
+		}
 
 		$query->group('a.item_id');
 
@@ -527,37 +560,6 @@ class Quick2cartModelCategory extends JModelList
 	public function getItems()
 	{
 		$items = parent::getItems();
-
-		$jinput = JFactory::getApplication()->input;
-
-		// Variable to store prices for price filter
-		$min_limit = $jinput->get('min_price', '', 'int');
-		$max_limit = $jinput->get('max_price', '', 'int');
-
-		if ($min_limit > $max_limit)
-		{
-			$temp = $min_limit;
-			$min_limit = $max_limit;
-			$max_limit = $temp;
-		}
-
-		// Show products from price range
-		if (!empty($min_limit) && !empty($max_limit))
-		{
-			$i = 0;
-
-			foreach ($items as $item)
-			{
-				$price = (int) $item->fprice;
-
-				if ($price < $min_limit || $price > $max_limit)
-				{
-					unset($items[$i]);
-				}
-
-				$i++;
-			}
-		}
 
 		return $items;
 	}

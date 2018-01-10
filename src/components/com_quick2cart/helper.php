@@ -3339,6 +3339,7 @@ class Comquick2cartHelper
 		// Create object of media helper class
 		$media           = new qtc_mediaHelper;
 		$params          = JComponentHelper::getParams('com_quick2cart');
+		$app = JFactory::getApplication();
 
 		// Get uploaded media details
 
@@ -3363,7 +3364,8 @@ class Comquick2cartHelper
 
 		if ($max_size_exceed)
 		{
-			$errorList[] = JText::_('FILE_BIG') . " " . $params->get('max_size') . "KB<br>";
+			$msg = JText::sprintf('COM_QUICK2CART_FILE_SIZE_EXCEED_ERROR', $params->get('max_size'));
+			$app->enqueueMessage($msg, 'error');
 			$error_flag  = 1;
 		}
 
@@ -3374,10 +3376,14 @@ class Comquick2cartHelper
 			// Detect media group type image/video/flash
 			$media_type_group = $media->check_media_type_group($file_type);
 
-			if (!$media_type_group['allowed'])
+			if (!empty($file_type))
 			{
-				$errorList[] = JText::_('FILE_ALLOW');
-				$error_flag  = 1;
+				if (!$media_type_group['allowed'])
+				{
+					$msg = JText::_('COM_QUICK2CART_FILE_TYPE_NOT_ALLOWED');
+					$app->enqueueMessage($msg, 'error');
+					$error_flag  = 1;
+				}
 			}
 
 			if (!$error_flag)
@@ -4304,6 +4310,11 @@ class Comquick2cartHelper
 
 		// Static public function options($extension, $config = array('filter.published' => array(0,1)))
 		$qtc_cat_options = JHtml::_('category.options', 'com_quick2cart', array('filter.published' => array(1)));
+
+		foreach ($qtc_cat_options as $k => $catDetails)
+		{
+			$catDetails->text = JText::_(trim($catDetails->text));
+		}
 
 		if ($getOptionsOnly == 1)
 		{

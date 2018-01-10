@@ -137,37 +137,39 @@ $qtcshiphelper = new qtcshiphelper;
 	function ckUniqueVanityURL()
 	{
 		var editstore="<?php echo $store_edit;?>";
-		var newvanityURL=document.qtcCreateStoreForm.storeVanityUrl.value;
-		var oldVanity="<?php echo $store_vanity;?>";
-		/*if not a edit task and not empty sku value then only call ajax*/
-		/*if (editstore==0 && skuval)*/
-		if (newvanityURL)
+		var newvanityURL = techjoomla.jQuery('#storeVanityUrl').value;
+
+		if (typeof newvanityURL === 'undefined')
 		{
-			if (oldVanity != newvanityURL)
-			{
-				techjoomla.jQuery.ajax({
-					url: '?option=com_quick2cart&controller=vendor&task=ckUniqueVanityURL&vanityURL='+newvanityURL+'&tmpl=component&format=raw',
-					cache: false,
-					type: 'GET',
-					/*dataType: 'json',*/
-					success: function(data)
+			newvanityURL = '';
+		}
+
+		var oldVanity="<?php echo $store_vanity;?>";
+
+		if (oldVanity != newvanityURL)
+		{
+			techjoomla.jQuery.ajax({
+				url: '?option=com_quick2cart&controller=vendor&task=ckUniqueVanityURL&vanityURL='+newvanityURL+'&tmpl=component&format=raw',
+				cache: false,
+				type: 'GET',
+				/*dataType: 'json',*/
+				success: function(data)
+				{
+					/* already exist*/
+					if (data == '1')
 					{
-						/* already exist*/
-						if (data == '1')
-						{
-							alert("<?php echo JText::_( 'QTC_VANITY_ALREADY_EXIST')?>");
-							techjoomla.jQuery('#store_alias').hide();
-							techjoomla.jQuery('#storeVanityUrl').focus();
-						}
-						elseif (! techjoomla.jQuery('#storeVanityUrl').hasClass('invalid'))
-						{
-							n=newvanityURL.replace(/([0-9]*)(:)/i,"$1-");
-							techjoomla.jQuery('#store_alias span').html(n);
-							techjoomla.jQuery('#store_alias').show();
-						}
+						alert("<?php echo JText::_( 'QTC_VANITY_ALREADY_EXIST')?>");
+						techjoomla.jQuery('#store_alias').hide();
+						techjoomla.jQuery('#storeVanityUrl').focus();
 					}
-				});
-			}
+					elseif (! techjoomla.jQuery('#storeVanityUrl').hasClass('invalid'))
+					{
+						n=newvanityURL.replace(/([0-9]*)(:)/i,"$1-");
+						techjoomla.jQuery('#store_alias span').html(n);
+						techjoomla.jQuery('#store_alias').show();
+					}
+				}
+			});
 		}
 	}
 

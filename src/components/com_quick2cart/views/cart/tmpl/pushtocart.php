@@ -288,7 +288,7 @@ if ($this->showBuyNowBtn)
 			</div>
 		<?php
 		}
-		
+
 		// For cck products
 		if (empty($productDetailsUrl))
 		{
@@ -297,10 +297,10 @@ if ($this->showBuyNowBtn)
 			$item['parent'] = $this->parent;
 			$item['count'] = '';
 			$item['options'] = '';
-			
+
 			$prod_details = $Quick2cartModelcart->getProd($item);
 			$item_id = $prod_details[0]['item_id'];
-			
+
 			if (!empty($item_id))
 			{
 				$productDetailsUrl = $comquick2cartHelper->getProductLink($item_id);
@@ -310,7 +310,11 @@ if ($this->showBuyNowBtn)
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('discounts');
 		$shareButtonHtml = $dispatcher->trigger('getDiscountHtml',array($productDetailsUrl));
-		echo $shareButtonHtml[0];
+
+		if (isset($shareButtonHtml[0]))
+		{
+			echo $shareButtonHtml[0];
+		}
 		?>
 	</div>
 </div>

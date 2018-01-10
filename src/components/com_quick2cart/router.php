@@ -140,7 +140,11 @@ class Quick2CartRouter extends JComponentRouterBase
 					$segments[] = $category->alias;
 				}
 
-				unset($query['prod_cat']);
+				if (!empty($query['prod_cat']))
+				{
+					unset($query['prod_cat']);
+				}
+
 				unset($query['view']);
 			}
 		}
@@ -186,7 +190,7 @@ class Quick2CartRouter extends JComponentRouterBase
 
 		if ($view == 'vendor')
 		{
-			if (($query['layout'] == 'store' || $query['layout'] == 'createstore'))
+			if (($query['layout'] == 'store' || $query['layout'] == 'createstore' || $query['layout'] == 'storeinfo'))
 			{
 				if (isset($query['store_id']))
 				{
@@ -333,11 +337,11 @@ class Quick2CartRouter extends JComponentRouterBase
 					$vars['item_id'] = $productId;
 				}
 			}
-			elseif (($storeId = $this->_getStoreRow($segments[0])->id) && $segments[1] == 'createstore')
+			elseif (($storeId = $this->_getStoreRow($segments[0])->id) && ($segments[1] == 'createstore' || $segments[1] == 'storeinfo'))
 			{
 					$vars['view'] = 'vendor';
 					$vars['store_id'] = $storeId;
-					$vars['layout'] = 'createstore';
+					$vars['layout'] = $segments[1];
 			}
 			elseif (($storeId = $this->_getStoreRow($segments[0])->id)
 				&& ($categoryTable->load(array('alias' => $segments[1], 'extension' => 'com_quick2cart'))))
@@ -362,7 +366,11 @@ class Quick2CartRouter extends JComponentRouterBase
 					if (isset($segments[1]))
 					{
 						$vars['layout'] = $segments[1];
-						$vars['orderid'] = $segments[2];
+
+						if (isset($segments[2]) && is_numeric($segments[2]))
+						{
+							$vars['orderid'] = $segments[2];
+						}
 
 						if (isset($segments[3]))
 						{

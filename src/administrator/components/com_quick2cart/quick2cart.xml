@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0" type="component" method="upgrade">
 	<name>com_quick2cart</name>
-
 	<author>TechJoomla</author>
 	<authorEmail>extensions@techjoomla.com</authorEmail>
 	<authorUrl>www.techjoomla.com</authorUrl>
-	<copyright>Copyright(C)2012-13 TechJoomla</copyright>
+	<copyright>Copyright(C)2012-17 TechJoomla</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-
-	<creationDate>6th July 2017</creationDate>
-	<version>2.9.6</version>
-
+	<creationDate>4th Dec 2017</creationDate>
+	<version>2.9.8</version>
 	<description>Quick2Cart - Quick, Simple Ecommerce For Joomla!</description>
-
 	<install>
 		<sql>
 			<file driver="mysql" charset="utf8">sql/install.sql</file>
 		</sql>
 	</install>
-
 	<scriptfile>script.quick2cart.php</scriptfile>
-
 	<files folder="site">
 		<folder>assets</folder>
 		<folder>controllers</folder>
@@ -29,7 +23,6 @@
 		<folder>views</folder>
 		<folder>layouts</folder>
 		<folder>views_bs2</folder>
-
 		<filename>defines.php</filename>
 		<filename>router.php</filename>
 		<filename>authorizeviews.php</filename>
@@ -38,11 +31,9 @@
 		<filename>controller.php</filename>
 		<filename>index.html</filename>
 	</files>
-
 	<languages folder="site_language">
 		<language tag="en-GB">en-GB/en-GB.com_quick2cart.ini</language>
 	</languages>
-
 	<administration>
 		<menu link="option=com_quick2cart" img="components/com_quick2cart/assets/images/quick2cart_16.png">com_quick2cart</menu>
 		<submenu>
@@ -55,7 +46,6 @@
 			<menu link="option=com_quick2cart&amp;view=payouts" img="components/com_quick2cart/assets/images/payouts_16.png">COM_QUICK2CART_PAYOUTS_REPORT</menu>
 			<menu link="option=com_quick2cart&amp;view=promotions" img="components/com_quick2cart/assets/images/coupons_16.png">COM_QUICK2CART_PROMOTIONS</menu>
 		</submenu>
-
 		<files folder="admin">
 			<folder>assets</folder>
 			<folder>controllers</folder>
@@ -72,14 +62,12 @@
 			<filename>index.html</filename>
 			<filename>toolbar.xml</filename>
 		</files>
-
 		<languages folder="admin_language/en-GB">
 			<language tag="en-GB">en-GB.com_quick2cart.ini</language>
 			<language tag="en-GB">en-GB.com_quick2cart.sys.ini</language>
 			<language tag="en-GB">en-GB.com_quick2cart.menu.ini</language>
 		</languages>
 	</administration>
-
 	<config>
 		<fields>
 			<fieldset>
@@ -89,7 +77,6 @@
 				<field name="popup_buynow" default="1" />
 				<field name="currentBSViews" default="bs3" />
 				<field name="qtcLoadBootstrap" default="0" />
-
 				<!--Checkout Settings-->
 				<field name="singleStoreCkout" default="0" />
 				<field name="orderWithZeroPrice" default="0" />
@@ -99,58 +86,48 @@
 				<field name="termsConditonsArtId" default="0" />
 				<field name="send_email_to_customer" default="1" />
 				<field name="send_email_to_customer_after_order_placed" default="1" />
-
 				<!-- Shipping and taxation settings -->
 				<field name="enableTaxtion" default="0" />
 				<field name="shipping" default="0" />
 				<field name="shippingMode" default="itemLevel" />
 				<field name="outofstock_allowship" default="0" />
-
 				<!--Payment settings options -->
 				<field name="sale_mail" default="" />
 				<field name="commission" default="0" />
 				<field name="gateways" default="bycheck" />
 				<!--
-				<field name="send_payments_to_owner" default="0" />
+				     <field name="send_payments_to_owner" default="0" />
 				-->
-
 				<!-- Currency settings -->
 				<field name="addcurrency" default="USD" />
 				<field name="addcurrency_sym" default="$" />
 				<field name="currency_display_format" default="{SYMBOL} {AMOUNT}" />
-
 				<!-- Order Id settings -->
 				<field name="order_prefix" default="OID" />
 				<field name="separator" default="-" />
 				<field name="random_orderid" default="1" />
 				<field name="padding_count" default="10" />
-
 				<!-- VAT and Invoice settings -->
 				<field name="enable_bill_vat" default="1" />
 				<field name="useinvoice" default="1" />
-
 				<!-- Native Product Manager Settings -->
 				<!-- Product options -->
 				<field name="enable_editor" default="0" />
 				<field name="usedisc" default="0" />
 				<field name="usestock" default="0" />
 				<field name="minmax_quantity" default="0" />
-
 				<!-- Admin approval and email settings -->
 				<field name="admin_approval_stores" default="0" />
 				<field name="admin_approval" default="0" />
 				<field name="mail_on_store_create" default="0" />
 				<field name="mail_on_store_edit" default="0" />
 				<field name="mail_on_edit" default="0" />
-
 				<!-- Store home page settings -->
 				<field name="featured_limit" default="4" />
 				<field name="topSeller_limit" default="4" />
 				<field name="storeProdPage_limit" default="4" />
-
 				<!-- All Products/ category page settings -->
 				<field name="all_prod_pagination_limit" default="15" />
-
 				<!-- Product Details Page Display and Other Display Settings-->
 				<field name="ProductTitleLimit" default="15" />
 				<field name="qty_buynow" default="1" />
@@ -158,7 +135,6 @@
 				<field name="who_bought_limit" default="2" />
 				<field name="layout_to_load" default="flexible_layout" />
 				<field name="fix_pin_height" default="200" />
-
 				<!-- How much grid should be used for different devices -->
 				<field name="pin_for_lg" default="3" />
 				<field name="pin_for_md" default="4" />
@@ -166,12 +142,10 @@
 				<field name="pin_for_xs" default="12" />
 				<field name="pin_width" default="170" />
 				<field name="pin_padding" default="3" />
-
 				<!-- Social sharing buttons-->
 				<field name="social_sharing" default="0" />
 				<field name="social_shring_type" default="native" />
 				<field name="addthis_publishid" default="" />
-
 				<!-- Media settings -->
 				<field name="storeavatar_width" default="124" />
 				<field name="storeavatar_height" default="124" />
@@ -183,7 +157,6 @@
 				<field name="medium_height" default="128" />
 				<field name="large_width" default="512" />
 				<field name="large_height" default="512" />
-
 				<!--Digital Products Settings-->
 				<field name="eProdSupport" default="1" />
 				<field name="allowedFileExtensions" default="ac,avi,bmp,csv,doc,docx,epg,epub,fla,flac,flv,gif,gz,gzip,ico,jpg,mkv,mov,mp3,mp4,odg,odp,ods,odt,ogg,pdf,png,pps,ppt,rar,swf,tar.gz,txt,wav,wma,wmv,xcf,xls,xlsx,zip" />
@@ -193,14 +166,12 @@
 				<field name="eProdUploadMode" default="1" />
 				<field name="eProdUExpiryMode" default="epMaxDownload" />
 				<field name="eProdExpFormat" default="epDateExp" />
-
 				<!--Integrations Settings-->
 				<field name="integrate_with" default="none" />
 				<field name="point_system" default="0" />
 				<field name="streamAddProd" default="0" />
 				<field name="streamCeateStore" default="0" />
 				<field name="streamBuyProd" default="0" />
-
 				<!--Advanced Settings-->
 				<field name="qtc_middlenmae" default="0" />
 			</fieldset>

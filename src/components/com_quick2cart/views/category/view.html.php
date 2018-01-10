@@ -40,6 +40,8 @@ class Quick2cartViewCategory extends JViewLegacy
 		$this->items      = $this->get('Items');
 		$this->pagination = $this->get('Pagination');
 		$this->params     = JComponentHelper::getParams('com_quick2cart');
+		$model            = $this->getModel('category');
+		$this->searchkey  = $model->getState('filter.search');
 
 		$this->product_sorting = array(
 		'' => JText::_('COM_QUICK2CART_SELECT_SORTING_FILTER'),
@@ -62,7 +64,6 @@ class Quick2cartViewCategory extends JViewLegacy
 		}
 
 		$jinput     = JFactory::getApplication()->input;
-		$this->searchkey = $jinput->get("filter_search");
 
 		$layout     = $jinput->get('layout', 'default', 'STRING');
 		$option     = $jinput->get('option', '', 'STRING');
@@ -91,7 +92,6 @@ class Quick2cartViewCategory extends JViewLegacy
 		{
 			global $mainframe;
 			$mainframe = JFactory::getApplication();
-			$model     = $this->getModel('category');
 
 			// Sstore_id is changed from  STORE view
 			$change_storeto = $mainframe->getUserStateFromRequest('$option.current_store', 'current_store', '', 'INTEGER');

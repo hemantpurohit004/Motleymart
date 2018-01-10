@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-JHtml::_('formbehavior.chosen', 'select');
+//~ JHtml::_('formbehavior.chosen', 'select');
 
 $jinput = JFactory::getApplication()->input;
 $qtc_product_name = $jinput->get('qtc_article_name', '', 'RAW');

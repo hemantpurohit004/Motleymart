@@ -30,26 +30,25 @@ class ProductHelper
 	 */
 	public function getAllFeturedProducts($store_id = '', $prod_cat = '', $limit = '4')
 	{
-		$where   = array();
-		$where[] = ' i.featured=1 ';
-		$where[] = ' i.state=1 ';
-		$where[] = ' i.display_in_product_catlog=1 ';
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName(array('i.item_id', 'i.featured', 'i.name', 'i.images', 'i.store_id')));
+		$query->select($db->quoteName(array('i.slab', 'i.min_quantity', 'i.max_quantity', 'i.parent', 'i.product_id', 'i.stock')));
+		$query->from($db->quoteName("#__kart_items", "i"));
+		$query->where($db->quoteName('i.featured') . '=1');
+		$query->where($db->quoteName('i.state') . '=1');
+		$query->where($db->quoteName('i.display_in_product_catlog') . '=1');
 
 		if (!empty($store_id))
 		{
-			$where[] = ' i.`store_id`=\'' . $store_id . '\' ';
+			$query->where($db->quoteName('i.store_id') . '=' . (INT) $store_id);
 		}
 
 		if (!empty($prod_cat))
 		{
-			$where[] = ' i.`category`=\'' . $prod_cat . '\' ';
+			$query->where($db->quoteName('i.category') . '=' . (INT) $prod_cat);
 		}
 
-		$where = (count($where) ? ' WHERE ' . implode(' AND ', $where) : '');
-		$db    = JFactory::getDBO();
-		$query = "SELECT i.item_id,i.featured,i.name,i.images,i.`store_id`,i.slab,i.`min_quantity`,i.`max_quantity`,
-		i.`parent`,i.`product_id`,i.stock
-		FROM #__kart_items  AS i" . $where . ' LIMIT 0 , ' . $limit;
 		$db->setQuery($query);
 
 		return $data = $db->loadAssocList();
@@ -69,39 +68,37 @@ class ProductHelper
 	 */
 	public function getTopSellerProducts($store_id = '', $prod_cat = '', $limit = 5, $parent = "")
 	{
-		$where = array();
-
-		//  Payment completed, and shipped are considered
-		$where[] = " o.`status` IN('C', 'S')";
-		$where[] = ' i.`state`=1';
-		$where[] = ' i.`display_in_product_catlog`=1';
+		// Payment completed, and shipped are considered
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName(array('i.item_id', 'i.name', 'i.images', 'i.store_id', 'i.slab')));
+		$query->select($db->quoteName(array('i.min_quantity', 'i.max_quantity', 'i.featured', 'i.parent', 'i.product_id', 'i.stock')));
+		$query->select('SUM(' . $db->quoteName('oi.product_quantity') . ') AS qty');
+		$query->from($db->quoteName("#__kart_order_item", "oi"));
+		$query->JOIN('INNER', $db->quoteName("#__kart_items", "i") . " ON " . $db->quoteName('oi.item_id') . "=" . $db->quoteName('i.item_id'));
+		$query->JOIN('INNER', $db->quoteName("#__kart_orders", "o") . " ON " . $db->quoteName('oi.order_id') . "=" . $db->quoteName('o.id'));
+		$query->where($db->quoteName('o.status') . " IN('C', 'S')");
+		$query->where($db->quoteName('i.state') . '=1');
+		$query->where($db->quoteName('i.display_in_product_catlog') . '=1');
 
 		if (!empty($store_id))
 		{
-			$where[] = ' i.store_id=\'' . $store_id . '\' ';
+			$query->where($db->quoteName('i.store_id') . '=' . (INT) $store_id);
 		}
 
 		if (!empty($prod_cat))
 		{
-			$where[] = ' i.`category`=\'' . $prod_cat . '\' ';
+			$query->where($db->quoteName('i.category') . '=' . (INT) $prod_cat);
 		}
 
 		if (!empty($parent))
 		{
-			$where[] = ' i.`parent`=\'' . $parent . '\' ';
+			$query->where($db->quoteName('i.parent') . '=' . (INT) $parent);
 		}
 
-		$where = (count($where) ? ' WHERE ' . implode(' AND ', $where) : '');
-		$db    = JFactory::getDbo();
-		$query = 'SELECT i.item_id,i.name,i.images,i.`store_id`,i.slab,i.`min_quantity`,i.`max_quantity`,i.`featured`,i.`parent`,
-		i.`product_id` , SUM( oi.`product_quantity` ) AS qty,i.stock
-		FROM  `#__kart_order_item` AS oi
-		INNER JOIN  `#__kart_items` AS i ON oi.`item_id` = i.`item_id`
-		INNER JOIN  `#__kart_orders` AS o ON oi.`order_id` = o.`id`
-		' . $where . '
-		GROUP BY  `item_id`
-		ORDER BY qty DESC
-		LIMIT 0 , ' . $limit;
+		$query->group($db->quoteName("i.item_id"));
+		$query->order("qty DESC");
+		$query->setLimit($limit);
 
 		$db->setQuery($query);
 
@@ -383,25 +380,15 @@ class ProductHelper
 	 */
 	public function getNewlyAdded_products($limit = '2')
 	{
-		/*$db    = JFactory::getDBO();
-		$query = 'SELECT i.item_id,i.name,i.images,i.`store_id`,i.slab,
-		i.`min_quantity`,i.`max_quantity`,i.`featured`,i.`parent`,i.`product_id`  ,i.`stock` from `#__kart_items` AS i
-		WHERE i.state=1
-		ORDER BY `cdate` DESC
-		LIMIT 0 , ' . $limit;
-		$db->setQuery($query);
-		return $data = $db->loadAssocList();*/
-
 		$db    = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('i.item_id,i.name,i.images,i.`store_id`,i.slab,i.`min_quantity`,i.`max_quantity`,i.`featured`,i.`parent`,i.`product_id`  ,i.`stock`'
-		);
-		$query->from('#__kart_items AS i');
-		$query->where('i.state=1 AND i.display_in_product_catlog = 1');
+		$query->select($db->quoteName(array('i.item_id','i.name','i.images','i.store_id','i.slab','i.min_quantity')));
+		$query->select($db->quoteName(array('i.max_quantity','i.featured','i.parent','i.product_id','i.stock')));
+		$query->from($db->quoteName('#__kart_items', 'i'));
 
-		// Plugin backeside params $this->params->get('no_of_product')
+		$query->where($db->quoteName('i.state') . "=1");
+		$query->where($db->quoteName('i.display_in_product_catlog') . "=1");
 
-		// $query->setLimit($this->params->get('no_of_product'));
 		$query->setLimit($limit);
 		$query->order("i.item_id DESC");
 		$db->setQuery($query);
@@ -418,24 +405,18 @@ class ProductHelper
 	 */
 	public function getRecentlyBoughtproducts($limit = '2')
 	{
-		$db    = JFactory::getDBO();
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('DISTINCT(' . $db->quoteName('oi.item_id') . ')');
+		$query->select($db->quoteName(array('i.name', 'i.images', 'i.featured', 'i.stock')));
+		$query->from($db->quoteName("#__kart_items", "i"));
+		$query->where($db->quoteName('i.state') . "=1");
+		$query->where($db->quoteName('i.display_in_product_catlog') . "=1");
+		$query->JOIN('INNER', $db->quoteName("#__kart_order_item", "oi") . " ON " . $db->quoteName('oi.item_id') . "=" . $db->quoteName('i.item_id'));
 
-		/*print 	$query = 'SELECT i.item_id,i.name,i.images,i.`store_id`,i.slab,i.`min_quantity`,i.`max_quantity`,i.`parent`,i.`product_id`
-		FROM `#__kart_items` AS i
-		INNER JOIN `#__kart_order_item` AS oi
-		ON oi.item_id=i.item_id
-		WHERE i.state=1
-		ORDER BY oi.`cdate` DESC
-		LIMIT 0 , '.$limit;*/
-
-		$query = 'SELECT DISTINCT(oi.item_id),i.name,i.images,i.featured,i.`stock`
-								FROM `#__kart_order_item` AS oi , `#__kart_items` AS i
-								WHERE i.state=1 AND i.display_in_product_catlog = 1
-								 AND   oi.item_id=i.item_id
-								GROUP BY oi.item_id
-								ORDER BY oi.`cdate` DESC
-								LIMIT 0 , ' . $limit;
-
+		$query->group($db->quoteName('oi.item_id'));
+		$query->order('oi.cdate DESC');
+		$query->limit($limit);
 		$db->setQuery($query);
 
 		return $db->loadAssocList();

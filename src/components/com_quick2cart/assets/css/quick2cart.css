@@ -1615,3 +1615,36 @@ th.cartitem_tprice{min-width: 90px;}
 		float:right;
 	}
 }
+
+.q2c-wrapper .q2c-inline-block
+{
+	display:inline-block;
+}
+
+.q2c-wrapper .q2c-table-cell-center
+{
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.q2c-wrapper .q2c-display-table
+{
+	display:table;
+}
+
+.q2c-wrapper .q2c-padding-5px
+{
+	padding:5px;
+}
+
+.q2c-wrapper .q2c-height-26px
+{
+	height:26px;
+}
+
+.q2c-wrapper .q2c-small-buy-button
+{
+	padding-top:0px;
+	padding-bottom:0px;
+	line-height:2;
+}
