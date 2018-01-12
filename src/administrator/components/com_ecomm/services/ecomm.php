@@ -1451,7 +1451,7 @@ class EcommService
      * Function to get all the categories
      * return array containig status as true and the categories
      */
-    public function ecommGetAllCategories($level = 2)
+    public function ecommGetAllCategories($level = 1)
     {
         // Clear data
         $this->returnData            = array();
@@ -1469,7 +1469,7 @@ class EcommService
 
                 if (count($categories) == 1) {
                     $parentId = $categories[0]['parent_id'];
-                    return $this->ecommGetCategoriesByLevel(2, $parentId);
+                    return $this->ecommGetCategoriesByLevel(1, $parentId);
                 }
 
                 for ($i = 0; $i < count($categories); $i++) {
