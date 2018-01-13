@@ -1763,7 +1763,7 @@ class EcommService
                     $method = array(
                         'name'=> ($shipMethod['name'] != null) ? $shipMethod['name'] : '', 
                         'totalShipCost' => (string) $shipMethod['totalShipCost']);
-                    $temp['shippingMethods'] = $method;
+                    $temp['shippingMethods'] = $method;  
                 }
                 $formattedCart[] = $temp;
             }
