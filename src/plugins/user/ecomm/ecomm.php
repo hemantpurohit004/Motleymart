@@ -58,6 +58,7 @@ class PlgUserEcomm extends JPlugin
 		}
 
 		$userId = ArrayHelper::getValue($user, 'id', 0, 'int');
+		$db = JFactory::getDbo();
 
 		if ($userId)
 		{
