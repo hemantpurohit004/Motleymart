@@ -1514,7 +1514,8 @@ class EcommService
 
             // Build the query
             $query->select('*')
-                ->from($this->db->quoteName('#__categories'));
+                ->from($this->db->quoteName('#__categories'))
+                ->order('lft ASC');
 
             // If parentId is given
             if ($parentId != 0) {
