@@ -1760,8 +1760,10 @@ class EcommService
                 $temp['productDetails'] = $this->ecommGetFormattedCartDetails(array($item['itemDetail']))[0];
                 foreach ($item['shippingMeths'] as $shipMethod)
                 {
-                    $method = array('name'=>$shipMethod['name'], 'totalShipCost' => (string)$shipMethod['totalShipCost']);
-                    $temp['shippingMethods'][] = $method;
+                    $method = array(
+                        'name'=> ($shipMethod['name'] != null) ? $shipMethod['name'] : '', 
+                        'totalShipCost' => (string) $shipMethod['totalShipCost']);
+                    $temp['shippingMethods'] = $method;  
                 }
                 $formattedCart[] = $temp;
             }
