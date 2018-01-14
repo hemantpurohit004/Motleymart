@@ -676,10 +676,11 @@ class EcommService
                             }
 
                         } else {
-                            $price = $productPrice + ($option->itemattributeoption_prefix . 1) * $option->itemattributeoption_price;
+                            //$price = $productPrice + ($option->itemattributeoption_prefix . 1) * $option->itemattributeoption_price;
+                            $price = $option->itemattributeoption_price;
                         }
 
-                        $availableOption['optionPrice'] = $price;
+                        $availableOption['optionPrice'] = (string) $price;
 
                         //$availableOption['optionOrdering'] = $option->ordering;
                         //$availableOption['optionState'] = $option->state;
@@ -1702,7 +1703,11 @@ class EcommService
         $discount      = $formattedDiscount->applicableMaxDiscount;
         $afterDiscount = $billAmount - $discount;
 
-        $billingDetails = array('totalBillAmount' => (double) $billAmount, 'discountAmount' => (double) $discount, 'totalBillAmountAfterDiscount' => (double) $afterDiscount);
+        $billingDetails = array(
+            'totalBillAmount' => (double) $billAmount, 
+            'discountAmount' => (double) $discount,  // No more needed
+            'totalBillAmountAfterDiscount' => (double) $afterDiscount // No more needed
+        );
 
         unset($formattedCart['totalBillAmount']);
         unset($this->returnData['store']);
@@ -1909,7 +1914,17 @@ class EcommService
             $singleItem['quantity']           = $singleCartItem['qty'];
             $singleItem['categoryId']         = $singleCartItem['category'];
             $singleItem['productAmount']      = $singleCartItem['amt'];
-            $singleItem['productTotalAmount'] = (string) $singleCartItem['tamt'];
+            $singleItem['productTotalAmount'] = $singleCartItem['tamt'];
+
+            if($singleItem['productTotalAmount'] == 0)
+            {
+                $singleItem['productTotalAmount'] = (string) $singleItem['productAmount'] * $singleItem['quantity'] ;
+            }   
+            else
+            {
+                $singleItem['productTotalAmount'] = (string) $singleCartItem['tamt'];
+            }
+
             $singleItem['shopTitle']          = '';
             $singleItem['productImages']      = $this->ecommGetProductImages($singleCartItem['item_id']);
 
@@ -1936,7 +1951,7 @@ class EcommService
                 $singleItem['shopTitle'] = $storeData['store']['title'];
             }
 
-            $total += $singleCartItem['tamt'];
+            $total += $singleItem['productTotalAmount'];
 
             $cartData[] = $singleItem;
         }
@@ -2694,6 +2709,8 @@ class EcommService
             $productsDetails = array();
             $totalTax = 0;
             $totalShippingCharges = 0;
+            $couponCode = '';
+            //$discountDetail = '';
 
             foreach ($order['items'] as $item)
             {
@@ -2707,20 +2724,19 @@ class EcommService
                 $product->totalAmount = $item->product_final_price;
                 $product->shippingCharges = (string) round($item->item_shipcharges, 2);
                 $product->taxCharges = (string) round($item->item_tax, 2);
-                $product->discount = (string) round($item->discount, 2);
-
-                $product->couponCode = '';
-                if(isset($item->coupon_code) && !empty($item->coupon_code))
-                {
-                    $product->couponCode = $item->coupon_code;
-                }
 
                 $product->optionDetails = new stdClass;
                 $product->optionDetails->optionId = $item->product_attributes;
                 $product->optionDetails->optionName = $item->product_attribute_names;
+                
                 if(isset($item->product_attributes_price) && !empty($item->product_attributes_price))
                 {
                     $temp = $product->productAmount + $item->product_attributes_price;
+                    $product->optionDetails->optionAmount = (string) $temp;
+                }
+                else
+                {
+                    $temp = $product->productAmount;
                     $product->optionDetails->optionAmount = (string) $temp;
                 }
 
@@ -2730,6 +2746,16 @@ class EcommService
                 $totalItemTaxCharges += !empty($item->item_tax) ? $item->item_tax : 0.00;
                 $totalItemDiscount += !empty($item->discount) ? $item->discount : 0.00;
                 $totalItemPrice += !empty($item->product_final_price) ? $item->product_final_price : 0.00;
+
+                if(!empty($item->coupon_code) && empty($couponCode))
+                {
+                    $couponCode = $item->coupon_code;
+                }
+
+                // if(!empty($item->discount_detail) && empty($discountDetail))
+                // {
+                //     $discountDetail = json_decode($item->discount_detail);
+                // }
             }
 
             $orderDetails->amount = (string) round($orderData->amount, 2);
@@ -2737,6 +2763,8 @@ class EcommService
             $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
             $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
             $orderDetails->discount = (string) round($totalItemDiscount, 2);
+            $orderDetails->couponCode = $couponCode;
+            //$orderDetails->discountDetail = $discountDetail;
 
             $orderDetails->productDetails = $productsDetails;
 

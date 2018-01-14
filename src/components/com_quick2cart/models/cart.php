@@ -555,7 +555,18 @@ class Quick2cartModelcart extends JModelLegacy
 
 			// Task 3 calculate total m price
 			// Product_final_price as tamt
-			$cart[$key]['tamt'] = ((float) $cart[$key]['amt'] + (float) $cart[$key]['opt_amt']) * (float) $cart[$key]['qty'];
+			//$cart[$key]['tamt'] = ((float) $cart[$key]['amt'] + (float) $cart[$key]['opt_amt']) * (float) $cart[$key]['qty']; // Commented By Nitesh
+			
+			// Hack By Nitesh
+			$optAmtNum = $cart[$key]['opt_amt'];
+			if($optAmtNum < 0 )
+			{
+			    $optAmtNum *= -1;
+			}
+			$cart[$key]['opt_amt'] = $optAmtNum; 
+
+			$cart[$key]['tamt'] =  (float) $cart[$key]['opt_amt'] * (float) $cart[$key]['qty'];
+			// Hack By Nitesh End
 
 			// Synchronize new item price and its related in cart_item table
 			$cart_item                           = new stdClass;
