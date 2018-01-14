@@ -47,7 +47,7 @@ class EcommApiResourceEcommCreateOrder extends ApiResource
 
 		$productsDetails = $inputData['productsDetails'];
 		$billingAddressId = $inputData['billing'];
-		$couponDetails = isset($inputData['couponDetails'])? $inputData['couponDetails'] : array();
+		$couponDetails = isset($inputData['couponDetails'])? $inputData['couponDetails'] : "";
 
 		$shippingAddressId = $billingAddressId;
 
