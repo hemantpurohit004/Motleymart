@@ -139,7 +139,19 @@ if (in_array('cart', $order_blocks))
  								<span>
 									<strong>
  								<?php
- 									$prodprice = (float) ($order->product_item_price + $order->product_attributes_price);
+
+ 									//$prodprice = (float) ($order->product_item_price + $order->product_attributes_price); // Commented By Nitesh
+
+ 									// Hack By Nitesh
+ 									if(!empty($order->product_attributes_price))
+ 									{ 
+ 										$prodprice = (float) ($order->product_item_price + $order->product_attributes_price); // Commented By Nitesh
+ 									}
+ 									else
+ 									{ 
+										$prodprice = (float) $order->product_item_price; 
+									}
+									
 									echo " <br/ >Price :" . $this->comquick2cartHelper->getFromattedPrice(number_format($prodprice, 2), $order_currency);
  								?>
 									</strong>
@@ -353,7 +365,7 @@ if (in_array('cart', $order_blocks))
 					<?php
 						//$totalItemShipCharges += !empty($order->item_shipcharges) ? $order->item_shipcharges : 0;
 
-					}
+					} 
 					?>
 					<tr>
 						<td colspan="6">&nbsp;</td>
