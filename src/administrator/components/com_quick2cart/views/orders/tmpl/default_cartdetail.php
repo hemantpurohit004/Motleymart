@@ -144,8 +144,14 @@ if (in_array('cart', $order_blocks))
 
  									// Hack By Nitesh
  									if(!empty($order->product_attributes_price))
- 									{ 
- 										$prodprice = (float) ($order->product_item_price + $order->product_attributes_price); // Commented By Nitesh
+ 									{
+ 										$optAmtNum = $order->product_attributes_price;
+										if($optAmtNum < 0 )
+										{
+										    $optAmtNum *= -1;
+										}
+										
+										$prodprice = (float) ($optAmtNum); // Commented By Nitesh
  									}
  									else
  									{ 
