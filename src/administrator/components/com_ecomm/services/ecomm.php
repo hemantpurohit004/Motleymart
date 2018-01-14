@@ -3200,17 +3200,6 @@ class EcommService
             $products[] = $productData;
         }
 
-        // Check if there are coupons present
-        $coupons = array();
-        if(isset($couponDetails) && !empty($couponDetails)) {
-            foreach ($couponDetails as $coupon) {
-                // If coupon value not blank
-                if (!empty($coupon)) {
-                    $coupons[] = $coupon;
-                }
-            }
-        }
-
         // Build the data
         $orderData                   = new stdClass;
         $orderData->address          = new stdClass;
@@ -3218,14 +3207,14 @@ class EcommService
         $orderData->products_data    = $products;
         $orderData->address->billing = $billingAddress;
         $orderData->address->shipping = $shippingAddress;
-        $orderData->coupon_code      = $coupons;
+        $orderData->coupon_code      = $couponDetails;
 
         $createOrderHelper = new CreateOrderHelper;
 
         //print_r($orderData);die;
 
 
-////  Code to add the shipping charges
+////  Code to add the shipping charges - start
 
         $path = JPATH_SITE . '/components/com_quick2cart/helpers/qtcshiphelper.php';
 
@@ -3274,8 +3263,9 @@ class EcommService
         $jinput = JFactory::getApplication();
         $jinput->input->set('itemshipMethDetails', $itemshipMethDetails);
         $jinput->input->set('itemshipMeth', $itemshipMeth);
+        
+////  Code to add the shipping charges - start
 
-/////
         // Place the order
         $result = $createOrderHelper->qtc_place_order($orderData);
 
