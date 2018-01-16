@@ -1982,7 +1982,7 @@ class EcommService
 
         if(isset($images[0]) && !empty($images[0]))
         {
-            $productImages['Img' . $i] = $images[0];
+            $productImages['Img0'] = $images[0];
         }
 
         return $productImages;
