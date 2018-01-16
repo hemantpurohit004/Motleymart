@@ -595,8 +595,9 @@ class EcommService
                     $images   = $this->getValidImages($images);
                     $imgArray = array();
 
-                    for ($index = 0; $index < count($images); $index++) {
-                        $imgArray['image' . $index] = $images[$index];
+                    if(isset($images[0]) && !empty($images[0]))
+                    {
+                        $imgArray['image0'] = $images[0];
                     }
 
                     $singleProduct['images'][] = $imgArray;
