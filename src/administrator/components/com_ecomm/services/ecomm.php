@@ -2360,9 +2360,6 @@ class EcommService
                     // Get the product ratings
                     $singleProduct['ratings'] = $this->ecommGetProductRating($product['product_id']);
 
-                    // Get the products available in options
-                    // $singleProduct['availableIn'] = $this->ecommGetAvailableUnitsForProduct($product['price']);
-
                     // Get all the images
                     $images = json_decode($product['images']);
 
@@ -2370,12 +2367,12 @@ class EcommService
                     $images   = $this->getValidImages($images);
                     $imgArray = array();
 
-                    for ($index = 0; $index < count($images); $index++) {
-                        $imgArray['image' . $index] = $images[$index];
+                    if(isset($images[0]) && !empty($images[0]))
+                    {
+                        $imgArray['image0'] = $images[0];
                     }
 
                     $singleProduct['images'][] = $imgArray;
-
                     $productsDetails[] = $singleProduct;
                 }
 
@@ -2487,7 +2484,9 @@ class EcommService
             $productDetails->images = array();
 
             for ($i = 0; $i < count($images); $i++) {
-                $productDetails->images['Img' . $i] = $images[$i];
+                $productImage = new stdClass;
+                $productImage->path = $images[$i];
+                $productDetails->images[] = $productImage;
             }
 
             // Load the promotion helper class and get the promotions
