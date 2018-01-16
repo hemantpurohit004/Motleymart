@@ -1980,8 +1980,9 @@ class EcommService
 
         $productImages = array();
 
-        for ($i = 0; $i < count($images); $i++) {
-            $productImages['Img' . $i] = $images[$i];
+        if(isset($images[0]) && !empty($images[0]))
+        {
+            $productImages['Img' . $i] = $images[0];
         }
 
         return $productImages;
