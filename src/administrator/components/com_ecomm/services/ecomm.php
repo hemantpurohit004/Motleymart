@@ -1673,22 +1673,49 @@ class EcommService
         return $this->returnData;
     }
 
+
+    /*
+     * Function to get the cart details
+     * return array containig status as true and the cart details
+     */
+    public function ecommApplyCouponCode($couponCode)
+    {
+        $this->returnData = array();
+
+        $session = JFactory::getSession();
+        $couponList = array();
+        $model   = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
+        $applicablePromotions   = $model->getPromoCoupon($couponCode);
+
+        if (!empty($applicablePromotions))
+        {
+            $couponList[0]                 = array("code" => $couponCode);
+            $session->set('coupon', $couponList);
+
+            $this->returnData['success'] = 'true';
+        }
+        else
+        {
+            $session->set('coupon', $couponList);
+            $this->returnData['success'] = 'false';
+            $this->returnData['message'] = 'Invalid Promo Code';
+        }
+
+        return $this->returnData;
+    }
+
     /*
      * Function to get the cart details
      * return array containig status as true and the cart details
      */
     public function ecommGetCartDetails()
     {
-        //return array('userid'=>JFactory::getUser()->id);
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
         // Load the cart model
         $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
         $cart      = $cartModel->getCartitems();
 
         // Load the promotion helper class and get the promotions
+        $discount        = 0;
         $promotionHelper = new PromotionHelper;
         $coupon          = $promotionHelper->getSessionCoupon();
         $promotions      = $promotionHelper->getCartPromotionDetail($cart, $coupon);
@@ -1701,17 +1728,35 @@ class EcommService
         $formattedDiscount = $this->ecommGetFormattedDiscountDetails($maxDiscountPromoUsed);
 
         $billAmount    = $formattedCart['totalBillAmount'];
-        $discount      = $formattedDiscount->applicableMaxDiscount;
-        $afterDiscount = $billAmount - $discount;
+        if(isset($formattedDiscount->applicableMaxDiscount))
+        {
+            $discount      = $formattedDiscount->applicableMaxDiscount;
+        }
+
+        // calculate tax
+        $tax = 0;
+        $tax = $this->getTaxAmount($billAmount);
+        
+        // calculate delivery charges
+        $delivery = 0;
+        $delivery = $this->getDeliveryAmount($billAmount);
+
+        $totalPayableAmount = ($billAmount + $tax + $delivery) - $discount;
 
         $billingDetails = array(
-            'totalBillAmount' => (double) $billAmount, 
-            'discountAmount' => (double) $discount,  // No more needed
-            'totalBillAmountAfterDiscount' => (double) $afterDiscount // No more needed
+            'totalBillAmount' => (string) $billAmount, 
+            'discountAmount' => (string) $discount,
+            'totalPayableAmount' => (string) $totalPayableAmount,
+            'taxAmount'  => (string) $tax,
+            'deliveryAmount'  => (string) $delivery
         );
 
         unset($formattedCart['totalBillAmount']);
         unset($this->returnData['store']);
+
+        // Clear the previous responses
+        $this->returnData            = array();
+        $this->returnData['success'] = 'false';
 
         if (!empty($formattedCart)) {
             $this->returnData['success']         = 'true';
@@ -1726,9 +1771,68 @@ class EcommService
         return $this->returnData;
     }
 
+    /*public function getMotleyDiscountAmount($cart)
+    {
+        // Get the product details
+        $modelCart      = new Quick2cartModelcart;
+        $total = 0;
+        foreach($cart as $product)
+        {
+            $productDetails = $this->ecommGetSingleProductDetails($product['item_id'], $product['category'], $product['store_id']);
+            $mrp = $productDetails['productDetails']->price;
+            $sellingPrice = $productDetails['productDetails']->sellingPrice;
+            $amount = $mrp - $sellingPrice;
+            $total += $amount;
+        }
+
+        return $total;
+    } */
+
+    public function getTaxAmount($billAmount)
+    {
+        // Default user group
+        $params       = JComponentHelper::getParams('com_ecomm');
+        $taxType = $params->get('taxType');
+        $taxAmount = 0;
+
+        switch($taxType)
+        {
+            case 'flat':
+                $taxAmount = $params->get('taxAmount');
+            break;
+
+            case 'percent':
+                $taxPercent = $params->get('taxPercent');
+                $taxAmount = ($taxPercent / 100) * $billAmount;
+            break;
+        }
+
+        return $taxAmount;
+    }
+
+    public function getDeliveryAmount($billAmount)
+    {
+        // Default user group
+        $params       = JComponentHelper::getParams('com_ecomm');
+        $baseAmount = $params->get('deliveryBaseAmount');
+        $deliveryAmount = 0;
+
+        switch($baseAmount < $billAmount)
+        {
+            case true:
+                $deliveryAmount = $params->get('deliveryAmountGreater');
+            break;
+
+            case false:
+                $deliveryAmount = $params->get('deliveryAmountLess');
+            break;
+        }
+
+        return $deliveryAmount;
+    }
+
     public function ecommGetShippingDetails($addressId)
     {
-        //print_r($addressId);die;
         // Clear the previous responses
         $this->returnData  = array();
         $this->returnData['success'] = 'false';
@@ -1892,11 +1996,23 @@ class EcommService
     }
 
     public function ecommGetFormattedDiscountDetails($discount)
-    {
-        unset($discount->rules);
-        unset($discount->applicableItemDetail);
+    { 
+        $data = new stdClass;
 
-        return $discount;
+        if(empty($discount))
+        {
+            $data->hasDiscount = "false";
+        }
+        else
+        {
+            $data->hasDiscount = "true";
+            $data->couponCode = $discount->coupon_code;
+            $data->name = $discount->name;
+            $data->description = $discount->description;
+            $data->applicableMaxDiscount = (string) $discount->applicableMaxDiscount;
+        }
+
+        return $data;
     }
 
     public function ecommGetFormattedCartDetails($cart)
@@ -2532,6 +2648,8 @@ class EcommService
             unset($productDetails->metakey);
             unset($productDetails->metadesc);
             unset($productDetails->slab);
+            unset($productDetails->taxprofile_id);
+            unset($productDetails->shipProfileId);
 
             // Build the data to be return
             $this->returnData['success']        = 'true';
@@ -2702,7 +2820,9 @@ class EcommService
             $orderDetails->status = $orderData->status;
             $orderDetails->createdOn = $orderData->cdate;
             $orderDetails->createdBy = $orderData->user_id;
-
+            $orderDetails->tax = $orderData->order_tax;
+            $orderDetails->shippingCharges = $orderData->order_shipping;
+            
             $totalItemShipCharges = 0;
             $totalItemTaxCharges = 0;
             $totalItemDiscount = 0;
@@ -2722,31 +2842,25 @@ class EcommService
                 $product->productName = $item->order_item_name;
                 $product->quantity = $item->product_quantity;
                 $product->productAmount = $item->product_item_price;
-                $product->totalAmount = $item->product_final_price;
-                $product->shippingCharges = (string) round($item->item_shipcharges, 2);
-                $product->taxCharges = (string) round($item->item_tax, 2);
+                $product->totalAmount = $item->product_attributes_price * $item->product_quantity;
+                
+                // Commented For now
+                // $product->shippingCharges = (string) round($item->item_shipcharges, 2);
+                // $product->taxCharges = (string) round($item->item_tax, 2);
 
                 $product->optionDetails = new stdClass;
                 $product->optionDetails->optionId = $item->product_attributes;
                 $product->optionDetails->optionName = $item->product_attribute_names;
                 
-                if(isset($item->product_attributes_price) && !empty($item->product_attributes_price))
-                {
-                    $temp = $product->productAmount + $item->product_attributes_price;
-                    $product->optionDetails->optionAmount = (string) $temp;
-                }
-                else
-                {
-                    $temp = $product->productAmount;
-                    $product->optionDetails->optionAmount = (string) $temp;
-                }
+                $product->optionDetails->optionAmount = (string) $item->product_attributes_price;
 
                 $productsDetails[] = $product;
 
-                $totalItemShipCharges += !empty($item->item_shipcharges) ? $item->item_shipcharges : 0.00;
-                $totalItemTaxCharges += !empty($item->item_tax) ? $item->item_tax : 0.00;
+                // Commented For now
+                // $totalItemShipCharges += !empty($item->item_shipcharges) ? $item->item_shipcharges : 0.00;
+                // $totalItemTaxCharges += !empty($item->item_tax) ? $item->item_tax : 0.00;
                 $totalItemDiscount += !empty($item->discount) ? $item->discount : 0.00;
-                $totalItemPrice += !empty($item->product_final_price) ? $item->product_final_price : 0.00;
+                $totalItemPrice += !empty($product->totalAmount) ? $product->totalAmount : 0.00;
 
                 if(!empty($item->coupon_code) && empty($couponCode))
                 {
@@ -2761,8 +2875,11 @@ class EcommService
 
             $orderDetails->amount = (string) round($orderData->amount, 2);
             $orderDetails->subTotal = (string) round($totalItemPrice, 2);
-            $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
-            $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
+            
+            // Commented For now
+            // $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
+            // $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
+            
             $orderDetails->discount = (string) round($totalItemDiscount, 2);
             $orderDetails->couponCode = $couponCode;
             //$orderDetails->discountDetail = $discountDetail;
@@ -3163,7 +3280,7 @@ class EcommService
      * Function to create new order
      * return array containig status as true
      */
-    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $couponDetails)
+    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId)
     {
         // Clear the previous responses
         $this->returnData            = array();
@@ -3172,17 +3289,9 @@ class EcommService
         $billingAddress              = new stdClass;
         $products                    = array();
 
-        if(!empty($couponDetails)) 
-        {
-            $model   = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
-            $applicablePromotions   = $model->getPromoCoupon($couponDetails);
-            if(empty($applicablePromotions))
-            {
-                $this->returnData['error_code'] = 'INVALID_PROMO_CODE';
-                $this->returnData['message'] = 'Invalid promo code. Please use another promo code.';
-                return $this->returnData;
-            } 
-        }
+        $promotionHelper = new PromotionHelper;
+        $couponDetails   = $promotionHelper->getSessionCoupon();
+
         
         $user = JFactory::getUser();
 
@@ -3242,7 +3351,7 @@ class EcommService
 
         //print_r($orderData);die;
 
-
+/*
 ////  Code to add the shipping charges - start
 
         $path = JPATH_SITE . '/components/com_quick2cart/helpers/qtcshiphelper.php';
@@ -3294,6 +3403,7 @@ class EcommService
         $jinput->input->set('itemshipMeth', $itemshipMeth);
         
 ////  Code to add the shipping charges - start
+*/
 
         // Place the order
         $result = $createOrderHelper->qtc_place_order($orderData);

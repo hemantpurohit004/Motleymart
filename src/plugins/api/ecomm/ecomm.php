@@ -76,6 +76,7 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommGetOtp', 'private', 'post');
 		$this->setResourceAccess('ecommVerifyOtp', 'private', 'post');
 		$this->setResourceAccess('getEnvironmentDetails', 'private', 'post');
+		$this->setResourceAccess('ecommApplyCouponCode', 'private', 'post');
 		
 	}
 }

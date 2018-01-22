@@ -90,4 +90,61 @@
 				required="true"
 				/>
 	</fieldset>
+	<fieldset name="CartCheckout">
+		<field 
+				name="taxType" 
+				class="btn-group" 
+				type="radio" 
+				default="flat" 
+				description="Select tax type" 
+				label="Tax Type"
+				required="true"
+				>
+				<option value="flat">Flat</option>
+				<option value="percent">Percent</option>
+		</field>
+		<field
+				name="taxAmount"
+				type="text"
+				label="Tax Amount"
+				description="Enter tax amount"
+				required="true"
+				default="0"
+				showon="taxType:flat"
+				/>
+		<field
+				name="taxPercent"
+				type="text"
+				label="Tax Percent"
+				description="Enter tax percent"
+				required="true"
+				default="0"
+				showon="taxType:percent"
+				/>
+		<field
+				name="deliveryBaseAmount"
+				type="text"
+				label="Delivery Amount"
+				description="Enter delivery base amount"
+				required="true"
+				default="500"
+				/>
+		<field
+				name="deliveryAmountLess"
+				type="text"
+				label="Delivery Amount Less"
+				description="Enter delivery amount less"
+				required="true"
+				default="50"
+				/>
+
+		<field
+				name="deliveryAmountGreater"
+				type="text"
+				label="Delivery Amount Greater"
+				description="Enter delivery amount less"
+				required="true"
+				default="0"
+				/>
+	</fieldset>
 </config>

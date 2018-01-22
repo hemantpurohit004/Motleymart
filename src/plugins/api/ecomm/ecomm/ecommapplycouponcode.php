@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommCreateOrder extends ApiResource
+class EcommApiResourceEcommApplyCouponCode extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,12 +45,13 @@ class EcommApiResourceEcommCreateOrder extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$productsDetails = $inputData['productsDetails'];
-		$billingAddressId = $inputData['billing'];
+		// Get the required data
+		$couponCode = $inputData['couponCode'];
 
-		$shippingAddressId = $billingAddressId;
+		// Create blank userData array
+		$userData = array();
 
-		$data = $service->ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId);
+		$data = $service->ecommApplyCouponCode($couponCode);
 
 		$this->plugin->setResponse($data);
 		return true;
