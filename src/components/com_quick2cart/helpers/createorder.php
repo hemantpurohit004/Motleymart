@@ -615,18 +615,24 @@ class CreateOrderHelper
 			{
 				foreach ($prod_info[1] as $attri_info)
 				{
+					// Hack By Nitesh
 					if ($attri_info['itemattributeoption_prefix'] == '+')
 					{
-						$orderItemData->product_attributes_price += $attri_info['itemattributeoption_price'];
+						// $orderItemData->product_attributes_price += $attri_info['itemattributeoption_price']; Commented By Nitesh
+						$orderItemData->product_attributes_price = $attri_info['itemattributeoption_price']; 
 					}
 					else
 					{
-						$orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price'];
+						// $orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price']; Commented By Nitesh
+						$orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price'] * -1; 
 					}
 				}
 			}
 
-			$product_price = $orderItemData->product_attributes_price + $orderItemData->product_item_price;
+			// $product_price = $orderItemData->product_attributes_price + $orderItemData->product_item_price; Commented By Nitesh
+
+			// Hack By Nitesh
+			$product_price = $orderItemData->product_attributes_price;
 
 			$orderItemData->product_final_price = $cartFormatData['tamt'] = $product_price * $orderItemData->product_quantity;
 

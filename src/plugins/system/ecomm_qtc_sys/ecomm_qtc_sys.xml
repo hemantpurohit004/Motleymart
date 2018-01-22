@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+
+	<name>Ecomm Quick2Cart - System Plugin</name>
+	<author>Shivneri Systems</author>
+	<creationDate>September 2017</creationDate>
+	<copyright>(C) 2005 - 2017 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>niteshkesarkar136@gmail.com</authorEmail>
+	<authorUrl>www.shivnerisystems.com</authorUrl>
+	<version>3.0.0</version>
+
+	<description>
+		<![CDATA[
+			This plugins add the tax and shipping charges for order.</strong>
+		]]>
+	</description>
+
+	<files>
+		<filename plugin="ecomm_qtc_sys">ecomm_qtc_sys.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<languages >
+		<language tag="en-GB">en-GB/en-GB.plg_system_ecomm_qtc_sys.ini</language>
+	</languages>
+
+	<!-- Fields for Joomla 1.6.x and onwards -->
+	<config name="params">
+		<fields name="params">
+			<fieldset name="basic">
+				<!-- <field name="loadBS3js" class="btn-group" type="radio" default="0" description="QTC_SYS_LOAD_BS3_JS_DESC" label="QTC_SYS_LOAD_BS3_JS" >
+					<option value="1">QTC_SYS_YES</option>
+					<option value="0">QTC_SYS_NO</option>
+				</field>
+				<field name="loadmasonryJs" class="btn-group" type="radio" default="1" description="QTC_SYS_LOAD_MASONRY_JS_DESC" label="QTC_SYS_LOAD_MASONRY_JS" >
+					<option value="1">QTC_SYS_YES</option>
+					<option value="0">QTC_SYS_NO</option>
+				</field>
+				-->
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>
