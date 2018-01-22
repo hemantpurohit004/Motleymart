@@ -2818,7 +2818,9 @@ class EcommService
             $orderDetails->status = $orderData->status;
             $orderDetails->createdOn = $orderData->cdate;
             $orderDetails->createdBy = $orderData->user_id;
-
+            $orderDetails->tax = $orderData->order_tax;
+            $orderDetails->shippingCharges = $orderData->order_shipping;
+            
             $totalItemShipCharges = 0;
             $totalItemTaxCharges = 0;
             $totalItemDiscount = 0;
@@ -2838,31 +2840,25 @@ class EcommService
                 $product->productName = $item->order_item_name;
                 $product->quantity = $item->product_quantity;
                 $product->productAmount = $item->product_item_price;
-                $product->totalAmount = $item->product_final_price;
-                $product->shippingCharges = (string) round($item->item_shipcharges, 2);
-                $product->taxCharges = (string) round($item->item_tax, 2);
+                $product->totalAmount = $item->product_attributes_price * $item->product_quantity;
+                
+                // Commented For now
+                // $product->shippingCharges = (string) round($item->item_shipcharges, 2);
+                // $product->taxCharges = (string) round($item->item_tax, 2);
 
                 $product->optionDetails = new stdClass;
                 $product->optionDetails->optionId = $item->product_attributes;
                 $product->optionDetails->optionName = $item->product_attribute_names;
                 
-                if(isset($item->product_attributes_price) && !empty($item->product_attributes_price))
-                {
-                    $temp = $product->productAmount + $item->product_attributes_price;
-                    $product->optionDetails->optionAmount = (string) $temp;
-                }
-                else
-                {
-                    $temp = $product->productAmount;
-                    $product->optionDetails->optionAmount = (string) $temp;
-                }
+                $product->optionDetails->optionAmount = (string) $item->product_attributes_price;
 
                 $productsDetails[] = $product;
 
-                $totalItemShipCharges += !empty($item->item_shipcharges) ? $item->item_shipcharges : 0.00;
-                $totalItemTaxCharges += !empty($item->item_tax) ? $item->item_tax : 0.00;
+                // Commented For now
+                // $totalItemShipCharges += !empty($item->item_shipcharges) ? $item->item_shipcharges : 0.00;
+                // $totalItemTaxCharges += !empty($item->item_tax) ? $item->item_tax : 0.00;
                 $totalItemDiscount += !empty($item->discount) ? $item->discount : 0.00;
-                $totalItemPrice += !empty($item->product_final_price) ? $item->product_final_price : 0.00;
+                $totalItemPrice += !empty($product->totalAmount) ? $product->totalAmount : 0.00;
 
                 if(!empty($item->coupon_code) && empty($couponCode))
                 {
@@ -2877,8 +2873,11 @@ class EcommService
 
             $orderDetails->amount = (string) round($orderData->amount, 2);
             $orderDetails->subTotal = (string) round($totalItemPrice, 2);
-            $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
-            $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
+            
+            // Commented For now
+            // $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
+            // $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
+            
             $orderDetails->discount = (string) round($totalItemDiscount, 2);
             $orderDetails->couponCode = $couponCode;
             //$orderDetails->discountDetail = $discountDetail;
