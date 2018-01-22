@@ -2648,6 +2648,8 @@ class EcommService
             unset($productDetails->metakey);
             unset($productDetails->metadesc);
             unset($productDetails->slab);
+            unset($productDetails->taxprofile_id);
+            unset($productDetails->shipProfileId);
 
             // Build the data to be return
             $this->returnData['success']        = 'true';
