@@ -33,7 +33,6 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 	 */
 	public function onQuick2cartAfterOrderPlace($order_obj, $data)
 	{	
-
 		$ecommService = new EcommService;
 
 		$products = $order_obj['items'];
