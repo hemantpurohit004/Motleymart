@@ -93,6 +93,12 @@ class PlgUserEcomm extends JPlugin
 					'DELETE FROM #__kart_customer_address WHERE user_id = ' . $userId
 				);
 				$db->execute();
+
+				// Delete com_api key
+				$db->setQuery(
+					'DELETE FROM #__api_keys WHERE userid = ' . $userId
+				);
+				$db->execute();
 			}
 			catch (Exception $e)
 			{
