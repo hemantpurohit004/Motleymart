@@ -71,7 +71,6 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommCreateOrder', 'private', 'post');
 		$this->setResourceAccess('ecommUpdateCartDetails', 'private', 'post');
 		$this->setResourceAccess('ecommGetCartDetails', 'private', 'post');
-		$this->setResourceAccess('ecommUpdatePaymentDetailsForOrder', 'private', 'post');
 		$this->setResourceAccess('ecommGetOrdersForUser', 'private', 'post');
 		$this->setResourceAccess('ecommGetOtp', 'private', 'post');
 		$this->setResourceAccess('ecommVerifyOtp', 'private', 'post');
