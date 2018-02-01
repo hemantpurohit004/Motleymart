@@ -632,6 +632,73 @@ class EcommService
         return $this->db->loadAssoc()['id'];
     }
 
+
+    /**
+     * Function ecommCancelOrder.
+     */
+    public function ecommCancelOrder($orderid)
+    {
+        $orderDetails = $this->ecommGetSingleOrderDetails('', $orderid);
+
+        $this->returnData = array();
+        $this->returnData['success']   = 'false';
+
+        if($orderDetails['success'] == true)
+        {
+            // Remove hardcoded store_id afterwards
+            $store_id = 3;
+            $note = 'Cancel This Order';
+            $notify_chk = 1;
+            $status = 'E';
+            
+            if($this->updateOrderStatus($orderid, $status, $note, $notify_chk, $store_id))
+            {
+                $this->returnData['success']   = "true";
+            }
+        }
+
+        return $this->returnData;
+    }
+
+    /**
+     * Function getCountryName.
+     */
+    public function updateOrderStatus($orderid, $status, $note, $notify_chk, $store_id)
+    {
+
+         // Update item status
+        $this->comquick2cartHelper->updatestatus($orderid, $status, $note, $notify_chk, $store_id);
+
+        // Save order history
+        $orderItems = $this->getOrderItems($orderid);
+
+        foreach ($orderItems as $oitemId)
+        {
+            // Save order item status history
+            $this->comquick2cartHelper->saveOrderStatusHistory($orderid, $oitemId, $status, $note, $notify_chk);
+        }
+
+        return true;
+    }
+
+    /**
+     * Function getOrderItems.
+     */
+    public function getOrderItems($orderid)
+    {
+        if ($orderid)
+        {
+            $db = JFactory::getDBO();
+            $query = $db->getQuery(true);
+            $query->select('order_item_id');
+            $query->from('#__kart_order_item AS oi');
+            $query->where("oi.order_id= " . $orderid);
+            $db->setQuery($query);
+
+            return $orderList = $db->loadColumn();
+        }
+    }
+
     /**
      * Function getCountryName.
      */
