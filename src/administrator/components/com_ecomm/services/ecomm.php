@@ -1861,45 +1861,20 @@ class EcommService
 
     public function getTaxAmount($billAmount)
     {
-        // Default user group
-        $params       = JComponentHelper::getParams('com_ecomm');
-        $taxType = $params->get('taxType');
-        $taxAmount = 0;
+        $dispatcher = JDispatcher::getInstance();
+        JPluginHelper::importPlugin('qtctax');
+        $result = $dispatcher->trigger('addTax', array($billAmount));
 
-        switch($taxType)
-        {
-            case 'flat':
-                $taxAmount = $params->get('taxAmount');
-            break;
-
-            case 'percent':
-                $taxPercent = $params->get('taxPercent');
-                $taxAmount = ($taxPercent / 100) * $billAmount;
-            break;
-        }
-
-        return $taxAmount;
+        return $result[0]['charges'];
     }
 
     public function getDeliveryAmount($billAmount)
     {
-        // Default user group
-        $params       = JComponentHelper::getParams('com_ecomm');
-        $baseAmount = $params->get('deliveryBaseAmount');
-        $deliveryAmount = 0;
+        $dispatcher = JDispatcher::getInstance();
+        JPluginHelper::importPlugin('qtcshipping');
+        $result = $dispatcher->trigger('qtcshipping', array($billAmount));
 
-        switch($baseAmount < $billAmount)
-        {
-            case true:
-                $deliveryAmount = $params->get('deliveryAmountGreater');
-            break;
-
-            case false:
-                $deliveryAmount = $params->get('deliveryAmountLess');
-            break;
-        }
-
-        return $deliveryAmount;
+        return $result[0]['charges'];
     }
 
     public function ecommGetShippingDetails($addressId)
