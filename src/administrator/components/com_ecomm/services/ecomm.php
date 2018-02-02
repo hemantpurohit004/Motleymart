@@ -358,8 +358,12 @@ class EcommService
      * Function to get update the payment details after user choose the payment method
      * return array containig status as true and the payment details
      */
-    public function ecommUpdatePaymentDetailsForOrder($paymentMode, $orderDetails, $response)
+    public function ecommUpdatePaymentDetailsForOrder($paymentDetails)
     {
+        $paymentMode = $paymentDetails['paymentMode'];
+        $orderDetails = $paymentDetails['orderDetails'];
+        $response = isset($paymentDetails['response'])? $paymentDetails['response'] : '' ;
+
         require JPATH_SITE . '/components/com_quick2cart/controller.php';
         JLoader::import('payment', JPATH_SITE . '/components/com_quick2cart/models');
 
@@ -3347,7 +3351,7 @@ class EcommService
      * Function to create new order
      * return array containig status as true
      */
-    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId)
+    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $paymentDetails)
     {
         // Clear the previous responses
         $this->returnData            = array();
@@ -3486,9 +3490,27 @@ class EcommService
                 $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
                 $cartModel->empty_cart();
 
-                $this->returnData = $this->ecommGetSingleOrderDetails(0, $result->order_id);
+                // Update payment details start
+                $data = $this->ecommGetSingleOrderDetails(0, $result->order_id);
+                $orderData = $data['orderDetails'];
 
-                unset($this->returnData['order']);
+                $orderDetails = array();
+                $orderDetails['total'] = $orderData->amount;
+                $orderDetails['mail_addr'] = $orderData->userAddressDetails->email;
+                $orderDetails['order_id'] = $orderData->prefix . $orderData->orderId;
+                $orderDetails['user_id'] = $orderData->createdBy;
+                $orderDetails['comment'] = '';
+                $paymentDetails['orderDetails'] = $orderDetails;
+
+                if(isset($paymentDetails) && isset($paymentDetails['response']) && !empty($paymentDetails['response']))
+                {
+                    $paymentDetails['response']['txnid'] = $orderData->prefix . $orderData->orderId;
+                }
+
+                $this->ecommUpdatePaymentDetailsForOrder($paymentDetails);
+                // update payment details end
+
+                $this->returnData = $orderData;
             }
         }
 
