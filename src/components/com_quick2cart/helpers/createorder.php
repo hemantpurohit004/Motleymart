@@ -1290,11 +1290,11 @@ class CreateOrderHelper
 			{
 				if ($attri_info['itemattributeoption_prefix'] == '+')
 				{
-					$basePrice += $attri_info['itemattributeoption_price'];
+					$basePrice = $attri_info['itemattributeoption_price'];
 				}
 				else
 				{
-					$basePrice -= $attri_info['itemattributeoption_price'];
+					$basePrice = $attri_info['itemattributeoption_price'];
 				}
 			}
 		}
