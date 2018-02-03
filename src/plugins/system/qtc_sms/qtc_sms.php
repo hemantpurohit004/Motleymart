@@ -86,32 +86,21 @@ class PlgSystemQtc_Sms extends JPlugin
 	 * @since   2.7
 	 */
 	public function onQuick2cartAfterOrderPlace($order_obj, $data)
-	{
-		$ship = $data['order_info'][0];
-		$bill = $data['order_info'][1];
+	{ 
+		$ship = $data->address->shipping;
+		$orderData = $order_obj['order'];
 
-		$vars = new StdClass;
 		$oreder_status_arr = array('C', 'RF', 'S', 'P');
 
 		if ($ship->phone)
 		{
-			if (in_array($ship->status, $oreder_status_arr))
+			if (in_array($orderData->status, $oreder_status_arr))
 			{
-				$current_order_status = $ship->status;
+				$current_order_status = $orderData->status;
 			}
 
-			$order_id_before_prefix = $ship->order_id;
+			$order_id = $orderData->prefix . $orderData->id;
 			$mob_no  = $ship->phone;
-		}
-		elseif ($bill->phone)
-		{
-			if (in_array($bill->status, $oreder_status_arr))
-			{
-				$current_order_status = $bill->status;
-			}
-
-			$order_id_before_prefix = $bill->order_id;
-			$mob_no  = $bill->phone;
 		}
 
 		// Check Here
@@ -134,18 +123,7 @@ class PlgSystemQtc_Sms extends JPlugin
 			break;
 		}
 
-		$vars->mobile_no = trim($mob_no);
-
-		if (!class_exists('Quick2cartModelpayment'))
-		{
-			JLoader::register('Quick2cartModelpayment', JPATH_SITE . '/components/com_quick2cart/models/payment.php');
-			JLoader::load('Quick2cartModelpayment');
-		}
-
-		$Quick2cartModelpayment = new Quick2cartModelpayment;
-		$order_id_prefix               = $Quick2cartModelpayment->generate_prefix($order_id_before_prefix);
-
-		$order_id = $order_id_prefix . $order_id_before_prefix;
+		$mobile_no = trim($mob_no);
 
 		$find = array('{ORDERNO}','{STATUS}');
 		$replace = array($order_id, $whichever);
@@ -160,7 +138,61 @@ class PlgSystemQtc_Sms extends JPlugin
 		if (in_array($whichever, $selected_order_status))
 		{
 			JPluginHelper::importPlugin('sms');
-			$smsresult = $dispatcher->trigger('onSmsSendMessage', array($message, $vars));
+			$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobile_no, $message));
+		}
+	}
+
+	/**
+	 * onQuick2cartAfterOrderUpdate Trigger
+	 *
+	 * @param   Array  $order_obj  Order Object
+	 * @param   Array  $data       User Info
+	 *
+	 * @return  array
+	 *
+	 * @since   2.7
+	 */
+	public function onQuick2cartAfterOrderUpdate($order_obj, $data)
+	{ 
+
+		$status = $order_obj->status;
+		$mobileNo = trim($data['order_info'][0]->phone);
+		$orderId = $order_obj->prefix . $order_obj->id;
+
+		// Check Here
+		switch ($status)
+		{
+			case 'C' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_CONFIRMED');
+			break;
+
+			case 'RF' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_REFUND');
+			break;
+
+			case 'S' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_SHIPPED');
+			break;
+
+			case 'P' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_PENDING');
+			break;
+		}
+
+		$find = array('{ORDERNO}','{STATUS}');
+		$replace = array($orderId, $whichever);
+		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_MESSAGE'));
+
+		$dispatcher = JDispatcher::getInstance();
+		$plugin_name = $this->params['sms_options'];
+
+		$selected_order_status = array();
+		$selected_order_status = $this->params['order_status'];
+
+		if (in_array($whichever, $selected_order_status))
+		{
+			JPluginHelper::importPlugin('sms');
+			$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
 		}
 	}
 }
