@@ -1036,6 +1036,10 @@ class Comquick2cartHelper
 	 */
 	public function sendordermail($orderid)
 	{
+		// Load backend language file for shared views in FE/BE
+		$lang = JFactory::getLanguage();
+		$lang->load('com_quick2cart', JPATH_SITE);
+
 		$comquick2cartHelper = new comquick2cartHelper;
 		$params              = JComponentHelper::getParams('com_quick2cart');
 		$jinput              = JFactory::getApplication()->input;
