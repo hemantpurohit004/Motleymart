@@ -185,7 +185,8 @@ $this->attribute_opt = array();
 					<th class="<?php echo $stockRelatedFildClass; ?> qtcStockSkufields" width="80px"	align="left"><?php echo JText::_('QTC_ADDATTRI_STOCK'); ?></th>
 					<th class="<?php echo $stockRelatedFildClass; ?> qtcStockSkufields" width="40px"	align="left"><?php echo JText::_('QTC_ADDATTRI_SKU'); ?></th>
 					<th width="10%"	align="left"><?php echo JText::_( 'QTC_ADDATTRI_OPTPREFIX' ); ?></th>
-					<th width="40%"	align="left"><?php echo JText::_( 'QTC_ADDATTRI_OPTVAL' ); ?> </th>
+					<th width="20%"	align="left"><?php echo JText::_( 'MRP' ); //QTC_ADDATTRI_OPTVAL?> </th>
+					<th width="20%"	align="left"><?php echo JText::_( 'Selling Price' ); //QTC_ADDATTRI_OPTVAL ?> </th>
 					<th width="10%"	align="left"><?php echo JText::_( 'QTC_ADDATTRI_OPTORDER' ); ?></th>
 					<th width="5%"	align="left"></th>
 				</tr>
@@ -241,6 +242,53 @@ $this->attribute_opt = array();
 					echo JHtml::_('select.genericlist', $addpre_select, "att_detail[$i][attri_opt][$k][prefix]", 'class="chzn-done input-mini" data-chosen="qtc"', "value", "text", $addpre_val);
 				?>
 				</td>
+				<td>
+					<?php
+					$currencies=$params->get('addcurrency');
+					$curr=explode(',',$currencies);
+					$currencies_sym=$params->get('addcurrency_sym');
+
+					if (!empty($currencies_sym) )
+					{
+						$curr_syms=explode(',',$currencies_sym);
+					}
+					?>
+
+					<div class='control-group'  >
+						<span class='qtc_currencey_textbox1 input-append '>
+							<?php $quick2cartModelAttributes =  new quick2cartModelAttributes();
+
+							foreach($curr as $currKey=>$value)    // key contain 0,1,2... // value contain INR...
+							{
+									$currvalue=array();
+									$storevalue="";
+
+									if (isset($this->attribute_opt[$k] ))
+									{
+										$currvalue=$quick2cartModelAttributes->getOption_currencyValue($this->attribute_opt[$k]->itemattributeoption_id,$value);
+										$storevalue=(isset($currvalue[0]['price']))?$currvalue[0]['price'] : '';
+									}
+
+									if (!empty($curr_syms[$currKey]))
+									{
+										$currtext = $curr_syms[$currKey];
+									}
+									else
+									{
+										$currtext = $value;
+									}
+									?>
+								<div class="input-append curr_margin " >
+									<input type='text' name="att_detail[<?php echo $i; ?>][attri_opt][<?php echo $k; ?>][mrp][<?php echo $value; ?>]" size='1' id='' value="<?php echo (isset($this->attribute_opt[$k]->itemattributeoption_price_mrp))?$this->attribute_opt[$k]->itemattributeoption_price_mrp:0; ?>" class="span1 currtext controls" Onkeyup="checkforalpha(this,46,<?php echo $entered_numerics; ?>);">
+									<span class="add-on "><?php echo $currtext; ?></span>
+								</div>
+							<?php
+							}
+						?>
+						</span>
+					</div>
+				</td>
+
 				<td>
 					<?php
 					$currencies=$params->get('addcurrency');
