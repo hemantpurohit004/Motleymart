@@ -250,7 +250,10 @@ if (in_array('cart', $order_blocks))
 						<td class="cartitem_qty rightalign" data-title="<?php echo JText::_('QTC_PRODUCT_QTY');?>" style="<?php echo ($orders_email) ? $emailStyle_td : '';?>"><?php echo $order->product_quantity;?></td>
 						<td class="cartitem_price rightalign"  data-title="<?php echo JText::_('QTC_PRODUCT_PRICE');?>" style="<?php echo ($orders_email) ? $emailStyle_td . $emailStyle_priceNdTotPrice : '';?>">
 							<span><?php
-								$prodprice = (float) ($order->product_item_price + $order->product_attributes_price);
+								// Commented By Nitesh
+								// $prodprice = (float) ($order->product_item_price + $order->product_attributes_price);
+								// Hack By Nitesh
+								$prodprice = (float) ($order->product_attributes_price);
 								echo $this->comquick2cartHelper->getFromattedPrice(number_format($prodprice, 2), $order_currency);?>
 							</span>
 						</td>
