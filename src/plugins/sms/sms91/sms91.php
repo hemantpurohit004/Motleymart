@@ -134,4 +134,25 @@ class PlgSmsSms91 extends JPlugin
 		
 		return $result;
 	}
+
+		/**
+	 * Functions to send SMS
+	 *
+	 * @param   string  $phone      phone 
+	 * @param   string  $message    message
+	 *
+	 * @return  array  Returns array containing keys as phone, message and status
+	 *
+	 * @since  1.0
+	 */
+	public function onSmsSendMessage($phone, $message)
+	{	
+		// Encode the message
+		$encodedMessage = urlencode($message);
+	
+		$result = $this->send($phone, $encodedMessage);
+		
+		return $result;
+	}
+
 }

@@ -1436,8 +1436,8 @@ class EcommService
                 } else {
                     $arrayName                 = explode(' ', $userDetails->name);
                     $addressData['firstname']  = trim($arrayName[0]);
-                    $addressData['middlename'] = trim($arrayName[1]);
-                    $addressData['lastname']   = trim($arrayName[2]);
+                    $addressData['middlename'] = '';
+                    $addressData['lastname']   = trim($arrayName[1]);
                 }
             }
 
@@ -1486,7 +1486,7 @@ class EcommService
     {
         $dispatcher = JDispatcher::getInstance();
         JPluginHelper::importPlugin('sms');
-        $result = $dispatcher->trigger('send_SMS', array($receiver, $message));
+        $result = $dispatcher->trigger('onSmsSendMessage', array($receiver, $message));
 
         return $result;
     }
