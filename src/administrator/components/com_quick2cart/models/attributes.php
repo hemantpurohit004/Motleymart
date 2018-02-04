@@ -406,6 +406,9 @@ class Quick2cartModelAttributes extends JModelLegacy
 				$opt->itemattributeoption_prefix = $attri_opt['prefix'];
 				$opt->ordering                   = $attri_opt['order'];
 
+				// Hack By Nitesh
+				$opt->itemattributeoption_price_mrp = $attri_opt['mrp'][$currkey];
+
 				// UPDATING ATT OPTION
 				if (!empty($attri_opt['id']))
 				{

@@ -739,20 +739,8 @@ class EcommService
                     {
                         $availableOption['optionId']   = $option->itemattributeoption_id;
                         $availableOption['optionName'] = $option->itemattributeoption_name;
-                        if ($option->itemattributeoption_price == 0)
-                        {
-                            if (empty($sellingPrice)) {
-                                $price = $productPrice;
-                            } else {
-                                $price = $sellingPrice;
-                            }
-
-                        } else {
-                            //$price = $productPrice + ($option->itemattributeoption_prefix . 1) * $option->itemattributeoption_price;
-                            $price = $option->itemattributeoption_price;
-                        }
-
-                        $availableOption['optionPrice'] = (string) $price;
+                        $availableOption['optionMRP'] = (string) $option->itemattributeoption_price_mrp;
+                        $availableOption['optionPrice'] = (string) $option->itemattributeoption_price;
 
                         //$availableOption['optionOrdering'] = $option->ordering;
                         //$availableOption['optionState'] = $option->state;
