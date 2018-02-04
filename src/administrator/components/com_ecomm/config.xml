@@ -2,20 +2,6 @@
 <config>
 	<fieldset name="component">
 		<field
-				name="way2sms_username"
-				type="text"
-				label="Username"
-				description="Enter way2sms account username"
-				required="true"
-				/>
-		<field
-				name="way2sms_password"
-				type="password"
-				label="Password"
-				description="Enter way2sms account username"
-				required="true"
-				/>
-		<field
 				name="otp_timeout"
 				type="number"
 				label="OTP Timeout (in seconds)"
@@ -23,13 +9,14 @@
 				required="true"
 				default="120"
 				/>
-		<field
-				name="text_limit"
-				type="number"
-				label="Text limit in title"
-				description="Enter text limit in title"
+		<field 
+				name="otpDigitCount"
+				type="number" 
+				default="6" 
+				description="Enter OTP digit count" 
+				label="OTP Digit Count"
+				hint="For example, 6"
 				required="true"
-				default="30"
 				/>
 		<field
 				name="banner_store_path"
@@ -90,61 +77,15 @@
 				required="true"
 				/>
 	</fieldset>
-	<fieldset name="CartCheckout">
+	<fieldset name="USER_REGISTRATION">
 		<field 
-				name="taxType" 
-				class="btn-group" 
-				type="radio" 
-				default="flat" 
-				description="Select tax type" 
-				label="Tax Type"
+				name="emailDomain"
+				type="text" 
+				default="mailinator.com" 
+				description="Enter Email Domain For New User" 
+				label="Email Domain"
+				hint="For example, domain.com"
 				required="true"
-				>
-				<option value="flat">Flat</option>
-				<option value="percent">Percent</option>
-		</field>
-		<field
-				name="taxAmount"
-				type="text"
-				label="Tax Amount"
-				description="Enter tax amount"
-				required="true"
-				default="0"
-				showon="taxType:flat"
-				/>
-		<field
-				name="taxPercent"
-				type="text"
-				label="Tax Percent"
-				description="Enter tax percent"
-				required="true"
-				default="0"
-				showon="taxType:percent"
-				/>
-		<field
-				name="deliveryBaseAmount"
-				type="text"
-				label="Delivery Amount"
-				description="Enter delivery base amount"
-				required="true"
-				default="500"
-				/>
-		<field
-				name="deliveryAmountLess"
-				type="text"
-				label="Delivery Amount Less"
-				description="Enter delivery amount less"
-				required="true"
-				default="50"
-				/>
-
-		<field
-				name="deliveryAmountGreater"
-				type="text"
-				label="Delivery Amount Greater"
-				description="Enter delivery amount less"
-				required="true"
-				default="0"
 				/>
 	</fieldset>
 </config>

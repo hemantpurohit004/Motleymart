@@ -13,7 +13,6 @@ defined('_JEXEC') or die('Restricted access');
 JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
 JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
 JLoader::register('comquick2cartHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
-JLoader::register('Qtcshiphelper', JPATH_SITE . '/components/com_quick2cart/helpers');
 JLoader::register('storeHelper', JPATH_SITE . '/components/com_quick2cart/helpers/storeHelper.php');
 JLoader::register('ProductHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
 JLoader::import('promotion', JPATH_SITE . '/components/com_quick2cart/helpers');
@@ -46,20 +45,6 @@ class EcommService
         $this->storeHelper             = new storeHelper;
         $this->comquick2cartHelper     = new comquick2cartHelper;
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
-
-        $path = JPATH_SITE . '/components/com_quick2cart/helpers/qtcshiphelper.php';
-        if (!class_exists('Qtcshiphelper'))
-        {
-            JLoader::register('Qtcshiphelper', $path);
-            JLoader::load('Qtcshiphelper');
-        }
-
-        $path = JPATH_SITE . '/components/com_quick2cart/helpers/taxHelper.php';
-        if (!class_exists('taxHelper'))
-        {
-            JLoader::register('taxHelper', $path);
-            JLoader::load('taxHelper');
-        }
     }
     
     /*
@@ -215,13 +200,16 @@ class EcommService
      */
     public function ecommGenerateOtpForMobileNoResetPassword($mobileNo, $isUser)
     {
-        $params     = &JComponentHelper::getParams('com_ecomm');
+        $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -316,11 +304,14 @@ class EcommService
     {
         $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -986,17 +977,21 @@ class EcommService
                 $userModel = JModelLegacy::getInstance('User', 'UsersModel');
 
                 // Default user group
-                $params       = &JComponentHelper::getParams('com_users');
+                $params       = JComponentHelper::getParams('com_users');
                 $newUserGroup = $params->get('new_usertype');
+
+                $params     = JComponentHelper::getParams('com_ecomm');
+                $domain = $params->get('emailDomain');
 
                 // Build the data to be stored
                 $data = array(
                     'password' => $password,
                     'username' => $mobileNo,
                     'name'     => $mobileNo,
-                    'email'    => $mobileNo . '@mailinator.com',
+                    'email'    => $mobileNo .'@'. $domain,
                     'groups'   => array($newUserGroup),
                     'profile'  => array('phone' => $mobileNo),
+                    'sendEmail'  => true
                 );
 
                 // Save the data in the table
@@ -1244,11 +1239,14 @@ class EcommService
     {
         $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -1288,13 +1286,16 @@ class EcommService
      */
     public function ecommGenerateOtpForMobileNo($mobileNo, $isUser)
     {
-        $params     = &JComponentHelper::getParams('com_ecomm');
+        $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -1348,7 +1349,7 @@ class EcommService
     public function ecommSaveAddress($lattitude, $longitude, $userId)
     {
         // Default user group
-        $params       = &JComponentHelper::getParams('com_ecomm');
+        $params       = JComponentHelper::getParams('com_ecomm');
         $googleAddressKey = $params->get('googleAddressKey');
 
         if(empty($googleAddressKey)) {
@@ -1392,11 +1393,11 @@ class EcommService
             $addressData['address']    = trim($arrayOfAddress[$length - 5]);
 
             if (array_key_exists($length - 6, $arrayOfAddress)) {
-                $addressData['address'] = trim($arrayOfAddress[$length - 6] . ',' . $addressData['address']);
+                $addressData['address'] = trim(trim($arrayOfAddress[$length - 6]) . ', ' . trim($addressData['address']));
             }
 
             if (array_key_exists($length - 7, $arrayOfAddress)) {
-                $addressData['address'] = trim($arrayOfAddress[$length - 7] . ',' . $addressData['address']);
+                $addressData['address'] = trim(trim($arrayOfAddress[$length - 7]) . ', ' . trim($addressData['address']));
             }
 
             // Get the user details
@@ -1431,7 +1432,7 @@ class EcommService
 
             if(empty($groups)){
                 // Default user group
-                $params       = &JComponentHelper::getParams('com_users');
+                $params = JComponentHelper::getParams('com_users');
                 $groups = array($params->get('new_usertype'));
             }
 
@@ -3216,7 +3217,7 @@ class EcommService
                 }
 
                 // Default user group
-                $params       = &JComponentHelper::getParams('com_users');
+                $params       = JComponentHelper::getParams('com_users');
                 $newUserGroup = $params->get('new_usertype');
 
                 if (isset($user['groups']) && !empty($user['groups'])) {
@@ -3387,96 +3388,36 @@ class EcommService
 
         //print_r($orderData);die;
 
-/*
-////  Code to add the shipping charges - start
-
-        $path = JPATH_SITE . '/components/com_quick2cart/helpers/qtcshiphelper.php';
-
-        if (!class_exists('qtcshiphelper'))
-        {
-            JLoader::register('qtcshiphelper', $path);
-            JLoader::load('qtcshiphelper');
-        }
-
-        $qtcshiphelper              = new qtcshiphelper;
-        $shippingDetails            = new stdClass;
-
-        // Get the address model and save the address
-        $customer_addressform_model = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
-
-        $shippingDetails->ship = $customer_addressform_model->getAddress($shippingAddressId);
-        $shippingDetails->ship = $createOrderHelper->mapUserAddress($shippingDetails->ship);
-
-        $shippingDetails->bill = $customer_addressform_model->getAddress($billingAddressId);
-        $shippingDetails->bill = $createOrderHelper->mapUserAddress($shippingDetails->bill);
-
-        $itemWiseShipDetail = $qtcshiphelper->getCartItemsShiphDetail($shippingDetails);
-
-        $itemshipMethDetails = $itemshipMeth = array();
-
-        if(!empty($itemWiseShipDetail))
-        {
-            // Format the cart details
-            $formattedCart = array();
-            foreach ($itemWiseShipDetail as $item)
-            {
-
-                foreach ($item['shippingMeths'] as $shipMethod)
-                {
-                    $temp = $shipMethod;
-                    $temp['methRateId'] = $shipMethod['plugMethRateId'];
-                    unset($temp['plugMethRateId']);
-                    unset($temp['name']);
-                    unset($temp['product_attributes']);
-                    $itemshipMethDetails[$shipMethod['methodId']] = $temp;
-                    $itemshipMeth[][$item['item_id']] = $shipMethod['methodId'];
-                }
-            }
-        }
-
-        $jinput = JFactory::getApplication();
-        $jinput->input->set('itemshipMethDetails', $itemshipMethDetails);
-        $jinput->input->set('itemshipMeth', $itemshipMeth);
-        
-////  Code to add the shipping charges - start
-*/
-
         // Place the order
         $result = $createOrderHelper->qtc_place_order($orderData);
 
         // If order is successful
-        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id)) {
-            // TODO - check when should we send msg
-            //$message = 'Your order is successfully placed. Order id is : ' . $result->order_id;
-            //$status = $this->ecommSendSms($user->username, $message);
+        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id)) 
+        {
+            $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
+            $cartModel->empty_cart();
 
-            //if ($status['success'] == 'true')
+            // Update payment details start
+            $data = $this->ecommGetSingleOrderDetails(0, $result->order_id);
+            $orderData = $data['orderDetails'];
+
+            $orderDetails = array();
+            $orderDetails['total'] = $orderData->amount;
+            $orderDetails['mail_addr'] = $orderData->userAddressDetails->email;
+            $orderDetails['order_id'] = $orderData->prefix . $orderData->orderId;
+            $orderDetails['user_id'] = $orderData->createdBy;
+            $orderDetails['comment'] = '';
+            $paymentDetails['orderDetails'] = $orderDetails;
+
+            if(isset($paymentDetails) && isset($paymentDetails['response']) && !empty($paymentDetails['response']))
             {
-                $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
-                $cartModel->empty_cart();
-
-                // Update payment details start
-                $data = $this->ecommGetSingleOrderDetails(0, $result->order_id);
-                $orderData = $data['orderDetails'];
-
-                $orderDetails = array();
-                $orderDetails['total'] = $orderData->amount;
-                $orderDetails['mail_addr'] = $orderData->userAddressDetails->email;
-                $orderDetails['order_id'] = $orderData->prefix . $orderData->orderId;
-                $orderDetails['user_id'] = $orderData->createdBy;
-                $orderDetails['comment'] = '';
-                $paymentDetails['orderDetails'] = $orderDetails;
-
-                if(isset($paymentDetails) && isset($paymentDetails['response']) && !empty($paymentDetails['response']))
-                {
-                    $paymentDetails['response']['txnid'] = $orderData->prefix . $orderData->orderId;
-                }
-
-                $this->ecommUpdatePaymentDetailsForOrder($paymentDetails);
-                // update payment details end
-
-                $this->returnData = $orderData;
+                $paymentDetails['response']['txnid'] = $orderData->prefix . $orderData->orderId;
             }
+
+            $this->ecommUpdatePaymentDetailsForOrder($paymentDetails);
+            // update payment details end
+
+            $this->returnData = $orderData;
         }
 
         return $this->returnData;
