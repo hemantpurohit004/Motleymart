@@ -1695,15 +1695,17 @@ class EcommService
      * Function to add the item in the cart
      * return array containig status as true and the shops for given category
      */
-    public function ecommAddToCart($item, $userData)
+    public function ecommAddToCart($items, $userData)
     {
         // Clear the previous responses
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
-        // Add to cart
-        $data = $this->comquick2cartHelper->addToCartAPI($item, $userData);
-
+        foreach($items as $item) {
+             // Add to cart
+             $data = $this->comquick2cartHelper->addToCartAPI($item, $userData);
+        }
+       
         // If successfully added to the cart
         if ($data['status']) {
             $this->returnData['success'] = 'true';

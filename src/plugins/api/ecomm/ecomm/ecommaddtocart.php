@@ -46,22 +46,22 @@ class EcommApiResourceEcommAddToCart extends ApiResource
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
 		// Get the required data
-		$productId = $inputData['productId'];
-		$count = $inputData['count'];
-		$options = $inputData['options'];
+		$productDetails = $inputData['productDetails'];
+		$products = array();
 
-		// Create item array
-		$item = array(
-			'id' => $productId,
-			'parent' => 'com_quick2cart',
-			'count' => $count,
-			'options' => $options
-		);
+		foreach($productDetails as $product) {
+			$temp = array();
+			$temp['id'] = $product['productId'];
+			$temp['count'] = $product['count'];
+			$temp['options'] = $product['options'];
+			$temp['parent'] = 'com_quick2cart';
+			$products[] = $temp;
+		}
 
 		// Create blank userData array
 		$userData = array();
 
-		$data = $service->ecommAddToCart($item, $userData);
+		$data = $service->ecommAddToCart($products, $userData);
 
 		$this->plugin->setResponse($data);
 		return true;
