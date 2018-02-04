@@ -1246,7 +1246,7 @@ class EcommService
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand($$otpStartRange, $otpEndRange);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
