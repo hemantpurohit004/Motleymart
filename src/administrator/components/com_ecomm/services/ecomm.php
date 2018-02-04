@@ -200,13 +200,16 @@ class EcommService
      */
     public function ecommGenerateOtpForMobileNoResetPassword($mobileNo, $isUser)
     {
-        $params     = &JComponentHelper::getParams('com_ecomm');
+        $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -301,11 +304,14 @@ class EcommService
     {
         $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -1233,11 +1239,14 @@ class EcommService
     {
         $params     = JComponentHelper::getParams('com_ecomm');
         $otpTimeout = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10,$otpDigitCount);
+        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
 
         try
         {
             // Generate random number between 100000 and 999999
-            $otp = mt_rand(100000, 999999);
+            $otp = mt_rand($$otpStartRange, $otpEndRange);
 
             // Create the expiration time
             $currentTimestamp    = date('Y-m-d H:i:s');
@@ -1340,7 +1349,7 @@ class EcommService
     public function ecommSaveAddress($lattitude, $longitude, $userId)
     {
         // Default user group
-        $params       = &JComponentHelper::getParams('com_ecomm');
+        $params       = JComponentHelper::getParams('com_ecomm');
         $googleAddressKey = $params->get('googleAddressKey');
 
         if(empty($googleAddressKey)) {
@@ -1384,11 +1393,11 @@ class EcommService
             $addressData['address']    = trim($arrayOfAddress[$length - 5]);
 
             if (array_key_exists($length - 6, $arrayOfAddress)) {
-                $addressData['address'] = trim($arrayOfAddress[$length - 6] . ',' . $addressData['address']);
+                $addressData['address'] = trim(trim($arrayOfAddress[$length - 6]) . ', ' . trim($addressData['address']));
             }
 
             if (array_key_exists($length - 7, $arrayOfAddress)) {
-                $addressData['address'] = trim($arrayOfAddress[$length - 7] . ',' . $addressData['address']);
+                $addressData['address'] = trim(trim($arrayOfAddress[$length - 7]) . ', ' . trim($addressData['address']));
             }
 
             // Get the user details
@@ -1423,7 +1432,7 @@ class EcommService
 
             if(empty($groups)){
                 // Default user group
-                $params       = &JComponentHelper::getParams('com_users');
+                $params = JComponentHelper::getParams('com_users');
                 $groups = array($params->get('new_usertype'));
             }
 
@@ -3208,7 +3217,7 @@ class EcommService
                 }
 
                 // Default user group
-                $params       = &JComponentHelper::getParams('com_users');
+                $params       = JComponentHelper::getParams('com_users');
                 $newUserGroup = $params->get('new_usertype');
 
                 if (isset($user['groups']) && !empty($user['groups'])) {
