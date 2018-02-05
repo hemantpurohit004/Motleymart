@@ -1767,6 +1767,27 @@ class EcommService
     }
 
     /*
+     * Function to get mrp of optionId
+     * return mrp of option else 0
+     */
+    public function ecommGetMrpOfOption($productId, $optionId)
+    {
+        $data = $this->ecommGetAvailableUnitsForProduct($productId, 0, 0);
+        if(isset($data['isAvailable']) && $data['isAvailable'] == true)
+        {
+            if(isset($data['options']) && !empty($data['options']))
+            {
+                foreach ($data['options'] as $option) {
+                   if($optionId ==  $option['optionId']) 
+                   {
+                        return $option['optionMRP'];
+                   }
+                }
+            }
+        }
+    }
+
+    /*
      * Function to get the cart details
      * return array containig status as true and the cart details
      */
@@ -1778,9 +1799,22 @@ class EcommService
 
         // Load the promotion helper class and get the promotions
         $discount        = 0;
+        $productDiscount = 0;
+        $productMrpTotal = 0;
         $promotionHelper = new PromotionHelper;
         $coupon          = $promotionHelper->getSessionCoupon();
         $promotions      = $promotionHelper->getCartPromotionDetail($cart, $coupon);
+
+        // Calculate product mrp total
+        foreach($cart as $product)
+        {
+            $optionId = explode(',', $product['product_attributes']);
+            $mrp = $this->ecommGetMrpOfOption($product['item_id'],$optionId[0]);
+            if(!empty($mrp))
+            {
+                $productMrpTotal+=($mrp * $product['qty']);
+            }
+        }
 
         // Get the promotion details that has maximum discount
         $maxDiscountPromoUsed = $promotions->maxDisPromo;
@@ -1805,9 +1839,13 @@ class EcommService
 
         $totalPayableAmount = ($billAmount + $tax + $delivery) - $discount;
 
+        // Calculate product discount
+        $productDiscount = $productMrpTotal - $billAmount;
+
         $billingDetails = array(
             'totalBillAmount' => (string) $billAmount, 
             'discountAmount' => (string) $discount,
+            'productDiscountAmount' => (string) $productDiscount,
             'totalPayableAmount' => (string) $totalPayableAmount,
             'taxAmount'  => (string) $tax,
             'deliveryAmount'  => (string) $delivery
@@ -1966,6 +2004,7 @@ class EcommService
                 $attribute['child_product_item_id']      = $attr->child_product_item_id;
                 $attribute['itemattributeoption_name']   = $attr->itemattributeoption_name;
                 $attribute['itemattributeoption_price']  = $attr->itemattributeoption_price;
+                $attribute['itemattributeoption_price_mrp']  = $attr->itemattributeoption_price_mrp;
                 $attribute['itemattributeoption_code']   = $attr->itemattributeoption_code;
                 $attribute['itemattributeoption_prefix'] = $attr->itemattributeoption_prefix;
                 $attribute['ordering']                   = $attr->ordering;
@@ -2067,7 +2106,7 @@ class EcommService
             $singleItem['shopId']             = $singleCartItem['store_id'];
             $singleItem['quantity']           = $singleCartItem['qty'];
             $singleItem['categoryId']         = $singleCartItem['category'];
-            $singleItem['productAmount']      = $singleCartItem['amt'];
+            $singleItem['productAmount']      = $singleCartItem['product_attributes_price'];
             $singleItem['productTotalAmount'] = $singleCartItem['tamt'];
 
             if($singleItem['productTotalAmount'] == 0)
