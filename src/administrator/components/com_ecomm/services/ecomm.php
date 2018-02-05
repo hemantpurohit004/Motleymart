@@ -1785,6 +1785,8 @@ class EcommService
                 }
             }
         }
+
+        return 0;
     }
 
     /*
