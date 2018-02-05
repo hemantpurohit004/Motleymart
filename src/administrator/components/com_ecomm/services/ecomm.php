@@ -1812,7 +1812,7 @@ class EcommService
         {
             $optionId = explode(',', $product['product_attributes']);
             $mrp = $this->ecommGetMrpOfOption($product['item_id'],$optionId[0]);
-            if(!empty($mrp))
+            if(!empty($mrp) && $mrp > 0)
             {
                 $productMrpTotal+=($mrp * $product['qty']);
             }
@@ -1842,15 +1842,18 @@ class EcommService
         $totalPayableAmount = ($billAmount + $tax + $delivery) - $discount;
 
         // Calculate product discount
-        $productDiscount = $productMrpTotal - $billAmount;
+        if(!empty($productMrpTotal) && $productMrpTotal > 0)
+        {
+            $productDiscount = $productMrpTotal - $billAmount;
+        }
 
         $billingDetails = array(
-            'totalBillAmount' => (string) $billAmount, 
-            'discountAmount' => (string) $discount,
-            'productDiscountAmount' => (string) $productDiscount,
-            'totalPayableAmount' => (string) $totalPayableAmount,
-            'taxAmount'  => (string) $tax,
-            'deliveryAmount'  => (string) $delivery
+            'totalBillAmount' => (string)round($billAmount,2), 
+            'discountAmount' => (string) round($discount,2),
+            'productDiscountAmount' => (string) round($productDiscount,2),
+            'totalPayableAmount' => (string) round($totalPayableAmount,2),
+            'taxAmount'  => (string) round($tax,2),
+            'deliveryAmount'  => (string) round($delivery,2)
         );
 
         unset($formattedCart['totalBillAmount']);
