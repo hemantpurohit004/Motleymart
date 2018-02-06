@@ -611,34 +611,6 @@ class Quick2cartModelcartcheckout extends JModelLegacy
 		// Place order
 		$orderStatus = (array) $createOrderHelper->qtc_place_order($orderData);
 
-		// START Q2C Sample development
-		$order_obj = array();
-
-		if (!empty($status->order_id))
-		{
-			$orderDetails = $createOrderHelper->getOrderDetails($status->order_id);
-			$order_obj['order'] = $orderDetails;
-			$order_obj['items'] = $cart_itemsdata;
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin("system");
-			$result = $dispatcher->trigger("onQuick2cartAfterOrderPlace", array($order_obj, $data));
-
-			// @DEPRICATED
-			$result = $dispatcher->trigger("OnAfterq2cOrder", array($order_obj, $data));
-
-			if ($params['send_email_to_customer'] == 1)
-			{
-				if ($params['send_email_to_customer_after_order_placed'] == 1)
-				{
-					// We are assuming that empty status as pending
-					if (empty($orderDetails->status) || $orderDetails->status == 'P')
-					{
-						@$comquick2cartHelper->sendordermail($orderDetails->id);
-					}
-				}
-			}
-		}
-
 		// Clear the seesion coupon
 		$session = JFactory::getSession();
 		$session->clear("coupon");

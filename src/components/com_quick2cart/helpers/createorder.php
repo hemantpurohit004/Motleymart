@@ -274,39 +274,9 @@ class CreateOrderHelper
 					$this->qtc_add_shipping_address($orderData->address->shipping, $orderStatus->order_id);
 				}
 
-				// Send order email
-				$params = JComponentHelper::getParams('com_quick2cart');
 				$jinput              = JFactory::getApplication()->input;
 				$jinput->set('orderid', $orderId);
-
-				// For guest checkout
-				if (!JFactory::getUser()->id && $params->get('guest'))
-				{
-					$billemail = $orderData->address->billing->user_email;
-					$jinput->set('email', md5($billemail));
-				}
-
-				if ($params['send_email_to_customer'] == 1)
-				{
-					if ($params['send_email_to_customer_after_order_placed'] == 1)
-					{
-						// We are assuming that bydefault status of newly created order is pending
-						$comquick2cartHelper->sendordermail($orderStatus->order_id);
-					}
-				}
 			}
-
-			// Call to quick2cart OnAfterq2cOrder trigger
-			$order_obj = array();
-			$order_obj['order'] = $this->getOrderDetails($orderStatus->order_id);
-			$order_obj['items'] = $this->getOrderItemDetails($orderStatus->order_id);
-			$data = $orderData;
-			$dispatcher = JDispatcher::getInstance();
-			JPluginHelper::importPlugin("system");
-			$result = $dispatcher->trigger("onQuick2cartAfterOrderPlace", array($order_obj, $data));
-
-			// @DEPRICATED
-			$result = $dispatcher->trigger("OnAfterq2cOrder", array($order_obj, $data));
 
 			// Clear the seesion coupon
 			$session = JFactory::getSession();
