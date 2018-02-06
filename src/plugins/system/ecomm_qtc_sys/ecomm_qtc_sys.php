@@ -24,52 +24,57 @@ JLoader::import('ecomm', JPATH_ADMINISTRATOR . '/components/com_ecomm/services')
 class PlgSystemEcomm_Qtc_Sys extends JPlugin
 {
 	/**
-	 * [onQuick2cartAfterOrderPlace ]
+	 * [ecommOnQuick2cartAfterOrderPlace ]
 	 *
-	 * @param   [type]  $order_obj  [description]
-	 * @param   [type]  $data       [description]
+	 * @param   [type]  $orderDetails  Order details array
 	 *
 	 * @return  [type]              [description]
 	 */
-	public function onQuick2cartAfterOrderPlace($order_obj, $data)
-	{	
-		$ecommService = new EcommService;
 
-		$products = $order_obj['items'];
-		$totalAmount = 0;
+	public function ecommOnQuick2cartAfterOrderPlace($orderDetails)
+	{ 
+		$mobileNo = trim($orderDetails->userAddressDetails->mobileNo);
 
-		foreach($products as $item) 
+		$order_status_arr = array('C', 'RF', 'S', 'P');
+
+		if ($mobileNo)
 		{
-			$totalAmount += $item->original_price;
+			if (in_array($orderDetails->status, $order_status_arr))
+			{
+				$current_order_status = $orderDetails->status;
+			}
+
+			$order_id = $orderDetails->prefix . $orderDetails->orderId;
 		}
 
-		$taxAmount = $ecommService->getTaxAmount($totalAmount);
-		$shipAmount = $ecommService->getDeliveryAmount($totalAmount);
-		$amount = $order_obj['order']->amount + $shipAmount + $taxAmount;
+		// Check Here
+		switch ($current_order_status)
+		{
+			case 'C' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_CONFIRMED');
+			break;
 
-		// Create the insert query
-		$db = JFactory::getDbo();
-		$query   = $db->getQuery(true);
+			case 'RF' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_REFUND');
+			break;
 
-        // Fields to update.
-        $fields = array(
-            $db->quoteName('order_tax') . ' = ' . $db->quote($taxAmount),
-            $db->quoteName('order_shipping') . ' = ' . $db->quote($shipAmount),
-            $db->quoteName('amount') . ' = ' . $db->quote($amount),
-            $db->quoteName('original_amount') . ' = ' . $db->quote($amount),
-        );
+			case 'S' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_SHIPPED');
+			break;
 
-        // Conditions for which records should be updated.
-        $conditions = array(
-            $db->quoteName('id') . ' = ' . $db->quote($order_obj['order']->id)
-        );
+			case 'P' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_PENDING');
+			break;
+		}
 
-        $query->update($db->quoteName('#__kart_orders'))
-            ->set($fields)
-            ->where($conditions);
+		$find = array('{ORDERNO}','{STATUS}');
+		$replace = array($order_id, $whichever);
+		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_MESSAGE'));
 
-        $db->setQuery($query);
-        
-    	return $db->execute();
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('sms');
+		$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
+		
+		return true;
 	}
 }
