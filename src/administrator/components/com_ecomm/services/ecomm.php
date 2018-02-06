@@ -1901,6 +1901,11 @@ class EcommService
             $productDiscount = $productMrpTotal - $billAmount;
         }
 
+        if($productDiscount < 0)
+        {
+            $productDiscount = 0;
+        }
+
         $billingDetails = array(
             'totalBillAmount' => (string)round($billAmount,2), 
             'discountAmount' => (string) round($discount,2),
