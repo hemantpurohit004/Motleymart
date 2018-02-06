@@ -1808,7 +1808,22 @@ class EcommService
             $couponList[0]                 = array("code" => $couponCode);
             $session->set('coupon', $couponList);
 
-            $this->returnData['success'] = 'true';
+            // Load the cart model
+            $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
+            $cart      = $cartModel->getCartitems();
+
+            $promotionHelper = new PromotionHelper;
+            $promotions      = $promotionHelper->getCartPromotionDetail($cart, $couponCode);
+
+            // Get the promotion details that has maximum discount
+            $maxDiscountPromoUsed = $promotions->maxDisPromo;
+            $formattedDiscount = $this->ecommGetFormattedDiscountDetails($maxDiscountPromoUsed);
+
+            if(isset($formattedDiscount->applicableMaxDiscount))
+            {
+                 $this->returnData['success'] = 'true';
+                 $this->returnData['discountDetails'] = $formattedDiscount;
+            }
         }
         else
         {
@@ -1908,7 +1923,7 @@ class EcommService
 
         $billingDetails = array(
             'totalBillAmount' => (string)round($billAmount,2), 
-            'discountAmount' => (string) round($discount,2),
+            'discountAmount' => (string) round($discount, 2),
             'productDiscountAmount' => (string) round($productDiscount,2),
             'totalPayableAmount' => (string) round($totalPayableAmount,2),
             'taxAmount'  => (string) round($tax,2),
