@@ -99,6 +99,12 @@ class PlgUserEcomm extends JPlugin
 					'DELETE FROM #__api_keys WHERE userid = ' . $userId
 				);
 				$db->execute();
+
+				// Delete user coupon map
+				$db->setQuery(
+					'DELETE FROM #__ecomm_user_coupon_map WHERE userId = ' . $userId
+				);
+				$db->execute();
 			}
 			catch (Exception $e)
 			{
