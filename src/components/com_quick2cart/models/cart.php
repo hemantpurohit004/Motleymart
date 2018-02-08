@@ -686,6 +686,15 @@ class Quick2cartModelcart extends JModelLegacy
 		$query->where($conditions);
 		$db->setQuery($query);
 		$db->execute();
+
+		// Hack By Nitesh
+		$userId = JFactory::getUser()->id;
+		$query = $db->getQuery(true);
+		$conditions = array($db->quoteName('userId') . '=' . (int) $userId);
+		$query->delete($db->quoteName('#__ecomm_user_coupon_map'));
+		$query->where($conditions);
+		$db->setQuery($query);
+		$db->execute();
 	}
 
 	/**
