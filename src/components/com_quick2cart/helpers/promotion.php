@@ -24,7 +24,15 @@ class PromotionHelper
 	 */
 	public function getSessionCoupon()
 	{
-		$session = JFactory::getSession();
+		// Hack By Nitesh
+		$dispatcher = JDispatcher::getInstance();
+        JPluginHelper::importPlugin("system");
+        $return = $dispatcher->trigger("getUserAppliedCouponCode", array());
+
+        return $return[0];
+
+		// Commented By Nitesh
+		/*$session = JFactory::getSession();
 		$cops = $session->get('coupon');
 
 		$coupon_code = '';
@@ -42,7 +50,7 @@ class PromotionHelper
 			}
 		}
 
-		return $coupon_code;
+		return $coupon_code;*/
 	}
 
 	/**
