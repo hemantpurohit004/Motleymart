@@ -1805,25 +1805,11 @@ class EcommService
 
         if (!empty($applicablePromotions))
         {
-            $couponList[0]                 = array("code" => $couponCode);
-            $session->set('coupon', $couponList);
+            $dispatcher = JDispatcher::getInstance();
+            JPluginHelper::importPlugin("system");
+            $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
 
-            // Load the cart model
-            $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
-            $cart      = $cartModel->getCartitems();
-
-            $promotionHelper = new PromotionHelper;
-            $promotions      = $promotionHelper->getCartPromotionDetail($cart, $couponCode);
-
-            // Get the promotion details that has maximum discount
-            $maxDiscountPromoUsed = $promotions->maxDisPromo;
-            $formattedDiscount = $this->ecommGetFormattedDiscountDetails($maxDiscountPromoUsed);
-
-            if(isset($formattedDiscount->applicableMaxDiscount))
-            {
-                 $this->returnData['success'] = 'true';
-                 $this->returnData['discountDetails'] = $formattedDiscount;
-            }
+            $this->returnData['success'] = $return[0];
         }
         else
         {
@@ -3731,24 +3717,20 @@ class EcommService
 
         $gateways = array();
 
-        foreach ($result as $value) {
+        foreach ($result as $value) 
+        {
             $obj     = new stdClass;
-            $obj->id = $value;
-            $init    = false;
 
-            if ($value == 'byorder') {
-                $obj->title = 'Cash On Delivery';
-            } else if ($value == 'byordercard') {
-                $obj->title = 'Card On Delivery';
-            } else if ($value == 'payumoney') {
-                $obj->title = 'Card payment(Visa/Debit/Master) via PayUMoney';
-            } else {
-                $init = true;
-            }
+            $data = JPluginHelper::getPlugin("payment", $value);
+            $pluginDetails = json_decode($data->params);
 
-            if (!$init) {
+            if (!empty($pluginDetails->plugin_name)) 
+            {
+                $obj->id = $value;
+                $obj->title = $pluginDetails->plugin_name;
+
                 $gateways[] = $obj;
-            }
+            } 
         }
 
         if (!empty($gateways)) {
