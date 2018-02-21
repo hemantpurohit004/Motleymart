@@ -88,15 +88,6 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 
 	public function ecommApplyCouponCode($couponCode)
 	{ 
-		/*
-		CREATE TABLE `db_motleymart`.`ichal_ecomm_user_coupon_map` ( `id` INT NOT NULL AUTO_INCREMENT , `userId` INT NOT NULL , `couponCode` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-        // Load the table and save the data
-        $mobileOtpMapTable = JTable::getInstance('MobileOtpMap', 'EcommTable', array('dbo', $this->db));
-        $mobileOtpMapTable->load(array('mobile_no' => $mobileNo));
-
-		*/
-
         $return = 'false';
 
 		// Get the table instance

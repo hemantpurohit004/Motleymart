@@ -3,7 +3,7 @@
  * @package     Joomla.Plugin
  * @subpackage  User.joomla
  *
- * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -117,6 +117,7 @@ class PlgUserJoomla extends JPlugin
 		if (strpos($this->app->get('mailfrom'), '@') === false)
 		{
 			$this->app->enqueueMessage(JText::_('JERROR_SENDING_EMAIL'), 'warning');
+
 			return;
 		}
 
@@ -188,7 +189,7 @@ class PlgUserJoomla extends JPlugin
 	public function onUserLogin($user, $options = array())
 	{
 		$instance = $this->_getUser($user, $options);
-	    
+
 		// If _getUser returned an error, then pass it back.
 		if ($instance instanceof Exception)
 		{

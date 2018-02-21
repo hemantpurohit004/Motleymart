@@ -32,6 +32,18 @@
 				description="Enter Google Address Key"
 				required="true"
 				/>
+		<field 
+				name="addressType" 
+				type="list" 
+				default="Home" 
+				label="Default Address Type" 
+				description=" Select Default Address Type"
+				required="true"
+				>
+		 	 	<option value="Home">Home</option>
+		  		<option value="Office">Office</option>
+		  		<option value="Other">Other</option>
+		</field>
 	</fieldset>
 	<fieldset name="Environment">
 		<field

@@ -34,6 +34,9 @@ class Event {
 								self::$fields[$k.'-'.$in] = $input['name'];
 							}
 							if(!empty($label)){
+								if(is_array($label)){
+									$label = $label['text'];
+								}
 								self::$fields[$k.'-'.$in] .= ' - '.(strlen($label) < 60 ? $label : substr($label, 0, 60).'...');
 							}
 						}

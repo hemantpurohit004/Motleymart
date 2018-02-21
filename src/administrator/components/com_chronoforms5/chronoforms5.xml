@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
 	<name>com_chronoforms5</name>
-	<creationDate>July 2016</creationDate>
+	<creationDate>August 2017</creationDate>
 	<author>ChronoEngine.com</author>
-	<copyright>ChronoEngine.com 2016</copyright>
+	<copyright>ChronoEngine.com 2017</copyright>
 	<authorEmail>webmaster@chronoengine.com</authorEmail>
 	<authorUrl>www.chronoengine.com</authorUrl>
-	<version>5.0.12</version>
+	<version>5.0.16</version>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<description>The ChronoForms V5 component is the ultimate tool for Joomla forms creation, power and simplicity.</description>
 

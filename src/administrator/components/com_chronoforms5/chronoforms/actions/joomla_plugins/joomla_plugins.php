@@ -24,7 +24,9 @@ Class JoomlaPlugins extends \GCore\Admin\Extensions\Chronoforms\Action{
 		$config = new \GCore\Libs\Parameter($config);
 		
 		$mainframe = \JFactory::getApplication();
-		$contentParams = $mainframe->getParams('com_content');
+		//$contentParams = $mainframe->getParams('com_content');
+		//fix provided by gquadro on the forums
+		$contentParams = \JComponentHelper::getParams('com_content');
 		$dispatcher = \JDispatcher::getInstance();
 		$type = 'content';
 		\JPluginHelper::importPlugin($type);

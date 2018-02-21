@@ -572,4 +572,3 @@ if (in_array('cart', $order_blocks))
 	<?php
 }?>
 <!-- End Cart detail -->
-

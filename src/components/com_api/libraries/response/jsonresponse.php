@@ -32,6 +32,7 @@ class APIJSONResponse
 		if ($response instanceof Exception) {
 			$this->err_msg = $response->getMessage();
 			$this->err_code = $response->getCode();
+			$this->data->success = 'false';
 		}
 		else
 		{

@@ -242,8 +242,19 @@ Class Email extends \GCore\Admin\Extensions\Chronoforms\Action{
 			$gpg->addEncryptKey($mySecretKeyId);
 			$body = $gpg->encrypt($body);
 		}
-
-		$sent = \GCore\Libs\Mailer::send($tos, $subject, $body, $attachments, $others);
+		
+		if($settings['mail']['mail_method'] == 'joomla'){
+			$JMail = \JFactory::getMailer();
+			
+			$sent = $JMail->sendMail($others['from_email'], $others['from_name'], $tos, $subject, $body, $others['type'], $others['cc'], $others['bcc'], $attachments, $others['reply_email'], $others['reply_name']);
+		}else{
+			if(\GCore\C::get('GSITE_PLATFORM') == 'wordpress'){
+				$sent = wp_mail($tos, $subject, $body, /*$others*/ '', $attachments);
+			}else{
+				$sent = \GCore\Libs\Mailer::send($tos, $subject, $body, $attachments, $others);
+			}
+		}
+		
 		if($sent){
 			$form->debug[$action_id][self::$title][] = "An email with the details below was sent successfully:";
 		}else{

@@ -1396,7 +1396,10 @@ class Model {
 			$models_data = $data;
 			$data = $data[$this->alias];
 		}
-		$this->data = $data;
+		$passive_data = isset($params['passive_data']) AND $params['passive_data'] == true;
+		if(!$passive_data){
+			$this->data = $data;
+		}
 		//check new or update record
 		if((!empty($this->pkey) AND !empty($data[$this->pkey]) AND empty($params['new'])) OR (!empty($params['conditions']) AND is_array($params['conditions']))){
 			$mode = 'update';
@@ -1521,7 +1524,9 @@ class Model {
 		}else{
 			$this->created = false;
 		}
-		$this->data[$this->pkey] = $this->id;
+		if(!$passive_data){
+			$this->data[$this->pkey] = $this->id;
+		}
 		//check relationships
 		if(!isset($params['recursive']) OR $params['recursive'] != -1){
 			$this->processRelations('save', array('hasOne', 'belongsTo', 'hasMany'), $models_data);
@@ -1596,7 +1601,7 @@ class Model {
 						//check counter Cache
 						if(!empty($model_info['counterCache'])){
 							$counter_field = $model_info['counterCache'];
-							$className->updateAll(array($counter_field => $this->dbo->quoteName($counter_field).' + 1'), array($className->pkey => $this->data[$foreignKey]), array('cleanlist' => array($counter_field), 'modified' => false));
+							$className->updateAll(array($counter_field => $this->dbo->quoteName($counter_field).' + 1'), array($className->pkey => $this->data[$foreignKey]), array('cleanlist' => array($counter_field), 'modified' => false, 'passive_data' => true));
 						}
 					}
 					//check cache fields
