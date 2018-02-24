@@ -55,6 +55,7 @@ class EcommService
         $this->returnData = array();
         $this->returnData['success'] = 'false';
 
+        $currentTime = JFactory::getDate()->format('Y-m-d H:m:s'); 
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
@@ -65,6 +66,7 @@ class EcommService
             'mobile_no' => $mobileNo,
             'rating' => $rating,
             'feedback' => $feedback,
+            'created_date' => $currentTime
         );
 
         if($feedbackTable->save($data))

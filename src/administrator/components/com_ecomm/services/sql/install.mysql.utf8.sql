@@ -65,6 +65,7 @@ CREATE TABLE `#__ecomm_feedbacks` (
   `email` varchar(50) NOT NULL,
   `rating` int(11) NOT NULL,
   `feedback` varchar(2000) NOT NULL,
+  `created_date` DATETIME NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

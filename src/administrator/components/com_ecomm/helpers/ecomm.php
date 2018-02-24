@@ -35,6 +35,7 @@ class EcommHelper
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-star"></i>  Ratings'), 'index.php?option=com_ecomm&view=ratings');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-image"></i>  Banner form'), 'index.php?option=com_ecomm&view=banner');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-image"></i>  Banners'), 'index.php?option=com_ecomm&view=banners');
+		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-star"></i>  Feedbacks'), 'index.php?option=com_ecomm&view=feedbacks');
 	}
 
 	function getSubscriptionDetails($subscriptionId, $fields)
