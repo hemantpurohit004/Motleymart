@@ -126,26 +126,13 @@ class UsersApiResourceLogin extends ApiResource
 				$userDetails = $service->ecommGetSingleUserDetails($id);
 				$result->key = $key;
 				$result->userDetails = $userDetails['user'];
-				/*
-				$response = array(
-        			'status' => 1,
-        		    'type' => 'Joomla',
-        		    'error_message' => '',
-        		    'username' =>$userDetails['username'],
-        		    'password' => $credentials['password'],
-        		    'email' => $userDetails['email'],
-        		    'fullname' => $userDetails['name']
-        		);
-    
-    			$dispatcher = JEventDispatcher::getInstance();
-    			
-    			// Include the content plugins for the change of category state event.
-    			JPluginHelper::importPlugin('user');
-    
-    			// Trigger the onCategoryChangeState event.
-    			$dispatcher->trigger('onUserLogin', array($response, $options));
-			    $result->userId = JFactory::getUser()->id;*/
-			    
+				
+				$data = JPluginHelper::getPlugin("payment", "payumoney");
+            	$payUMoneyDetails = json_decode($data->params);
+				
+				$result->payUMoneyDetails = new stdClass;            	
+				$result->payUMoneyDetails->key = $payUMoneyDetails->key;
+				$result->payUMoneyDetails->salt = $payUMoneyDetails->salt;
 			}
 			else
 			{

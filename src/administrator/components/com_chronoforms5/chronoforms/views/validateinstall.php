@@ -34,16 +34,13 @@ defined("GCORE_SITE") or die;
 				<?php echo $this->Html->formLine('domain', array('type' => 'custom', 'label' => 'Domain', 'code' => $domain, 'sublabel' => 'The domain name, this domain MUST match the domain name used to generate the key on ChronoEngine.com')); ?>
 				<?php echo $this->Html->formLine('domain_name', array('type' => 'hidden', 'value' => $domain)); ?>
 				<?php echo $this->Html->formLine('license_key', array('type' => 'text', 'label' => 'Validation Key', 'class' => 'L', 'sublabel' => 'The short validation key which you should generate using your sale# on www.chronoengine.com')); ?>
-				<?php echo $this->Html->formLine('pid', array('type' => 'dropdown', 'label' => 'Product', 'class' => 'L', 'options' => array(
-					14 => 'ChronoForms 3 validation keys subscription', 
-					4 => 'ChronoForms 5 validation keys subscription', 
-					6 => 'ChronoForms Ultimate subscription',
-					18 => 'ChronoForms PayPal actions Ultimate subscription',
-					7 => 'ChronoForms Authorize.net actions Ultimate subscription',
-					31 => 'ChronoForms 2Checkout actions Ultimate subscription',
-				), 'sublabel' => 'Your subscription type')); ?>
-				<?php //echo $this->Html->formLine('instantcode', array('type' => 'text', 'label' => 'Instant Code', 'class' => 'XXL', 'sublabel' => 'In some situations you may need to provide the instant code, you do not need to enter this code unless you had instructions to do so.')); ?>
 				<?php echo $this->Html->formLine('serial_number', array('type' => 'text', 'label' => 'Serial number', 'class' => 'XXL', 'sublabel' => 'In most cases you will not need to use this field.')); ?>
+				
+				<?php if(!empty($extra_info)): ?>
+				<?php echo $this->Html->formLine('sale_number', array('type' => 'text', 'label' => 'Sale number', 'class' => 'L', 'sublabel' => 'Please enter your sale# (Order number) received by email.')); ?>
+				<?php echo $this->Html->formLine('sort_number', array('type' => 'text', 'label' => 'Sort number', 'class' => 'L', 'sublabel' => 'Please enter the sort number')); ?>
+				<?php endif; ?>
+				
 				<?php echo $this->Html->formSecEnd(); ?>
 				<?php echo $this->Html->formEnd(); ?>
 			</form>

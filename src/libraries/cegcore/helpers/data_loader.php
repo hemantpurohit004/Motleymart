@@ -182,6 +182,10 @@ class DataLoader {
 				$opt_pat = '/<option(.*?)<\/option>/is';
 				$slct_pat = '/selected=("|\')selected("|\')/i';
 				preg_match($n_pat, $sel_matches[0][0], $name_attr);
+				if(empty($name_attr[2])){
+					continue;
+				}
+				
 				$name = self::_dotname($name_attr[2], true);
 				$value = \GCore\Libs\Arr::getVal($data, explode('.', $name));
 				

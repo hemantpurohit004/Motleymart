@@ -25,4 +25,7 @@
 		<folder>locales</folder>
 		<folder>vendors</folder>
 	</files>
+	<updateservers>
+		<server type="library" priority="1" name="CEGCore v1 update server">http://www.chronoengine.com/chrono_joomla_updates/cegcore1.xml</server>
+	</updateservers>
 </extension>

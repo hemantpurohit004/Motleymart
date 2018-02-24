@@ -165,9 +165,8 @@ class Document {
 				$this->addJsFile(\GCore\C::get('GCORE_FRONT_URL').'assets/bootstrap/js/bootstrap.js');
 			break;
 			case 'semantic-ui':
-				$this->addJsFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/js/semantic.min.js');
-				$this->addCssFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/css/semantic.min.css');
-				$this->addCssFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/css/semantic-gcore.css');
+				$this->addJsFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/semantic.min.js');
+				$this->addCssFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/semantic.min.css');
 			break;
 			case 'semantic-ui.js':
 				$this->addJsFile(\GCore\C::get('GCORE_FRONT_URL').'assets/semantic-ui/js/semantic.min.js');

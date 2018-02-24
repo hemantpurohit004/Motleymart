@@ -147,46 +147,19 @@ class Chronoforms extends \GCore\Libs\GController {
 		$session = \GCore\Libs\Base::getSession();
 		parent::_settings('chronoforms');
 		$chronoforms_settings = new \GCore\Libs\Parameter($this->data['Chronoforms']);
-		if($chronoforms_settings->get('wizard.safe_save', 1)){
-			$s_form = array();
-			//parse_str($this->data['serialized_form_data'], $s_form);
-			if(!empty($this->data['serialized_form_data_chunks'])){
-				$chunks = $this->data['serialized_form_data_chunks'];
-				$this->data['serialized_form_data'] = implode('', $chunks);
+		
+		if(!empty($this->data['serialized_form_data_chunks'])){
+			$tot = [];
+			foreach($this->data['serialized_form_data_chunks'] as $ch){
+				parse_str($ch, $d);
+				$tot = array_replace_recursive($tot, $d);
 			}
 			
-			$pairs = explode('&', $this->data['serialized_form_data']);
-			$result = array();
-			foreach($pairs as $pair){
-				$dummy = array();
-				parse_str($pair, $dummy);
-				$path = array();
-				self::extract_array_path($dummy, $path);
-				$path = implode('.', $path);
-				$new_path = explode('.', $path);
-				//check if the last path item is numeric, then its an array of values
-				if(is_numeric($new_path[count($new_path) - 1])){
-					$value = \GCore\Libs\Arr::getVal($dummy, $new_path);
-					$last_numeric_index = $new_path[count($new_path) - 1];
-					unset($new_path[count($new_path) - 1]);
-					$existing_results = (array)\GCore\Libs\Arr::getVal($result, $new_path, array());
-					if(!in_array($last_numeric_index, array_keys($existing_results))){
-						$existing_results[$last_numeric_index] = $value;
-					}else{
-						$existing_results[] = $value;	
-					}
-					$result = \GCore\Libs\Arr::setVal($result, $new_path, $existing_results);
-					continue;
-				}
-				if(in_array('_XNX_', $new_path) !== false){
-					continue;
-				}
-				$result = \GCore\Libs\Arr::setVal($result, $new_path, \GCore\Libs\Arr::getVal($dummy, $new_path));
-			}
-			$s_form = $result;
-			$this->data = $s_form;
+			unset($this->data['serialized_form_data_chunks']);
+			
+			$this->data = array_merge($this->data, $tot);
 		}
-
+		
 		$result = parent::_save();
 		if($result){
 			$this->_limit_forms();
@@ -776,14 +749,8 @@ class Chronoforms extends \GCore\Libs\GController {
 			$fields = '';
 			
 			$update_fld = 'validated';
-			if($this->data['pid'] == 18){
-				$update_fld = 'validated_paypal';
-			}
-			if($this->data['pid'] == 7){
-				$update_fld = 'validated_authorize';
-			}
-			if($this->data['pid'] == 31){
-				$update_fld = 'validated_2checkout';
+			if(strpos($this->data['license_key'], '@') !== false){
+				$update_fld = explode('@', $this->data['license_key'])[0];
 			}
 			//$postfields = array();
 			unset($this->data['option']);
@@ -791,8 +758,8 @@ class Chronoforms extends \GCore\Libs\GController {
 			foreach($this->data as $key => $value){
 				$fields .= "$key=".urlencode($value)."&";
 			}
-
-			$target_url = 'http://www.chronoengine.com/index.php?option=com_chronocontact&task=extra&chronoformname=validateLicense';
+			
+			$target_url = 'http://www.chronoengine.com/index.php?option=com_chronocontact&task=extra&chronoformname=validateLicense&ver=5&api=2';
 			$output = '-';
 			if(ini_get('allow_url_fopen')){
 				$output = file_get_contents($target_url.'&'.rtrim($fields, "& "));
@@ -806,16 +773,20 @@ class Chronoforms extends \GCore\Libs\GController {
 				$output = curl_exec($ch);
 				curl_close($ch);
 			}
-			if($output == '-'){
-				$session->setFlash('error', 'Validation error, Could not connect to the remote server, your host does not have neither the CURL nor the allow_url_fopen.');
-				$this->redirect(r_('index.php?ext=chronoforms'));
-			}
+			
 			$validstatus = $output;
 
-			if($validstatus == 'valid'){
+			if(strpos($validstatus, 'valid') === 0){
+				$valresults = explode(':', $validstatus);
+				$valprods = (array)$valresults[1];
+				
 				parent::_settings('chronoforms');
-				$this->data['Chronoforms'][$update_fld] = 1;
+				foreach($valprods as $valprod){
+					$update_fld = ($valprod == 'forms' ? 'validated' : 'validated_'.$valprod);
+					$this->data['Chronoforms'][$update_fld] = 1;
+				}
 				$result = parent::_save_settings('chronoforms');
+				
 				if($result){
 					$session->setFlash('success', 'Validated successfully.');
 					$this->redirect(r_('index.php?ext=chronoforms'));
@@ -823,21 +794,12 @@ class Chronoforms extends \GCore\Libs\GController {
 					$session->setFlash('error', 'Validation error.');
 				}
 			}else if($validstatus == 'invalid'){
-				parent::_settings('chronoforms');
-				$this->data['Chronoforms'][$update_fld] = 0;
-				$result = parent::_save_settings('chronoforms');
 				$session->setFlash('error', 'Validation error, you have provided incorrect data.');
-				$this->redirect(r_('index.php?ext=chronoforms'));
 			}else{
-				if(!empty($this->data['instantcode'])){
-					$step1 = base64_decode(trim($this->data['instantcode']));
-					$step2 = str_replace(substr(md5(str_replace('www.', '', strtolower($matches[2]))), 0, 7), '', $step1);
-					$step3 = str_replace(substr(md5(str_replace('www.', '', strtolower($matches[2]))), - strlen(md5(str_replace('www.', '', strtolower($matches[2])))) + 7), '', $step2);
-					$step4 = str_replace(substr($this->data['license_key'], 0, 10), '', $step3);
-					$step5 = str_replace(substr($this->data['license_key'], - strlen($this->data['license_key']) + 10), '', $step4);
-					//echo (int)$step5;return;
-					//if((((int)$step5 + (24 * 60 * 60)) > strtotime(date('d-m-Y H:i:s')))||(((int)$step5 - (24 * 60 * 60)) < strtotime(date('d-m-Y H:i:s')))){
-					if(((int)$step5 < (strtotime("now") + (24 * 60 * 60))) AND ((int)$step5 > (strtotime("now") - (24 * 60 * 60)))){
+				if(!empty($this->data['serial_number'])){
+					$blocks = explode("-", trim($this->data['serial_number']));
+					$hash = md5($this->data['license_key'].str_replace('www.', '', $domain).$blocks[3]);
+					if(substr($hash, 0, 7) == $blocks[4]){
 						parent::_settings('chronoforms');
 						$this->data['Chronoforms'][$update_fld] = 1;
 						$result = parent::_save_settings('chronoforms');
@@ -845,33 +807,14 @@ class Chronoforms extends \GCore\Libs\GController {
 							$session->setFlash('success', 'Validated successfully.');
 							$this->redirect(r_('index.php?ext=chronoforms'));
 						}else{
-							$session->setFlash('error', 'Validation error.');
+							$session->setFlash('error', 'Validation error, please fill the form below or contact us on www.chronoengine.com');
 						}
 					}else{
-						$session->setFlash('error', 'Validation error, Invalid instant code provided.');
-						$this->redirect(r_('index.php?ext=chronoforms'));
+						$session->setFlash('error', 'Serial number invalid, please fill the form below or contact us on www.chronoengine.com');
 					}
-				}else{
-					if(!empty($this->data['serial_number'])){
-						$blocks = explode("-", trim($this->data['serial_number']));
-						$hash = md5($this->data['pid'].$this->data['license_key'].str_replace('www.', '', $domain).$blocks[3]);
-						if(substr($hash, 0, 7) == $blocks[4]){
-							parent::_settings('chronoforms');
-							$this->data['Chronoforms'][$update_fld] = 1;
-							$result = parent::_save_settings('chronoforms');
-							if($result){
-								$session->setFlash('success', 'Validated successfully.');
-								$this->redirect(r_('index.php?ext=chronoforms'));
-							}else{
-								$session->setFlash('error', 'Validation error.');
-							}
-						}else{
-							$session->setFlash('error', 'Serial number invalid!');
-						}
-					}
-					$session->setFlash('error', 'Validation error, please try again using the Instant Code, or please contact us on www.chronoengine.com');
-					$this->redirect(r_('index.php?ext=chronoforms'));
 				}
+				$session->setFlash('error', 'Validation error, please fill the form below or contact us on www.chronoengine.com');
+				$this->redirect(r_('index.php?ext=chronoforms'));
 			}
 		}
 	}

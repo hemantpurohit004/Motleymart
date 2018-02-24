@@ -29,32 +29,23 @@ defined("GCORE_SITE") or die;
 
 	$save_ext = '';
 	$save_ext .= 'jQuery("#admin_form :input[name*=\'_XNX_\']").remove();'; //remove the default fields/actions fields to save some post data space
-	if($chronoforms_settings->get('wizard.safe_save', 1)){
-		if(!(int)$chronoforms_settings->get('wizard.safe_save_chunk_size', 0)){
-			$save_ext .= '
-			jQuery("#serialized_form_data").val(jQuery("#admin_form").serialize());
-			';
-		}else{
-			$save_ext .= '
-			var chunks_counter = 0;
-			var chunks = jQuery("#admin_form").serialize().match(/.{1,'.$chronoforms_settings->get('wizard.safe_save_chunk_size', 0).'}/g);
-			
-			jQuery.each(chunks, function(i, c){
-				var $chunk_clone = jQuery("<textarea></textarea>");
-				$chunk_clone.prop("class", "serialized_form_data_chunks");
-				$chunk_clone.prop("name", "serialized_form_data_chunks["+chunks_counter+"]");
-				$chunk_clone.val(c);
-				jQuery("#serialized_form_chunks_area").append($chunk_clone);
-				chunks_counter++;
-			});
-			';
+	$save_ext .= '
+	var chunks_counter = 0;
+	var chunks = jQuery("#admin_form").find(":input");
+	var maxcount = 900;
+	
+	if(chunks.length > maxcount){
+		for(i = 0; i <= chunks.length; i = i + maxcount){
+			var $chunk_clone = jQuery("<textarea></textarea>");
+			$chunk_clone.prop("class", "serialized_form_data_chunks");
+			$chunk_clone.prop("name", "serialized_form_data_chunks["+chunks_counter+"]");
+			$chunk_clone.val(chunks.slice(i, i + maxcount).serialize());
+			jQuery("#serialized_form_chunks_area").append($chunk_clone);
+			chunks_counter++;
 		}
-		$save_ext .= '
-		jQuery("#admin_form :input").prop("disabled", true);
-		jQuery("#serialized_form_data").prop("disabled", false);
-		jQuery(".serialized_form_data_chunks").prop("disabled", false);
-		';
 	}
+	
+	';
 	$simple_wizard_fix = '';
 	if(!empty($this->data['setup']) OR !empty($this->data['Form']['params']['setup'])){
 		//simple form, disable the editor in email actions.

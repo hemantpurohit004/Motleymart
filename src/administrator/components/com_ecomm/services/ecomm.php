@@ -46,6 +46,31 @@ class EcommService
         $this->comquick2cartHelper     = new comquick2cartHelper;
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
+	
+	/*
+     * Function to get the billing details
+     */
+    public function ecommGetBillingDetails()
+    {
+        $plugin = JPluginHelper::getPlugin('qtctax', 'qtc_tax_default');
+        $params = new JRegistry($plugin->params);
+
+        $taxData = new stdClass;
+        $taxData->taxType = 'percentage';
+        $taxData->taxAmount = $params->get('tax_per', 0);
+
+        
+        $plugin = JPluginHelper::getPlugin('qtcshipping', 'qtc_shipping_default');
+        $params = new JRegistry($plugin->params);
+
+        $shipData = new stdClass;
+        $shipData->shippingCondition = '<';
+        $shipData->shippingLimit = $params->get('shipping_limit', 0);
+        $shipData->shippingAmount = $params->get('shipping_per', 0);
+
+        return array('tax' => $taxData, 'ship' => $shipData);
+    }
+	
 
     /*
      * Function to send sms and email
@@ -158,6 +183,14 @@ class EcommService
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
+        // Check if user exists
+        $userId = JUserHelper::getUserId($mobileNo);
+        if(empty($userId))
+        {
+            $this->returnData['message'] = 'This mobile no is not registered with us.';
+            return $this->returnData;
+        }
+        
         // Check if user is already verified and has a userid
         $result = $this->verifyIfUserAlreadyExistsResetPassword($mobileNo);
 
@@ -635,7 +668,7 @@ class EcommService
                     $singleProduct['ratings'] = $this->ecommGetProductRating($product['product_id']);
 
                     // Get the products available in options
-                    // $singleProduct['availableIn'] = $this->ecommGetAvailableUnitsForProduct($product['price']);
+                    $singleProduct['availableIn'] = $this->ecommGetAvailableUnitsForProduct($product['product_id'], $product['price'],$singleProduct['sellingPrice']);
 
                     // Get all the images
                     $images = json_decode($product['images']);
@@ -1405,6 +1438,7 @@ class EcommService
         // Default user group
         $params       = JComponentHelper::getParams('com_ecomm');
         $googleAddressKey = $params->get('googleAddressKey');
+        $defaultAddressType = $params->get('addressType');
 
         if(empty($googleAddressKey)) {
             $this->returnData['success'] = 'false';
@@ -1468,7 +1502,7 @@ class EcommService
 
             $addressData['phone']         = trim($userProfileDetails->profile['phone']);
             $addressData['user_email']    = trim($userDetails->email);
-            $addressData['address_title'] = '';
+            $addressData['address_title'] = $defaultAddressType;
             $addressData['vat_number']    = '';
 
             if (!empty($userDetails->name)) {
@@ -1604,6 +1638,7 @@ class EcommService
                 // Push all the categories in returnData
                 $this->returnData['success']    = 'true';
                 $this->returnData['categories'] = $categories;
+                $this->returnData['billingDetails'] = $this->ecommGetBillingDetails();
             }
 
             return $this->returnData;
@@ -1796,7 +1831,7 @@ class EcommService
      */
     public function ecommApplyCouponCode($couponCode)
     {
-        $this->returnData = array();
+        /*$this->returnData = array();
 
         $session = JFactory::getSession();
         $couponList = array();
@@ -1814,6 +1849,53 @@ class EcommService
         else
         {
             $session->set('coupon', $couponList);
+            $this->returnData['success'] = 'false';
+            $this->returnData['message'] = 'Invalid Promo Code';
+        }
+
+        return $this->returnData; */
+        
+        
+        $this->returnData = array();
+
+        $session = JFactory::getSession();
+        $couponList = array();
+        $model   = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
+        $applicablePromotions   = $model->getPromoCoupon($couponCode);
+
+        if (!empty($applicablePromotions))
+        {
+            $dispatcher = JDispatcher::getInstance();
+            JPluginHelper::importPlugin("system");
+            $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
+
+            if($return[0] == 'true')
+            {
+                // Load the cart model
+                $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
+                $cart      = $cartModel->getCartitems();
+    
+                $promotionHelper = new PromotionHelper;
+                $promotions      = $promotionHelper->getCartPromotionDetail($cart, $couponCode);
+    
+                // Get the promotion details that has maximum discount
+                $maxDiscountPromoUsed = $promotions->maxDisPromo;
+                $formattedDiscount = $this->ecommGetFormattedDiscountDetails($maxDiscountPromoUsed);
+    
+                if(isset($formattedDiscount->applicableMaxDiscount))
+                {
+                     $this->returnData['success'] = 'true';
+                     $this->returnData['discountDetails'] = $formattedDiscount;
+                }
+            }
+            else
+            {
+                $this->returnData['success'] = 'false';
+                $this->returnData['message'] = 'Faild to apply this coupon code.';
+            }
+        }
+        else
+        {
             $this->returnData['success'] = 'false';
             $this->returnData['message'] = 'Invalid Promo Code';
         }
@@ -2601,7 +2683,7 @@ class EcommService
         $products = $this->db->loadAssocList();
 
         try
-        {
+        {   /*
             // If products found
             if (!empty($products)) {
                 $productsDetails = array();
@@ -2637,7 +2719,27 @@ class EcommService
 
                 $this->returnData['success']  = 'true';
                 $this->returnData['products'] = $productsDetails;
-            } else {
+            } */
+            
+            // If products found
+            if (!empty($products)) 
+            {
+                $productsDetails = array();
+                $singleProduct = array();
+                
+                // Iterate over each product and get details
+                foreach ($products as $product) 
+                {
+                    // Get the products available in options
+                    $productsDetails[] = $this->ecommGetSingleProductDetails($product['product_id'], $$shopId, $categoryId) ['productDetails'];
+                }
+
+                $this->returnData = array();
+                $this->returnData['success']  = 'true';
+                $this->returnData['products'] = $productsDetails;
+            }
+            
+            else {
                 $this->returnData['message'] = 'No products found.';
             }
 
