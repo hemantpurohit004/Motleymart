@@ -47,6 +47,34 @@ class EcommService
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
 	
+    /*
+     * Function to save user feedback
+     */
+    public function ecommSaveFeedback($name, $email, $mobileNo, $rating, $feedback)
+    {
+        $this->returnData = array();
+        $this->returnData['success'] = 'false';
+
+        $userId = JFactory::getUser()->id;
+
+        $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
+        $data = array(
+            'user_id' => $userId,
+            'name' => $name,
+            'email' => $email,
+            'mobile_no' => $mobileNo,
+            'rating' => $rating,
+            'feedback' => $feedback,
+        );
+
+        if($feedbackTable->save($data))
+        {
+            $this->returnData['success'] = 'true';
+        }
+
+        return $this->returnData;
+    }
+
 	/*
      * Function to get the billing details
      */

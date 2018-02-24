@@ -78,6 +78,7 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommApplyCouponCode', 'private', 'post');
 		$this->setResourceAccess('ecommCancelOrder', 'private', 'post');
 		$this->setResourceAccess('ecommSendOrderNotification', 'private', 'post');
+		$this->setResourceAccess('ecommSaveFeedback', 'private', 'post');
 		
 	}
 }
