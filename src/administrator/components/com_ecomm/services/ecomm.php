@@ -588,9 +588,22 @@ class EcommService
                 $resultData['categoryId']         = $productData['productDetails']->category;
                 $resultData['productAmount']      = (string) round($productData['productDetails']->productAmount, 2);
                 $resultData['productTotalAmount'] = (string) round($productData['productDetails']->productTotalAmount, 2);
-                $resultData['availableInOption']  = (string) $productData['productDetails']->availableInOption;
-                $resultData['optionId']           = $productData['productDetails']->optionId;
                 $resultData['productImages']      = $this->ecommGetProductImages($product->productId);
+
+                $resultData['price']              = $productData['productDetails']->price;
+                $resultData['sellingPrice']       = $productData['productDetails']->sellingPrice;
+                $optionData                       = $productData['productDetails']->availableIn;
+
+                foreach ($optionData['options'] as $option)
+                {
+                    if($productData['productDetails']->optionId == $option['optionId'])
+                    {
+                        $resultData['optionId']    = $option['optionId'];
+                        $resultData['optionName']  = $option['optionName'];
+                        $resultData['optionMRP']   = $option['optionMRP'];
+                        $resultData['optionPrice'] = $option['optionPrice'];
+                    }
+                }
 
                 $productList[] = $resultData;
             }
