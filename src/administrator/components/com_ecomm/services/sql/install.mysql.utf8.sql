@@ -57,4 +57,16 @@ CREATE TABLE IF NOT EXISTS `#__picker_vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+CREATE TABLE `#__ecomm_feedbacks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `mobile_no` varchar(13) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `feedback` varchar(2000) NOT NULL,
+  `created_date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 

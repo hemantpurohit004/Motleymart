@@ -47,6 +47,36 @@ class EcommService
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
 	
+    /*
+     * Function to save user feedback
+     */
+    public function ecommSaveFeedback($name, $email, $mobileNo, $rating, $feedback)
+    {
+        $this->returnData = array();
+        $this->returnData['success'] = 'false';
+
+        $currentTime = JFactory::getDate()->format('Y-m-d H:m:s'); 
+        $userId = JFactory::getUser()->id;
+
+        $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
+        $data = array(
+            'user_id' => $userId,
+            'name' => $name,
+            'email' => $email,
+            'mobile_no' => $mobileNo,
+            'rating' => $rating,
+            'feedback' => $feedback,
+            'created_date' => $currentTime
+        );
+
+        if($feedbackTable->save($data))
+        {
+            $this->returnData['success'] = 'true';
+        }
+
+        return $this->returnData;
+    }
+
 	/*
      * Function to get the billing details
      */
@@ -558,9 +588,22 @@ class EcommService
                 $resultData['categoryId']         = $productData['productDetails']->category;
                 $resultData['productAmount']      = (string) round($productData['productDetails']->productAmount, 2);
                 $resultData['productTotalAmount'] = (string) round($productData['productDetails']->productTotalAmount, 2);
-                $resultData['availableInOption']  = (string) $productData['productDetails']->availableInOption;
-                $resultData['optionId']           = $productData['productDetails']->optionId;
                 $resultData['productImages']      = $this->ecommGetProductImages($product->productId);
+
+                $resultData['price']              = $productData['productDetails']->price;
+                $resultData['sellingPrice']       = $productData['productDetails']->sellingPrice;
+                $optionData                       = $productData['productDetails']->availableIn;
+
+                foreach ($optionData['options'] as $option)
+                {
+                    if($productData['productDetails']->optionId == $option['optionId'])
+                    {
+                        $resultData['optionId']    = $option['optionId'];
+                        $resultData['optionName']  = $option['optionName'];
+                        $resultData['optionMRP']   = $option['optionMRP'];
+                        $resultData['optionPrice'] = $option['optionPrice'];
+                    }
+                }
 
                 $productList[] = $resultData;
             }
