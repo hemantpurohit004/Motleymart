@@ -584,13 +584,13 @@ $js_key="
 	?>
 		<div class="control-group" style="<?php echo $qtc_stock_style;?>">
 			<label for="stock" class="control-label">
-				<?php echo JHtml::tooltip(JText::_('COM_QUICK2CART_ITEM_STOCK_DESC'), JText::_('PLG_QTC_ITEM_STOCK'), '', JText::_('PLG_QTC_ITEM_STOCK'));?>
+				<?php echo JHtml::tooltip(JText::_('COM_QUICK2CART_ITEM_STOCK_DESC'), JText::_('PLG_QTC_ITEM_STOCK'), '', '* ' . JText::_('PLG_QTC_ITEM_STOCK'));?>
 			</label>
 			<div class="controls">
 				<input Onkeyup="checkforalpha(this,'45', '<?php echo addslashes($entered_numerics); ?>')"
 				type="text" name="stock" id="stock"
 				value="<?php if (isset($minmaxstock->stock)) echo $minmaxstock->stock;?>"
-				class="input-mini inputbox validate-integer" />
+				class="input-mini inputbox validate-integer" required="true"/>
 				<?php
 				if ($productType == 2)
 				{ ?>
