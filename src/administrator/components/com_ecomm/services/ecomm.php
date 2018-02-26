@@ -768,7 +768,7 @@ class EcommService
         $this->returnData = array();
         $this->returnData['success']   = 'false';
 
-        if($orderDetails['success'] == true)
+        if($orderDetails['success'] == 'true')
         {
             // Remove hardcoded store_id afterwards
             $store_id = 3;
