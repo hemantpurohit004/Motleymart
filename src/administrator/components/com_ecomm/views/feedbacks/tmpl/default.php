@@ -57,18 +57,21 @@ $this->sidebar = JHtmlSidebar::render();
 					<th width="5%" class="nowrap center">
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
 					</th>
-					<th width="25%" class="nowrap center">
-						<?php echo JHtml::_('grid.sort', JText::_("Name"), 'name', $listDirn, $listOrder);?>
+					<!--<th width="25%" class="nowrap center">
+						<?php //echo JHtml::_('grid.sort', JText::_("Name"), 'name', $listDirn, $listOrder);?>
 					</th>
 					<th width="10%" class="nowrap">
-						<?php echo JHtml::_('grid.sort', JText::_("Mobile No"), 'mobile_no', $listDirn, $listOrder);?>
-					</th>
-					<th width="20%" class="nowrap">
+						<?php //echo JHtml::_('grid.sort', JText::_("Mobile No"), 'mobile_no', $listDirn, $listOrder);?>
+					</th>-->
+					<th width="25%" class="nowrap">
 						<?php echo JHtml::_('grid.sort', JText::_("Email"), 'email', $listDirn, $listOrder);?>
 					</th>
-					<th width="10%" class="nowrap center">
-						<?php echo JHtml::_('grid.sort', JText::_("Rating"), 'rating', $listDirn, $listOrder);?>
+					<th width="50%" class="nowrap">
+						<?php echo JHtml::_('grid.sort', JText::_("Feedback"), 'feedback', $listDirn, $listOrder);?>
 					</th>
+					<!--<th width="10%" class="nowrap center">
+						<?php //echo JHtml::_('grid.sort', JText::_("Rating"), 'rating', $listDirn, $listOrder);?>
+					</th>-->
 					<th width="10%" class="nowrap center">
 						<?php echo JHtml::_('grid.sort', JText::_("Created Date"), 'created_date', $listDirn, $listOrder);?>
 					</th>
@@ -95,22 +98,25 @@ $this->sidebar = JHtmlSidebar::render();
 							<td class="center">
 								<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 							</td>
-							<td class="center">
+							<!--<td class="center">
 								<a href="<?php echo $feedbackLink;?>">
-									<?php echo $row->name;?>
+									<?php //echo $row->name;?>
 								</a>
 							</td>
 							<td class="">
-								<?php echo $row->mobile_no; ?>
-							</td>
+								<?php //echo $row->mobile_no; ?>
+							</td>-->
 							<td class="">								
 								<?php echo $row->email; ?>
 							</td>
-							<td class="center">
-								<span class="badge badge-info">
-									<?php echo $row->rating; ?>
-								</span>
+							<td class="">								
+								<?php echo $row->feedback; ?>
 							</td>
+							<!--<td class="center">
+								<span class="badge badge-info">
+									<?php //echo $row->rating; ?>
+								</span>
+							</td>-->
 							<td class="center">
 								<?php echo $row->created_date; ?>
 							</td>
