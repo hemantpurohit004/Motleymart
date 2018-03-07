@@ -6,7 +6,7 @@
 				type="text"
 				label="Name"
 				description="Enter name"
-				required="true"
+				required="false"
 				/>
 		<field
 				name="email"
@@ -20,7 +20,7 @@
 				type="text"
 				label="Mobile No"
 				description="Enter mobile no"
-				required="true"
+				required="false"
 				/>
 		<field
 				name="rating"
@@ -29,7 +29,7 @@
 				max="5"
 				label="Rating (out of 5)"
 				description="Enter rating out of 5"
-				required="true"
+				required="false"
 				/>
 		<field
 				name="feedback"

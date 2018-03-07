@@ -47,15 +47,16 @@ class EcommService
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
 	
-    /*
+	/*
      * Function to save user feedback
      */
     public function ecommSaveFeedback($name, $email, $mobileNo, $rating, $feedback)
     {
         $this->returnData = array();
         $this->returnData['success'] = 'false';
-
-        $currentTime = JFactory::getDate()->format('Y-m-d H:m:s'); 
+		$this->returnData['message'] = 'Please try again';
+		
+		$currentTime = JFactory::getDate()->format('Y-m-d H:m:s'); 
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
@@ -66,17 +67,18 @@ class EcommService
             'mobile_no' => $mobileNo,
             'rating' => $rating,
             'feedback' => $feedback,
-            'created_date' => $currentTime
+			'created_date' => $currentTime
         );
 
         if($feedbackTable->save($data))
         {
             $this->returnData['success'] = 'true';
+			$this->returnData['message'] = 'Thank you for your valuable feedback';
         }
 
         return $this->returnData;
     }
-
+	
 	/*
      * Function to get the billing details
      */
@@ -733,7 +735,7 @@ class EcommService
                 $this->returnData['success']  = 'true';
                 $this->returnData['products'] = $productsDetails;
             } else {
-                $this->returnData['message'] = 'No products found.';
+                $this->returnData['message'] = 'No products found';
             }
 
             return $this->returnData;
@@ -3086,6 +3088,12 @@ class EcommService
         return $this->returnData;
     }
 
+	public function getFormattedDate($date)
+    {
+        $date = new JDate( strtotime($orderData->cdate) . ' +5 hour +30 minutes +3 seconds');
+		return $date->format('d-m-Y h:m:s A');
+    }
+	
     /* VENDOR
      * Function to get single order ddetails for given orderId and shopId
      * return array containig status as true and the order details
@@ -3104,7 +3112,7 @@ class EcommService
             $orderDetails->orderId = $orderData->order_id;
             $orderDetails->prefix = $orderData->prefix;
             $orderDetails->status = $orderData->status;
-            $orderDetails->createdOn = $orderData->cdate;
+            $orderDetails->createdOn = $this->getFormattedDate($orderData->cdate);
             $orderDetails->createdBy = $orderData->user_id;
             $orderDetails->tax = $orderData->order_tax;
             $orderDetails->shippingCharges = $orderData->order_shipping;
@@ -3275,7 +3283,11 @@ class EcommService
                 foreach ($orderIds as $orderId) {
                     $order    = $this->comquick2cartHelper->getorderinfo($orderId['id'], $shopId = 0);
                     $order    = $this->getFormattedSingleOrderDetails($order['order_info'][0]);
+					
+					$order['cdate'] = $this->getFormattedDate($order['cdate']);
+					
                     $orders[] = $order;
+					
                 }
 
                 $this->returnData['success'] = 'true';
@@ -3311,7 +3323,7 @@ class EcommService
         $singleOrderDetails['zipcode']    = $orderData->zipcode;
         $singleOrderDetails['phone']      = $orderData->phone;
         $singleOrderDetails['cdate']      = $orderData->cdate;
-
+		
         return $singleOrderDetails;
 
     }
