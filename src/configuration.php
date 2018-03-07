@@ -13,7 +13,7 @@ class JConfig {
 	public $captcha = '0';
 	public $cookie_domain = '';
 	public $cookie_path = '';
-	public $db = 'db_motleymart';
+	public $db = 'motleymart';
 	public $dbprefix = 'ichal_';
 	public $dbtype = 'mysqli';
 	public $debug = '0';
@@ -24,7 +24,7 @@ class JConfig {
 	public $feed_email = 'none';
 	public $feed_limit = '5';
 	public $force_ssl = '0';
-	public $fromname = '[PROD] Motley Mart ';
+	public $fromname = '[Local] Motley Mart ';
 	public $ftp_enable = '0';
 	public $ftp_host = '';
 	public $ftp_pass = '';
@@ -33,11 +33,11 @@ class JConfig {
 	public $ftp_user = '';
 	public $gzip = '0';
 	public $helpurl = '';
-	public $host = 'shivneri-php71.local';
+	public $host = 'shivneri01-php7.local';
 	public $lifetime = '360';
 	public $list_limit = '5';
 	public $live_site = '';
-	public $log_path = '/var/www/shivneri-php71.local/public/motleymart/administrator/logs';
+	public $log_path = '/var/www/shivneri01-php7.local/public/motleymart/administrator/logs';
 	public $mailer = 'smtp';
 	public $mailfrom = 'niteshtestmail@gmail.com';
 	public $memcache_compress = '0';
@@ -51,7 +51,7 @@ class JConfig {
 	public $offset_user = 'UTC';
 	public $password = 'root';
 	public $robots = '';
-	public $secret = 'dPwM7ylsOgMhQ6ZJAC82QTofqKFEXHOM';
+	public $secret = 'pylljzQ53dYuPgd63wKxiOnOVyNXr2vh';
 	public $sef = '1';
 	public $sef_rewrite = '0';
 	public $sef_suffix = '0';
@@ -65,7 +65,7 @@ class JConfig {
 	public $smtpport = '465';
 	public $smtpsecure = 'ssl';
 	public $smtpuser = 'niteshtestmail@gmail.com';
-	public $tmp_path = '/var/www/shivneri-php71.local/public/motleymart/tmp';
+	public $tmp_path = '/var/www/shivneri01-php7.local/public/motleymart/tmp';
 	public $unicodeslugs = '0';
 	public $user = 'root';
 	public $mailonline = '1';
