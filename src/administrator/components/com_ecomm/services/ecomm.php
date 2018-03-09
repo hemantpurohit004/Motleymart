@@ -1141,7 +1141,8 @@ class EcommService
 
                     // Save the userId in table
                     if ($mobileOtpMapTable->save($data)) {
-                        $message = 'Your account details are as follows, username : ' . $mobileNo . ' and password ' . $password;
+                        //$message = 'Your account details are as follows, username : ' . $mobileNo . ' and password ' . $password;
+                        $message = 'Welcome to the Motley family. Your account has been successfully created.';
                         $result  = $this->ecommSendSms($mobileNo, $message);
 
                         //if ($result['success'] == 'true')
