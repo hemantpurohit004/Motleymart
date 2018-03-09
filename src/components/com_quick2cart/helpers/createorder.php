@@ -84,10 +84,22 @@ class CreateOrderHelper
 			$orderDetails->name = $orderData->address->billing->firstname;
 		}
 
+		/* Commented By Nitesh
 		// Before payment order status will be pending
 		$orderDetails->status = "P";
 		$orderDetails->cdate = date("Y-m-d H:i:s");
 		$orderDetails->mdate = date("Y-m-d H:i:s");
+		*/
+
+		// Hack By Nitesh
+		$timeZone = JFactory::getConfig()->get('offset');
+		date_default_timezone_set($timeZone);
+		$date = date("Y-m-d H:i:s");
+
+		// Before payment order status will be pending
+		$orderDetails->status = "P";
+		$orderDetails->cdate = $date;
+		$orderDetails->mdate = $date;
 
 		// Price without coupon
 		$order_original_amount = $this->calculateOrderPrice($orderData->products_data);
