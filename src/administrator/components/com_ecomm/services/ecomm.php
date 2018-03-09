@@ -763,9 +763,9 @@ class EcommService
     /**
      * Function ecommCancelOrder.
      */
-    public function ecommCancelOrder($orderid)
+    public function ecommCancelOrder($orderId)
     {
-        $orderDetails = $this->ecommGetSingleOrderDetails('', $orderid);
+        $orderDetails = $this->ecommGetSingleOrderDetails('', $orderId);
 
         $this->returnData = array();
         $this->returnData['success']   = 'false';
@@ -773,12 +773,12 @@ class EcommService
         if($orderDetails['success'] == 'true')
         {
             // Remove hardcoded store_id afterwards
-            $store_id = 3;
-            $note = 'Cancel This Order';
+            $store_id = 0;
+            $note = '';
             $notify_chk = 1;
             $status = 'E';
             
-            if($this->updateOrderStatus($orderid, $status, $note, $notify_chk, $store_id))
+            if($this->updateOrderStatus($orderId, $status, $note, $notify_chk, $store_id))
             {
                 $this->returnData['success']   = "true";
             }
