@@ -46,6 +46,8 @@ class Quick2CartHelper
 			JText::_('COM_QUICK2CART_CATEGORIES'), 'index.php?option=com_categories&view=categories&extension=com_quick2cart',
 			$vName == 'categories'
 			);
+
+			/* Commented By Nitesh
 			JHtmlSidebar::addEntry(
 			JText::_('COM_QUICK2CART_GLOBAL_ATTRIBUTES'), 'index.php?option=com_quick2cart&view=globalattributes', $vName == 'globalattributes'
 			);
@@ -58,6 +60,7 @@ class Quick2CartHelper
 			JText::_('COM_QUICK2CART_GLOBAL_ATTRIBUTE_SET_MAPPING'), 'index.php?option=com_quick2cart&view=attributesetmapping',
 			$vName == 'attributesetmapping'
 			);
+			*/
 
 			JHtmlSidebar::addEntry(
 			JText::_('COM_QUICK2CART_PRODUCTS'), 'index.php?option=com_quick2cart&view=products',
@@ -87,6 +90,7 @@ class Quick2CartHelper
 				JHtmlSidebar::addEntry(JText::_('REPORTS'), 'index.php?option=com_quick2cart&view=payouts', $vName == 'payouts');
 			}
 
+			/* Commented By Nitesh
 			JHtmlSidebar::addEntry(
 			JText::_('COM_QUICK2CART_TITLE_COUNTRIES'), 'index.php?option=com_tjfields&view=countries&client=com_quick2cart',
 			$vName == 'countries'
@@ -107,6 +111,7 @@ class Quick2CartHelper
 			$vName == 'zone'
 			);*/
 
+			/* Commented By Nitesh
 			if ($params->get('enableTaxtion', 0))
 			{
 				JHtmlSidebar::addEntry(
@@ -146,6 +151,7 @@ class Quick2CartHelper
 			$fields_link = "index.php?option=com_tjfields&view=fields&client=com_quick2cart.product";
 			JHtmlSidebar::addEntry(
 			JText::_('COM_QUICK2CART_TITLE_FORM_FIELDS'), $fields_link, $vName == 'fields');
+			*/
 		}
 		else
 		{
