@@ -14,6 +14,11 @@ jimport('joomla.plugin.plugin');
 
 JLoader::import('ecomm', JPATH_ADMINISTRATOR . '/components/com_ecomm/services');
 
+/*load language file for plugin frontend*/
+$lang = JFactory::getLanguage();
+$lang->load('plg_system_ecomm_qtc_sms', JPATH_ADMINISTRATOR);
+$lang->load('plg_system_ecomm_qtc_sys', JPATH_ADMINISTRATOR);
+
 /**
  * System plguin
  *
@@ -35,7 +40,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 	{ 
 		$mobileNo = trim($orderDetails->userAddressDetails->mobileNo);
 
-		$order_status_arr = array('C', 'RF', 'S', 'P');
+		$order_status_arr = array('C', 'P');
 
 		if ($mobileNo)
 		{
@@ -54,22 +59,16 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_CONFIRMED');
 			break;
 
-			case 'RF' :
-				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_REFUND');
-			break;
-
-			case 'S' :
-				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_SHIPPED');
-			break;
-
 			case 'P' :
 				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_PENDING');
 			break;
 		}
 
-		$find = array('{ORDERNO}','{STATUS}');
-		$replace = array($order_id, $whichever);
-		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_MESSAGE'));
+		$amount = $orderDetails->amount;
+
+		$find = array('{ORDERNO}','{STATUS}','{AMOUNT}');
+		$replace = array($order_id, $whichever, $amount);
+		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_ECOMM_QTC_SYS_ORDER_STATUS_MESSAGE_PENDING'));
 
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('sms');
