@@ -174,7 +174,8 @@ class Quick2cartModelOrders extends JModelLegacy
 			$where[] = " (i.processor LIKE '" . $search_gateway . "')";
 		}
 
-		if ($search == 'P' || $search == 'C' || $search == 'RF' || $search == 'S' || $search == 'E')
+		// Hack By Nitesh -Added D status
+		if ($search == 'P' || $search == 'C' || $search == 'RF' || $search == 'S' || $search == 'E' || $search == 'D')
 		{
 			$where[] = 'i.status = ' . $this->_db->Quote($search);
 		}
