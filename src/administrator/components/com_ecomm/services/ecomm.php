@@ -47,6 +47,64 @@ class EcommService
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
     
+    /* User
+     * Function to get available coupon code list
+     * return array containig status as true and the coupon code details
+     */
+    public function ecommGetCouponCodes()
+    {
+        $offers = $this->ecommGetShopOffers($shopId = 3, $published = 1);
+
+        $promotionHelper = new PromotionHelper;
+
+        $this->returnData = array();
+        $offersData = array();
+
+        if($offers['success'] = 'true' && count($offers['offers']) > 0)
+        {
+            foreach ($offers['offers'] as $offer)
+            {
+                $data['coupon_code'] = $offer['coupon_code'];
+                $data['promoType'] = 1;
+                $offerDetails          = $promotionHelper->getValidatePromotions($data)[0];
+
+                if($offerDetails)
+                {
+                    $offerObj = new stdClass;
+                    $offerObj->couponCode = $offerDetails->coupon_code;
+                    $offerObj->discount_type = $offerDetails->discount_type;
+                    $offerObj->discount = $offerDetails->discount;
+                    $offerObj->max_discount = empty($offerDetails->max_discount)? $offerDetails->discount : $offerDetails->max_discount;
+
+                    $offersData[] = $offerObj;
+                }
+            }
+        }
+
+        if(!empty($offersData))
+        {
+            $this->returnData['success'] = 'true';
+            $this->returnData['offers'] = $offersData;
+        }
+        else
+        {
+            $this->returnData['success'] = 'false';
+            $this->returnData['message'] = 'Please try again';
+        }
+
+        return $this->returnData;
+    }
+
+     /*
+     * Function to get the date
+     */
+    public function getDate()
+    {
+        $timeZone = JFactory::getConfig()->get('offset');
+        date_default_timezone_set($timeZone);
+        return date("Y-m-d H:i:s");
+    }
+
     /*
      * Function to save user feedback
      */
@@ -56,10 +114,6 @@ class EcommService
         $this->returnData['success'] = 'false';
         $this->returnData['message'] = 'Please try again';
         
-        $timeZone = JFactory::getConfig()->get('offset');
-        date_default_timezone_set($timeZone);
-        $currentTime = date("Y-m-d H:i:s");
-
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
@@ -70,7 +124,7 @@ class EcommService
             'mobile_no' => $mobileNo,
             'rating' => $rating,
             'feedback' => $feedback,
-            'created_date' => $currentTime
+            'created_date' => $this->getDate()
         );
 
         if($feedbackTable->save($data))
@@ -1879,73 +1933,20 @@ class EcommService
      */
     public function ecommApplyCouponCode($couponCode)
     {
-        /*$this->returnData = array();
-
-        $session = JFactory::getSession();
-        $couponList = array();
-        $model   = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
-        $applicablePromotions   = $model->getPromoCoupon($couponCode);
-
-        if (!empty($applicablePromotions))
-        {
-            $dispatcher = JDispatcher::getInstance();
-            JPluginHelper::importPlugin("system");
-            $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
-
-            $this->returnData['success'] = $return[0];
-        }
-        else
-        {
-            $session->set('coupon', $couponList);
-            $this->returnData['success'] = 'false';
-            $this->returnData['message'] = 'Invalid Promo Code';
-        }
-
-        return $this->returnData; */
-        
-        
         $this->returnData = array();
 
-        $session = JFactory::getSession();
-        $couponList = array();
-        $model   = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
-        $applicablePromotions   = $model->getPromoCoupon($couponCode);
-
-        if (!empty($applicablePromotions))
+        $dispatcher = JDispatcher::getInstance();
+        JPluginHelper::importPlugin("system");
+        $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
+        if($return[0] == 'true')
         {
-            $dispatcher = JDispatcher::getInstance();
-            JPluginHelper::importPlugin("system");
-            $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
-
-            if($return[0] == 'true')
-            {
-                // Load the cart model
-                $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
-                $cart      = $cartModel->getCartitems();
-    
-                $promotionHelper = new PromotionHelper;
-                $promotions      = $promotionHelper->getCartPromotionDetail($cart, $couponCode);
-    
-                // Get the promotion details that has maximum discount
-                $maxDiscountPromoUsed = $promotions->maxDisPromo;
-                $formattedDiscount = $this->ecommGetFormattedDiscountDetails($maxDiscountPromoUsed);
-    
-                if(isset($formattedDiscount->applicableMaxDiscount))
-                {
-                     $this->returnData['success'] = 'true';
-                     $this->returnData['discountDetails'] = $formattedDiscount;
-                }
-            }
-            else
-            {
-                $this->returnData['success'] = 'false';
-                $this->returnData['message'] = 'Faild to apply this coupon code.';
-            }
+            $this->returnData['success'] = 'true';
+            $this->returnData['message'] = 'Coupon code applied successfully';
         }
         else
         {
             $this->returnData['success'] = 'false';
-            $this->returnData['message'] = 'Invalid Promo Code';
+            $this->returnData['message'] = 'Failed to apply coupon';
         }
 
         return $this->returnData;
@@ -2492,7 +2493,7 @@ class EcommService
      * Function to get the shop offers
      * return array containig status as true and the shop offers
      */
-    public function ecommGetShopOffers($shopId, $getAll = false)
+    public function ecommGetShopOffers($shopId, $published)
     {
         try
         {
@@ -2506,12 +2507,18 @@ class EcommService
             $query->select('DISTINCT ' . implode(', ', $selectColumns))
                 ->from($this->db->quoteName('#__kart_promotions') . 'AS a');
 
-            // If getAll is false then return published offers for shop and published
-            if ($getAll) {
-                $query->where($this->db->quoteName('store_id') . " = " . $this->db->quote($shopId) . ' AND ' .
-                    $this->db->quoteName('state') . " = " . $this->db->quote('1')
-                );
+            // IF * then all shops, else specified shop
+            if($shopId != '*')
+            {
+                $query->where($this->db->quoteName('store_id') . " = " . $this->db->quote($shopId));
             }
+
+            // If state(published) is * then return all
+            if ($published != '*')
+            {
+                $query->where($this->db->quoteName('state') . " = " . $this->db->quote($published) );
+            }
+
 
             // Execute the query
             $this->db->setQuery($query);
@@ -3566,7 +3573,7 @@ class EcommService
             return 'exception';
         }
     }
-
+    
     /*
      * Function to create new order
      * return array containig status as true
