@@ -56,7 +56,10 @@ class EcommService
         $this->returnData['success'] = 'false';
         $this->returnData['message'] = 'Please try again';
         
-        $currentTime = JFactory::getDate()->format('Y-m-d H:m:s'); 
+        $timeZone = JFactory::getConfig()->get('offset');
+        date_default_timezone_set($timeZone);
+        $currentTime = date("Y-m-d H:i:s");
+
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));

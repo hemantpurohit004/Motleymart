@@ -66,8 +66,21 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 
 		$amount = $orderDetails->amount;
 
-		$find = array('{ORDERNO}','{STATUS}','{AMOUNT}');
-		$replace = array($order_id, $whichever, $amount);
+		$date = $orderDetails->createdOn;
+		$date = strtotime($date);
+		$hours = date('H', $date);
+
+		if($hours < 12)
+		{
+			$day = 'today';
+		}
+		else
+		{
+			$day = 'tomorrow';
+		}
+
+		$find = array('{ORDERNO}','{STATUS}','{AMOUNT}', '{DAY}');
+		$replace = array($order_id, $whichever, $amount, $day);
 		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_ECOMM_QTC_SYS_ORDER_STATUS_MESSAGE_PENDING'));
 
 		$dispatcher = JDispatcher::getInstance();
