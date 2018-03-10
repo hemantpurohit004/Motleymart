@@ -1539,7 +1539,8 @@ class Comquick2cartHelper
 		// END Q2C Sample development
 
 		// If ($send_mail == 1 && $order_oldstatus != $status)
-		if ($send_mail == 1)
+		// Hack By Nitesh - Sending email is disabled
+		if ($send_mail == 1 && false)
 		{
 			$params = JComponentHelper::getParams('com_quick2cart');
 

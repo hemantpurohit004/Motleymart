@@ -33,6 +33,7 @@
 					<option value="Refunded">COM_QUICK2CART_ORDER_STATUS_REFUND</option>
 					<option value="Shipped">COM_QUICK2CART_ORDER_STATUS_SHIPPED</option>
 					<option value="Pending">COM_QUICK2CART_ORDER_STATUS_PENDING</option>
+					<option value="Delivered">Delivered</option>
 				</field>
 
 			</fieldset>

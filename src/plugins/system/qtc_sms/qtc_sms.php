@@ -90,7 +90,7 @@ class PlgSystemQtc_Sms extends JPlugin
 		$ship = $data->address->shipping;
 		$orderData = $order_obj['order'];
 
-		$oreder_status_arr = array('C', 'RF', 'S', 'P');
+		$oreder_status_arr = array('C', 'RF', 'S', 'P','D');
 
 		if ($ship->phone)
 		{
@@ -177,11 +177,20 @@ class PlgSystemQtc_Sms extends JPlugin
 			case 'P' :
 				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_PENDING');
 			break;
+
+			case 'D' :
+				$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_DELIVERED');
+			break;
 		}
 
 		$find = array('{ORDERNO}','{STATUS}');
 		$replace = array($orderId, $whichever);
 		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_MESSAGE'));
+
+		if($status == 'D')
+		{
+			$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_MESSAGE_DELIVERED'));
+		}
 
 		$dispatcher = JDispatcher::getInstance();
 		$plugin_name = $this->params['sms_options'];
@@ -190,7 +199,7 @@ class PlgSystemQtc_Sms extends JPlugin
 		$selected_order_status = $this->params['order_status'];
 
 		if (in_array($whichever, $selected_order_status))
-		{
+		{ 
 			JPluginHelper::importPlugin('sms');
 			$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
 		}

@@ -326,6 +326,11 @@ $totalamount = 0;
 
 							switch($orders->status)
 							{
+								// Hack By Nitesh
+								case 'D':
+									$whichever = JText::_('Delivered');
+									$row_color = "success";
+								break;
 								case 'C':
 									$whichever = JText::_('QTC_CONFR');
 									$row_color = "success";
