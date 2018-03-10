@@ -47,6 +47,7 @@ class Quick2cartViewOrders extends JViewLegacy
 		$pstatus[]     = JHtml::_('select.option', 'RF', JText::_('QTC_REFUN'));
 		$pstatus[]     = JHtml::_('select.option', 'S', JText::_('QTC_SHIP'));
 		$pstatus[]     = JHtml::_('select.option', 'E', JText::_('QTC_ERR'));
+		$pstatus[]     = JHtml::_('select.option', 'D', JText::_('Delivered'));
 		$this->pstatus = $pstatus;
 
 		$sstatus       = array();
@@ -56,6 +57,7 @@ class Quick2cartViewOrders extends JViewLegacy
 		$sstatus[]     = JHtml::_('select.option', 'RF', JText::_('QTC_REFUN'));
 		$sstatus[]     = JHtml::_('select.option', 'S', JText::_('QTC_SHIP'));
 		$sstatus[]     = JHtml::_('select.option', 'E', JText::_('QTC_ERR'));
+		$sstatus[]     = JHtml::_('select.option', 'D', JText::_('Delivered'));
 		$this->sstatus = $sstatus;
 
 		$layout = $input->get('layout', '');
