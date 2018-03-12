@@ -3578,7 +3578,7 @@ class EcommService
      * Function to create new order
      * return array containig status as true
      */
-    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $paymentDetails)
+    public function ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $paymentDetails, $couponCode)
     {
         // Clear the previous responses
         $this->returnData            = array();
@@ -3587,10 +3587,13 @@ class EcommService
         $billingAddress              = new stdClass;
         $products                    = array();
 
+        $dispatcher = JDispatcher::getInstance();
+        JPluginHelper::importPlugin("system");
+        $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
+
         $promotionHelper = new PromotionHelper;
         $couponDetails   = $promotionHelper->getSessionCoupon();
 
-        
         $user = JFactory::getUser();
 
         // Get the billing address details
@@ -3602,7 +3605,6 @@ class EcommService
             $this->returnData['message'] = 'Billing address not found';
             return $this->returnData;
         }
-
 
         // If shipping address is enabled
         if ($shippingAddressId) {
