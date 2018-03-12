@@ -48,10 +48,11 @@ class EcommApiResourceEcommCreateOrder extends ApiResource
 		$productsDetails = $inputData['productsDetails'];
 		$billingAddressId = $inputData['billing'];
 		$paymentDetails = $inputData['paymentDetails'];
+		$couponCode = $inputData['couponCode'];
 
 		$shippingAddressId = $billingAddressId;
 
-		$data = $service->ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $paymentDetails);
+		$data = $service->ecommCreateOrder($productsDetails, $shippingAddressId, $billingAddressId, $paymentDetails, $couponCode);
 
 		$this->plugin->setResponse($data);
 		return true;
