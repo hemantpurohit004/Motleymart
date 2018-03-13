@@ -17,7 +17,6 @@ JLoader::register('storeHelper', JPATH_SITE . '/components/com_quick2cart/helper
 JLoader::register('ProductHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
 JLoader::import('promotion', JPATH_SITE . '/components/com_quick2cart/helpers');
 JLoader::import('cart', JPATH_SITE . '/components/com_quick2cart/models');
-JLoader::import('zone', JPATH_SITE . '/components/com_quick2cart/models');
 JLoader::import('category', JPATH_SITE . '/components/com_quick2cart/models');
 JLoader::import('createorder', JPATH_SITE . '/components/com_quick2cart/helpers');
 
@@ -46,7 +45,7 @@ class EcommService
         $this->comquick2cartHelper     = new comquick2cartHelper;
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
-    
+
     /* User
      * Function to get available coupon code list
      * return array containig status as true and the coupon code details
@@ -113,7 +112,7 @@ class EcommService
         $this->returnData = array();
         $this->returnData['success'] = 'false';
         $this->returnData['message'] = 'Please try again';
-        
+
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
@@ -135,7 +134,7 @@ class EcommService
 
         return $this->returnData;
     }
-    
+
     /*
      * Function to get the billing details
      */
@@ -148,7 +147,7 @@ class EcommService
         $taxData->taxType = 'percentage';
         $taxData->taxAmount = $params->get('tax_per', 0);
 
-        
+
         $plugin = JPluginHelper::getPlugin('qtcshipping', 'qtc_shipping_default');
         $params = new JRegistry($plugin->params);
 
@@ -159,7 +158,7 @@ class EcommService
 
         return array('tax' => $taxData, 'ship' => $shipData);
     }
-    
+
 
     /*
      * Function to send sms and email
@@ -186,14 +185,14 @@ class EcommService
                 $params   = JComponentHelper::getParams('com_quick2cart');
                 $send_email_to_customer = $params->get('send_email_to_customer', 0);
                 $after_order_placed = $params->get('send_email_to_customer_after_order_placed', 0);
-               
+
                 if ($send_email_to_customer  == 1)
                 {
                     if ($after_order_placed  == 1)
                     {
                         // We are assuming that empty status as pending
                         if (empty($orderDetails->status) || $orderDetails->status == 'P')
-                        { 
+                        {
                             @$data = $this->comquick2cartHelper->sendordermail($orderDetails->orderId);
                             $this->returnData['success'] = 'true';
                         }
@@ -214,12 +213,12 @@ class EcommService
 
         return $this->returnData;
     }
-    
+
     /*
      * Function to get environment details
      */
     public function getEnvironmentDetails()
-    {   
+    {
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
@@ -259,10 +258,10 @@ class EcommService
         {
             $this->returnData['message'] = 'Please configure the environments.';
         }
-        
+
         return $this->returnData;
     }
-    
+
     /*
      * Function to signup the user using mobileNo
      */
@@ -279,7 +278,7 @@ class EcommService
             $this->returnData['message'] = 'This mobile no is not registered with us.';
             return $this->returnData;
         }
-        
+
         // Check if user is already verified and has a userid
         $result = $this->verifyIfUserAlreadyExistsResetPassword($mobileNo);
 
@@ -834,7 +833,7 @@ class EcommService
             $note = '';
             $notify_chk = 1;
             $status = 'E';
-            
+
             if($this->updateOrderStatus($orderId, $status, $note, $notify_chk, $store_id))
             {
                 $this->returnData['success']   = "true";
@@ -1897,7 +1896,7 @@ class EcommService
              // Add to cart
              $data = $this->comquick2cartHelper->addToCartAPI($item, $userData);
         }
-       
+
         // If successfully added to the cart
         if ($data['status']) {
             $this->returnData['success'] = 'true';
@@ -1964,7 +1963,7 @@ class EcommService
             if(isset($data['options']) && !empty($data['options']))
             {
                 foreach ($data['options'] as $option) {
-                   if($optionId ==  $option['optionId']) 
+                   if($optionId ==  $option['optionId'])
                    {
                         return $option['optionMRP'];
                    }
@@ -2020,7 +2019,7 @@ class EcommService
         // calculate tax
         $tax = 0;
         $tax = $this->getTaxAmount($billAmount);
-        
+
         // calculate delivery charges
         $delivery = 0;
         $delivery = $this->getDeliveryAmount($billAmount);
@@ -2039,7 +2038,7 @@ class EcommService
         }
 
         $billingDetails = array(
-            'totalBillAmount' => (string)round($billAmount,2), 
+            'totalBillAmount' => (string)round($billAmount,2),
             'discountAmount' => (string) round($discount, 2),
             'productDiscountAmount' => (string) round($productDiscount,2),
             'totalPayableAmount' => (string) round($totalPayableAmount,2),
@@ -2142,9 +2141,9 @@ class EcommService
                 foreach ($item['shippingMeths'] as $shipMethod)
                 {
                     $method = array(
-                        'name'=> ($shipMethod['name'] != null) ? $shipMethod['name'] : '', 
+                        'name'=> ($shipMethod['name'] != null) ? $shipMethod['name'] : '',
                         'totalShipCost' => (string) $shipMethod['totalShipCost']);
-                    $temp['shippingMethods'] = $method;  
+                    $temp['shippingMethods'] = $method;
                 }
                 $formattedCart[] = $temp;
             }
@@ -2268,7 +2267,7 @@ class EcommService
     }
 
     public function ecommGetFormattedDiscountDetails($discount)
-    { 
+    {
         $data = new stdClass;
 
         if(empty($discount))
@@ -2308,7 +2307,7 @@ class EcommService
             if($singleItem['productTotalAmount'] == 0)
             {
                 $singleItem['productTotalAmount'] = (string) $singleItem['productAmount'] * $singleItem['quantity'] ;
-            }   
+            }
             else
             {
                 $singleItem['productTotalAmount'] = (string) $singleCartItem['tamt'];
@@ -2775,15 +2774,15 @@ class EcommService
                 $this->returnData['success']  = 'true';
                 $this->returnData['products'] = $productsDetails;
             } */
-            
+
             // If products found
-            if (!empty($products)) 
+            if (!empty($products))
             {
                 $productsDetails = array();
                 $singleProduct = array();
-                
+
                 // Iterate over each product and get details
-                foreach ($products as $product) 
+                foreach ($products as $product)
                 {
                     // Get the products available in options
                     $productsDetails[] = $this->ecommGetSingleProductDetails($product['product_id'], $$shopId, $categoryId) ['productDetails'];
@@ -2793,7 +2792,7 @@ class EcommService
                 $this->returnData['success']  = 'true';
                 $this->returnData['products'] = $productsDetails;
             }
-            
+
             else {
                 $this->returnData['message'] = 'No products found.';
             }
@@ -3097,7 +3096,7 @@ class EcommService
 
         return $this->returnData;
     }
-    
+
     /* VENDOR
      * Function to get single order ddetails for given orderId and shopId
      * return array containig status as true and the order details
@@ -3120,7 +3119,7 @@ class EcommService
             $orderDetails->createdBy = $orderData->user_id;
             $orderDetails->tax = $orderData->order_tax;
             $orderDetails->shippingCharges = $orderData->order_shipping;
-            
+
             $totalItemShipCharges = 0;
             $totalItemTaxCharges = 0;
             $totalItemDiscount = 0;
@@ -3141,7 +3140,7 @@ class EcommService
                 $product->quantity = $item->product_quantity;
                 $product->productAmount = $item->product_item_price;
                 $product->totalAmount = $item->product_attributes_price * $item->product_quantity;
-                
+
                 // Commented For now
                 // $product->shippingCharges = (string) round($item->item_shipcharges, 2);
                 // $product->taxCharges = (string) round($item->item_tax, 2);
@@ -3149,7 +3148,7 @@ class EcommService
                 $product->optionDetails = new stdClass;
                 $product->optionDetails->optionId = $item->product_attributes;
                 $product->optionDetails->optionName = $item->product_attribute_names;
-                
+
                 $product->optionDetails->optionAmount = (string) $item->product_attributes_price;
 
                 $productsDetails[] = $product;
@@ -3173,11 +3172,11 @@ class EcommService
 
             $orderDetails->amount = (string) round($orderData->amount, 2);
             $orderDetails->subTotal = (string) round($totalItemPrice, 2);
-            
+
             // Commented For now
             // $orderDetails->tax = (string) round($totalItemTaxCharges, 2);
             // $orderDetails->shippingCharges = (string) round($totalItemShipCharges, 2);
-            
+
             $orderDetails->discount = (string) round($totalItemDiscount, 2);
             $orderDetails->couponCode = $couponCode;
             //$orderDetails->discountDetail = $discountDetail;
@@ -3323,7 +3322,7 @@ class EcommService
         $singleOrderDetails['zipcode']    = $orderData->zipcode;
         $singleOrderDetails['phone']      = $orderData->phone;
         $singleOrderDetails['cdate']      = $orderData->cdate;
-        
+
         return $singleOrderDetails;
 
     }
@@ -3573,7 +3572,7 @@ class EcommService
             return 'exception';
         }
     }
-    
+
     /*
      * Function to create new order
      * return array containig status as true
@@ -3655,7 +3654,7 @@ class EcommService
         $result = $createOrderHelper->qtc_place_order($orderData);
 
         // If order is successful
-        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id)) 
+        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id))
         {
             $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
             $cartModel->empty_cart();
@@ -3876,20 +3875,20 @@ class EcommService
 
         $gateways = array();
 
-        foreach ($result as $value) 
+        foreach ($result as $value)
         {
             $obj     = new stdClass;
 
             $data = JPluginHelper::getPlugin("payment", $value);
             $pluginDetails = json_decode($data->params);
 
-            if (!empty($pluginDetails->plugin_name)) 
+            if (!empty($pluginDetails->plugin_name))
             {
                 $obj->id = $value;
                 $obj->title = $pluginDetails->plugin_name;
 
                 $gateways[] = $obj;
-            } 
+            }
         }
 
         if (!empty($gateways)) {
@@ -3909,64 +3908,64 @@ class EcommService
     /*public function ecommSaveStore($title, $storeCreatorId, $description, $companyName, $email, $phone,
     $lattitude, $longitude, $address, $landmark, $city, $pincode, $paymentMode, $paypalEmail,
     $otherPayMethod, $userId)*/
-    public function ecommSaveStore($title)
+    public function ecommSaveStore($storeData)
     {
-        //$input    = JFactory::getApplication()->input;
-        //$input    = new JInput();
-        /*$input->set('title', 'Patil Shop');
-        $input->set('store_creator_id', '313');
-        $input->set('storeVanityUrl', 'patil-shop');
-        $input->set('description', 'Teststore1');
-        $input->set('companyname', 'Store1');
-        $input->set('email', 'niteshkesarkar136@gmail.com');
-        $input->set('phone' ,'8446363349');
-        $input->set('address', 'address1');
-        $input->set('land_mark', 'landmark1');
-        $input->set('pincode', '416115');
-        $input->set('storecountry', '99');
-        $input->set('qtcstorestate', '1344');
-        $input->set('city', 'Ichalkaranji');
-        $input->set('paymentMode', '0');
-        $input->set('paypalemail', 'store1@mailinator.com');
-        $input->set('otherPayMethod', '');
+        // Clear the previous responses
+        $this->returnData            = array();
+        $this->returnData['success'] = 'false';
+
+        $input    = new JInput();
+        $token = JHtml::_('form.token');
+        $token = JSession::getFormToken();
+        $shopId = empty($storeData['shopId'])? 0 : $storeData['shopId'];
+
+        $input->set('id', $shopId);
+        $input->set('store_creator_id', $storeData['storeOwner']);
+        $input->set('title', $storeData['title']);
+
+        // Generate by code - must be unique
+        $input->set('storeVanityUrl', 'patil-shop123');
+
+        $input->set('description', $storeData['description']);
+        $input->set('companyname', $storeData['companyName']);
+
+        $input->set('email', $storeData['email']);
+        $input->set('phone' ,$storeData['mobileNo']);
+        $input->set('address', $storeData['address']);
+        $input->set('land_mark', $storeData['landMark']);
+        $input->set('pincode', $storeData['pinCode']);
+        $input->set('storecountry', $storeData['countryName']);
+        $input->set('qtcstorestate', $storeData['stateName']);
+        $input->set('city', $storeData['city']);
+
+        // Hard coded for now
+        //$input->set('state', 0);
+        $input->set('paymentMode',$storeData['paymentMode']);
+        $input->set('paypalemail', $storeData['paypalEmail']);
+        $input->set('otherPayMethod', $storeData['otherPayMethod']);
+
         $input->set('option', 'com_quick2cart');
         $input->set('task', 'vendor.save');
         $input->set('btnAction', 'vendor.save');
         $input->set('view', 'vendor');
-        $input->set('check', '29b3117f51b4ae79f6177aaa36ac152c');
-        $input->set('29b3117f51b4ae79f6177aaa36ac152c]', '1');*/
-        /*
-    $input->data = array(
-    'title' => 'Patil Shop',
-    'store_creator_id' => '313',
-    'storeVanityUrl' => 'patil-shop',
-    'description' => 'Teststore1',
-    'companyname' => 'Store1',
-    'email' => 'niteshkesarkar136@gmail.com',
-    'phone' => '8446363349',
-    'address' => 'address1',
-    'land_mark' => 'landmark1',
-    'pincode' => '416115',
-    'storecountry' => '99',
-    'qtcstorestate' => '1344',
-    'city' => 'Ichalkaranji',
-    'paymentMode' => '0',
-    'paypalemail' => 'store1@mailinator.com',
-    'otherPayMethod' => '',
-    'option' => 'com_quick2cart',
-    'task' => 'vendor.save',
-    'btnAction' => 'vendor.save',
-    'view' => 'vendor',
-    'check' => '29b3117f51b4ae79f6177aaa36ac152c',
-    '29b3117f51b4ae79f6177aaa36ac152c' => '1'
-    );
+        $input->set('check', $token);
+        $input->set($token, '1');
 
-    // Require helper file
-    JLoader::register('storeHelper', JPATH_SITE. '/components/com_quick2cart/helpers');
-    $this->storeHelper = new storeHelper;
-    $result      = $this->storeHelper->saveVendorDetails($post);
-    print_r($result);
-    die;*/
+        // Require helper file
+        JLoader::register('storeHelper', JPATH_SITE. '/components/com_quick2cart/helpers');
+        $this->storeHelper = new storeHelper;
+        $result      = $this->storeHelper->saveVendorDetails($input);
 
+        if($result['store_id'])
+        {
+            $this->returnData['success'] = 'true';
+            $this->returnData['message'] = 'Store details saved successfully';
+        }
+        else
+        {
+            $this->returnData['message'] = 'Failed to save the store details';
+        }
+
+        return $this->returnData;
     }
 }
