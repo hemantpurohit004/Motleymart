@@ -41,10 +41,10 @@ class EcommApiResourceEcommSaveStore extends ApiResource
 		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
 
 		$service  = new EcommService();
-		$input    = JFactory::getApplication()->input;
-		$post = $input->post; print_r($post);die;
-		$title    = $input->get('title','','ALNUM');
-		$data     = $service->ecommSaveStore($title);
+		// Get the request body and convert it into array
+		$inputData = json_decode(file_get_contents('php://input'), true);
+
+		$data     = $service->ecommSaveStore($inputData);
 
 		$this->plugin->setResponse($data);
 		return true;

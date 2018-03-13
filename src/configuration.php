@@ -20,7 +20,7 @@ class JConfig {
 	public $debug_lang = '0';
 	public $display_offline_message = '1';
 	public $editor = 'codemirror';
-	public $error_reporting = 'none';
+	public $error_reporting = 'default';
 	public $feed_email = 'none';
 	public $feed_limit = '5';
 	public $force_ssl = '0';
@@ -32,7 +32,7 @@ class JConfig {
 	public $ftp_root = '';
 	public $ftp_user = '';
 	public $gzip = '0';
-	public $helpurl = '';
+	public $helpurl = 'https://help.joomla.org/proxy?keyref=Help{major}{minor}:{keyref}&lang={langcode}';
 	public $host = 'shivneri01-php7.local';
 	public $lifetime = '360';
 	public $list_limit = '5';
