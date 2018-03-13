@@ -133,7 +133,9 @@ class Quick2cartControllerDashboard extends JControllerForm
 		$dateMonthYearArr = array();
 		$fromDateSTR = strtotime($fromDate);
 		$toDateSTR = strtotime($toDate);
-		$pending_orders = $confirmed_orders = $shiped_orders = $refund_orders = 0;
+
+		// Hack By Nitesh - Added delivered_orders
+		$pending_orders = $confirmed_orders = $shiped_orders = $delivered_orders = $refund_orders = 0;
 
 		if (empty($statsforpie[0]) && empty($statsforpie[1]) && empty($statsforpie[2]))
 		{
@@ -157,6 +159,12 @@ class Quick2cartControllerDashboard extends JControllerForm
 			{
 				$refund_orders = $statsforpie[2][0]->orders;
 			}
+
+			// Hack By Nitesh - Added delivered_orders
+			if (!empty($statsforpie[4]))
+			{
+				$delivered_orders = $statsforpie[3][0]->orders;
+			}
 		}
 
 		/*$barchart='<img src="http://chart.apis.google.com/chart?cht=lc&chtt=+'
@@ -164,6 +172,7 @@ class Quick2cartControllerDashboard extends JControllerForm
 		* .JText::_('NUMICHITSMON').'  	+&chco=0000ff,ff0000&chs=900x310&chbh=a,25&chm='.$chm_str.'&chd=t:'.$imprs.'|'.$clicks
 		* .'&chxt=x,y&chxr=0,0,200&chds=0,'.$max_invite.',0,'.$cmax_invite.'&chxl=1:|'.$yscale.'|0:|'. $daystring.'|" />';*/
 
+		// Hack By Nitesh - Added delivered_orders
 		header('Content-type: application/json');
 		echo json_encode(
 				array(
@@ -171,6 +180,7 @@ class Quick2cartControllerDashboard extends JControllerForm
 					"confirmed_orders" => $confirmed_orders,
 					"shiped_orders" => $shiped_orders,
 					"refund_orders" => $refund_orders,
+					"delivered_orders" => $delivered_orders,
 					"periodicorderscount" => $periodicorderscount,
 					"emptylinechart" => $emptylinechart
 				)

@@ -285,13 +285,13 @@ class Quick2cartModelDashboard extends JModelLegacy
 		WHERE status ='C' AND cdate between (".$curdate.",".$backdate." )
 		GROUP BY YEAR(cdate), MONTH(cdate) order by YEAR(cdate), MONTH(cdate)
 		*/
-
+		// Hack By Nitesh - STATUS D
 		$query = "SELECT FORMAT( SUM( amount ) , 2 ) AS amount, MONTH( cdate ) AS MONTHSNAME, YEAR( cdate ) AS YEARNM
 		FROM `#__kart_orders`
 		WHERE DATE(cdate)
 		BETWEEN  '" . $backdate . "'
 		AND  '" . $curdate . "'
-		AND ( STATUS =  'C' OR STATUS =  'S') AND currency='" . $currency . "'
+		AND ( STATUS =  'C' OR STATUS =  'S' OR STATUS =  'D') AND currency='" . $currency . "'
 		GROUP BY YEARNM, MONTHSNAME
 		ORDER BY YEAR( cdate ) , MONTH( cdate ) ASC";
 
@@ -429,6 +429,12 @@ class Quick2cartModelDashboard extends JModelLegacy
 		$db->setQuery($query);
 		$statsforpie[] = $db->loadObjectList();
 
+		// Hack By Nitesh - added Delivered order
+		$query = " SELECT COUNT(id) AS orders FROM #__kart_orders WHERE status= 'D'
+		AND (processor NOT IN('payment_jomsocialpoints','payment_alphapoints') OR extra='points') " . $where;
+		$db->setQuery($query);
+		$statsforpie[] = $db->loadObjectList();
+
 		return $statsforpie;
 	}
 
@@ -483,7 +489,8 @@ class Quick2cartModelDashboard extends JModelLegacy
 			$groupby             = "";
 		}
 
-		$query = "SELECT FORMAT(SUM(amount),2) FROM #__kart_orders WHERE (status ='C' OR status ='S')
+		// Hack By Nitesh - added status D
+		$query = "SELECT FORMAT(SUM(amount),2) FROM #__kart_orders WHERE (status ='C' OR status ='S' OR status ='D')
 		AND (processor NOT IN('payment_jomsocialpoints','payment_alphapoints') OR extra='points') " . $where;
 		$this->_db->setQuery($query);
 		$result = $this->_db->loadResult();
