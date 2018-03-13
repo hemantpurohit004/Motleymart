@@ -301,7 +301,7 @@ $document->addScriptDeclaration($js);
 									</div>
 								</div>
 								<!-- End - Bar Chart for Monthly Income for past 12 months -->
-								
+
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="panel panel-default">
@@ -525,7 +525,7 @@ $document->addScriptDeclaration($js);
 								<!-- /.row -->
 							</div>
 							<!-- Removed By Nitesh> -->
-							
+
 							<!-- /.col-lg-4 -->
 						</div>
 						<!-- /.row -->
@@ -542,7 +542,9 @@ $document->addScriptDeclaration($js);
 		// Get data for periodic orders chart
 		$statsforpie = $this->statsforpie;
 		$currentmonth='';
-		$pending_orders=$confirmed_orders=$shiped_orders=$refund_orders=0;
+
+		// Hack By Nitesh - added $delivered_orders
+		$pending_orders=$confirmed_orders=$shiped_orders=$delivered_orders=$refund_orders=0;
 
 		if(empty($statsforpie[0][0]) && empty($statsforpie[1][0]) && empty($statsforpie[2][0]))
 		{
@@ -570,11 +572,18 @@ $document->addScriptDeclaration($js);
 			{
 				$shiped_orders = $statsforpie[3][0]->orders;
 			}
+
+			// Hack By Nitesh - added $delivered_orders
+			if(!empty($statsforpie[4]))
+			{
+				$delivered_orders = $statsforpie[4][0]->orders;
+			}
 		}
 
 		$emptypiechart=0;
 
-		if(!$pending_orders and !$confirmed_orders and !$refund_orders and !$shiped_orders)
+		// Hack By Nitesh - added $delivered_orders
+		if(!$pending_orders and !$confirmed_orders and !$refund_orders and !$shiped_orders and !$delivered_orders)
 		{
 			$emptypiechart=1;
 		}
@@ -584,6 +593,8 @@ $document->addScriptDeclaration($js);
 		<input type="hidden" name="confirmed_orders" id="confirmed_orders" value="<?php if($confirmed_orders) echo $confirmed_orders; else echo '0';  ?>">
 		<input type="hidden" name="shiped_orders" id="shiped_orders" value="<?php if($shiped_orders) echo $shiped_orders; else echo '0';  ?>">
 		<input type="hidden" name="refund_orders" id="refund_orders" value="<?php if($refund_orders) echo $refund_orders; else echo '0'; ?>">
+		<!-- // Hack By Nitesh - added $delivered_orders -->
+		<input type="hidden" name="delivered_orders" id="delivered_orders" value="<?php if($delivered_orders) echo $delivered_orders; else echo '0'; ?>">
 	</form>
 </div>
 
@@ -594,6 +605,8 @@ $document->addScriptDeclaration($js);
 		document.getElementById("confirmed_orders").value=<?php if($confirmed_orders) echo $confirmed_orders; else echo '0'; ?>;
 		document.getElementById("shiped_orders").value=<?php if($shiped_orders) echo $shiped_orders; else echo '0'; ?>;
 		document.getElementById("refund_orders").value=<?php  if($refund_orders) echo $refund_orders; else echo '0'; ?>;
+		// Hack By Nitesh - added $delivered_orders
+		document.getElementById("delivered_orders").value=<?php  if($delivered_orders) echo $delivered_orders; else echo '0'; ?>;
 
 		drawPeriodicOrdersChart();
 	});
@@ -639,8 +652,12 @@ $document->addScriptDeclaration($js);
 		var shiped_orders = document.getElementById('shiped_orders').value;
 		var refund_orders = document.getElementById('refund_orders').value;
 
+		// Hack By Nitesh - added delivered_orders
+		var delivered_orders = document.getElementById('delivered_orders').value;
+
 		if (pending_orders > 0  || confirmed_orders > 0 || shiped_orders > 0 || refund_orders > 0)
 		{
+			// Hack By Nitesh - added Delivered Orders and #450d82
 			Morris.Donut({
 				element: 'graph-periodic-orders',
 				data: [{
@@ -655,8 +672,11 @@ $document->addScriptDeclaration($js);
 				 }, {
 					label: "<?php echo JText::_("REFUND_ORDS");?>",
 					value: refund_orders
+				}, {
+					label: "<?php echo JText::_("Delivered Orders");?>",
+					value: delivered_orders
 				}],
-				colors: ["#f0ad4e", "#5cb85c", "#428bca", "#d9534f"],
+				colors: ["#f0ad4e", "#5cb85c", "#428bca", "#d9534f", "#450d82"],
 				resize: true
 			});
 		}
