@@ -3903,11 +3903,8 @@ class EcommService
 
     /* VENDOR
      * Function to save new store
-     * return array containig status as true and the store details
+     * return array containig status as true and the message
      */
-    /*public function ecommSaveStore($title, $storeCreatorId, $description, $companyName, $email, $phone,
-    $lattitude, $longitude, $address, $landmark, $city, $pincode, $paymentMode, $paypalEmail,
-    $otherPayMethod, $userId)*/
     public function ecommSaveStore($storeData)
     {
         // Clear the previous responses
@@ -3923,9 +3920,6 @@ class EcommService
         $input->set('store_creator_id', $storeData['storeOwner']);
         $input->set('title', $storeData['title']);
 
-        // Generate by code - must be unique
-        $input->set('storeVanityUrl', 'patil-shop123');
-
         $input->set('description', $storeData['description']);
         $input->set('companyname', $storeData['companyName']);
 
@@ -3938,18 +3932,20 @@ class EcommService
         $input->set('qtcstorestate', $storeData['stateName']);
         $input->set('city', $storeData['city']);
 
-        // Hard coded for now
-        //$input->set('state', 0);
         $input->set('paymentMode',$storeData['paymentMode']);
         $input->set('paypalemail', $storeData['paypalEmail']);
         $input->set('otherPayMethod', $storeData['otherPayMethod']);
 
+        // Hard coded for now
         $input->set('option', 'com_quick2cart');
         $input->set('task', 'vendor.save');
         $input->set('btnAction', 'vendor.save');
         $input->set('view', 'vendor');
         $input->set('check', $token);
         $input->set($token, '1');
+
+        // Generate by code - must be unique
+        $input->set('storeVanityUrl', 'Motley-Store-' . $shopId);
 
         // Require helper file
         JLoader::register('storeHelper', JPATH_SITE. '/components/com_quick2cart/helpers');
@@ -3964,6 +3960,58 @@ class EcommService
         else
         {
             $this->returnData['message'] = 'Failed to save the store details';
+        }
+
+        return $this->returnData;
+    }
+
+    /* VENDOR
+     * Function to save new product
+     * return array containig status as true and the message
+     */
+    public function ecommSaveProduct($productData)
+    {
+        // Clear the previous responses
+        $this->returnData            = array();
+        $this->returnData['success'] = 'false';
+
+        $input    = new JInput();
+        $token = JHtml::_('form.token');
+        $token = JSession::getFormToken();
+        $productId = empty($productData['productId'])? 0 : $productData['productId'];
+
+        $input->set('pid', $productId);
+
+        $input->set('item_name', $productData['productName']);
+        $input->set('item_alias', $productData['productAlias']);
+        $input->set('qtc_product_type', 1);
+        $input->set('prod_cat', $productData['productCategory']);
+        $input->set('description', array('data' => $productData['productDescription']) );
+        $input->set('sku', $productData['productSku']);
+        $input->set('stock', $productData['stock']);
+        $input->set('state', $productData['state']);
+        $input->set('store_id', $productData['storeId']);
+        $input->set('multi_cur', array('INR' => $productData['productPrice'] ));
+        $input->set('multi_dis_cur', array('INR' => $productData['discountPrice'] ));
+
+        $input->set('option', 'com_quick2cart');
+        $input->set('client', 'com_quick2cart');
+        $input->set('task', 'product.save');
+        $input->set('view', 'product');
+        $input->set('check', 'post');
+        $input->set($token, '1');
+
+        // Require helper file
+        $productId      = $this->comquick2cartHelper->saveProduct($input);
+
+        if($productId > 0)
+        {
+            $this->returnData['success'] = 'true';
+            $this->returnData['message'] = 'Product details saved successfully';
+        }
+        else
+        {
+            $this->returnData['message'] = 'Failed to save the product details';
         }
 
         return $this->returnData;
