@@ -244,12 +244,13 @@ class Quick2cartModelDashboard extends JModelLegacy
 	 */
 	public function getAllOrderIncome()
 	{
+		// Hack By Nitesh - Added Status D
 		// Getting current currency
 		$comquick2cartHelper = new comquick2cartHelper;
 		$currency            = $comquick2cartHelper->getCurrencySession();
 		$query = "SELECT FORMAT(SUM(amount), 2)
 		 FROM #__kart_orders
-		 WHERE (status='C' OR status='S') AND currency='" . $currency . "'
+		 WHERE (status='C' OR status='S' OR status='D') AND currency='" . $currency . "'
 		 AND (processor NOT IN('jomsocialpoints', 'alphapoints') OR extra='points')";
 
 		$this->_db->setQuery($query);
