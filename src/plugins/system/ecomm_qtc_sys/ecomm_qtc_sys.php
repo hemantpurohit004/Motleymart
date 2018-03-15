@@ -37,7 +37,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 	 */
 
 	public function ecommOnQuick2cartAfterOrderPlace($orderDetails)
-	{ 
+	{
 		$mobileNo = trim($orderDetails->userAddressDetails->mobileNo);
 
 		$order_status_arr = array('C', 'P');
@@ -86,7 +86,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 		$dispatcher = JDispatcher::getInstance();
 		JPluginHelper::importPlugin('sms');
 		$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
-		
+
 		return true;
 	}
 
@@ -99,7 +99,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 	 */
 
 	public function ecommApplyCouponCode($couponCode)
-	{ 
+	{
         $return = 'false';
 
 		// Get the table instance
@@ -109,6 +109,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
         $userCouponMapTable = JTable::getInstance('UserCouponMap', 'EcommTable', array('dbo', $db));
 
 		$userCouponMapTable->load(array('userId' => $userId));
+
 		// Build the data to be stored
         $data = array(
             'userId' => $userId,
@@ -151,7 +152,7 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 		$userCouponMapTable = JTable::getInstance('UserCouponMap', 'EcommTable', array('dbo', $db));
 
 		$userCouponMapTable->load(array('userId' => $userId));
-		
+
 		if(!empty($userCouponMapTable->id))
 		{
 			return $userCouponMapTable->couponCode;
