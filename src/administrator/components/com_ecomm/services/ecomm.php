@@ -75,6 +75,9 @@ class EcommService
                     $offerObj->discount = $offerDetails->discount;
                     $offerObj->max_discount = empty($offerDetails->max_discount)? $offerDetails->discount : $offerDetails->max_discount;
 
+                    $conditionAmount = json_decode($offerDetails->rules[0]->condition_attribute_value, true)['INR'];
+                    $offerObj->conditionAmount = $conditionAmount;
+
                     $offersData[] = $offerObj;
                 }
             }
@@ -3588,7 +3591,7 @@ class EcommService
 
         $dispatcher = JDispatcher::getInstance();
         JPluginHelper::importPlugin("system");
-        $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
+        $result = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
 
         $promotionHelper = new PromotionHelper;
         $couponDetails   = $promotionHelper->getSessionCoupon();
