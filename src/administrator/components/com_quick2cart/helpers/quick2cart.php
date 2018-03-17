@@ -90,6 +90,14 @@ class Quick2CartHelper
 				JHtmlSidebar::addEntry(JText::_('REPORTS'), 'index.php?option=com_quick2cart&view=payouts', $vName == 'payouts');
 			}
 
+			JHtmlSidebar::addEntry(JText::_('Subscription Plans'), 'index.php?option=com_ecomm&view=subscriptions', $vName == 'subscriptions');
+
+			JHtmlSidebar::addEntry(JText::_('Vendors'), 'index.php?option=com_ecomm&view=usersubscriptions', $vName == 'usersubscriptions');
+
+			JHtmlSidebar::addEntry(JText::_('Banners'), 'index.php?option=com_ecomm&view=banners', $vName == 'banners');
+
+			JHtmlSidebar::addEntry(JText::_('Feedbacks'), 'index.php?option=com_ecomm&view=feedbacks', $vName == 'feedbacks');
+
 			/* Commented By Nitesh
 			JHtmlSidebar::addEntry(
 			JText::_('COM_QUICK2CART_TITLE_COUNTRIES'), 'index.php?option=com_tjfields&view=countries&client=com_quick2cart',

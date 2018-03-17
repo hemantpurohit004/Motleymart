@@ -27,7 +27,7 @@ class EcommHelper
 	 */
 	function addSideBar()
 	{
-		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-pencil-square-o"></i> Subscription form'), 'index.php?option=com_ecomm&view=subscription');
+		/*JHtmlSidebar::addEntry(JText::_('<i class="fa fa-pencil-square-o"></i> Subscription form'), 'index.php?option=com_ecomm&view=subscription');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-bars"></i>  Subscriptions plans'), 'index.php?option=com_ecomm&view=subscriptions');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-user"></i>  User\'s Subscription form'), 'index.php?option=com_ecomm&view=usersubscription');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-users"></i>  User\'s Subscriptions'), 'index.php?option=com_ecomm&view=usersubscriptions');
@@ -35,7 +35,51 @@ class EcommHelper
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-star"></i>  Ratings'), 'index.php?option=com_ecomm&view=ratings');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-image"></i>  Banner form'), 'index.php?option=com_ecomm&view=banner');
 		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-image"></i>  Banners'), 'index.php?option=com_ecomm&view=banners');
-		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-star"></i>  Feedbacks'), 'index.php?option=com_ecomm&view=feedbacks');
+		JHtmlSidebar::addEntry(JText::_('<i class="fa fa-star"></i>  Feedbacks'), 'index.php?option=com_ecomm&view=feedbacks');*/
+
+		$lang = JFactory::getLanguage();
+		$extension = 'com_quick2cart';
+		$base_dir = JPATH_ADMINISTRATOR;
+		$language_tag = 'en-GB';
+		$reload = true;
+		$lang->load($extension, $base_dir, $language_tag, $reload);
+
+		JHtmlSidebar::addEntry(JText::_('QTC_DASHBOARD'), 'index.php?option=com_quick2cart&view=dashboard', $vName == 'dashboard');
+		JHtmlSidebar::addEntry(
+
+		JText::_('COM_QUICK2CART_TITLE_STORES'), 'index.php?option=com_quick2cart&view=stores',
+		$vName == 'stores'
+		);
+
+		JHtmlSidebar::addEntry(
+		JText::_('COM_QUICK2CART_CATEGORIES'), 'index.php?option=com_categories&view=categories&extension=com_quick2cart',
+		$vName == 'categories'
+		);
+
+		JHtmlSidebar::addEntry(
+		JText::_('COM_QUICK2CART_PRODUCTS'), 'index.php?option=com_quick2cart&view=products',
+		$vName == 'products'
+		);
+
+		JHtmlSidebar::addEntry(
+		JText::_('COM_QUICK2CART_ADMIN_PROMOTIONS'), 'index.php?option=com_quick2cart&view=promotions',
+		$vName == 'promotions'
+		);
+
+		JHtmlSidebar::addEntry(JText::_('QTC_ORDERS'), 'index.php?option=com_quick2cart&view=orders', $vName == 'orders');
+
+		JHtmlSidebar::addEntry(JText::_('COM_QUICK2CART_SALES_REPORT'), 'index.php?option=com_quick2cart&view=salesreport', $vName == 'salesreport');
+
+		JHtmlSidebar::addEntry(JText::_('REPORTS'), 'index.php?option=com_quick2cart&view=payouts', $vName == 'payouts');
+
+		JHtmlSidebar::addEntry(JText::_('Subscription Plans'), 'index.php?option=com_ecomm&view=subscriptions', $vName == 'subscriptions');
+
+		JHtmlSidebar::addEntry(JText::_('Vendors'), 'index.php?option=com_ecomm&view=usersubscriptions', $vName == 'usersubscriptions');
+
+		JHtmlSidebar::addEntry(JText::_('Banners'), 'index.php?option=com_ecomm&view=banners', $vName == 'banners');
+
+		JHtmlSidebar::addEntry(JText::_('Feedbacks'), 'index.php?option=com_ecomm&view=feedbacks', $vName == 'feedbacks');
+
 	}
 
 	function getSubscriptionDetails($subscriptionId, $fields)

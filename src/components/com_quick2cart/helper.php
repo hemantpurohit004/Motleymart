@@ -1034,7 +1034,7 @@ class Comquick2cartHelper
 	 *
 	 * @return  Void
 	 */
-	public function sendordermail($orderid)
+	public function sendordermail($orderid, $sendCustomMsg = 0)
 	{
 		// Load backend language file
 		$lang = JFactory::getLanguage();
@@ -1093,7 +1093,13 @@ class Comquick2cartHelper
 
 		$mainframe = JFactory::getApplication();
 		$site      = $mainframe->getCfg('sitename');
-		$html      = '<div>' . JText::sprintf('QTC_ORDER_MAIL_MSG', $site) . '</div>' . $html;
+
+		// Hack By Nitesh
+		if($sendCustomMsg)
+		{
+			$html      = '<div>' . JText::sprintf('QTC_ORDER_MAIL_MSG', $site) . '</div>' . $html;
+		}
+
 		$body      = $html;
 
 		$find = array('{ORDERNO}','{SITENAME}');

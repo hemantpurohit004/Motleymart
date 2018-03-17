@@ -29,6 +29,43 @@ $lang->load('plg_system_ecomm_qtc_sys', JPATH_ADMINISTRATOR);
 class PlgSystemEcomm_Qtc_Sys extends JPlugin
 {
 	/**
+	 * [ecommOnQuick2cartAfterOrderCancel ]
+	 *
+	 * @param   [type]  $orderDetails  Order details array
+	 *
+	 * @return  [type]              [description]
+	 */
+
+	public function ecommOnQuick2cartAfterOrderCancel($orderDetails)
+	{
+		$mobileNo = trim($orderDetails->userAddressDetails->mobileNo);
+		$firstname = ucfirst(trim($orderDetails->userAddressDetails->firstName));
+		if(empty($firstname))
+		{
+			$firstname = 'Customer';
+		}
+
+		if ($mobileNo)
+		{
+			$current_order_status = $orderDetails->status;
+			$order_id = $orderDetails->prefix . $orderDetails->orderId;
+			$whichever = JText::_('PLG_SYSTEM_QTC_SMS_ORDER_STATUS_CANCELLED');
+		}
+
+		$amount = $orderDetails->amount;
+
+		$find = array('{ORDERNO}','{AMOUNT}', '{NAME}');
+		$replace = array($order_id, $amount, $firstname);
+		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_ECOMM_QTC_SYS_ORDER_STATUS_MESSAGE_CANCELLED'));
+
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('sms');
+		$smsresult = $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
+
+		return true;
+	}
+
+	/**
 	 * [ecommOnQuick2cartAfterOrderPlace ]
 	 *
 	 * @param   [type]  $orderDetails  Order details array
@@ -39,6 +76,11 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 	public function ecommOnQuick2cartAfterOrderPlace($orderDetails)
 	{
 		$mobileNo = trim($orderDetails->userAddressDetails->mobileNo);
+		$firstname = ucfirst(trim($orderDetails->userAddressDetails->firstName));
+		if(empty($firstname))
+		{
+			$firstname = 'Customer';
+		}
 
 		$order_status_arr = array('C', 'P');
 
@@ -79,8 +121,8 @@ class PlgSystemEcomm_Qtc_Sys extends JPlugin
 			$day = 'tomorrow';
 		}
 
-		$find = array('{ORDERNO}','{STATUS}','{AMOUNT}', '{DAY}');
-		$replace = array($order_id, $whichever, $amount, $day);
+		$find = array('{ORDERNO}', '{AMOUNT}', '{DAY}', '{NAME}');
+		$replace = array($order_id, $amount, $day, $firstname);
 		$message = str_replace($find, $replace, JText::_('PLG_SYSTEM_ECOMM_QTC_SYS_ORDER_STATUS_MESSAGE_PENDING'));
 
 		$dispatcher = JDispatcher::getInstance();
