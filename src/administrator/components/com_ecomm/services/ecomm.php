@@ -162,6 +162,61 @@ class EcommService
         return array('tax' => $taxData, 'ship' => $shipData);
     }
 
+    /*
+     * Function to send sms and email
+     */
+    public function ecommSendOrderCancelNotification($sendEmail, $sendSms, $orderId)
+    {
+        $order_obj = array();
+
+        if (!empty($orderId))
+        {
+            $orderData = $this->ecommGetSingleOrderDetails(0, $orderId);
+            $this->returnData = array();
+
+            if($orderData['success'] == 'true')
+            {
+                $orderDetails = $orderData['orderDetails'];
+                $helperPath = JPATH_SITE . '/components/com_quick2cart/helpers/createorder.php';
+                $createOrderHelper = $this->comquick2cartHelper->loadqtcClass($helperPath, "CreateOrderHelper");
+
+                $dispatcher = JDispatcher::getInstance();
+                JPluginHelper::importPlugin("system");
+                $result = $dispatcher->trigger("ecommOnQuick2cartAfterOrderCancel", array($orderDetails));
+
+                $params   = JComponentHelper::getParams('com_quick2cart');
+                $send_email_to_customer = $params->get('send_email_to_customer', 0);
+                $after_order_placed = $params->get('send_email_to_customer_after_order_cancel', 1);
+
+                if ($send_email_to_customer  == 1)
+                {
+                    if ($after_order_placed  == 1)
+                    {
+                        // We are assuming that empty status as cancelled
+                        if (empty($orderDetails->status) || $orderDetails->status == 'E')
+                        {
+                            @$data = $this->comquick2cartHelper->sendordermail($orderDetails->orderId);
+                            $this->returnData['success'] = 'true';
+                        }
+                    }
+                }
+                else
+                {
+                    $this->returnData['success'] = 'false';
+                    $this->returnData['message'] = JText::_('Sending email is disabled.');
+                }
+            }
+            else
+            {
+                $this->returnData['success'] = 'false';
+                $this->returnData['message'] = JText::_('Order details not found.');
+            }
+        }
+
+        return $this->returnData;
+    }
+
+
 
     /*
      * Function to send sms and email
