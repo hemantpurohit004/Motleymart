@@ -176,10 +176,10 @@ class EcommService
 
             if($orderData['success'] == 'true')
             {
-                $orderDetails = $orderData['orderDetails'];
                 $helperPath = JPATH_SITE . '/components/com_quick2cart/helpers/createorder.php';
                 $createOrderHelper = $this->comquick2cartHelper->loadqtcClass($helperPath, "CreateOrderHelper");
 
+                $orderDetails = $orderData['orderDetails'];
                 $dispatcher = JDispatcher::getInstance();
                 JPluginHelper::importPlugin("system");
                 $result = $dispatcher->trigger("ecommOnQuick2cartAfterOrderCancel", array($orderDetails));
@@ -894,6 +894,11 @@ class EcommService
 
             if($this->updateOrderStatus($orderId, $status, $note, $notify_chk, $store_id))
             {
+                $orderDetails = $orderData['orderDetails'];
+                $dispatcher = JDispatcher::getInstance();
+                JPluginHelper::importPlugin("system");
+                $result = $dispatcher->trigger("ecommOnQuick2cartAfterOrderCancel", array($orderDetails));
+
                 $this->returnData['success']   = "true";
             }
         }
