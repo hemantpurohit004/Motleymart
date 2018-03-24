@@ -1723,10 +1723,10 @@ class EcommService
     }
 
     /*
-     * Function to get all the shops for given category
-     * return array containig status as true and the shops for given category
+     * Function to get the shops for given address
+     * return array containig status as true and the shop near given address
      */
-    public function ecommGetAllShopsForCategory($categoryId, $addressId)
+    public function ecommGetShopsNearMe($latitude, $longitude)
     {
         try
         {
@@ -1734,167 +1734,66 @@ class EcommService
             $query = $this->db->getQuery(true);
 
             // Build the query
-            $query->select('DISTINCT (' . $this->db->quoteName('store_id') . ')')
-                ->from($this->db->quoteName('#__kart_items'))
-                ->where($this->db->quoteName('parent') . " = " . $this->db->quote('com_quick2cart') . ' AND ' .
-                    $this->db->quoteName('category') . " = " . $this->db->quote($categoryId) . ' AND ' .
-                    $this->db->quoteName('state') . " = " . $this->db->quote('1')
+            $query->select(array('id', 'owner'))
+                ->from($this->db->quoteName('#__kart_store'))
+                ->where(
+                    $this->db->quoteName('live') . " = " . $this->db->quote('1')
                 );
             $this->db->setQuery($query);
 
             // Load the list of stores found
             $stores = $this->db->loadAssocList();
+            $i = $shopId = 0;
+
+            // Default user group
+            $params       = JComponentHelper::getParams('com_ecomm');
+            $minDistance = $params->get('maxStoreDistance');
 
             // If stores found
-            if (!empty($stores)) {
-                $storeIds = array();
+            foreach ($stores as $store)
+            {
+                // Get the store's latitude, longitude
+                $result = $this->ecommGetUserAddressList($store['owner']);
 
-                // Iterate over each store and get its id
-                foreach ($stores as $store) {
-                    if ($store['store_id']) {
-                        $storeIds[] = $store['store_id'];
-                    }
+                if($result['success'] == 'true')
+                {
+                    $shopLocation = array();
+                    $shopLocation['latitude'] = $result['addresses'][0]->latitude;
+                    $shopLocation['longitude'] = $result['addresses'][0]->longitude;
                 }
 
-                // Get the new query instance
-                $query = $this->db->getQuery(true);
+                // Get the user's latitude, longitude
+                $userLocation = array();
+                $userLocation['latitude'] = $latitude;
+                $userLocation['longitude'] = $longitude;
 
-                // Build the query
-                $query->select('*')
-                    ->from($this->db->quoteName('#__kart_store'))
-                    ->where($this->db->quoteName('id') . " IN (" . implode(',', $storeIds) . ')');
+                $distance = $this->getDistance($shopLocation, $userLocation, $unit = 'K')['value'];
 
-                $this->db->setQuery($query);
-
-                // Load the list of Stores found
-                $storeDetails = $this->db->loadAssocList();
-                $data         = array();
-
-                // If found the store details
-                if (!empty($storeDetails)) {
-                    // Iterate over each store
-                    foreach ($storeDetails as $store) {
-                        // Get the live store details
-                        if ($store['live']) {
-                            $image = $this->comquick2cartHelper->isValidImg($store['store_avatar']);
-
-                            if (empty($image)) {
-                                $image = $this->storeHelper->getDefaultStoreImage();
-                            }
-
-                            // If atleast one store is live then set this flag
-                            $isStore            = true;
-                            $singleStoreDetails = array();
-
-                            // id, title, address[address+city], distance, store_avatar
-                            $singleStoreDetails['id']           = $store['id'];
-                            $singleStoreDetails['title']        = $store['title'];
-                            $singleStoreDetails['store_avatar'] = $image;
-                            //$singleStoreDetails['address']      = $store['address'] . ', ' . $store['city'];
-
-                            // Max Store Distance
-                            $params       = JComponentHelper::getParams('com_ecomm');
-                            $maxStoreDistance = $params->get('maxStoreDistance');
-
-                            if(!empty($maxStoreDistance))
-                            {
-                                $result = $this->ecommGetUserAddressList($store['owner']);
-                                if($result['success'] == 'true')
-                                {
-                                    $shopLocation = array();
-                                    $shopLocation['latitude'] = $result['addresses'][0]->latitude;
-                                    $shopLocation['longitude'] = $result['addresses'][0]->longitude;
-                                }
-
-                                $result = $this->ecommGetSingleCustomerAddressDetails($addressId);
-                                if($result['success'] == 'true')
-                                {
-                                    $userLocation = array();
-                                    $userLocation['latitude'] = $result['address']->latitude;
-                                    $userLocation['longitude'] = $result['address']->longitude;
-                                }
-
-                                // Get the distance between user and the shop
-                                $distanceData = $this->getDistance($shopLocation, $userLocation);
-
-                                if(!empty($distanceData))
-                                {
-                                    if($distanceData['value'] <= $maxStoreDistance)
-                                    {
-                                        $singleStoreDetails['distance'] = $distanceData['value'] . ' ' . $distanceData['unit'];
-                                        $data[] = $singleStoreDetails;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                // Check if store near user address, If yes then save store id
+                if($distance < $minDistance)
+                {
+                    $shopId = $stores[$i]['id'];
                 }
+
+                $i++;
             }
 
+
             $this->returnData = array();
-            // If we have atleast one live store details
-            if ($isStore || empty($data)) {
+            $this->returnData['success'] = 'false';
+
+            if($shopId > 0)
+            {
                 $this->returnData['success'] = 'true';
-                $this->returnData['stores']  = $data;
-            } else {
-                $this->returnData['message'] = 'No shops found for given category';
+                $this->returnData['shopId'] = (string) $shopId;
             }
 
             return $this->returnData;
+
         } catch (Exception $e) {
             $this->returnData['message'] = $e->getMessage();
             return $this->returnData;
         }
-    }
-
-
-    /*
-     * Function to get the shops for given address
-     * return array containig status as true and the shop near given address
-     */
-    public function ecommGetShopsNearMe($addressId)
-    {
-        $this->returnData = array();
-        $this->returnData['success'] = false;
-        return $this->returnData;
-        /*try
-        {
-            // Create db and query object
-            $query = $this->db->getQuery(true);
-
-            // Build the query
-            $query->select('DISTINCT (' . $this->db->quoteName('store_id') . ')')
-                ->from($this->db->quoteName('#__kart_items'))
-                ->where($this->db->quoteName('parent') . " = " . $this->db->quote('com_quick2cart') . ' AND ' .
-                    $this->db->quoteName('state') . " = " . $this->db->quote('1')
-                );
-            $this->db->setQuery($query);
-
-            // Load the list of stores found
-            $stores = $this->db->loadAssocList();
-
-            // If stores found
-            if (!empty($stores)) {
-                $storeIds = array();
-
-                // Foreach store get the address
-                foreach ($stores as $store) {
-                    if ($store['store_id']) {
-                        $storeIds[] = $store['store_id'];
-                    }
-                }
-
-
-
-                // Check if store near user address
-                // If yes then return the store id
-                // If not do nothiing
-                return $storeIds;
-            }
-        } catch (Exception $e) {
-            $this->returnData['message'] = $e->getMessage();
-            return $this->returnData;
-        }*/
     }
 
     /*

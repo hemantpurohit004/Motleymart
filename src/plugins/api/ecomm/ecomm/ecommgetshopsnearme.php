@@ -45,9 +45,10 @@ class EcommApiResourceEcommGetShopsNearMe extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$addressId = $inputData['addressId'];
+		$latitude = $inputData['latitude'];
+		$longitude = $inputData['longitude'];
 
-		$data     = $service->ecommGetShopsNearMe($addressId);
+		$data     = $service->ecommGetShopsNearMe($latitude, $longitude);
 
 		$this->plugin->setResponse($data);
 		return true;
