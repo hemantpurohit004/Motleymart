@@ -356,6 +356,8 @@ class CreateOrderHelper
 		$addressDetails->zipcode = (!empty($address->zipcode))?$address->zipcode:'';
 		$addressDetails->land_mark = (!empty($address->land_mark))?$address->land_mark:'';
 		$addressDetails->phone = isset($address->phone) ? $address->phone : '';
+		$addressDetails->latitude = isset($address->latitude) ? $address->latitude : '';
+		$addressDetails->longitude = isset($address->longitude) ? $address->longitude : '';
 
 		// To check if billing address already present for order
 		$db = JFactory::getDbo();
@@ -601,12 +603,12 @@ class CreateOrderHelper
 					if ($attri_info['itemattributeoption_prefix'] == '+')
 					{
 						// $orderItemData->product_attributes_price += $attri_info['itemattributeoption_price']; Commented By Nitesh
-						$orderItemData->product_attributes_price = $attri_info['itemattributeoption_price']; 
+						$orderItemData->product_attributes_price = $attri_info['itemattributeoption_price'];
 					}
 					else
 					{
 						// $orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price']; Commented By Nitesh
-						$orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price'] * -1; 
+						$orderItemData->product_attributes_price -= $attri_info['itemattributeoption_price'] * -1;
 					}
 				}
 			}

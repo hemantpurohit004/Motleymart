@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommSaveAddress extends ApiResource
+class EcommApiResourceEcommUpdateUserDetails extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -44,10 +44,24 @@ class EcommApiResourceEcommSaveAddress extends ApiResource
 
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
+		$userData = array();
 
-		$lattitude = $inputData['latitude'];
+		$userId = $inputData['userId'];
+		$username = $inputData['username'];
+		$name = $inputData['name'];
+		$email = $inputData['email'];
+		$password = $inputData['password'];
+		$lattitude = $inputData['lattitude'];
 		$longitude = $inputData['longitude'];
-		$data     = $service->ecommSaveAddress($lattitude, $longitude);
+		$dob = $inputData['dob'];
+
+		foreach($inputData as $key => $value){
+			if(!empty($inputData[$key])){
+				$userData[$key] = $value;
+			}
+		}
+		//print_r($userData);die;
+		$data     = $service->ecommUpdateUserDetails($userData);
 
 		$this->plugin->setResponse($data);
 		return true;

@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommSaveAddress extends ApiResource
+class EcommApiResourceEcommGetProductsForShopAndCategory extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,9 +45,13 @@ class EcommApiResourceEcommSaveAddress extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$lattitude = $inputData['latitude'];
-		$longitude = $inputData['longitude'];
-		$data     = $service->ecommSaveAddress($lattitude, $longitude);
+		$shopId = $inputData['shopId'];
+		$categoryId = $inputData['categoryId'];
+		$keyword = $inputData['keyword'];
+
+		$filter = array('keyword'=> $keyword);
+
+		$data   = $service->ecommGetProductsForShopAndCategory($shopId, $categoryId, $filter);
 
 		$this->plugin->setResponse($data);
 		return true;

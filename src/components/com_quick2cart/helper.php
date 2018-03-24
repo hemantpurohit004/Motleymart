@@ -3440,12 +3440,12 @@ class Comquick2cartHelper
 						case 'small':
 							$file_name_without_extension = $original_file_name_without_extension . "_S";
 							break;
-						case 'medium':
+						/*case 'medium':
 							$file_name_without_extension = $original_file_name_without_extension . "_M";
 							break;
 						case 'large':
 							$file_name_without_extension = $original_file_name_without_extension . "_L";
-							break;
+							break;*/
 						default:
 							$file_name_without_extension = $original_file_name_without_extension;
 							break;

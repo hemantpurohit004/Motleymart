@@ -2,6 +2,15 @@
 <config>
 	<fieldset name="component">
 		<field
+				name="maxStoreDistance"
+				type="number"
+				label="Max Store Distance (in KM)"
+				description="Enter max store distance in KM"
+				hint="Enter max store distance in KM"
+				required="true"
+				default="10"
+				/>
+		<field
 				name="otp_timeout"
 				type="number"
 				label="OTP Timeout (in seconds)"
@@ -9,11 +18,11 @@
 				required="true"
 				default="120"
 				/>
-		<field 
+		<field
 				name="otpDigitCount"
-				type="number" 
-				default="6" 
-				description="Enter OTP digit count" 
+				type="number"
+				default="6"
+				description="Enter OTP digit count"
 				label="OTP Digit Count"
 				hint="For example, 6"
 				required="true"
@@ -32,11 +41,11 @@
 				description="Enter Google Address Key"
 				required="true"
 				/>
-		<field 
-				name="addressType" 
-				type="list" 
-				default="Home" 
-				label="Default Address Type" 
+		<field
+				name="addressType"
+				type="list"
+				default="Home"
+				label="Default Address Type"
 				description=" Select Default Address Type"
 				required="true"
 				>
@@ -90,11 +99,11 @@
 				/>
 	</fieldset>
 	<fieldset name="USER_REGISTRATION">
-		<field 
+		<field
 				name="emailDomain"
-				type="text" 
-				default="mailinator.com" 
-				description="Enter Email Domain For New User" 
+				type="text"
+				default="mailinator.com"
+				description="Enter Email Domain For New User"
 				label="Email Domain"
 				hint="For example, domain.com"
 				required="true"

@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommSaveAddress extends ApiResource
+class EcommApiResourceEcommSignup extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -39,17 +39,20 @@ class EcommApiResourceEcommSaveAddress extends ApiResource
 	{
 		// Require helper file
 		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
-
-		$service  = new EcommService();
+		$service  = new EcommService;
 
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$lattitude = $inputData['latitude'];
-		$longitude = $inputData['longitude'];
-		$data     = $service->ecommSaveAddress($lattitude, $longitude);
+		// Get the mobileNo and isUser
+		$mobileNo = $inputData['mobileNo'];
+		$isUser   = $inputData['isUser'];
 
-		$this->plugin->setResponse($data);
+		// Call the signup method
+		$result     = $service->ecommSignup($mobileNo, $isUser);
+
+		$this->plugin->setResponse($result);
+
 		return true;
 	}
 }

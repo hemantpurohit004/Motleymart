@@ -44,10 +44,12 @@ class EcommApiResourceEcommSaveAddress extends ApiResource
 
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
-
-		$lattitude = $inputData['latitude'];
+		
+		$lattitude = $inputData['lattitude'];
 		$longitude = $inputData['longitude'];
-		$data     = $service->ecommSaveAddress($lattitude, $longitude);
+		$userId = $inputData['userId'];
+
+		$data     = $service->ecommSaveAddress($lattitude, $longitude, $userId);
 
 		$this->plugin->setResponse($data);
 		return true;

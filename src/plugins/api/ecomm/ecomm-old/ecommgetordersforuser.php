@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommSaveAddress extends ApiResource
+class EcommApiResourceEcommGetOrdersForUser extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,9 +45,16 @@ class EcommApiResourceEcommSaveAddress extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$lattitude = $inputData['latitude'];
-		$longitude = $inputData['longitude'];
-		$data     = $service->ecommSaveAddress($lattitude, $longitude);
+		$userId = JFactory::getUser()->id;
+		$statuses = $inputData['statuses'];
+
+		$arrayStatus = array();
+		foreach($statuses as $status)
+		{
+			$arrayStatus[] = $status[0];
+		}
+		
+		$data     = $service->eccommGetOrdersForUser($userId, $arrayStatus);
 
 		$this->plugin->setResponse($data);
 		return true;
