@@ -20,7 +20,7 @@ class JConfig {
 	public $debug_lang = '0';
 	public $display_offline_message = '1';
 	public $editor = 'codemirror';
-	public $error_reporting = 'default';
+	public $error_reporting = 'none';
 	public $feed_email = 'none';
 	public $feed_limit = '5';
 	public $force_ssl = '0';
@@ -39,7 +39,7 @@ class JConfig {
 	public $live_site = '';
 	public $log_path = '/var/www/shivneri01-php7.local/public/motleymart/administrator/logs';
 	public $mailer = 'smtp';
-	public $mailfrom = 'niteshtestmail@gmail.com';
+	public $mailfrom = 'shivnerisystems.team@gmail.com';
 	public $memcache_compress = '0';
 	public $memcache_persist = '1';
 	public $memcache_server_host = 'localhost';
@@ -51,7 +51,7 @@ class JConfig {
 	public $offset_user = 'UTC';
 	public $password = 'root';
 	public $robots = '';
-	public $secret = 'pylljzQ53dYuPgd63wKxiOnOVyNXr2vh';
+	public $secret = 'byPDsnp6C43OiZn84UmIVnqxxJtb92VN';
 	public $sef = '1';
 	public $sef_rewrite = '0';
 	public $sef_suffix = '0';

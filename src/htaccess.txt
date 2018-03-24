@@ -78,3 +78,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php [L]
 #
 ## End - Joomla! core SEF Section.
+
+# Set Time to Asia/Kolkata
+SetEnv TZ Asia/Kolkata

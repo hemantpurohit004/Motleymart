@@ -174,7 +174,6 @@ class PromotionHelper
 
 			$where[] = "(max_use  > (" . $maxUseSubQuery . ") OR max_use=0 )";
 
-			// Hack By Nitesh - added P status
 			// Max per user
 			$maxPerUserSubQuery = "SELECT COUNT( * ) FROM (" .
 			" SELECT o.id FROM  `#__kart_order_item` AS oi INNER JOIN  `#__kart_orders` AS o ON oi.order_id = o.id " .

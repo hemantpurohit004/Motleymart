@@ -29,8 +29,8 @@ class plgAPIEcomm extends ApiPlugin
 		JResponse::setHeader('Access-Control-Max-Age','1000');
 		parent::__construct($subject, $config);
 		ApiResource::addIncludePath(dirname(__FILE__).'/ecomm');
-
-		$this->setResourceAccess('ecommGetAllCategories', 'private', 'post');
+		
+		$this->setResourceAccess('ecommGetAllCategories', 'private', 'post'); 
 		$this->setResourceAccess('ecommSearch', 'private', 'post');
 		$this->setResourceAccess('ecommSignup', 'private', 'post');
 		$this->setResourceAccess('ecommVerifyMobileNoAndOtp', 'private', 'post');
@@ -44,16 +44,16 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommGetStatesForCountry', 'private', 'post');
 		$this->setResourceAccess('ecommGetHashKey', 'private', 'post');
 		$this->setResourceAccess('ecommSendSms', 'private', 'post');
-
-
+		
+		
 		$this->setResourceAccess('ecommGetCategoriesByLevel', 'private', 'post');
 		$this->setResourceAccess('ecommAddToCart', 'private', 'post');
 		$this->setResourceAccess('ecommGetCartDetails', 'private', 'post');
 		$this->setResourceAccess('ecommGetShippingDetails', 'private', 'post');
-
+		
 		$this->setResourceAccess('ecommUpdateUserDetails', 'private', 'post');
 		$this->setResourceAccess('ecommGetAllShopsForCategory', 'private', 'post');
-
+		
 		$this->setResourceAccess('ecommGetProductsForShopAndCategory', 'private', 'post');
 		$this->setResourceAccess('ecommGetShopCategories', 'private', 'post');
 		$this->setResourceAccess('ecommGetShopOffers', 'private', 'post');
@@ -79,6 +79,6 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommCancelOrder', 'private', 'post');
 		$this->setResourceAccess('ecommSendOrderNotification', 'private', 'post');
 		$this->setResourceAccess('ecommSaveFeedback', 'private', 'post');
-		$this->setResourceAccess('ecommGetShopsNearMe', 'private', 'post');
+		
 	}
 }

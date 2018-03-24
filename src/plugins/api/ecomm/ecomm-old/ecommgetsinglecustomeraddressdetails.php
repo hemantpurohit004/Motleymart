@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
+class EcommApiResourceEcommGetSingleCustomerAddressDetails extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,10 +45,9 @@ class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$categoryId = $inputData['categoryId'];
 		$addressId = $inputData['addressId'];
 
-		$data     = $service->ecommGetAllShopsForCategory($categoryId, $addressId);
+		$data     = $service->ecommGetSingleCustomerAddressDetails($addressId);
 
 		$this->plugin->setResponse($data);
 		return true;

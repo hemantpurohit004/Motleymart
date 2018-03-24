@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
+class EcommApiResourceEcommLogin extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -41,14 +41,10 @@ class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
 		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
 
 		$service  = new EcommService();
-
-		// Get the request body and convert it into array
-		$inputData = json_decode(file_get_contents('php://input'), true);
-
-		$categoryId = $inputData['categoryId'];
-		$addressId = $inputData['addressId'];
-
-		$data     = $service->ecommGetAllShopsForCategory($categoryId, $addressId);
+		$input    = JFactory::getApplication()->input;
+		$mobileNo = $input->get('mobileNo','','STRING');
+		$password = $input->get('password','','STRING');
+		$data     = $service->ecommLogin($mobileNo, $password);
 
 		$this->plugin->setResponse($data);
 		return true;

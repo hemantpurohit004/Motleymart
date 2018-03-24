@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
+class EcommApiResourceGetEnvironmentDetails extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -39,18 +39,15 @@ class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
 	{
 		// Require helper file
 		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
+		$service  = new EcommService;
 
-		$service  = new EcommService();
+		// Call the signup method
+		$result     = $service->getEnvironmentDetails();
+		
+		//$result['userid'] = JFactory::getUser()->id; // remove latter  , only for debugging perpose
+		
+		$this->plugin->setResponse($result);
 
-		// Get the request body and convert it into array
-		$inputData = json_decode(file_get_contents('php://input'), true);
-
-		$categoryId = $inputData['categoryId'];
-		$addressId = $inputData['addressId'];
-
-		$data     = $service->ecommGetAllShopsForCategory($categoryId, $addressId);
-
-		$this->plugin->setResponse($data);
 		return true;
 	}
 }

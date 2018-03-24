@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
+class EcommApiResourceEcommSendOrderNotification extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,10 +45,11 @@ class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$categoryId = $inputData['categoryId'];
-		$addressId = $inputData['addressId'];
+		$sendEmail = isset($inputData['sendEmail'])? $inputData['sendEmail'] : true;
+		$sendSms = isset($inputData['sendSms'])? $inputData['sendSms'] : true;
+		$orderId = $inputData['orderId'];
 
-		$data     = $service->ecommGetAllShopsForCategory($categoryId, $addressId);
+		$data     = $service->ecommSendOrderNotification($sendEmail, $sendSms, $orderId);
 
 		$this->plugin->setResponse($data);
 		return true;

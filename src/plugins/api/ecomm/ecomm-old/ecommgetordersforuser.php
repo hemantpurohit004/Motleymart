@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
+class EcommApiResourceEcommGetOrdersForUser extends ApiResource
 {
 	/**
 	 * API Plugin for get method
@@ -45,10 +45,16 @@ class EcommApiResourceEcommGetAllShopsForCategory extends ApiResource
 		// Get the request body and convert it into array
 		$inputData = json_decode(file_get_contents('php://input'), true);
 
-		$categoryId = $inputData['categoryId'];
-		$addressId = $inputData['addressId'];
+		$userId = JFactory::getUser()->id;
+		$statuses = $inputData['statuses'];
 
-		$data     = $service->ecommGetAllShopsForCategory($categoryId, $addressId);
+		$arrayStatus = array();
+		foreach($statuses as $status)
+		{
+			$arrayStatus[] = $status[0];
+		}
+		
+		$data     = $service->eccommGetOrdersForUser($userId, $arrayStatus);
 
 		$this->plugin->setResponse($data);
 		return true;
