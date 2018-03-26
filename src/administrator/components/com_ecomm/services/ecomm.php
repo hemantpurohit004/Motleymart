@@ -1778,7 +1778,6 @@ class EcommService
                 $i++;
             }
 
-
             $this->returnData = array();
             $this->returnData['success'] = 'false';
 
@@ -1786,6 +1785,10 @@ class EcommService
             {
                 $this->returnData['success'] = 'true';
                 $this->returnData['shopId'] = (string) $shopId;
+            }
+            else
+            {
+                $this->returnData['shopId'] = '0';
             }
 
             return $this->returnData;
