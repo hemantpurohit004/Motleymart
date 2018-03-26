@@ -2865,6 +2865,11 @@ class EcommService
         $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
         $result       = $addressModel->getAddress($addressId);
 
+        // Load the address form model
+        $cartCheckoutModel = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
+        $result->country_name = $cartCheckoutModel->getCountryName($result->country_code);
+        $result->state_name = $cartCheckoutModel->getStateName($result->state_code);
+
         // If successfully saved the address then return true
         if ($result) {
             $this->returnData['success'] = 'true';
