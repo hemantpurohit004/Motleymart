@@ -239,4 +239,80 @@ class EcommCategoryService
 
         return false;
     }
+
+    /* - STORE
+     * Function to get the shop categories
+     * return array containig status as true and the shop categories
+     */
+    public function ecommGetShopCategories($shopId)
+    {
+        try
+        {
+            // Create db and query object
+            $query = $this->db->getQuery(true);
+
+            // Build the query
+            $query->select('DISTINCT (' . $this->db->quoteName('category') . ')')
+                ->from($this->db->quoteName('#__kart_items'))
+                ->where($this->db->quoteName('parent') . " = " . $this->db->quote('com_quick2cart') . ' AND ' .
+                    $this->db->quoteName('store_id') . " = " . $this->db->quote($shopId) . ' AND ' .
+                    $this->db->quoteName('state') . " = " . $this->db->quote('1')
+                );
+            $this->db->setQuery($query);
+
+            // Load the list of categories found
+            $categories = $this->db->loadAssocList();
+
+            // If categories found
+            if (!empty($categories)) {
+                $categoryIds = array();
+
+                // Iterate over each category and get its id
+                foreach ($categories as $category) {
+                    if ($category['category']) {
+                        $categoryIds[] = $category['category'];
+                    }
+                }
+
+                // Create query object
+                $query = $this->db->getQuery(true);
+
+                // Create the base select statement.
+                $query->select('*')
+                    ->from($this->db->quoteName('#__categories'))
+                    ->where($this->db->quoteName('extension') . ' = ' . $this->db->quote('com_quick2cart') . ' AND ' .
+                        $this->db->quoteName('published') . ' = ' . $this->db->quote('1') . ' AND ' .
+                        //$this->db->quoteName('level') . ' = ' . $this->db->quote('2') . ' AND ' .
+                        $this->db->quoteName('id') . ' IN (' . implode(', ', $categoryIds) . ')');
+
+                $this->db->setQuery($query);
+
+                // Load the list of categories found
+                $categories = $this->db->loadAssocList();
+
+                // If categories found
+                if (!empty($categories)) {
+                    $this->returnData['success'] = 'true';
+                    $data                        = array();
+
+                    // Iterate over each category
+                    foreach ($categories as $category) {
+                        // Push the single categories data in the
+                        $data[] = $this->getSpecificCategoryDetails($category);
+                    }
+
+                    // Push all the categories in returnData
+                    $this->returnData['categories'] = $data;
+                }
+            } else {
+                $this->returnData['success'] = 'false';
+                $this->returnData['message'] = 'This shop does not belong to any of the category';
+            }
+
+            return $this->returnData;
+        } catch (Exception $e) {
+            $this->returnData['message'] = $e->getMessage();
+            return $this->returnData;
+        }
+    }
 }

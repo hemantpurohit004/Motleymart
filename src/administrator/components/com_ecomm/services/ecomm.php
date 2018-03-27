@@ -930,129 +930,6 @@ class EcommService
         return $this->returnData;
     }
 
-    /* - STORE
-     * Function to get the shop offers
-     * return array containig status as true and the shop offers
-     */
-    public function ecommGetShopOffers($shopId, $published)
-    {
-        try
-        {
-            // Create db and query object
-            $query = $this->db->getQuery(true);
-
-            // Columns to fetch from table
-            $selectColumns = array('id', 'store_id', 'state', 'name', 'description', 'from_date', 'exp_date', 'coupon_required', 'coupon_code', 'discount_type', 'max_use', 'max_per_user');
-
-            // Build the query
-            $query->select('DISTINCT ' . implode(', ', $selectColumns))
-                ->from($this->db->quoteName('#__kart_promotions') . 'AS a');
-
-            // IF * then all shops, else specified shop
-            if ($shopId != '*') {
-                $query->where($this->db->quoteName('store_id') . " = " . $this->db->quote($shopId));
-            }
-
-            // If state(published) is * then return all
-            if ($published != '*') {
-                $query->where($this->db->quoteName('state') . " = " . $this->db->quote($published));
-            }
-
-            // Execute the query
-            $this->db->setQuery($query);
-
-            // Load the list of offers found
-            $offers = $this->db->loadAssocList();
-
-            // If offers found
-            if (!empty($offers)) {
-                $this->returnData['success'] = 'true';
-                $this->returnData['offers']  = $offers;
-            }
-
-            return $this->returnData;
-        } catch (Exception $e) {
-            $this->returnData['message'] = $e->getMessage();
-            return $this->returnData;
-        }
-    }
-
-    /* - STORE
-     * Function to get the shop categories
-     * return array containig status as true and the shop categories
-     */
-    public function ecommGetShopCategories($shopId)
-    {
-        try
-        {
-            // Create db and query object
-            $query = $this->db->getQuery(true);
-
-            // Build the query
-            $query->select('DISTINCT (' . $this->db->quoteName('category') . ')')
-                ->from($this->db->quoteName('#__kart_items'))
-                ->where($this->db->quoteName('parent') . " = " . $this->db->quote('com_quick2cart') . ' AND ' .
-                    $this->db->quoteName('store_id') . " = " . $this->db->quote($shopId) . ' AND ' .
-                    $this->db->quoteName('state') . " = " . $this->db->quote('1')
-                );
-            $this->db->setQuery($query);
-
-            // Load the list of categories found
-            $categories = $this->db->loadAssocList();
-
-            // If categories found
-            if (!empty($categories)) {
-                $categoryIds = array();
-
-                // Iterate over each category and get its id
-                foreach ($categories as $category) {
-                    if ($category['category']) {
-                        $categoryIds[] = $category['category'];
-                    }
-                }
-
-                // Create query object
-                $query = $this->db->getQuery(true);
-
-                // Create the base select statement.
-                $query->select('*')
-                    ->from($this->db->quoteName('#__categories'))
-                    ->where($this->db->quoteName('extension') . ' = ' . $this->db->quote('com_quick2cart') . ' AND ' .
-                        $this->db->quoteName('published') . ' = ' . $this->db->quote('1') . ' AND ' .
-                        //$this->db->quoteName('level') . ' = ' . $this->db->quote('2') . ' AND ' .
-                        $this->db->quoteName('id') . ' IN (' . implode(', ', $categoryIds) . ')');
-
-                $this->db->setQuery($query);
-
-                // Load the list of categories found
-                $categories = $this->db->loadAssocList();
-
-                // If categories found
-                if (!empty($categories)) {
-                    $this->returnData['success'] = 'true';
-                    $data                        = array();
-
-                    // Iterate over each category
-                    foreach ($categories as $category) {
-                        // Push the single categories data in the
-                        $data[] = $this->getSpecificCategoryDetails($category);
-                    }
-
-                    // Push all the categories in returnData
-                    $this->returnData['categories'] = $data;
-                }
-            } else {
-                $this->returnData['success'] = 'false';
-                $this->returnData['message'] = 'This shop does not belong to any of the category';
-            }
-
-            return $this->returnData;
-        } catch (Exception $e) {
-            $this->returnData['message'] = $e->getMessage();
-            return $this->returnData;
-        }
-    }
-
     /* - USER
      * Function to get joomla's user details
      * return array containig status as true and the user detials
@@ -1078,28 +955,6 @@ class EcommService
         } else {
             return false;
         }
-    }
-
-    /* VENDOR - STORE
-     * Function to Save the store
-     * return array containig status as true and the store details
-     */
-    public function ecommUpdateStoreState($shopId, $status)
-    {
-        $query = $this->db->getQuery(true);
-
-        $query->update($this->db->quoteName('#__kart_store'))
-            ->set($this->db->quoteName('live') . ' = ' . $this->db->quote((int) $status))
-            ->where($this->db->quoteName('id') . ' = ' . $this->db->quote($shopId));
-
-        $this->db->setQuery($query);
-
-        // If successfully updated the status
-        if ($this->db->execute()) {
-            $this->returnData['success'] = 'true';
-        }
-
-        return $this->returnData;
     }
 
     /* User - USER
@@ -1162,42 +1017,6 @@ class EcommService
             $this->returnData['user']    = $user;
         } else {
             $this->returnData['message'] = 'User with this id is not exists';
-        }
-
-        return $this->returnData;
-    }
-
-    /* - STORE
-     */
-    public function ecommGetSingleStoreDetails($shopId, $fields = '')
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-        $storeData                   = array();
-
-        // Get the store details
-        $result = $this->storeHelper->getStoreDetail($shopId);
-
-        if (!empty($result) && isset($result['id']) && !empty($result['id'])) {
-            // If needs only specified fields
-            if (!empty($fields)) {
-                // Get the fields as array
-                $fieldsArray = explode(',', $fields);
-
-                // Iterate over each of the field
-                foreach ($fieldsArray as $field) {
-                    // Check if the specified field exists, if not return blank
-                    $storeData[$field] = (isset($result[$field])) ? $result[$field] : '';
-                }
-            } else {
-                // Not mentioned any fields then return all data
-                $storeData = $result;
-            }
-
-            // Return success as true and the specified fields of the store
-            $this->returnData['success'] = 'true';
-            $this->returnData['store']   = $storeData;
         }
 
         return $this->returnData;
@@ -1294,14 +1113,6 @@ class EcommService
         return $this->returnData;
     }
 
-    /* VENDOR - STORE
-     * Function to get total sale
-     * return array containig status as true and the sale details
-     */
-    public function ecommGetTotalSale($vendorId, $storeId, $orderStatuses)
-    {
-    }
-
     /* Common - PAYMENT
      * Function to get payment methods
      * return array containig status as true and the payment methods
@@ -1337,67 +1148,6 @@ class EcommService
             $this->returnData['paymentMethods'] = $gateways;
         } else {
             $this->returnData['message'] = 'No payment methods found.';
-        }
-
-        return $this->returnData;
-    }
-
-    /* VENDOR - STORE
-     * Function to save new store
-     * return array containig status as true and the message
-     */
-    public function ecommSaveStore($storeData)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        $input  = new JInput();
-        $token  = JHtml::_('form.token');
-        $token  = JSession::getFormToken();
-        $shopId = empty($storeData['shopId']) ? 0 : $storeData['shopId'];
-
-        $input->set('id', $shopId);
-        $input->set('store_creator_id', $storeData['storeOwner']);
-        $input->set('title', $storeData['title']);
-
-        $input->set('description', $storeData['description']);
-        $input->set('companyname', $storeData['companyName']);
-
-        $input->set('email', $storeData['email']);
-        $input->set('phone', $storeData['mobileNo']);
-        $input->set('address', $storeData['address']);
-        $input->set('land_mark', $storeData['landMark']);
-        $input->set('pincode', $storeData['pinCode']);
-        $input->set('storecountry', $storeData['countryName']);
-        $input->set('qtcstorestate', $storeData['stateName']);
-        $input->set('city', $storeData['city']);
-
-        $input->set('paymentMode', $storeData['paymentMode']);
-        $input->set('paypalemail', $storeData['paypalEmail']);
-        $input->set('otherPayMethod', $storeData['otherPayMethod']);
-
-        // Hard coded for now
-        $input->set('option', 'com_quick2cart');
-        $input->set('task', 'vendor.save');
-        $input->set('btnAction', 'vendor.save');
-        $input->set('view', 'vendor');
-        $input->set('check', $token);
-        $input->set($token, '1');
-
-        // Generate by code - must be unique
-        $input->set('storeVanityUrl', 'Motley-Store-' . $shopId);
-
-        // Require helper file
-        JLoader::register('storeHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
-        $this->storeHelper = new storeHelper;
-        $result            = $this->storeHelper->saveVendorDetails($input);
-
-        if ($result['store_id']) {
-            $this->returnData['success'] = 'true';
-            $this->returnData['message'] = 'Store details saved successfully';
-        } else {
-            $this->returnData['message'] = 'Failed to save the store details';
         }
 
         return $this->returnData;
