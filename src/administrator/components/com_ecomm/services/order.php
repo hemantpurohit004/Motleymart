@@ -72,48 +72,6 @@ class EcommOrderService
     }
 
     /* User - ORDER
-     * Function to get update the payment details after user choose the payment method
-     * return array containig status as true and the payment details
-     */
-    public function ecommUpdatePaymentDetailsForOrder($paymentDetails)
-    {
-        $paymentMode  = $paymentDetails['paymentMode'];
-        $orderDetails = $paymentDetails['orderDetails'];
-        $response     = isset($paymentDetails['response']) ? $paymentDetails['response'] : '';
-
-        require JPATH_SITE . '/components/com_quick2cart/controller.php';
-        JLoader::import('payment', JPATH_SITE . '/components/com_quick2cart/models');
-
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
-        $paymentModel = JModelLegacy::getInstance('payment', 'Quick2cartModel');
-
-        if ($paymentMode == 'byorder' || $paymentMode == 'byordercard') {
-            $data = $paymentModel->processpayment($orderDetails, $paymentMode, $orderDetails['order_id']);
-
-            if ($data['status'] == 0) {
-                $this->returnData['success'] = 'true';
-                $this->returnData['message'] = JText::_('Thank you for placing the order! Your order will processed in a while.');
-            }
-        }
-
-        if ($paymentMode == 'payumoney') {
-            $response['udf1'] = $response['txnid'];
-            $data             = $paymentModel->processpayment($response, $paymentMode, $response['txnid']);
-
-            if ($data['status'] == 1) {
-                $this->returnData['success'] = 'true';
-                $this->returnData['message'] = JText::_('Thank you for placing the order! Your order will processed in a while.');
-            }
-        }
-
-        return $this->returnData;
-    }
-
-    /* User - ORDER
      * Function to get single order details for given orderId and shopId
      * return array containig status as true and the order details
      */
@@ -596,7 +554,10 @@ class EcommOrderService
                 $paymentDetails['response']['txnid'] = $orderData->prefix . $orderData->orderId;
             }
 
-            $this->ecommUpdatePaymentDetailsForOrder($paymentDetails);
+            // Require helper file
+            JLoader::register('EcommPaymentService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/payment.php');
+            $paymentService = new EcommPaymentService;
+            $paymentService->ecommUpdatePaymentDetailsForOrder($paymentDetails);
             // update payment details end
 
             $this->returnData = $orderData;

@@ -90,7 +90,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*  - COMMON
+    /*  - PAYMENT
      * Function to get the date
      */
     public function getDate()
@@ -463,63 +463,6 @@ class EcommService
         }
 
         return $this->returnData;
-    }
-
-    /* - PAYMENT
-     * Function to get hash key for payment gateway
-     * return hask key
-     */
-    public function ecommGetHashKey($posted)
-    {
-        // Clear data
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        $plugin = JPluginHelper::getPlugin('payment', 'payumoney');
-        $params = new JRegistry($plugin->params);
-
-        $key  = $params->get('key', '');
-        $salt = $params->get('salt', '');
-
-        if (empty($key) || empty($salt)) {
-            $this->returnData['message'] = 'Unable to do transaction.';
-        } else {
-            $txnId = strtotime($this->getDate());
-
-            $amount      = $posted["amount"];
-            $productName = $posted["productInfo"];
-            $firstName   = $posted["firstName"];
-            $email       = $posted["email"];
-            $udf1        = $posted["udf1"];
-            $udf2        = $posted["udf2"];
-            $udf3        = $posted["udf3"];
-            $udf4        = $posted["udf4"];
-            $udf5        = $posted["udf5"];
-
-            $payhash_str = $key . '|' . $this->checkNull($txnId) . '|' . $this->checkNull($amount) . '|'
-            . $this->checkNull($productName) . '|' . $this->checkNull($firstName) . '|'
-            . $this->checkNull($email) . '|' . $this->checkNull($udf1) . '|' . $this->checkNull($udf2)
-            . '|' . $this->checkNull($udf3) . '|' . $this->checkNull($udf4) . '|' . $this->checkNull($udf5) . '||||||' . $salt;
-
-            $hash = strtolower(hash('sha512', $payhash_str));
-
-            if (!empty($hash)) {
-                $this->returnData['success'] = 'true';
-                $this->returnData['hash']    = $hash;
-            }
-        }
-
-        return $this->returnData;
-    }
-    /* - PAYMENT
-     */
-    public function checkNull($value)
-    {
-        if ($value == null) {
-            return '';
-        } else {
-            return $value;
-        }
     }
 
     /* - USER
@@ -1113,43 +1056,4 @@ class EcommService
         return $this->returnData;
     }
 
-    /* Common - PAYMENT
-     * Function to get payment methods
-     * return array containig status as true and the payment methods
-     */
-    public function ecommGetPaymentMethods()
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        // Active payment methods
-        $params = JComponentHelper::getParams('com_quick2cart');
-        $result = $params->get('gateways');
-
-        $gateways = array();
-
-        foreach ($result as $value) {
-            $obj = new stdClass;
-
-            $data          = JPluginHelper::getPlugin("payment", $value);
-            $pluginDetails = json_decode($data->params);
-
-            if (!empty($pluginDetails->plugin_name)) {
-                $obj->id    = $value;
-                $obj->title = $pluginDetails->plugin_name;
-
-                $gateways[] = $obj;
-            }
-        }
-
-        if (!empty($gateways)) {
-            $this->returnData['success']        = 'true';
-            $this->returnData['paymentMethods'] = $gateways;
-        } else {
-            $this->returnData['message'] = 'No payment methods found.';
-        }
-
-        return $this->returnData;
-    }
 }
