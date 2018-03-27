@@ -6,7 +6,7 @@
  * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-defined('_JEXEC') or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.plugin.plugin');
 jimport('joomla.user.helper');
@@ -20,37 +20,36 @@ jimport('joomla.user.helper');
  */
 class EcommApiResourceEcommGetSingleCategoryDetails extends ApiResource
 {
-	/**
-	 * API Plugin for get method
-	 *
-	 * @return  avoid.
-	 */
-	public function get()
-	{
-		$this->plugin->setResponse("Please Use Post method");
-	}
+    /**
+     * API Plugin for get method
+     *
+     * @return  avoid.
+     */
+    public function get()
+    {
+        $this->plugin->setResponse("Please Use Post method");
+    }
 
-	/**
-	 * API Plugin for post method
-	 *
-	 * @return  avoid.
-	 */
-	public function post()
-	{
-		// Require helper file
-		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
+    /**
+     * API Plugin for post method
+     *
+     * @return  avoid.
+     */
+    public function post()
+    {
+        // Require helper file
+        JLoader::register('EcommCategoryService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/category.php');
 
-		$service  = new EcommService();
+        $service = new EcommCategoryService();
 
-		// Get the request body and convert it into array
-		$inputData = json_decode(file_get_contents('php://input'), true);
+        // Get the request body and convert it into array
+        $inputData = json_decode(file_get_contents('php://input'), true);
 
+        $categoryId = $inputData['categoryId'];
 
-		$categoryId = $inputData['categoryId'];
+        $data = $service->ecommGetSingleCategoryDetails($categoryId);
 
-		$data     = $service->ecommGetSingleCategoryDetails($categoryId);
-
-		$this->plugin->setResponse($data);
-		return true;
-	}
+        $this->plugin->setResponse($data);
+        return true;
+    }
 }
