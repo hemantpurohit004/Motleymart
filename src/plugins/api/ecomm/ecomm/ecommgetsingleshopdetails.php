@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommSaveStore extends ApiResource
+class EcommApiResourceEcommGetSingleShopDetails extends ApiResource
 {
     /**
      * API Plugin for get method
@@ -39,14 +39,19 @@ class EcommApiResourceEcommSaveStore extends ApiResource
     {
         // Require helper file
         JLoader::register('EcommStoreService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/store.php');
+        $service = new EcommStoreService;
 
-        $service = new EcommStoreService();
         // Get the request body and convert it into array
         $inputData = json_decode(file_get_contents('php://input'), true);
 
-        $data = $service->ecommSaveStore($inputData);
+        // Get the shopId
+        $shopId = $inputData['shopId'];
 
-        $this->plugin->setResponse($data);
+        // Call the signup method
+        $result = $service->ecommGetSingleShopDetails($shopId);
+
+        $this->plugin->setResponse($result);
+
         return true;
     }
 }
