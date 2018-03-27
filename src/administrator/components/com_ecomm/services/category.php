@@ -240,7 +240,7 @@ class EcommCategoryService
         return false;
     }
 
-    /* - STORE
+    /* - CATEGORY
      * Function to get the shop categories
      * return array containig status as true and the shop categories
      */
