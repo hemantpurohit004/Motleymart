@@ -24,7 +24,7 @@ class EcommPaymentService
         $this->returnData['success'] = 'false';
     }
 
-    /*  - COMMON
+    /*  - PAYMENT
      * Function to get the date
      * return date in the format Y-m-d H:i:s
      */

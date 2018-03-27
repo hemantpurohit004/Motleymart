@@ -90,7 +90,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*  - PAYMENT
+    /*  - COMMON
      * Function to get the date
      */
     public function getDate()
