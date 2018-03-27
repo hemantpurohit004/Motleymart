@@ -40,13 +40,12 @@ class EcommService
         $this->db                    = JFactory::getDbo();
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
-
         $this->storeHelper             = new storeHelper;
         $this->comquick2cartHelper     = new comquick2cartHelper;
         $this->Quick2cartModelCategory = new Quick2cartModelCategory;
     }
 
-    /* User
+    /* User - CART
      * Function to get available coupon code list
      * return array containig status as true and the coupon code details
      */
@@ -57,25 +56,22 @@ class EcommService
         $promotionHelper = new PromotionHelper;
 
         $this->returnData = array();
-        $offersData = array();
+        $offersData       = array();
 
-        if($offers['success'] = 'true' && count($offers['offers']) > 0)
-        {
-            foreach ($offers['offers'] as $offer)
-            {
+        if ($offers['success'] = 'true' && count($offers['offers']) > 0) {
+            foreach ($offers['offers'] as $offer) {
                 $data['coupon_code'] = $offer['coupon_code'];
-                $data['promoType'] = 1;
-                $offerDetails          = $promotionHelper->getValidatePromotions($data)[0];
+                $data['promoType']   = 1;
+                $offerDetails        = $promotionHelper->getValidatePromotions($data)[0];
 
-                if($offerDetails)
-                {
-                    $offerObj = new stdClass;
-                    $offerObj->couponCode = $offerDetails->coupon_code;
+                if ($offerDetails) {
+                    $offerObj                = new stdClass;
+                    $offerObj->couponCode    = $offerDetails->coupon_code;
                     $offerObj->discount_type = $offerDetails->discount_type;
-                    $offerObj->discount = $offerDetails->discount;
-                    $offerObj->max_discount = empty($offerDetails->max_discount)? $offerDetails->discount : $offerDetails->max_discount;
+                    $offerObj->discount      = $offerDetails->discount;
+                    $offerObj->max_discount  = empty($offerDetails->max_discount) ? $offerDetails->discount : $offerDetails->max_discount;
 
-                    $conditionAmount = json_decode($offerDetails->rules[0]->condition_attribute_value, true)['INR'];
+                    $conditionAmount           = json_decode($offerDetails->rules[0]->condition_attribute_value, true)['INR'];
                     $offerObj->conditionAmount = $conditionAmount;
 
                     $offersData[] = $offerObj;
@@ -83,13 +79,10 @@ class EcommService
             }
         }
 
-        if(!empty($offersData))
-        {
+        if (!empty($offersData)) {
             $this->returnData['success'] = 'true';
-            $this->returnData['offers'] = $offersData;
-        }
-        else
-        {
+            $this->returnData['offers']  = $offersData;
+        } else {
             $this->returnData['success'] = 'false';
             $this->returnData['message'] = 'Please try again';
         }
@@ -97,7 +90,7 @@ class EcommService
         return $this->returnData;
     }
 
-     /*
+    /*  - COMMON
      * Function to get the date
      */
     public function getDate()
@@ -107,30 +100,29 @@ class EcommService
         return date("Y-m-d H:i:s");
     }
 
-    /*
+    /*  - COMMON
      * Function to save user feedback
      */
     public function ecommSaveFeedback($name, $email, $mobileNo, $rating, $feedback)
     {
-        $this->returnData = array();
+        $this->returnData            = array();
         $this->returnData['success'] = 'false';
         $this->returnData['message'] = 'Please try again';
 
         $userId = JFactory::getUser()->id;
 
         $feedbackTable = JTable::getInstance('Feedback', 'EcommTable', array('dbo', $this->db));
-        $data = array(
-            'user_id' => $userId,
-            'name' => $name,
-            'email' => $email,
-            'mobile_no' => $mobileNo,
-            'rating' => $rating,
-            'feedback' => $feedback,
-            'created_date' => $this->getDate()
+        $data          = array(
+            'user_id'      => $userId,
+            'name'         => $name,
+            'email'        => $email,
+            'mobile_no'    => $mobileNo,
+            'rating'       => $rating,
+            'feedback'     => $feedback,
+            'created_date' => $this->getDate(),
         );
 
-        if($feedbackTable->save($data))
-        {
+        if ($feedbackTable->save($data)) {
             $this->returnData['success'] = 'true';
             $this->returnData['message'] = 'Thank you for your valuable feedback';
         }
@@ -147,68 +139,58 @@ class EcommService
         $plugin = JPluginHelper::getPlugin('qtctax', 'qtc_tax_default');
         $params = new JRegistry($plugin->params);
 
-        $taxData = new stdClass;
-        $taxData->taxType = 'percentage';
+        $taxData            = new stdClass;
+        $taxData->taxType   = 'percentage';
         $taxData->taxAmount = $params->get('tax_per', 0);
-
 
         $plugin = JPluginHelper::getPlugin('qtcshipping', 'qtc_shipping_default');
         $params = new JRegistry($plugin->params);
 
-        $shipData = new stdClass;
+        $shipData                    = new stdClass;
         $shipData->shippingCondition = '<';
-        $shipData->shippingLimit = $params->get('shipping_limit', 0);
-        $shipData->shippingAmount = $params->get('shipping_per', 0);
+        $shipData->shippingLimit     = $params->get('shipping_limit', 0);
+        $shipData->shippingAmount    = $params->get('shipping_per', 0);
 
         return array('tax' => $taxData, 'ship' => $shipData);
     }
 
-    /*
+    /* - ORDER
      * Function to send sms and email
      */
     public function ecommSendOrderNotification($sendEmail, $sendSms, $orderId)
     {
         $order_obj = array();
 
-        if (!empty($orderId))
-        {
-            $orderData = $this->ecommGetSingleOrderDetails(0, $orderId);
+        if (!empty($orderId)) {
+            $orderData        = $this->ecommGetSingleOrderDetails(0, $orderId);
             $this->returnData = array();
 
-            if($orderData['success'] == 'true')
-            {
-                $orderDetails = $orderData['orderDetails'];
-                $helperPath = JPATH_SITE . '/components/com_quick2cart/helpers/createorder.php';
+            if ($orderData['success'] == 'true') {
+                $orderDetails      = $orderData['orderDetails'];
+                $helperPath        = JPATH_SITE . '/components/com_quick2cart/helpers/createorder.php';
                 $createOrderHelper = $this->comquick2cartHelper->loadqtcClass($helperPath, "CreateOrderHelper");
 
                 $dispatcher = JDispatcher::getInstance();
                 JPluginHelper::importPlugin("system");
                 $result = $dispatcher->trigger("ecommOnQuick2cartAfterOrderPlace", array($orderDetails));
 
-                $params   = JComponentHelper::getParams('com_quick2cart');
+                $params                 = JComponentHelper::getParams('com_quick2cart');
                 $send_email_to_customer = $params->get('send_email_to_customer', 0);
-                $after_order_placed = $params->get('send_email_to_customer_after_order_placed', 0);
+                $after_order_placed     = $params->get('send_email_to_customer_after_order_placed', 0);
 
-                if ($send_email_to_customer  == 1)
-                {
-                    if ($after_order_placed  == 1)
-                    {
+                if ($send_email_to_customer == 1) {
+                    if ($after_order_placed == 1) {
                         // We are assuming that empty status as pending
-                        if (empty($orderDetails->status) || $orderDetails->status == 'P')
-                        {
-                            @$data = $this->comquick2cartHelper->sendordermail($orderDetails->orderId);
+                        if (empty($orderDetails->status) || $orderDetails->status == 'P') {
+                            @$data                       = $this->comquick2cartHelper->sendordermail($orderDetails->orderId);
                             $this->returnData['success'] = 'true';
                         }
                     }
-                }
-                else
-                {
+                } else {
                     $this->returnData['success'] = 'false';
                     $this->returnData['message'] = JText::_('Sending email is disabled.');
                 }
-            }
-            else
-            {
+            } else {
                 $this->returnData['success'] = 'false';
                 $this->returnData['message'] = JText::_('Order details not found.');
             }
@@ -217,7 +199,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - COMMON
      * Function to get environment details
      */
     public function getEnvironmentDetails()
@@ -225,47 +207,44 @@ class EcommService
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
-        $params     = JComponentHelper::getParams('com_ecomm');
-        $localhostUrl = $params->get('localhost_url');
-        $staggingUrl = $params->get('stagging_url');
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $localhostUrl  = $params->get('localhost_url');
+        $staggingUrl   = $params->get('stagging_url');
         $productionUrl = $params->get('production_url');
 
-        $localhostAdminKey = $params->get('localhost_admin_key');
-        $staggingAdminKey = $params->get('stagging_admin_key');
+        $localhostAdminKey  = $params->get('localhost_admin_key');
+        $staggingAdminKey   = $params->get('stagging_admin_key');
         $productionAdminKey = $params->get('production_admin_key');
 
         $environments = array(
             '0' => array(
                 'name' => 'Localhost',
-                'url' => $localhostUrl,
-                'key' => $localhostAdminKey
+                'url'  => $localhostUrl,
+                'key'  => $localhostAdminKey,
             ),
             '1' => array(
                 'name' => 'Stagging',
-                'url' => $staggingUrl,
-                'key' => $staggingAdminKey
+                'url'  => $staggingUrl,
+                'key'  => $staggingAdminKey,
             ),
             '2' => array(
                 'name' => 'Production',
-                'url' => $productionUrl,
-                'key' => $productionAdminKey
-            )
+                'url'  => $productionUrl,
+                'key'  => $productionAdminKey,
+            ),
         );
 
-        if(!empty($localhostUrl) && !empty($localhostAdminKey) && !empty($staggingUrl) && !empty($staggingAdminKey) && !empty($productionUrl) && !empty($productionAdminKey))
-        {
-            $this->returnData['success'] = 'true';
+        if (!empty($localhostUrl) && !empty($localhostAdminKey) && !empty($staggingUrl) && !empty($staggingAdminKey) && !empty($productionUrl) && !empty($productionAdminKey)) {
+            $this->returnData['success']      = 'true';
             $this->returnData['environments'] = $environments;
-        }
-        else
-        {
+        } else {
             $this->returnData['message'] = 'Please configure the environments.';
         }
 
         return $this->returnData;
     }
 
-    /*
+    /* - USER
      * Function to signup the user using mobileNo
      */
     public function ecommGetOtp($mobileNo, $isUser)
@@ -276,8 +255,7 @@ class EcommService
 
         // Check if user exists
         $userId = JUserHelper::getUserId($mobileNo);
-        if(empty($userId))
-        {
+        if (empty($userId)) {
             $this->returnData['message'] = 'This mobile no is not registered with us.';
             return $this->returnData;
         }
@@ -321,7 +299,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - USER
      * Function to verify the user is already registered with this mobileNo
      */
     public function verifyIfUserAlreadyExistsResetPassword($mobileNo)
@@ -343,7 +321,7 @@ class EcommService
         return $return;
     }
 
-    /*
+    /* - USER
      * Function to check if OTP is already generated for given MobileNo
      * If yes then return array containig mobile_no and otp
      * If no then return false
@@ -370,17 +348,17 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to generate OTP for given MobileNo
      * return array containig status as true and mobile_no as specified mobileNo and otp as newly generated otp
      */
     public function ecommGenerateOtpForMobileNoResetPassword($mobileNo, $isUser)
     {
-        $params     = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout = $params->get('otp_timeout');
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $otpTimeout    = $params->get('otp_timeout');
         $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10,$otpDigitCount);
-        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
+        $otpStartRange = pow(10, $otpDigitCount);
+        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
 
         try
         {
@@ -388,7 +366,7 @@ class EcommService
             $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
-            $currentTimestamp = $this->getDate();
+            $currentTimestamp    = $this->getDate();
             $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
             $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
 
@@ -431,7 +409,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to update the verified column
      */
     public function ecommUpdateVerifiedOtpResetPassword($mobileNo)
@@ -446,7 +424,7 @@ class EcommService
         return $this->db->execute();
     }
 
-    /*
+    /* - USER
      * Function to validate the Mobile No and OTP
      */
     public function ecommVerifyOtp($mobileNo, $otp)
@@ -471,17 +449,17 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /*  - USER
      * Function to re-generate OTP for given MobileNo
      * return array containig status as true and mobile_no as specified mobileNo and otp as re-generated otp
      */
     public function ecommRegenerateOtpForMobileNoResetPassword($mobileNo)
     {
-        $params     = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout = $params->get('otp_timeout');
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $otpTimeout    = $params->get('otp_timeout');
         $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10,$otpDigitCount);
-        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
+        $otpStartRange = pow(10, $otpDigitCount);
+        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
 
         try
         {
@@ -489,7 +467,7 @@ class EcommService
             $otp = mt_rand($otpStartRange, $otpEndRange);
 
             // Create the expiration time
-            $currentTimestamp = $this->getDate();
+            $currentTimestamp    = $this->getDate();
             $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
             $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
 
@@ -520,15 +498,15 @@ class EcommService
         }
     }
 
-    /* User
+    /* User - ORDER
      * Function to get update the payment details after user choose the payment method
      * return array containig status as true and the payment details
      */
     public function ecommUpdatePaymentDetailsForOrder($paymentDetails)
     {
-        $paymentMode = $paymentDetails['paymentMode'];
+        $paymentMode  = $paymentDetails['paymentMode'];
         $orderDetails = $paymentDetails['orderDetails'];
-        $response = isset($paymentDetails['response'])? $paymentDetails['response'] : '' ;
+        $response     = isset($paymentDetails['response']) ? $paymentDetails['response'] : '';
 
         require JPATH_SITE . '/components/com_quick2cart/controller.php';
         JLoader::import('payment', JPATH_SITE . '/components/com_quick2cart/models');
@@ -560,7 +538,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* User
+    /* User - PRODUCT
      * Function to get single order details for given orderId and shopId
      * return array containig status as true and the order details
      */
@@ -591,7 +569,7 @@ class EcommService
         }
     }
 
-    /* User
+    /* User - ORDER
      * Function to get single order details for given orderId and shopId
      * return array containig status as true and the order details
      */
@@ -622,7 +600,7 @@ class EcommService
                             $ifOptionsPresent                                 = true;
                             $productData['productDetails']->optionId          = $options['optionId'];
                             $productData['productDetails']->availableInOption = $options['optionName'];
-                            $price  = $options['optionPrice'];
+                            $price                                            = $options['optionPrice'];
                         }
                     }
                 }
@@ -630,7 +608,7 @@ class EcommService
                 if (!$ifOptionsPresent) {
                     $productData['productDetails']->optionId          = "";
                     $productData['productDetails']->availableInOption = "";
-                    $price = $productData['productDetails']->price;
+                    $price                                            = $productData['productDetails']->price;
                 }
 
                 $productData['productDetails']->productAmount      = $price;
@@ -648,14 +626,12 @@ class EcommService
                 $resultData['productTotalAmount'] = (string) round($productData['productDetails']->productTotalAmount, 2);
                 $resultData['productImages']      = $this->ecommGetProductImages($product->productId);
 
-                $resultData['price']              = $productData['productDetails']->price;
-                $resultData['sellingPrice']       = $productData['productDetails']->sellingPrice;
-                $optionData                       = $productData['productDetails']->availableIn;
+                $resultData['price']        = $productData['productDetails']->price;
+                $resultData['sellingPrice'] = $productData['productDetails']->sellingPrice;
+                $optionData                 = $productData['productDetails']->availableIn;
 
-                foreach ($optionData['options'] as $option)
-                {
-                    if($productData['productDetails']->optionId == $option['optionId'])
-                    {
+                foreach ($optionData['options'] as $option) {
+                    if ($productData['productDetails']->optionId == $option['optionId']) {
                         $resultData['optionId']    = $option['optionId'];
                         $resultData['optionName']  = $option['optionName'];
                         $resultData['optionMRP']   = $option['optionMRP'];
@@ -683,7 +659,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* Common
+    /* Common - BANNER
      * Function to get banner images based on category id
      * return array containig status as true and the payment methods
      */
@@ -693,7 +669,7 @@ class EcommService
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
-        // Load the address form model
+        // Load the banners form model
         $bannersModel = JModelLegacy::getInstance('banners', 'EcommModel');
         $result       = $bannersModel->getItems();
 
@@ -719,7 +695,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - PRODUCT
      * Function to Search product by its title and category
      */
     public function ecommSearch($search)
@@ -768,7 +744,7 @@ class EcommService
                     $singleProduct['ratings'] = $this->ecommGetProductRating($product['product_id']);
 
                     // Get the products available in options
-                    $singleProduct['availableIn'] = $this->ecommGetAvailableUnitsForProduct($product['product_id'], $product['price'],$singleProduct['sellingPrice']);
+                    $singleProduct['availableIn'] = $this->ecommGetAvailableUnitsForProduct($product['product_id'], $product['price'], $singleProduct['sellingPrice']);
 
                     // Get all the images
                     $images = json_decode($product['images']);
@@ -777,8 +753,7 @@ class EcommService
                     $images   = $this->getValidImages($images);
                     $imgArray = array();
 
-                    if(isset($images[0]) && !empty($images[0]))
-                    {
+                    if (isset($images[0]) && !empty($images[0])) {
                         $imgArray['image0'] = $images[0];
                     }
 
@@ -800,65 +775,38 @@ class EcommService
         }
     }
 
-    /**
-     * Function getCountryName.
-     */
-    public function getCountryCode($countryName)
-    {
-        $query = $this->db->getQuery(true);
-        $query->select('id');
-        $query->from('#__tj_country');
-        $query->where('country=' . $this->db->quote($countryName));
-        $this->db->setQuery($query);
-
-        return $this->db->loadAssoc()['id'];
-    }
-
-
-    /**
+    /** - ORDER
      * Function ecommCancelOrder.
      */
     public function ecommCancelOrder($orderId)
     {
         $orderDetails = $this->ecommGetSingleOrderDetails('', $orderId);
 
-        $this->returnData = array();
-        $this->returnData['success']   = 'false';
+        $this->returnData            = array();
+        $this->returnData['success'] = 'false';
 
-        if($orderDetails['success'] == 'true')
-        {
+        if ($orderDetails['success'] == 'true') {
             // Remove hardcoded store_id afterwards
-            $store_id = 0; $note = ''; $notify_chk = 1; $status = 'E';
+            $store_id   = 0;
+            $note       = '';
+            $notify_chk = 1;
+            $status     = 'E';
 
             $this->comquick2cartHelper->updatestatus($orderId, $status, $note, $notify_chk, $store_id);
 
             $orderDetails = $orderData['orderDetails'];
-            $dispatcher = JDispatcher::getInstance();
+            $dispatcher   = JDispatcher::getInstance();
             JPluginHelper::importPlugin("system");
             $result = $dispatcher->trigger("ecommOnQuick2cartAfterOrderCancel", array($orderDetails));
 
-            $this->returnData['success']   = "true";
+            $this->returnData['success'] = "true";
 
         }
 
         return $this->returnData;
     }
 
-    /**
-     * Function getCountryName.
-     */
-    public function getStateCode($stateName)
-    {
-        $query = $this->db->getQuery(true);
-        $query->select('id');
-        $query->from('#__tj_region');
-        $query->where('region=' . $this->db->quote($stateName));
-        $this->db->setQuery($query);
-
-        return $this->db->loadAssoc()['id'];
-    }
-
-    /*
+    /* - PRODUCT
      * Function to get available units for product
      * return array of available units for product
      */
@@ -876,13 +824,12 @@ class EcommService
                 if (!empty($attribute->optionDetails)) {
                     $optionData = array();
 
-                    foreach ($attribute->optionDetails as $option)
-                    {
-                        $availableOption['optionId']   = $option->itemattributeoption_id;
-                        $availableOption['optionName'] = $option->itemattributeoption_name;
-                        $availableOption['optionMRP'] = (string) $option->itemattributeoption_price_mrp;
+                    foreach ($attribute->optionDetails as $option) {
+                        $availableOption['optionId']    = $option->itemattributeoption_id;
+                        $availableOption['optionName']  = $option->itemattributeoption_name;
+                        $availableOption['optionMRP']   = (string) $option->itemattributeoption_price_mrp;
                         $availableOption['optionPrice'] = (string) $option->itemattributeoption_price;
-                        $optionData[] = $availableOption;
+                        $optionData[]                   = $availableOption;
                     }
                     $attributeData['isAvailable'] = 'true';
                     $attributeData['options']     = $optionData;
@@ -894,58 +841,7 @@ class EcommService
         return $attributeData;
     }
 
-    /*
-     * Function to get countries for address
-     * return array of countries
-     */
-    public function ecommGetCountriesForAddress()
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        $Quick2cartModelZone = JModelLegacy::getInstance('Zone', 'Quick2cartModel');
-        //$Quick2cartModelZone = new Quick2cartModelZone;
-        $countries           = $Quick2cartModelZone->getCountry();
-
-        if (!empty($countries)) {
-            $this->returnData['success']   = 'true';
-            $this->returnData['countries'] = $countries;
-        }
-
-        return $this->returnData;
-    }
-
-    /*
-     * Function to get states for country
-     * return array of states
-     */
-    public function ecommGetStatesForCountry($countryId)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-        $data                        = array();
-
-        $Quick2cartModelZone = JModelLegacy::getInstance('Zone', 'Quick2cartModel');
-        //$Quick2cartModelZone = new Quick2cartModelZone;
-        $states              = $Quick2cartModelZone->getRegionList($countryId);
-
-        if (!empty($states)) {
-            $this->returnData['success'] = 'true';
-
-            for ($i = 0; $i < count($states); $i++) {
-                $data[$i]['id']        = $states[$i]->region_id;
-                $data[$i]['stateName'] = $states[$i]->region;
-            }
-
-            $this->returnData['states'] = $data;
-        }
-
-        return $this->returnData;
-    }
-
-    /*
+    /* - PAYMENT
      * Function to get hash key for payment gateway
      * return hask key
      */
@@ -991,7 +887,8 @@ class EcommService
 
         return $this->returnData;
     }
-
+    /* - PAYMENT
+    */
     public function checkNull($value)
     {
         if ($value == null) {
@@ -1001,7 +898,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to check if MobileNo is verified or not
      * If yes then return array containig mobile_no and user id
      * If no then return false
@@ -1028,7 +925,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to register mobile no and password
      */
     public function ecommRegister($mobileNo, $password)
@@ -1049,18 +946,18 @@ class EcommService
                 $newUserGroup = $params->get('new_usertype');
 
                 // Email domain
-                $params     = JComponentHelper::getParams('com_ecomm');
+                $params = JComponentHelper::getParams('com_ecomm');
                 $domain = $params->get('emailDomain');
 
                 // Build the data to be stored
                 $data = array(
-                    'password' => $password,
-                    'username' => $mobileNo,
-                    'name'     => $mobileNo,
-                    'email'    => $mobileNo .'@'. $domain,
-                    'groups'   => array($newUserGroup),
-                    'profile'  => array('phone' => $mobileNo),
-                    'sendEmail'  => true
+                    'password'  => $password,
+                    'username'  => $mobileNo,
+                    'name'      => $mobileNo,
+                    'email'     => $mobileNo . '@' . $domain,
+                    'groups'    => array($newUserGroup),
+                    'profile'   => array('phone' => $mobileNo),
+                    'sendEmail' => true,
                 );
 
                 // Save the data in the table
@@ -1124,7 +1021,7 @@ class EcommService
 
     }
 
-    /*
+    /* - USER
      * Function to update the verified column
      */
     public function ecommVerifyOtpIsExpired($expirationTime)
@@ -1139,7 +1036,7 @@ class EcommService
         return true;
     }
 
-    /*
+    /* - USER
      * Function to update the verified column
      */
     public function ecommUpdateVerifiedOtp($mobileNo)
@@ -1154,7 +1051,7 @@ class EcommService
         return $this->db->execute();
     }
 
-    /*
+    /* - USER
      * Function to validate the Mobile No and OTP
      */
     public function ecommVerifyMobileNoAndOtp($mobileNo, $otp)
@@ -1179,7 +1076,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - USER
      * Function to verify the user is already registered with this mobileNo
      */
     public function verifyIfUserAlreadyExists($mobileNo)
@@ -1201,7 +1098,7 @@ class EcommService
         return $return;
     }
 
-    /*
+    /* - USER
      * Function to signup the user using mobileNo
      */
     public function ecommSignup($mobileNo, $isUser)
@@ -1249,7 +1146,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - USER
      * Function to check if OTP is already generated for given MobileNo
      * If yes then return array containig mobile_no and otp
      * If no then return false
@@ -1276,17 +1173,17 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to re-generate OTP for given MobileNo
      * return array containig status as true and mobile_no as specified mobileNo and otp as re-generated otp
      */
     public function ecommRegenerateOtpForMobileNo($mobileNo)
     {
-        $params     = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout = $params->get('otp_timeout');
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $otpTimeout    = $params->get('otp_timeout');
         $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10,$otpDigitCount);
-        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
+        $otpStartRange = pow(10, $otpDigitCount);
+        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
 
         try
         {
@@ -1325,17 +1222,17 @@ class EcommService
         }
     }
 
-    /*
+    /* - USER
      * Function to generate OTP for given MobileNo
      * return array containig status as true and mobile_no as specified mobileNo and otp as newly generated otp
      */
     public function ecommGenerateOtpForMobileNo($mobileNo, $isUser)
     {
-        $params     = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout = $params->get('otp_timeout');
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $otpTimeout    = $params->get('otp_timeout');
         $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10,$otpDigitCount);
-        $otpEndRange = pow(10,($otpDigitCount + 1)) - 1;
+        $otpStartRange = pow(10, $otpDigitCount);
+        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
 
         try
         {
@@ -1387,107 +1284,7 @@ class EcommService
         }
     }
 
-    /*
-     * Function to save the address for the user/vendor
-     * return array containig status as true/false
-     */
-    public function ecommSaveAddress($latitude, $longitude)
-    {
-        // Default user group
-        $params       = JComponentHelper::getParams('com_ecomm');
-        $googleAddressKey = $params->get('googleAddressKey');
-        $defaultAddressType = $params->get('addressType');
-
-        if(empty($googleAddressKey)) {
-            $this->returnData['success'] = 'false';
-            $this->returnData['message'] = 'Please configure google address key.';
-            return $this->returnData;
-        }
-
-        $url       = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' . trim($latitude) . ',' . trim($longitude) . '&sensor=false&key=' . $googleAddressKey;
-
-        $curlSession = curl_init();
-        curl_setopt($curlSession, CURLOPT_URL, $url);
-        curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
-        $jsonData = curl_exec($curlSession);
-        curl_close($curlSession);
-
-        $arrayData = json_decode($jsonData);
-
-        $status    = $arrayData->status;
-
-        if ($status == "OK") {
-            $address = $arrayData->results[0]->formatted_address;
-        } else {
-            $address = false;
-        }
-
-        if ($address) {
-            $arrayOfAddress = explode(',', $address);
-
-            $addressData = array();
-            $length      = count($arrayOfAddress);
-
-            $addressData['country_code'] = (string) $this->getCountryCode(trim($arrayOfAddress[$length - 1])); //99 // $arrayOfAddress[$length-1];
-
-            $addr                      = explode(' ', $arrayOfAddress[$length - 2]);
-            $addressData['state_code'] = (string) $this->getStateCode(trim($addr[1])); // 1344 ; //$addr[1];
-            $addressData['zipcode']    = trim($addr[2]);
-            $addressData['city']       = trim($arrayOfAddress[$length - 3]);
-            $addressData['land_mark']  = trim($arrayOfAddress[$length - 4]);
-            $addressData['address']    = trim($arrayOfAddress[$length - 5]);
-
-            if (array_key_exists($length - 6, $arrayOfAddress)) {
-                $addressData['address'] = trim(trim($arrayOfAddress[$length - 6]) . ', ' . trim($addressData['address']));
-            }
-
-            if (array_key_exists($length - 7, $arrayOfAddress)) {
-                $addressData['address'] = trim(trim($arrayOfAddress[$length - 7]) . ', ' . trim($addressData['address']));
-            }
-
-            // Get the user details
-            JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_users/models');
-            $userModel = JModelLegacy::getInstance('User', 'UsersModel');
-
-            $userId = JFactory::getUser()->id;
-            $userDetails        = $userModel->getItem($userId);
-            $userProfileDetails = JUserHelper::getProfile($userId);
-
-            $addressData['phone']         = trim($userProfileDetails->profile['phone']);
-            $addressData['user_email']    = trim($userDetails->email);
-            $addressData['address_title'] = $defaultAddressType;
-            $addressData['latitude']    = $latitude;
-            $addressData['longitude']    = $longitude;
-            $addressData['vat_number']    = '';
-
-            if (!empty($userDetails->name)) {
-                if (is_numeric($userDetails->name)) {
-                    $addressData['firstname']  = '';
-                    $addressData['middlename'] = '';
-                    $addressData['lastname']   = '';
-                } else {
-                    $arrayName                 = explode(' ', $userDetails->name);
-                    $addressData['firstname']  = trim($arrayName[0]);
-                    $addressData['middlename'] = '';
-                    $addressData['lastname']   = trim($arrayName[1]);
-                }
-            }
-
-            $addressStatus = $this->ecommSaveCustomerAddress($addressData);
-            if ($addressStatus['success'] == 'true') {
-                $this->returnData['success'] = 'true';
-            } else {
-                $this->returnData['message'] = 'Failed to add the address in your addresses.';
-            }
-        } else {
-             $this->returnData['message'] = 'Google api error';
-             $this->returnData['debug_data'] = $jsonData;
-        }
-        return $this->returnData;
-    }
-
-    /*
+    /* - CATEGORY
      * Function to get all the categories
      * return array containig status as true and the categories
      */
@@ -1526,8 +1323,8 @@ class EcommService
                 }
 
                 // Push all the categories in returnData
-                $this->returnData['success']    = 'true';
-                $this->returnData['categories'] = $categories;
+                $this->returnData['success']        = 'true';
+                $this->returnData['categories']     = $categories;
                 $this->returnData['billingDetails'] = $this->ecommGetBillingDetails();
             }
 
@@ -1538,7 +1335,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - CATEGORY
      * Function to get all the categories
      * return array containig status as true and the categories
      */
@@ -1601,7 +1398,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - CATEGORY
      * Function to get all sub-categories for the categoryId
      * return array containig status as true and the categories
      */
@@ -1671,7 +1468,7 @@ class EcommService
         }
     }
 
-    /*
+    /* CART
      * Function to get the cart details
      * return array containig status as true and the cart details
      */
@@ -1682,13 +1479,10 @@ class EcommService
         $dispatcher = JDispatcher::getInstance();
         JPluginHelper::importPlugin("system");
         $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
-        if($return[0] == 'true')
-        {
+        if ($return[0] == 'true') {
             $this->returnData['success'] = 'true';
             $this->returnData['message'] = 'Coupon code applied successfully';
-        }
-        else
-        {
+        } else {
             $this->returnData['success'] = 'false';
             $this->returnData['message'] = 'Failed to apply coupon';
         }
@@ -1696,7 +1490,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
+    /* - PRODUCT
      * Function to get images of the product in cart
      * return array containig images of the product in cart
      */
@@ -1714,92 +1508,14 @@ class EcommService
 
         $productImages = array();
 
-        if(isset($images[0]) && !empty($images[0]))
-        {
+        if (isset($images[0]) && !empty($images[0])) {
             $productImages['Img0'] = $images[0];
         }
 
         return $productImages;
     }
 
-    /*
-     * Function to get the shops for given address
-     * return array containig status as true and the shop near given address
-     */
-    public function ecommGetShopsNearMe($latitude, $longitude)
-    {
-        try
-        {
-            // Create db and query object
-            $query = $this->db->getQuery(true);
-
-            // Build the query
-            $query->select(array('id', 'owner'))
-                ->from($this->db->quoteName('#__kart_store'))
-                ->where(
-                    $this->db->quoteName('live') . " = " . $this->db->quote('1')
-                );
-            $this->db->setQuery($query);
-
-            // Load the list of stores found
-            $stores = $this->db->loadAssocList();
-            $i = $shopId = 0;
-
-            // Default user group
-            $params       = JComponentHelper::getParams('com_ecomm');
-            $minDistance = $params->get('maxStoreDistance');
-
-            // If stores found
-            foreach ($stores as $store)
-            {
-                // Get the store's latitude, longitude
-                $result = $this->ecommGetUserAddressList($store['owner']);
-
-                if($result['success'] == 'true')
-                {
-                    $shopLocation = array();
-                    $shopLocation['latitude'] = $result['addresses'][0]->latitude;
-                    $shopLocation['longitude'] = $result['addresses'][0]->longitude;
-                }
-
-                // Get the user's latitude, longitude
-                $userLocation = array();
-                $userLocation['latitude'] = $latitude;
-                $userLocation['longitude'] = $longitude;
-
-                $distance = $this->getDistance($shopLocation, $userLocation, $unit = 'K')['value'];
-
-                // Check if store near user address, If yes then save store id
-                if($distance < $minDistance)
-                {
-                    $shopId = $stores[$i]['id'];
-                }
-
-                $i++;
-            }
-
-            $this->returnData = array();
-            $this->returnData['success'] = 'false';
-
-            if($shopId > 0)
-            {
-                $this->returnData['success'] = 'true';
-                $this->returnData['shopId'] = (string) $shopId;
-            }
-            else
-            {
-                $this->returnData['shopId'] = '0';
-            }
-
-            return $this->returnData;
-
-        } catch (Exception $e) {
-            $this->returnData['message'] = $e->getMessage();
-            return $this->returnData;
-        }
-    }
-
-    /*
+    /* - STORE
      * Function to get the shop offers
      * return array containig status as true and the shop offers
      */
@@ -1818,15 +1534,13 @@ class EcommService
                 ->from($this->db->quoteName('#__kart_promotions') . 'AS a');
 
             // IF * then all shops, else specified shop
-            if($shopId != '*')
-            {
+            if ($shopId != '*') {
                 $query->where($this->db->quoteName('store_id') . " = " . $this->db->quote($shopId));
             }
 
             // If state(published) is * then return all
-            if ($published != '*')
-            {
-                $query->where($this->db->quoteName('state') . " = " . $this->db->quote($published) );
+            if ($published != '*') {
+                $query->where($this->db->quoteName('state') . " = " . $this->db->quote($published));
             }
 
             // Execute the query
@@ -1848,7 +1562,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - STORE
      * Function to get the shop categories
      * return array containig status as true and the shop categories
      */
@@ -1924,7 +1638,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - CATEGORY
      * Function to get joomla's user details
      * return array containig status as true and the user detials
      */
@@ -1958,7 +1672,7 @@ class EcommService
         return $singleCategoryData;
     }
 
-    /*
+    /* - USER
      * Function to get joomla's user details
      * return array containig status as true and the user detials
      */
@@ -1985,7 +1699,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - CATEGORY
      * Function to get joomla's category details
      * return array containig status as true and the user detials
      */
@@ -2011,7 +1725,7 @@ class EcommService
         return false;
     }
 
-    /*
+    /* - PRODUCT
      * Function to get the products of given sub-category and shop
      * return array containig status as true and the shop products
      */
@@ -2049,24 +1763,20 @@ class EcommService
         try
         {
             // If products found
-            if (!empty($products))
-            {
+            if (!empty($products)) {
                 $productsDetails = array();
-                $singleProduct = array();
+                $singleProduct   = array();
 
                 // Iterate over each product and get details
-                foreach ($products as $product)
-                {
+                foreach ($products as $product) {
                     // Get the products available in options
-                    $productsDetails[] = $this->ecommGetSingleProductDetails($product['product_id'], $$shopId, $categoryId) ['productDetails'];
+                    $productsDetails[] = $this->ecommGetSingleProductDetails($product['product_id'], $$shopId, $categoryId)['productDetails'];
                 }
 
-                $this->returnData = array();
+                $this->returnData             = array();
                 $this->returnData['success']  = 'true';
                 $this->returnData['products'] = $productsDetails;
-            }
-
-            else {
+            } else {
                 $this->returnData['message'] = 'No products found.';
             }
 
@@ -2077,6 +1787,8 @@ class EcommService
         }
     }
 
+    /* PRODUCT / - STORE
+    */
     public function getValidImages($images)
     {
         // Initialise variable
@@ -2096,16 +1808,7 @@ class EcommService
         return $validImages;
     }
 
-    /*
-     * Function to get avaliable payment options for given shop
-     * return array containig status as true and the shop payment options
-     */
-    public function ecommGetPaymentOptionsForShop($shopId)
-    {
-
-    }
-
-    /*
+    /* - PRODUCT
      * Function to get the ratings for the given productId
      * return array containig status as true and the shop payment options
      */
@@ -2147,7 +1850,7 @@ class EcommService
         }
     }
 
-    /*
+    /* - PRODUCT
      * Function to get single product details along with the applicable offers
      * return array containig status as true and the product details and the offers if applicatable
      */
@@ -2172,8 +1875,8 @@ class EcommService
             $productDetails->images = array();
 
             for ($i = 0; $i < count($images); $i++) {
-                $productImage = new stdClass;
-                $productImage->path = $images[$i];
+                $productImage             = new stdClass;
+                $productImage->path       = $images[$i];
                 $productDetails->images[] = $productImage;
             }
 
@@ -2231,7 +1934,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - STORE
      * Function to Save the store
      * return array containig status as true and the store details
      */
@@ -2253,7 +1956,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* User
+    /* User - USER
      * Function to get specific user details
      * return array containig status as true and the sale details
      */
@@ -2265,17 +1968,17 @@ class EcommService
         // Return - id, username, name, email, mobile_no, latitude, longitude
         $userData = array();
 
-        $userData['id']        = isset($userDetails->id) ? $userDetails->id : '';
-        $userData['is_user']   = ($type != 'exception') ? (string) $type : '';
-        $userData['username']  = isset($userDetails->username) ? $userDetails->username : '';
-        $userData['name']      = isset($userDetails->name) ? $userDetails->name : '';
-        $userData['email']     = isset($userDetails->email) ? $userDetails->email : '';
-        $userData['mobileNo']  = isset($userDetails->profile['phone']) ? $userDetails->profile['phone'] : '';
+        $userData['id']       = isset($userDetails->id) ? $userDetails->id : '';
+        $userData['is_user']  = ($type != 'exception') ? (string) $type : '';
+        $userData['username'] = isset($userDetails->username) ? $userDetails->username : '';
+        $userData['name']     = isset($userDetails->name) ? $userDetails->name : '';
+        $userData['email']    = isset($userDetails->email) ? $userDetails->email : '';
+        $userData['mobileNo'] = isset($userDetails->profile['phone']) ? $userDetails->profile['phone'] : '';
 
         return $userData;
     }
 
-    /* User
+    /* User - USER
      * Function to get total sale
      * return array containig status as true and the sale details
      */
@@ -2295,7 +1998,7 @@ class EcommService
         }
     }
 
-    /* VENDOR
+    /* VENDOR - USER
      * Function to get single user details for given orderId and shopId
      * return array containig status as true and the user details
      */
@@ -2318,7 +2021,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - CATEGORY
      * Function to get single category details for given categoryId
      * return array containig status as true and the category details
      */
@@ -2341,6 +2044,8 @@ class EcommService
         return $this->returnData;
     }
 
+    /* - STORE
+    */
     public function ecommGetSingleStoreDetails($shopId, $fields = '')
     {
         // Clear the previous responses
@@ -2375,7 +2080,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - ORDER
      * Function to get single order ddetails for given orderId and shopId
      * return array containig status as true and the order details
      */
@@ -2385,42 +2090,40 @@ class EcommService
 
         $order = $this->comquick2cartHelper->getorderinfo($orderId, $shopId);
 
-        if (!empty($order) && isset($order['order_info'][0]->id))
-        {
+        if (!empty($order) && isset($order['order_info'][0]->id)) {
             $orderData = $order['order_info'][0];
 
-            $orderDetails = new stdClass;
-            $orderDetails->orderId = $orderData->order_id;
-            $orderDetails->prefix = $orderData->prefix;
-            $orderDetails->status = $orderData->status;
-            $orderDetails->createdOn = $orderData->cdate;
-            $orderDetails->createdBy = $orderData->user_id;
-            $orderDetails->tax = $orderData->order_tax;
+            $orderDetails                  = new stdClass;
+            $orderDetails->orderId         = $orderData->order_id;
+            $orderDetails->prefix          = $orderData->prefix;
+            $orderDetails->status          = $orderData->status;
+            $orderDetails->createdOn       = $orderData->cdate;
+            $orderDetails->createdBy       = $orderData->user_id;
+            $orderDetails->tax             = $orderData->order_tax;
             $orderDetails->shippingCharges = $orderData->order_shipping;
 
             $totalItemShipCharges = 0;
-            $totalItemTaxCharges = 0;
-            $totalItemDiscount = 0;
-            $totalItemPrice = 0;
-            $productsDetails = array();
-            $totalTax = 0;
+            $totalItemTaxCharges  = 0;
+            $totalItemDiscount    = 0;
+            $totalItemPrice       = 0;
+            $productsDetails      = array();
+            $totalTax             = 0;
             $totalShippingCharges = 0;
-            $couponCode = '';
+            $couponCode           = '';
 
-            foreach ($order['items'] as $item)
-            {
+            foreach ($order['items'] as $item) {
                 $product = new stdClass;
 
-                $product->productId = $item->item_id;
-                $product->storeId = $item->store_id;
-                $product->productName = $item->order_item_name;
-                $product->quantity = $item->product_quantity;
+                $product->productId     = $item->item_id;
+                $product->storeId       = $item->store_id;
+                $product->productName   = $item->order_item_name;
+                $product->quantity      = $item->product_quantity;
                 $product->productAmount = $item->product_item_price;
-                $product->totalAmount = $item->product_attributes_price * $item->product_quantity;
+                $product->totalAmount   = $item->product_attributes_price * $item->product_quantity;
 
-                $product->optionDetails = new stdClass;
-                $product->optionDetails->optionId = $item->product_attributes;
-                $product->optionDetails->optionName = $item->product_attribute_names;
+                $product->optionDetails               = new stdClass;
+                $product->optionDetails->optionId     = $item->product_attributes;
+                $product->optionDetails->optionName   = $item->product_attribute_names;
                 $product->optionDetails->optionAmount = (string) $item->product_attributes_price;
 
                 $productsDetails[] = $product;
@@ -2428,48 +2131,45 @@ class EcommService
                 $totalItemDiscount += !empty($item->discount) ? $item->discount : 0.00;
                 $totalItemPrice += !empty($product->totalAmount) ? $product->totalAmount : 0.00;
 
-                if(!empty($item->coupon_code) && empty($couponCode))
-                {
+                if (!empty($item->coupon_code) && empty($couponCode)) {
                     $couponCode = $item->coupon_code;
                 }
             }
 
-            $orderDetails->amount = (string) round($orderData->amount, 2);
+            $orderDetails->amount   = (string) round($orderData->amount, 2);
             $orderDetails->subTotal = (string) round($totalItemPrice, 2);
 
-            $orderDetails->discount = (string) round($totalItemDiscount, 2);
+            $orderDetails->discount   = (string) round($totalItemDiscount, 2);
             $orderDetails->couponCode = $couponCode;
 
             $orderDetails->productDetails = $productsDetails;
 
             // Address Details
-            $orderDetails->userAddressDetails = new stdClass;
-            $orderDetails->userAddressDetails->firstName = $orderData->firstname;
-            $orderDetails->userAddressDetails->middleName = $orderData->middlename;
-            $orderDetails->userAddressDetails->lastName = $orderData->lastname;
-            $orderDetails->userAddressDetails->email = $orderData->user_email;
-            $orderDetails->userAddressDetails->mobileNo = $orderData->phone;
-            $orderDetails->userAddressDetails->address = $orderData->address;
-            $orderDetails->userAddressDetails->landMark = $orderData->land_mark;
-            $orderDetails->userAddressDetails->city = $orderData->city;
-            $orderDetails->userAddressDetails->zipCode = $orderData->zipcode;
-            $orderDetails->userAddressDetails->stateName = $orderData->state_name;
+            $orderDetails->userAddressDetails              = new stdClass;
+            $orderDetails->userAddressDetails->firstName   = $orderData->firstname;
+            $orderDetails->userAddressDetails->middleName  = $orderData->middlename;
+            $orderDetails->userAddressDetails->lastName    = $orderData->lastname;
+            $orderDetails->userAddressDetails->email       = $orderData->user_email;
+            $orderDetails->userAddressDetails->mobileNo    = $orderData->phone;
+            $orderDetails->userAddressDetails->address     = $orderData->address;
+            $orderDetails->userAddressDetails->landMark    = $orderData->land_mark;
+            $orderDetails->userAddressDetails->city        = $orderData->city;
+            $orderDetails->userAddressDetails->zipCode     = $orderData->zipcode;
+            $orderDetails->userAddressDetails->stateName   = $orderData->state_name;
             $orderDetails->userAddressDetails->countryName = $orderData->country_name;
-            $orderDetails->userAddressDetails->latitude = $orderData->latitude;
-            $orderDetails->userAddressDetails->longitude = $orderData->longitude;
+            $orderDetails->userAddressDetails->latitude    = $orderData->latitude;
+            $orderDetails->userAddressDetails->longitude   = $orderData->longitude;
 
-            $this->returnData['success'] = 'true';
-            $this->returnData['orderDetails']   = $orderDetails;
-        }
-        else
-        {
+            $this->returnData['success']      = 'true';
+            $this->returnData['orderDetails'] = $orderDetails;
+        } else {
             $this->returnData['message'] = 'Failed to get the order details';
         }
 
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - ORDER
      * Function to get all the pending orders for given store
      * return array containig status as true and the order details
      */
@@ -2502,7 +2202,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* User
+    /* User - ORDER
      * Function to get all the pending orders for given user
      * return array containig status as true and the order details
      */
@@ -2563,6 +2263,8 @@ class EcommService
 
     }
 
+    /* ORDER
+    */
     public function getFormattedSingleOrderDetails($orderData)
     {
         $singleOrderDetails = array();
@@ -2587,7 +2289,7 @@ class EcommService
 
     }
 
-    /* VENDOR
+    /* VENDOR - ORDER
      * Function to get orders for shop and status
      * return array containig status as true and the order details
      */
@@ -2618,7 +2320,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* Common
+    /* Common - USER
      * Function to update specific user details
      * return array containig status as true and the user details
      */
@@ -2628,9 +2330,9 @@ class EcommService
         $userModel = JModelLegacy::getInstance('User', 'UsersModel');
 
         //check if userId
-        if(isset($userData['userId']) && !empty($userData['userId'])){
+        if (isset($userData['userId']) && !empty($userData['userId'])) {
             $userId = $userData['userId'];
-        } else if(isset($userData['username']) && !empty($userData['username'])){
+        } else if (isset($userData['username']) && !empty($userData['username'])) {
             //check if username
             JLoader::register('JUserHelper', JPATH_LIBRARIES . '/joomla/user/helper');
             $userId = JUserHelper::getUserId($userData['username']);
@@ -2709,37 +2411,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* User
-     * Function to get store distance from users location
-     * return array containig status as true and the distance details
-     * google map api key = AIzaSyD2Glj1K120tqnUvw629PiK_SjNdSi83aU
-     */
-    public function getDistance($storeLocation, $userLocation, $unit = 'K')
-    {
-        //Get latitude and longitude from geo data
-        $latitudeFrom  = $storeLocation['latitude'];
-        $longitudeFrom = $storeLocation['longitude'];
-        $latitudeTo    = $userLocation['latitude'];
-        $longitudeTo   = $userLocation['longitude'];
-
-        // Calculate distance from latitude and longitude
-        $theta = $longitudeFrom - $longitudeTo;
-        $dist  = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) + cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
-        $dist  = acos($dist);
-        $dist  = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
-        $unit  = strtoupper($unit);
-        $data = array();
-
-        if ($unit == "K") {
-            $data['value'] = round(($miles * 1.609344), 2);
-            $data['unit'] = 'KM';
-        }
-
-        return $data;
-    }
-
-    /*
+    /* - ORDER
      * Function to create new order
      * return array containig status as true
      */
@@ -2762,7 +2434,7 @@ class EcommService
         $user = JFactory::getUser();
 
         // Get the billing address details
-        $address = $this->ecommGetSingleCustomerAddressDetails($billingAddressId);
+        $address = $this->addressService->ecommGetSingleCustomerAddressDetails($billingAddressId);
 
         if ($address['success'] == 'true') {
             $billingAddress = $address['address'];
@@ -2774,7 +2446,7 @@ class EcommService
         // If shipping address is enabled
         if ($shippingAddressId) {
             // Get the shipping address details
-            $address = $this->ecommGetSingleCustomerAddressDetails($shippingAddressId);
+            $address = $this->addressService->ecommGetSingleCustomerAddressDetails($shippingAddressId);
 
             if ($address['success'] == 'true') {
                 $shippingAddress = $address['address'];
@@ -2804,13 +2476,13 @@ class EcommService
         }
 
         // Build the data
-        $orderData                   = new stdClass;
-        $orderData->address          = new stdClass;
-        $orderData->userId           = $user->id;
-        $orderData->products_data    = $products;
-        $orderData->address->billing = $billingAddress;
+        $orderData                    = new stdClass;
+        $orderData->address           = new stdClass;
+        $orderData->userId            = $user->id;
+        $orderData->products_data     = $products;
+        $orderData->address->billing  = $billingAddress;
         $orderData->address->shipping = $shippingAddress;
-        $orderData->coupon_code      = $couponDetails;
+        $orderData->coupon_code       = $couponDetails;
 
         $createOrderHelper = new CreateOrderHelper;
 
@@ -2820,25 +2492,23 @@ class EcommService
         $result = $createOrderHelper->qtc_place_order($orderData);
 
         // If order is successful
-        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id))
-        {
+        if ($result->status == 'success' && isset($result->order_id) && !empty($result->order_id)) {
             $cartModel = JModelLegacy::getInstance('cart', 'Quick2cartModel');
             $cartModel->empty_cart();
 
             // Update payment details start
-            $data = $this->ecommGetSingleOrderDetails(0, $result->order_id);
+            $data      = $this->ecommGetSingleOrderDetails(0, $result->order_id);
             $orderData = $data['orderDetails'];
 
-            $orderDetails = array();
-            $orderDetails['total'] = $orderData->amount;
-            $orderDetails['mail_addr'] = $orderData->userAddressDetails->email;
-            $orderDetails['order_id'] = $orderData->prefix . $orderData->orderId;
-            $orderDetails['user_id'] = $orderData->createdBy;
-            $orderDetails['comment'] = '';
+            $orderDetails                   = array();
+            $orderDetails['total']          = $orderData->amount;
+            $orderDetails['mail_addr']      = $orderData->userAddressDetails->email;
+            $orderDetails['order_id']       = $orderData->prefix . $orderData->orderId;
+            $orderDetails['user_id']        = $orderData->createdBy;
+            $orderDetails['comment']        = '';
             $paymentDetails['orderDetails'] = $orderDetails;
 
-            if(isset($paymentDetails) && isset($paymentDetails['response']) && !empty($paymentDetails['response']))
-            {
+            if (isset($paymentDetails) && isset($paymentDetails['response']) && !empty($paymentDetails['response'])) {
                 $paymentDetails['response']['txnid'] = $orderData->prefix . $orderData->orderId;
             }
 
@@ -2851,134 +2521,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /*
-     * Function to get single address detaill
-     * return array containig status as true
-     */
-    public function ecommGetSingleCustomerAddressDetails($addressId)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        // Get the address model and save the address
-        $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
-        $result       = $addressModel->getAddress($addressId);
-
-        // Load the address form model
-        $cartCheckoutModel = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
-        $result->country_name = $cartCheckoutModel->getCountryName($result->country_code);
-        $result->state_name = $cartCheckoutModel->getStateName($result->state_code);
-
-        // If successfully saved the address then return true
-        if ($result) {
-            $this->returnData['success'] = 'true';
-            $this->returnData['address'] = $result;
-        }
-
-        return $this->returnData;
-    }
-
-    /*
-     * Function to save customer address
-     * return array containig status as true
-     */
-    public function ecommSaveCustomerAddress($address)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        // Get the address model and save the address
-        $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
-        $result       = $addressModel->save($address);
-
-        // If successfully saved the address then return true
-        if ($result) {
-            $this->returnData['success'] = 'true';
-        }
-
-        return $this->returnData;
-    }
-
-    /*
-     * Function to delete the customer address
-     * return array containig status as true
-     */
-    public function ecommDeleteCustomerAddress($addressId)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        // Load the address form model
-        $addressFormModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
-        $result           = $addressFormModel->delete($addressId);
-
-        if ($result) {
-            $this->returnData['success'] = 'true';
-        }
-
-        return $this->returnData;
-    }
-
-    /*
-     * Function to get all the customer addresses used in past
-     * return array containig status as true and the addresses
-     */
-    public function ecommGetUserAddressList($userId = 0)
-    {
-        if(!$userId)
-        {
-            $userId = JFactory::getUser()->id;
-        }
-
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        try
-        {
-            $query = $this->db->getQuery(true);
-
-            $query->select('*');
-            $query->from('#__kart_customer_address');
-            $query->where('user_id = ' . $userId);
-            $query->order('id DESC');
-
-            // Get the options.
-            $this->db->setQuery($query);
-            $address = $this->db->loadObjectList();
-
-            if (!empty($userId)) {
-                // Load the address form model
-                $cartCheckoutModel = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
-                $userAddresses = array();
-
-                // Check if address is used as billing or shipping order
-                if (!empty($address)) {
-                    foreach ($address as $item) {
-                        $item->country_name = $cartCheckoutModel->getCountryName($item->country_code);
-                        $item->state_name = $cartCheckoutModel->getStateName($item->state_code);
-
-                        $userAddresses[] = $item;
-                    }
-
-                    if (!empty($userAddresses)) {
-                        $this->returnData['success']   = 'true';
-                        $this->returnData['addresses'] = $userAddresses;
-                    }
-                }
-            }
-
-            return $this->returnData;
-        } catch (Exception $e) {
-            $this->returnData['message'] = $e->getMessage();
-            return $this->returnData;
-        }
-    }
-
-    /* VENDOR
+    /* VENDOR - STORE
      * Function to get total sale
      * return array containig status as true and the sale details
      */
@@ -2986,7 +2529,7 @@ class EcommService
     {
     }
 
-    /* Common
+    /* Common - PAYMENT
      * Function to get payment methods
      * return array containig status as true and the payment methods
      */
@@ -3002,16 +2545,14 @@ class EcommService
 
         $gateways = array();
 
-        foreach ($result as $value)
-        {
-            $obj     = new stdClass;
+        foreach ($result as $value) {
+            $obj = new stdClass;
 
-            $data = JPluginHelper::getPlugin("payment", $value);
+            $data          = JPluginHelper::getPlugin("payment", $value);
             $pluginDetails = json_decode($data->params);
 
-            if (!empty($pluginDetails->plugin_name))
-            {
-                $obj->id = $value;
+            if (!empty($pluginDetails->plugin_name)) {
+                $obj->id    = $value;
                 $obj->title = $pluginDetails->plugin_name;
 
                 $gateways[] = $obj;
@@ -3028,7 +2569,7 @@ class EcommService
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - STORE
      * Function to save new store
      * return array containig status as true and the message
      */
@@ -3038,10 +2579,10 @@ class EcommService
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
-        $input    = new JInput();
-        $token = JHtml::_('form.token');
-        $token = JSession::getFormToken();
-        $shopId = empty($storeData['shopId'])? 0 : $storeData['shopId'];
+        $input  = new JInput();
+        $token  = JHtml::_('form.token');
+        $token  = JSession::getFormToken();
+        $shopId = empty($storeData['shopId']) ? 0 : $storeData['shopId'];
 
         $input->set('id', $shopId);
         $input->set('store_creator_id', $storeData['storeOwner']);
@@ -3051,7 +2592,7 @@ class EcommService
         $input->set('companyname', $storeData['companyName']);
 
         $input->set('email', $storeData['email']);
-        $input->set('phone' ,$storeData['mobileNo']);
+        $input->set('phone', $storeData['mobileNo']);
         $input->set('address', $storeData['address']);
         $input->set('land_mark', $storeData['landMark']);
         $input->set('pincode', $storeData['pinCode']);
@@ -3059,7 +2600,7 @@ class EcommService
         $input->set('qtcstorestate', $storeData['stateName']);
         $input->set('city', $storeData['city']);
 
-        $input->set('paymentMode',$storeData['paymentMode']);
+        $input->set('paymentMode', $storeData['paymentMode']);
         $input->set('paypalemail', $storeData['paypalEmail']);
         $input->set('otherPayMethod', $storeData['otherPayMethod']);
 
@@ -3075,24 +2616,21 @@ class EcommService
         $input->set('storeVanityUrl', 'Motley-Store-' . $shopId);
 
         // Require helper file
-        JLoader::register('storeHelper', JPATH_SITE. '/components/com_quick2cart/helpers');
+        JLoader::register('storeHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
         $this->storeHelper = new storeHelper;
-        $result      = $this->storeHelper->saveVendorDetails($input);
+        $result            = $this->storeHelper->saveVendorDetails($input);
 
-        if($result['store_id'])
-        {
+        if ($result['store_id']) {
             $this->returnData['success'] = 'true';
             $this->returnData['message'] = 'Store details saved successfully';
-        }
-        else
-        {
+        } else {
             $this->returnData['message'] = 'Failed to save the store details';
         }
 
         return $this->returnData;
     }
 
-    /* VENDOR
+    /* VENDOR - PRODUCT
      * Function to save new product
      * return array containig status as true and the message
      */
@@ -3102,10 +2640,10 @@ class EcommService
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
 
-        $input    = new JInput();
-        $token = JHtml::_('form.token');
-        $token = JSession::getFormToken();
-        $productId = empty($productData['productId'])? 0 : $productData['productId'];
+        $input     = new JInput();
+        $token     = JHtml::_('form.token');
+        $token     = JSession::getFormToken();
+        $productId = empty($productData['productId']) ? 0 : $productData['productId'];
 
         $input->set('pid', $productId);
 
@@ -3113,13 +2651,13 @@ class EcommService
         $input->set('item_alias', $productData['productAlias']);
         $input->set('qtc_product_type', 1);
         $input->set('prod_cat', $productData['productCategory']);
-        $input->set('description', array('data' => $productData['productDescription']) );
+        $input->set('description', array('data' => $productData['productDescription']));
         $input->set('sku', $productData['productSku']);
         $input->set('stock', $productData['stock']);
         $input->set('state', $productData['state']);
         $input->set('store_id', $productData['storeId']);
-        $input->set('multi_cur', array('INR' => $productData['productPrice'] ));
-        $input->set('multi_dis_cur', array('INR' => $productData['discountPrice'] ));
+        $input->set('multi_cur', array('INR' => $productData['productPrice']));
+        $input->set('multi_dis_cur', array('INR' => $productData['discountPrice']));
 
         $input->set('option', 'com_quick2cart');
         $input->set('client', 'com_quick2cart');
@@ -3129,15 +2667,12 @@ class EcommService
         $input->set($token, '1');
 
         // Require helper file
-        $productId      = $this->comquick2cartHelper->saveProduct($input);
+        $productId = $this->comquick2cartHelper->saveProduct($input);
 
-        if($productId > 0)
-        {
+        if ($productId > 0) {
             $this->returnData['success'] = 'true';
             $this->returnData['message'] = 'Product details saved successfully';
-        }
-        else
-        {
+        } else {
             $this->returnData['message'] = 'Failed to save the product details';
         }
 
