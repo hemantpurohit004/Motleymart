@@ -6,7 +6,7 @@
  * @copyright   Copyright (C) 2005 - 2014 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-defined('_JEXEC') or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.plugin.plugin');
 jimport('joomla.user.helper');
@@ -20,30 +20,30 @@ jimport('joomla.user.helper');
  */
 class EcommApiResourceEcommGetAllCategories extends ApiResource
 {
-	/**
-	 * API Plugin for get method
-	 *
-	 * @return  avoid.
-	 */
-	public function get()
-	{
-		$this->plugin->setResponse("Please Use Post method");
-	}
+    /**
+     * API Plugin for get method
+     *
+     * @return  avoid.
+     */
+    public function get()
+    {
+        $this->plugin->setResponse("Please Use Post method");
+    }
 
-	/**
-	 * API Plugin for post method
-	 *
-	 * @return  avoid.
-	 */
-	public function post()
-	{
-		// Require helper file
-		JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
-		$service  = new EcommService();
+    /**
+     * API Plugin for post method
+     *
+     * @return  avoid.
+     */
+    public function post()
+    {
+        // Require helper file
+        JLoader::register('EcommCategoryService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/category.php');
+        $service = new EcommCategoryService();
 
-		$data     = $service->ecommGetAllCategories();
+        $data = $service->ecommGetAllCategories();
 
-		$this->plugin->setResponse($data);
-		return true;
-	}
+        $this->plugin->setResponse($data);
+        return true;
+    }
 }
