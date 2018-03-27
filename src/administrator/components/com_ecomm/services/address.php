@@ -31,9 +31,9 @@ class EcommAddressService
     public function ecommGetCountriesForAddress()
     {
         // Create the instance of zone model & call getCountry
-		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
+        JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
         $Quick2cartModelZone = JModelLegacy::getInstance('Zone', 'Quick2cartModel');
-        $countries = $Quick2cartModelZone->getCountry();
+        $countries           = $Quick2cartModelZone->getCountry();
 
         // If we have the countries present
         if (!empty($countries)) {
@@ -50,10 +50,10 @@ class EcommAddressService
      */
     public function ecommGetStatesForCountry($countryId)
     {
-    	// Create the instance of zone model & call getRegionList
-		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
+        // Create the instance of zone model & call getRegionList
+        JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
         $Quick2cartModelZone = JModelLegacy::getInstance('Zone', 'Quick2cartModel');
-        $states = $Quick2cartModelZone->getRegionList($countryId);
+        $states              = $Quick2cartModelZone->getRegionList($countryId);
 
         // If we have the states present
         if (!empty($states)) {
@@ -102,20 +102,20 @@ class EcommAddressService
      */
     public function getCountryCode($countryName)
     {
-    	try
+        try
         {
-        	// Get the query instance
-	        $query = $this->db->getQuery(true);
+            // Get the query instance
+            $query = $this->db->getQuery(true);
 
-	        // Build the query
-	        $query->select('id');
-	        $query->from('#__tj_country');
-	        $query->where('country=' . $this->db->quote($countryName));
+            // Build the query
+            $query->select('id');
+            $query->from('#__tj_country');
+            $query->where('country=' . $this->db->quote($countryName));
 
-	        // Set the query and load result
-	        $this->db->setQuery($query);
-	        return $this->db->loadAssoc()['id'];
-    	} catch (Exception $e) {
+            // Set the query and load result
+            $this->db->setQuery($query);
+            return $this->db->loadAssoc()['id'];
+        } catch (Exception $e) {
             return '0';
         }
     }
@@ -126,19 +126,19 @@ class EcommAddressService
      */
     public function getStateCode($stateName)
     {
-    	try
+        try
         {
-        	// Get the query instance
-	        $query = $this->db->getQuery(true);
+            // Get the query instance
+            $query = $this->db->getQuery(true);
 
-	        // Build the query
-	        $query->select('id');
-	        $query->from('#__tj_region');
-	        $query->where('region=' . $this->db->quote($stateName));
+            // Build the query
+            $query->select('id');
+            $query->from('#__tj_region');
+            $query->where('region=' . $this->db->quote($stateName));
 
-	        // Set the query and load result
-	        $this->db->setQuery($query);
-	        return $this->db->loadAssoc()['id'];
+            // Set the query and load result
+            $this->db->setQuery($query);
+            return $this->db->loadAssoc()['id'];
         } catch (Exception $e) {
             return '0';
         }
@@ -151,7 +151,7 @@ class EcommAddressService
     public function ecommSaveCustomerAddress($address)
     {
         // Get the address model and save the address
-		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
+        JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
         $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
         $result       = $addressModel->save($address);
 
@@ -187,14 +187,14 @@ class EcommAddressService
      */
     public function ecommGetUserAddressList($userId = 0)
     {
-    	// If userId not provided then get logged in user's id
+        // If userId not provided then get logged in user's id
         if (!$userId) {
             $userId = JFactory::getUser()->id;
         }
 
         try
         {
-        	// Get the query Object
+            // Get the query Object
             $query = $this->db->getQuery(true);
 
             // Build the query
@@ -391,7 +391,7 @@ class EcommAddressService
             return $this->returnData;
         }
 
-        $i      = $shopId      = 0;
+        $i = $shopId = 0;
 
         // Default user group
         $params      = JComponentHelper::getParams('com_ecomm');
@@ -425,7 +425,7 @@ class EcommAddressService
 
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
-        $this->returnData['shopId'] = '0';
+        $this->returnData['shopId']  = '0';
 
         if ($shopId > 0) {
             $this->returnData['success'] = 'true';
