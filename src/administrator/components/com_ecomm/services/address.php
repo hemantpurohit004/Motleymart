@@ -34,11 +34,18 @@ class EcommAddressService
         JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
         $Quick2cartModelZone = JModelLegacy::getInstance('Zone', 'Quick2cartModel');
         $countries           = $Quick2cartModelZone->getCountry();
+        $data                = array();
+
+        // Iterate over each country and get its id and country
+        for ($i = 0; $i < count($countries); $i++) {
+            $data[$i]['id']      = $countries[$i]['id'];
+            $data[$i]['country'] = $countries[$i]['country'];
+        }
 
         // If we have the countries present
-        if (!empty($countries)) {
+        if (!empty($data)) {
             $this->returnData['success']   = 'true';
-            $this->returnData['countries'] = $countries;
+            $this->returnData['countries'] = $data;
         }
 
         return $this->returnData;
@@ -61,8 +68,8 @@ class EcommAddressService
 
             // Iterate over each state and get its id and name
             for ($i = 0; $i < count($states); $i++) {
-                $data[$i]['id']        = $states[$i]->region_id;
-                $data[$i]['stateName'] = $states[$i]->region;
+                $data[$i]['id']        = $states[$i]['id'];
+                $data[$i]['stateName'] = $states[$i]['region'];
             }
 
             // Save it in returnData
@@ -79,6 +86,7 @@ class EcommAddressService
     public function ecommGetSingleCustomerAddressDetails($addressId)
     {
         // Get the address model and save the address
+        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
         $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
         $result       = $addressModel->getAddress($addressId);
 
@@ -151,7 +159,7 @@ class EcommAddressService
     public function ecommSaveCustomerAddress($address)
     {
         // Get the address model and save the address
-        JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
+        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
         $addressModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
         $result       = $addressModel->save($address);
 
@@ -170,6 +178,7 @@ class EcommAddressService
     public function ecommDeleteCustomerAddress($addressId)
     {
         // Load the address form model
+        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
         $addressFormModel = JModelLegacy::getInstance('Customer_AddressForm', 'Quick2cartModel');
         $result           = $addressFormModel->delete($addressId);
 
@@ -213,6 +222,7 @@ class EcommAddressService
 
         if (!empty($userId)) {
             // Load the checkout model
+            JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
             $cartCheckoutModel = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
             $userAddresses     = array();
 

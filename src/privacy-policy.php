@@ -1,4 +1,4 @@
-<div style="background-color:#5257af;font-size: 40px; color:white"><center><p><strong>Privacy Policy</strong></p><center></div>
+<body style="margin-left: 100px;margin-right: 100px;"><div style="background-color:#5257af;font-size: 40px; color:white"><center><p><strong>Privacy Policy</strong></p><center></div>
 
 <p>This Privacy Policy is meant to help you understand what data we collect, why we collect it, and what we do with it. This is important; we hope you will take time to read it carefully:<p>
 
@@ -26,3 +26,4 @@
 <p>Motley and/or its respective suppliers make no claims about the suitability, reliability, availability, timeliness, lack of viruses or other harmful components and accuracy of the information, software, products, services and related graphics contained within the Motley sites for any purpose. All such information, software, products, services and related graphics are provided "as is" without warranty of any kind. Motley and/or its respective suppliers hereby disclaim all warranties</p>
 
 <p>Policy updates reserves the right to change or update this policy at any time. Such changes shall be effective immediately upon posting to the Site.</p>
+	</body>

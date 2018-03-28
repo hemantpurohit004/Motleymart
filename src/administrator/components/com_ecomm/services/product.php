@@ -239,8 +239,9 @@ class EcommProductService
      */
     public function ecommGetSingleProductDetails($productId, $categoryId, $shopId)
     {
-        // Get the product details
-        $modelCart      = new Quick2cartModelcart;
+        // Load the cart model
+        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
+        $modelCart      = JModelLegacy::getInstance('cart', 'Quick2cartModel');
         $productDetails = $modelCart->getItemRec($productId);
 
         // Get the selling price
@@ -309,7 +310,9 @@ class EcommProductService
      */
     public function ecommGetProductsForShopAndCategory($shopId, $categoryId, $filter = array())
     {
-        $model = new Quick2cartModelCategory;
+        // Load the cart model
+        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
+        $model = JModelLegacy::getInstance('Category', 'Quick2cartModel');
 
         try
         {
@@ -319,8 +322,8 @@ class EcommProductService
             // Select the required fields from the table.
             $query->select($model->getState('list.select', 'a.*'));
             $query->select('CASE WHEN bc.discount_price IS NOT NULL THEN bc.discount_price
-	                        ELSE a.price
-	                        END as fprice');
+                            ELSE a.price
+                            END as fprice');
             $query->from('`#__kart_items` AS a');
             $query->where('`category` = ' . $categoryId);
             $query->where('`store_id` = ' . $shopId);
