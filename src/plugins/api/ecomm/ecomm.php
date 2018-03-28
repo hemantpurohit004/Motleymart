@@ -81,5 +81,6 @@ class plgAPIEcomm extends ApiPlugin
 		$this->setResourceAccess('ecommSaveFeedback', 'private', 'post');
 		$this->setResourceAccess('ecommGetShopsNearMe', 'private', 'post');
 		$this->setResourceAccess('ecommGetSingleShopDetails', 'private', 'post');
+		$this->setResourceAccess('ecommGetUserAddressListWithShopId', 'private', 'post');
 	}
 }
