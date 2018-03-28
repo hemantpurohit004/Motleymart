@@ -71,7 +71,7 @@ class EcommStoreService
         }
     }
 
-    /* User - CART
+    /* - STORE
      * Function to get available coupon code list
      * return array containig status as true and the coupon code details
      */
