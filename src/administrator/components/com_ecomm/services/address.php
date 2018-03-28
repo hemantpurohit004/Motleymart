@@ -444,4 +444,65 @@ class EcommAddressService
 
         return $this->returnData;
     }
+
+    /* - ADDRESS
+     * Function to get all the customer addresses used in past
+     * return array containig status as true and the addresses
+     */
+    public function ecommGetUserAddressListWithShopId($userId = 0)
+    {
+        // If userId not provided then get logged in user's id
+        if (!$userId) {
+            $userId = JFactory::getUser()->id;
+        }
+
+        try
+        {
+            // Get the query Object
+            $query = $this->db->getQuery(true);
+
+            // Build the query
+            $query->select('*');
+            $query->from('#__kart_customer_address');
+            $query->where('user_id = ' . $userId);
+            $query->order('id DESC');
+
+            // Set the query and load result.
+            $this->db->setQuery($query);
+            $address = $this->db->loadObjectList();
+        } catch (Exception $e) {
+            $this->returnData['message'] = $e->getMessage();
+            return $this->returnData;
+        }
+
+        if (!empty($userId)) {
+            // Load the checkout model
+            JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
+            $cartCheckoutModel = JModelLegacy::getInstance('cartcheckout', 'Quick2cartModel');
+            $userAddresses     = array();
+
+            // Check if address is used as billing or shipping order
+            if (!empty($address)) {
+                foreach ($address as $item) {
+                    $item->country_name = $cartCheckoutModel->getCountryName($item->country_code);
+                    $item->state_name   = $cartCheckoutModel->getStateName($item->state_code);
+                    $item->shopId       = 0;
+
+                    $result = $this->ecommGetShopsNearMe($item->latitude, $item->longitude);
+                    if ($result['success'] = 'true') {
+                        $item->shopId = $result['shopId'];
+                    }
+
+                    $userAddresses[] = $item;
+                }
+                $this->returnData = array('success' => 'false');
+                if (!empty($userAddresses)) {
+                    $this->returnData['success']   = 'true';
+                    $this->returnData['addresses'] = $userAddresses;
+                }
+            }
+        }
+
+        return $this->returnData;
+    }
 }
