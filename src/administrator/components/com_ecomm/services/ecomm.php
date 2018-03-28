@@ -9,22 +9,14 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-// Include quick2cart models and helpers
-JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_quick2cart/models');
-JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
-JLoader::register('comquick2cartHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
-JLoader::register('storeHelper', JPATH_SITE . '/components/com_quick2cart/helpers/storeHelper.php');
-JLoader::register('ProductHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
+// Include helpers
 JLoader::import('promotion', JPATH_SITE . '/components/com_quick2cart/helpers');
-JLoader::import('cart', JPATH_SITE . '/components/com_quick2cart/models');
-JLoader::import('category', JPATH_SITE . '/components/com_quick2cart/models');
-JLoader::import('createorder', JPATH_SITE . '/components/com_quick2cart/helpers');
 
-// Include the users model
+// Include the models
 JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_users/models');
-
-// Include the ecomm models, tables and helpers
 JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_ecomm/models');
+
+// Include the tables
 JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_ecomm/tables');
 
 /**
@@ -37,12 +29,9 @@ class EcommService
 {
     public function __construct()
     {
-        $this->db                      = JFactory::getDbo();
-        $this->returnData              = array();
-        $this->returnData['success']   = 'false';
-        $this->storeHelper             = new storeHelper;
-        $this->comquick2cartHelper     = new comquick2cartHelper;
-        $this->Quick2cartModelCategory = new Quick2cartModelCategory;
+        $this->db                    = JFactory::getDbo();
+        $this->returnData            = array();
+        $this->returnData['success'] = 'false';
     }
 
     /* User - CART
@@ -209,15 +198,7 @@ class EcommService
             else {
                 // Check if the otp is expired or not
                 if (!$this->ecommVerifyOtpIsExpired($data['expiration_time'])) {
-                    $message = 'Your OTP for ' . $mobileNo . ' is ' . $data['otp'];
-
-                    $dispatcher = JDispatcher::getInstance();
-                    JPluginHelper::importPlugin('sms');
-                    $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
-
-                    // If otp is not expired
-                    $this->returnData['success'] = "true";
-                    $this->returnData            = array_merge($this->returnData, $data);
+                    $this->returnData = $this->sendOtpToMobileNo($mobileNo, $data['otp']);
                 } else {
                     // If otp is expired then regenerate
                     if ($this->ecommRegenerateOtpForMobileNoResetPassword($mobileNo)) {
@@ -285,26 +266,14 @@ class EcommService
      */
     public function ecommGenerateOtpForMobileNoResetPassword($mobileNo, $isUser)
     {
-        $params        = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout    = $params->get('otp_timeout');
-        $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10, $otpDigitCount);
-        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
+        $data = $this->ecommGenerateOtp();
 
         try
         {
-            // Generate random number between 100000 and 999999
-            $otp = mt_rand($otpStartRange, $otpEndRange);
-
-            // Create the expiration time
-            $currentTimestamp    = $this->getDate();
-            $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
-            $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
-
             // Initialise the variables
             $query   = $this->db->getQuery(true);
             $columns = array('mobile_no', 'otp', 'expiration_time');
-            $values  = array($this->db->quote($mobileNo), $this->db->quote($otp), $this->db->quote($expirationTime));
+            $values  = array($this->db->quote($mobileNo), $this->db->quote($data['otp']), $this->db->quote($data['expirationTime']));
 
             if ($isUser == 0) {
                 $columns[] = 'is_user';
@@ -320,16 +289,7 @@ class EcommService
 
             // If data is inserted successfully
             if ($this->db->execute()) {
-                $message = 'Your OTP for ' . $mobileNo . ' is ' . $otp;
-
-                $dispatcher = JDispatcher::getInstance();
-                JPluginHelper::importPlugin('sms');
-                $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
-
-                $this->returnData['success']         = "true";
-                $this->returnData['mobile_no']       = $mobileNo;
-                $this->returnData['otp']             = (string) $otp;
-                $this->returnData['expiration_time'] = $expirationTime;
+                $this->returnData = $this->sendOtpToMobileNo($mobileNo, $data['otp']);
             } else {
                 $this->returnData['success'] = "false";
             }
@@ -343,16 +303,47 @@ class EcommService
     /* - USER
      * Function to update the verified column
      */
+    public function ecommGenerateOtp()
+    {
+        $params        = JComponentHelper::getParams('com_ecomm');
+        $otpTimeout    = $params->get('otp_timeout');
+        $otpDigitCount = $params->get('otpDigitCount') - 1;
+        $otpStartRange = pow(10, $otpDigitCount);
+        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
+
+        // Generate random number between 100000 and 999999
+        $otp = mt_rand($otpStartRange, $otpEndRange);
+
+        // Create the expiration time
+        $currentTimestamp    = $this->getDate();
+        $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
+        $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
+
+        return array(
+            'otp'            => (string) $otp,
+            'otpTimeout'     => $otpTimeout,
+            'expirationTime' => $expirationTime,
+        );
+    }
+
+    /* - USER
+     * Function to update the verified column
+     */
     public function ecommUpdateVerifiedOtpResetPassword($mobileNo)
     {
-        $query      = $this->db->getQuery(true);
-        $conditions = array(
-            $this->db->quoteName('mobile_no') . ' = ' . $this->db->quote($mobileNo),
-        );
-        $query->delete($this->db->quoteName('#__ecomm_mobile_otp_map_reset_password'));
-        $query->where($conditions);
-        $this->db->setQuery($query);
-        return $this->db->execute();
+        try
+        {
+            $query      = $this->db->getQuery(true);
+            $conditions = array(
+                $this->db->quoteName('mobile_no') . ' = ' . $this->db->quote($mobileNo),
+            );
+            $query->delete($this->db->quoteName('#__ecomm_mobile_otp_map_reset_password'));
+            $query->where($conditions);
+            $this->db->setQuery($query);
+            return $this->db->execute();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /* - USER
@@ -386,28 +377,16 @@ class EcommService
      */
     public function ecommRegenerateOtpForMobileNoResetPassword($mobileNo)
     {
-        $params        = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout    = $params->get('otp_timeout');
-        $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10, $otpDigitCount);
-        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
+        $data = $this->ecommGenerateOtp();
 
         try
         {
-            // Generate random number between 100000 and 999999
-            $otp = mt_rand($otpStartRange, $otpEndRange);
-
-            // Create the expiration time
-            $currentTimestamp    = $this->getDate();
-            $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
-            $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
-
             $query = $this->db->getQuery(true);
 
             // Fields to update.
             $fields = array(
-                $this->db->quoteName('otp') . ' = ' . $this->db->quote($otp),
-                $this->db->quoteName('expiration_time') . ' = ' . $this->db->quote($expirationTime),
+                $this->db->quoteName('otp') . ' = ' . $this->db->quote($data['otp']),
+                $this->db->quoteName('expiration_time') . ' = ' . $this->db->quote($data['expirationTime']),
             );
 
             // Conditions for which records should be updated.
@@ -427,42 +406,6 @@ class EcommService
         } catch (Exception $e) {
             return false;
         }
-    }
-
-    /* Common - BANNER
-     * Function to get banner images based on category id
-     * return array containig status as true and the payment methods
-     */
-    public function ecommGetBannerImages($categoryId)
-    {
-        // Clear the previous responses
-        $this->returnData            = array();
-        $this->returnData['success'] = 'false';
-
-        // Load the banners form model
-        $bannersModel = JModelLegacy::getInstance('banners', 'EcommModel');
-        $result       = $bannersModel->getItems();
-
-        if ($result) {
-            $data = array();
-
-            foreach ($result as $banner) {
-                if ($banner->category_id == $categoryId) {
-                    $data[] = $banner;
-                }
-            }
-
-            if (empty($data)) {
-                $this->returnData['message'] = 'No banner images found.';
-            } else {
-                $this->returnData['success']      = 'true';
-                $this->returnData['BannerImages'] = $data;
-            }
-        } else {
-            $this->returnData['message'] = 'No banner images found.';
-        }
-
-        return $this->returnData;
     }
 
     /* - USER
@@ -608,14 +551,19 @@ class EcommService
      */
     public function ecommUpdateVerifiedOtp($mobileNo)
     {
-        $query = $this->db->getQuery(true);
-        $query->update($this->db->quoteName('#__ecomm_mobile_otp_map'))
-            ->set($this->db->quoteName('verified') . ' = ' . $this->db->quote('1'))
-            ->where($this->db->quoteName('mobile_no') . ' = ' . $this->db->quote($mobileNo));
+        try
+        {
+            $query = $this->db->getQuery(true);
+            $query->update($this->db->quoteName('#__ecomm_mobile_otp_map'))
+                ->set($this->db->quoteName('verified') . ' = ' . $this->db->quote('1'))
+                ->where($this->db->quoteName('mobile_no') . ' = ' . $this->db->quote($mobileNo));
 
-        $this->db->setQuery($query);
+            $this->db->setQuery($query);
 
-        return $this->db->execute();
+            return $this->db->execute();
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /* - USER
@@ -648,9 +596,6 @@ class EcommService
      */
     public function verifyIfUserAlreadyExists($mobileNo)
     {
-        // Initialise the variables
-        $return = false;
-
         // Get the table instance
         $mobileOtpMapTable = JTable::getInstance('MobileOtpMap', 'EcommTable', array('dbo', $this->db));
 
@@ -659,10 +604,10 @@ class EcommService
 
         // If user_id exists for given mobile_no
         if (!empty($mobileOtpMapTable->user_id)) {
-            $return = true;
+            return true;
         }
 
-        return $return;
+        return false;
     }
 
     /* - USER
@@ -691,16 +636,7 @@ class EcommService
             else {
                 // Check if the otp is expired or not
                 if (!$this->ecommVerifyOtpIsExpired($data['expiration_time'])) {
-                    $message = 'Your OTP for ' . $mobileNo . ' is ' . $data['otp'];
-
-                    $dispatcher = JDispatcher::getInstance();
-                    JPluginHelper::importPlugin('sms');
-                    $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
-
-                    // If otp is not expired
-                    $this->returnData['success'] = "true";
-                    $this->returnData            = array_merge($this->returnData, $data);
-
+                    $this->returnData = $this->sendOtpToMobileNo($mobileNo, $data['otp']);
                 } else {
                     // If otp is expired then regenerate
                     if ($this->ecommRegenerateOtpForMobileNo($mobileNo)) {
@@ -746,28 +682,16 @@ class EcommService
      */
     public function ecommRegenerateOtpForMobileNo($mobileNo)
     {
-        $params        = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout    = $params->get('otp_timeout');
-        $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10, $otpDigitCount);
-        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
+        $data = $this->ecommGenerateOtp();
 
         try
         {
-            // Generate random number between 100000 and 999999
-            $otp = mt_rand($otpStartRange, $otpEndRange);
-
-            // Create the expiration time
-            $currentTimestamp    = $this->getDate();
-            $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
-            $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
-
             $query = $this->db->getQuery(true);
 
             // Fields to update.
             $fields = array(
-                $this->db->quoteName('otp') . ' = ' . $this->db->quote($otp),
-                $this->db->quoteName('expiration_time') . ' = ' . $this->db->quote($expirationTime),
+                $this->db->quoteName('otp') . ' = ' . $this->db->quote($data['otp']),
+                $this->db->quoteName('expiration_time') . ' = ' . $this->db->quote($data['expirationTime']),
             );
 
             // Conditions for which records should be updated.
@@ -795,26 +719,14 @@ class EcommService
      */
     public function ecommGenerateOtpForMobileNo($mobileNo, $isUser)
     {
-        $params        = JComponentHelper::getParams('com_ecomm');
-        $otpTimeout    = $params->get('otp_timeout');
-        $otpDigitCount = $params->get('otpDigitCount') - 1;
-        $otpStartRange = pow(10, $otpDigitCount);
-        $otpEndRange   = pow(10, ($otpDigitCount + 1)) - 1;
+        $data = $this->ecommGenerateOtp();
 
         try
         {
-            // Generate random number between 100000 and 999999
-            $otp = mt_rand($otpStartRange, $otpEndRange);
-
-            // Create the expiration time
-            $currentTimestamp    = $this->getDate();
-            $expirationTimestamp = strtotime($currentTimestamp) + $otpTimeout;
-            $expirationTime      = date('Y-m-d H:i:s', $expirationTimestamp);
-
             // Initialise the variables
             $query   = $this->db->getQuery(true);
             $columns = array('mobile_no', 'otp', 'expiration_time');
-            $values  = array($this->db->quote($mobileNo), $this->db->quote($otp), $this->db->quote($expirationTime));
+            $values  = array($this->db->quote($mobileNo), $this->db->quote($data['otp']), $this->db->quote($data['expirationTime']));
 
             if ($isUser == 0) {
                 $columns[] = 'is_user';
@@ -830,17 +742,7 @@ class EcommService
 
             // If data is inserted successfully
             if ($this->db->execute()) {
-                $message = 'Your OTP for ' . $mobileNo . ' is ' . $otp;
-
-                $dispatcher = JDispatcher::getInstance();
-                JPluginHelper::importPlugin('sms');
-                $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
-
-                $this->returnData['success']         = "true";
-                $this->returnData['mobile_no']       = $mobileNo;
-                $this->returnData['otp']             = (string) $otp;
-                $this->returnData['expiration_time'] = $expirationTime;
-
+                $this->returnData = $this->sendOtpToMobileNo($mobileNo, $data['otp']);
             } else {
                 $this->returnData['success'] = "false";
             }
@@ -851,26 +753,23 @@ class EcommService
         }
     }
 
-    /* CART
-     * Function to get the cart details
-     * return array containig status as true and the cart details
+    /* - USER
+     * Function to get joomla's user details
+     * return array containig status as true and the user detials
      */
-    public function ecommApplyCouponCode($couponCode)
+    public function sendOtpToMobileNo($mobileNo, $otp)
     {
-        $this->returnData = array();
+        $message = 'Your OTP for ' . $mobileNo . ' is ' . $otp;
 
         $dispatcher = JDispatcher::getInstance();
-        JPluginHelper::importPlugin("system");
-        $return = $dispatcher->trigger("ecommApplyCouponCode", array($couponCode));
-        if ($return[0] == 'true') {
-            $this->returnData['success'] = 'true';
-            $this->returnData['message'] = 'Coupon code applied successfully';
-        } else {
-            $this->returnData['success'] = 'false';
-            $this->returnData['message'] = 'Failed to apply coupon';
-        }
+        JPluginHelper::importPlugin('sms');
+        $dispatcher->trigger('onSmsSendMessage', array($mobileNo, $message));
 
-        return $this->returnData;
+        return array(
+            'success'   => 'true',
+            'mobile_no' => $mobileNo,
+            'otp'       => $otp,
+        );
     }
 
     /* - USER
@@ -889,15 +788,12 @@ class EcommService
         // If user is exists - check by username exists
         if (isset($userDetails->username) && !empty($userDetails->username)) {
             // Get the user's profile details
-            $profileDetails = JUserHelper::getProfile($userId);
-
-            // Bind the profile details
-            $userDetails->profile = $profileDetails->profile;
+            $userDetails->profile = JUserHelper::getProfile($userId)->profile;
 
             return $userDetails;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /* User - USER

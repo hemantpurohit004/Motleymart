@@ -315,4 +315,35 @@ class EcommCategoryService
             return $this->returnData;
         }
     }
+
+    /* - CATEGORY - BANNER
+     * Function to get banner images based on category id
+     * return array containig status as true and the payment methods
+     */
+    public function ecommGetBannerImagesForCategory($categoryId)
+    {
+        // Load the banners form model
+        $bannersModel = JModelLegacy::getInstance('banners', 'EcommModel');
+        $result       = $bannersModel->getItems();
+
+        if ($result) {
+            $data = array();
+
+            foreach ($result as $banner) {
+                if ($banner->category_id == $categoryId) {
+                    $data[] = $banner;
+                }
+            }
+
+            if (!empty($data)) {
+                $this->returnData['success']      = 'true';
+                $this->returnData['BannerImages'] = $data;
+                return $this->returnData;
+            }
+        }
+
+        $this->returnData['message'] = 'No banner images found.';
+
+        return $this->returnData;
+    }
 }
