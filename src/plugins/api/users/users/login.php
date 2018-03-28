@@ -6,7 +6,7 @@
  * @link http://www.techjoomla.com
  */
 
-defined('_JEXEC') or die( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 JModelLegacy::addIncludePath(JPATH_SITE . 'components/com_api/models');
 require_once JPATH_SITE . '/components/com_api/libraries/authentication/user.php';
 require_once JPATH_SITE . '/components/com_api/libraries/authentication/login.php';
@@ -14,153 +14,144 @@ require_once JPATH_SITE . '/components/com_api/models/key.php';
 require_once JPATH_SITE . '/components/com_api/models/keys.php';
 class UsersApiResourceLogin extends ApiResource
 {
-	/**
-	 * Method get
-	 *
-	 * @return  mixed
-	 *
-	 * @since 1.0
-	 */
-	public function get()
-	{
-		$this->plugin->err_code = 405;
-		$this->plugin->err_message = JText::_('PLG_API_USERS_GET_METHOD_NOT_ALLOWED_MESSAGE');
-		$this->plugin->setResponse(null);
-	}
+    /**
+     * Method get
+     *
+     * @return  mixed
+     *
+     * @since 1.0
+     */
+    public function get()
+    {
+        $this->plugin->err_code    = 405;
+        $this->plugin->err_message = JText::_('PLG_API_USERS_GET_METHOD_NOT_ALLOWED_MESSAGE');
+        $this->plugin->setResponse(null);
+    }
 
-	/**
-	 * Method post
-	 *
-	 * @return  auth, id
-	 *
-	 * @since 1.0
-	 */
+    /**
+     * Method post
+     *
+     * @return  auth, id
+     *
+     * @since 1.0
+     */
 
-	public function post()
-	{
-		$this->plugin->setResponse($this->keygen());
-	}
-	public function keygen()
-	{
-		// init variable
-		$obj = new stdclass;
-		$umodel = new JUser;
-		$user = $umodel->getInstance();
-		$app = JFactory::getApplication();
-		$username = $app->input->get('username', 0, 'STRING');
-		$user = JFactory::getUser();
-		$id = JUserHelper::getUserId($username);
+    public function post()
+    {
+        $this->plugin->setResponse($this->keygen());
+    }
+    public function keygen()
+    {
+        // init variable
+        $obj      = new stdclass;
+        $umodel   = new JUser;
+        $user     = $umodel->getInstance();
+        $app      = JFactory::getApplication();
+        $username = $app->input->get('username', 0, 'STRING');
+        $user     = JFactory::getUser();
+        $id       = JUserHelper::getUserId($username);
 
-		if($id == null)
-		{
-			$model = FD::model('Users');
-			$id = $model->getUserId('email', $username);
-		}
+        if ($id == null) {
+            $model = FD::model('Users');
+            $id    = $model->getUserId('email', $username);
+        }
 
-		$result = new stdClass;
-		$kmodel = new ApiModelKey;
-		$model = new ApiModelKeys;
-		$key = null;
+        $result = new stdClass;
+        $kmodel = new ApiModelKey;
+        $model  = new ApiModelKeys;
+        $key    = null;
 
-		// Get login user hash
-		//$kmodel->setState('user_id', $user->id);
+        // Get login user hash
+        //$kmodel->setState('user_id', $user->id);
 
-		$kmodel->setState('user_id', $id);
-		$log_hash = $kmodel->getList();
+        $kmodel->setState('user_id', $id);
+        $log_hash = $kmodel->getList();
 
-		$log_hash = (!empty($log_hash))?$log_hash[count($log_hash) - count($log_hash)]:$log_hash;
+        $log_hash = (!empty($log_hash)) ? $log_hash[count($log_hash) - count($log_hash)] : $log_hash;
 
-		if (!empty($log_hash))
-		{
-			$key = $log_hash->hash;
-		}
-		else if($key == null || empty($key))
-		{
-			// Create new key for user
-			$data = array(
-			'userid' => $id,
-			'domain' => '' ,
-			'state' => 1,
-			'id' => '',
-			'task' => 'save',
-			'c' => 'key',
-			'ret' => 'index.php?option=com_api&view=keys',
-			'option' => 'com_api',
-			JSession::getFormToken() => 1
-			);
-			$result = $kmodel->save($data);
-			$key = $result->hash;
+        if (!empty($log_hash)) {
+            $key = $log_hash->hash;
+        } else if ($key == null || empty($key)) {
+            // Create new key for user
+            $data = array(
+                'userid'                 => $id,
+                'domain'                 => '',
+                'state'                  => 1,
+                'id'                     => '',
+                'task'                   => 'save',
+                'c'                      => 'key',
+                'ret'                    => 'index.php?option=com_api&view=keys',
+                'option'                 => 'com_api',
+                JSession::getFormToken() => 1,
+            );
+            $result = $kmodel->save($data);
+            $key    = $result->hash;
 
-			//add new key in easysocial table
-			$easyblog = JPATH_ROOT . '/administrator/components/com_easyblog/easyblog.php';
+            //add new key in easysocial table
+            $easyblog = JPATH_ROOT . '/administrator/components/com_easyblog/easyblog.php';
 
-			if (JFile::exists($easyblog) && JComponentHelper::isEnabled('com_easysocial', true))
-			{
-				$this->updateEauth( $user , $key );
-			}
-		}
+            if (JFile::exists($easyblog) && JComponentHelper::isEnabled('com_easysocial', true)) {
+                $this->updateEauth($user, $key);
+            }
+        }
 
-		if (!empty($key))
-		{
-			$result->success = 'true';
+        if (!empty($key)) {
+            $result->success = 'true';
 
-			// Get the log in credentials.
-			$credentials = array();
-			$credentials['username']  = $app->input->get('username', 0, 'STRING');
-			$credentials['password']  = $app->input->get('password', 0, 'STRING');
+            // Get the log in credentials.
+            $credentials             = array();
+            $credentials['username'] = $app->input->get('username', 0, 'STRING');
+            $credentials['password'] = $app->input->get('password', 0, 'STRING');
 
-			// Get the log in options.
-			$options = array(
-    			'remember' => 0,
-        		'return' => 'index.php?option=com_users&view=profile',
-        		'entry_url' => JUri::root() . 'index.php?option=com_users&task=user.login',
-        		'action' => 'core.login.site'
-    		);
-    		
-			// Perform the log in.
-			if ($app->login($credentials, $options))
-			{
-			    // Require service file
-			    JLoader::register('EcommService', JPATH_SITE. '/administrator/components/com_ecomm/services/ecomm.php');
-				$service  = new EcommService();
-				$userDetails = $service->ecommGetSingleUserDetails($id);
-				$result->key = $key;
-				$result->userDetails = $userDetails['user'];
-				
-				$data = JPluginHelper::getPlugin("payment", "payumoney");
-            	$payUMoneyDetails = json_decode($data->params);
-				
-				$result->payUMoneyDetails = new stdClass;            	
-				$result->payUMoneyDetails->key = $payUMoneyDetails->key;
-				$result->payUMoneyDetails->salt = $payUMoneyDetails->salt;
-			}
-			else
-			{
-				$result->success = 'false';
-				$this->plugin->err_code = 500;
-				$this->plugin->err_message = JText::_('Login failed. Please try again.');
-			}
-		}
-		return $result;
-	}
+            // Get the log in options.
+            $options = array(
+                'remember'  => 0,
+                'return'    => 'index.php?option=com_users&view=profile',
+                'entry_url' => JUri::root() . 'index.php?option=com_users&task=user.login',
+                'action'    => 'core.login.site',
+            );
 
-	/**
-	 * Method function to update Easyblog auth keys
-	 *
-	 * @return  mixed
-	 *
-	 * @since 1.0
-	 */
-	public function updateEauth($user=null,$key=null)
-	{
-		require_once JPATH_ADMINISTRATOR . '/components/com_easysocial/includes/foundry.php';
-		$model 	= FD::model('Users');
-		$id 	= $model->getUserId('username', $user->username);
-		$user 	= FD::user($id);
-		$user->alias = $user->username;
-		$user->auth = $key;
-		$user->store();
+            // Perform the log in.
+            if ($app->login($credentials, $options)) {
+                // Require service file
+                JLoader::register('EcommUserService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/user.php');
+                $service             = new EcommUserService();
+                $userDetails         = $service->ecommGetSingleUserDetails($id);
+                $result->key         = $key;
+                $result->userDetails = $userDetails['user'];
 
-		return $id;
-	}
+                $data             = JPluginHelper::getPlugin("payment", "payumoney");
+                $payUMoneyDetails = json_decode($data->params);
+
+                $result->payUMoneyDetails       = new stdClass;
+                $result->payUMoneyDetails->key  = $payUMoneyDetails->key;
+                $result->payUMoneyDetails->salt = $payUMoneyDetails->salt;
+            } else {
+                $result->success           = 'false';
+                $this->plugin->err_code    = 500;
+                $this->plugin->err_message = JText::_('Login failed. Please try again.');
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Method function to update Easyblog auth keys
+     *
+     * @return  mixed
+     *
+     * @since 1.0
+     */
+    public function updateEauth($user = null, $key = null)
+    {
+        require_once JPATH_ADMINISTRATOR . '/components/com_easysocial/includes/foundry.php';
+        $model       = FD::model('Users');
+        $id          = $model->getUserId('username', $user->username);
+        $user        = FD::user($id);
+        $user->alias = $user->username;
+        $user->auth  = $key;
+        $user->store();
+
+        return $id;
+    }
 }
