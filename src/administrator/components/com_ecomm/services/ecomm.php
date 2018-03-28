@@ -9,9 +9,6 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-// Include helpers
-JLoader::import('promotion', JPATH_SITE . '/components/com_quick2cart/helpers');
-
 // Include the models
 JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_users/models');
 JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_ecomm/models');
@@ -32,51 +29,6 @@ class EcommService
         $this->db                    = JFactory::getDbo();
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
-    }
-
-    /* User - CART
-     * Function to get available coupon code list
-     * return array containig status as true and the coupon code details
-     */
-    public function ecommGetCouponCodes()
-    {
-        $offers = $this->ecommGetShopOffers($shopId = 3, $published = 1);
-
-        $promotionHelper = new PromotionHelper;
-
-        $this->returnData = array();
-        $offersData       = array();
-
-        if ($offers['success'] = 'true' && count($offers['offers']) > 0) {
-            foreach ($offers['offers'] as $offer) {
-                $data['coupon_code'] = $offer['coupon_code'];
-                $data['promoType']   = 1;
-                $offerDetails        = $promotionHelper->getValidatePromotions($data)[0];
-
-                if ($offerDetails) {
-                    $offerObj                = new stdClass;
-                    $offerObj->couponCode    = $offerDetails->coupon_code;
-                    $offerObj->discount_type = $offerDetails->discount_type;
-                    $offerObj->discount      = $offerDetails->discount;
-                    $offerObj->max_discount  = empty($offerDetails->max_discount) ? $offerDetails->discount : $offerDetails->max_discount;
-
-                    $conditionAmount           = json_decode($offerDetails->rules[0]->condition_attribute_value, true)['INR'];
-                    $offerObj->conditionAmount = $conditionAmount;
-
-                    $offersData[] = $offerObj;
-                }
-            }
-        }
-
-        if (!empty($offersData)) {
-            $this->returnData['success'] = 'true';
-            $this->returnData['offers']  = $offersData;
-        } else {
-            $this->returnData['success'] = 'false';
-            $this->returnData['message'] = 'Please try again';
-        }
-
-        return $this->returnData;
     }
 
     /*  - COMMON
