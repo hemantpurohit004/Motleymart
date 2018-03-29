@@ -44,7 +44,8 @@ class EcommApiResourceEcommSearch extends ApiResource
         $inputData = json_decode(file_get_contents('php://input'), true);
 
         $search = $inputData['search'];
-        $data   = $service->ecommSearch($search);
+        $shopId = $inputData['shopId'];
+        $data   = $service->ecommSearch($search, $shopId);
 
         $this->plugin->setResponse($data);
         return true;
