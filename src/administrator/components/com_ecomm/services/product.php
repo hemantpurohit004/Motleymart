@@ -27,8 +27,12 @@ class EcommProductService
     /* - PRODUCT
      * Function to Search product by its title and category
      */
-    public function ecommSearch($search)
+    public function ecommSearch($search, $shopId = 0)
     {
+        if (empty($shopId) || $shopId <= 0) {
+            return array('success' => 'false', 'message' => 'Please select shop first');
+        }
+
         try
         {
             // Get the query instance
@@ -39,6 +43,7 @@ class EcommProductService
             $query->from($this->db->quoteName('#__kart_items') . 'AS k');
             $query->where('(' . $this->db->quoteName('k.name') . 'like' . "'%$search%'" . 'OR' . $this->db->quoteName('c.title') . 'like' . "'%$search%'" . ')', 'AND');
             $query->where($this->db->quoteName('k.state') . ' = ' . $this->db->quote('1'));
+            $query->where($this->db->quoteName('k.store_id') . ' = ' . $this->db->quote($shopId));
 
             $query->JOIN('LEFT', '`#__categories` AS c ON k.category=c.id');
             $query->JOIN('INNER', '`#__kart_base_currency` AS bc ON bc.item_id=k.item_id');
