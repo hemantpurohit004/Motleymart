@@ -16,11 +16,11 @@ class JConfig {
 	public $db = 'motleymart';
 	public $dbprefix = 'ichal_';
 	public $dbtype = 'mysqli';
-	public $debug = '1';
+	public $debug = '0';
 	public $debug_lang = '0';
 	public $display_offline_message = '1';
 	public $editor = 'codemirror';
-	public $error_reporting = 'maximum';
+	public $error_reporting = 'none';
 	public $feed_email = 'none';
 	public $feed_limit = '5';
 	public $force_ssl = '0';

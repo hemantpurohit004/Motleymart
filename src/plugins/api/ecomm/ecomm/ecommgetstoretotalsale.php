@@ -45,9 +45,11 @@ class EcommApiResourceEcommGetStoreTotalSale extends ApiResource
         // Get the request body and convert it into array
         $inputData = json_decode(file_get_contents('php://input'), true);
 
-        $shopId = $inputData['shopId'];
+        $shopId    = $inputData['shopId'];
+        $startDate = $inputData['startDate'];
+        $endDate   = $inputData['endDate'];
 
-        $data = $service->getAllOrderIncome($shopId);
+        $data = $service->ecommGetStoreTotalSale($shopId, $startDate, $endDate);
 
         $this->plugin->setResponse($data);
         return true;

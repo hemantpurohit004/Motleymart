@@ -250,20 +250,46 @@ class EcommStoreService
      * Function to get all orders income
      * return array containig status as true and icome details
      */
-    public function getAllOrderIncome($shopId)
+    public function ecommGetStoreTotalSale($shopId, $startDate, $endDate)
     {
-         // Create db and query object
-        $query = "SELECT FORMAT(SUM(amount), 2) FROM `ichal_kart_orders` WHERE `id` IN ( SELECT DISTINCT `order_id` FROM `ichal_kart_order_item` WHERE `store_id`='" . $shopId ."' ) AND `status` IN ('C', 'S', 'D')";
+        try {
+            // Get the query instance
+            $innerQuery = $this->db->getQuery(true);
+            $query      = $this->db->getQuery(true);
 
-         try {
+            // Get the orderIds of orders for current store and status
+            $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
+            $innerQuery->from($this->db->quoteName('#__kart_order_item'));
+            $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
+            $innerQuery->where($this->db->quoteName('status') . " IN ('C', 'S', 'D')");
+
+            // Get the sum of amount of given order ids
+            $query->select('FORMAT(SUM(amount), 2)');
+            $query->from($this->db->quoteName('#__kart_orders'));
+            $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
+
+            // If start date is provided
+            if ($startDate) {
+                $query->where($this->db->quoteName('cdate') . ' >=  "' . $startDate . '"');
+            }
+
+            // If end date is provided
+            if ($endDate) {
+                $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
+            }
+
             $this->db->setQuery($query);
             $result = $this->db->loadResult();
 
+            if (empty($result)) {
+                $result = '0';
+            }
+
             $this->returnData['success'] = 'true';
-            $this->returnData['amount'] = $result;
+            $this->returnData['amount']  = $result;
             return $this->returnData;
-         } catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->returnData;
-         }
+        }
     }
 }
