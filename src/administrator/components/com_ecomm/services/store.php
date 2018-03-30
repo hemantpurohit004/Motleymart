@@ -245,4 +245,25 @@ class EcommStoreService
 
         return $this->returnData;
     }
+
+    /* VENDOR - STORE
+     * Function to get all orders income
+     * return array containig status as true and icome details
+     */
+    public function getAllOrderIncome($shopId)
+    {
+         // Create db and query object
+        $query = "SELECT FORMAT(SUM(amount), 2) FROM `ichal_kart_orders` WHERE `id` IN ( SELECT DISTINCT `order_id` FROM `ichal_kart_order_item` WHERE `store_id`='" . $shopId ."' ) AND `status` IN ('C', 'S', 'D')";
+
+         try {
+            $this->db->setQuery($query);
+            $result = $this->db->loadResult();
+
+            $this->returnData['success'] = 'true';
+            $this->returnData['amount'] = $result;
+            return $this->returnData;
+         } catch (Exception $e) {
+            return $this->returnData;
+         }
+    }
 }
