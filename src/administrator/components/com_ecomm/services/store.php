@@ -261,12 +261,12 @@ class EcommStoreService
             $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
             $innerQuery->from($this->db->quoteName('#__kart_order_item'));
             $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
-            $innerQuery->where($this->db->quoteName('status') . " IN ('C', 'S', 'D')");
 
             // Get the sum of amount of given order ids
-            $query->select('FORMAT(SUM(amount), 2)');
+            $query->select('status, FORMAT(SUM(amount), 2) as amount');
             $query->from($this->db->quoteName('#__kart_orders'));
             $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
+            $query->group($this->db->quoteName('status'));
 
             // If start date is provided
             if ($startDate) {
@@ -279,14 +279,10 @@ class EcommStoreService
             }
 
             $this->db->setQuery($query);
-            $result = $this->db->loadResult();
+            $result = $this->db->loadAssocList();
 
-            if (empty($result)) {
-                $result = '0';
-            }
-
-            $this->returnData['success'] = 'true';
-            $this->returnData['amount']  = $result;
+            $this->returnData['success']   = 'true';
+            $this->returnData['totalSale'] = $result;
             return $this->returnData;
         } catch (Exception $e) {
             return $this->returnData;
