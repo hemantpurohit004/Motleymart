@@ -245,4 +245,47 @@ class EcommStoreService
 
         return $this->returnData;
     }
+
+    /* VENDOR - STORE
+     * Function to get all orders income
+     * return array containig status as true and icome details
+     */
+    public function ecommGetStoreTotalSale($shopId, $startDate, $endDate)
+    {
+        try {
+            // Get the query instance
+            $innerQuery = $this->db->getQuery(true);
+            $query      = $this->db->getQuery(true);
+
+            // Get the orderIds of orders for current store and status
+            $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
+            $innerQuery->from($this->db->quoteName('#__kart_order_item'));
+            $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
+
+            // Get the sum of amount of given order ids
+            $query->select('status, FORMAT(SUM(amount), 2) as amount');
+            $query->from($this->db->quoteName('#__kart_orders'));
+            $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
+            $query->group($this->db->quoteName('status'));
+
+            // If start date is provided
+            if ($startDate) {
+                $query->where($this->db->quoteName('cdate') . ' >=  "' . $startDate . '"');
+            }
+
+            // If end date is provided
+            if ($endDate) {
+                $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
+            }
+
+            $this->db->setQuery($query);
+            $result = $this->db->loadAssocList();
+
+            $this->returnData['success']   = 'true';
+            $this->returnData['totalSale'] = $result;
+            return $this->returnData;
+        } catch (Exception $e) {
+            return $this->returnData;
+        }
+    }
 }
