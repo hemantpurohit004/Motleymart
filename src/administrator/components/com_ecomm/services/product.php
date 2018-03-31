@@ -453,4 +453,74 @@ class EcommProductService
 
         return $this->returnData;
     }
+
+    /* VENDOR - PRODUCT
+     * Function to get product list
+     * return array containig status as true and the product list
+     */
+    public function ecommGetProductsList($shopId, $categoryId, $status = -1)
+    {
+        try
+        {
+            // Create db and query object
+            $query = $this->db->getQuery(true);
+
+            // Build the query
+            $query->select($this->db->quoteName(array('product_id', 'store_id', 'category', 'name', 'price', 'stock', 'images', 'description', 'state')))
+                ->from($this->db->quoteName('#__kart_items'))
+                ->where($this->db->quoteName('store_id') . " = " . (int) $shopId);
+
+            // If status is other than -1
+            if ($status != -1) {
+                $query->where($this->db->quoteName('state') . " = " . (int) $status);
+            }
+
+            // If categoryId is provided
+            if ($categoryId) {
+                $query->where($this->db->quoteName('category') . " = " . (int) $categoryId);
+            }
+
+            // Set the query and get the result
+            $this->db->setQuery($query);
+            $products = $this->db->loadAssocList();
+
+            // If products are present
+            if (!empty($products)) {
+                // Load the cart model
+                JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
+                $modelCart = JModelLegacy::getInstance('cart', 'Quick2cartModel');
+
+                // Itterate over each product
+                for ($i = 0; $i < count($products); $i++) {
+                    // Get the selling price
+                    $sellingPrice                 = $modelCart->getPrice($products[$i]['product_id'], 1)['discount_price'];
+                    $products[$i]['sellingPrice'] = (empty($sellingPrice)) ? '0' : $sellingPrice;
+
+                    // Get the products available in options
+                    $products[$i]['availableIn'] = $this->ecommGetAvailableUnitsForProduct($products[$i]['product_id'], $products[$i]['price'], $products[$i]['sellingPrice']);
+
+                    // Get all the images
+                    $images = json_decode($products[$i]['images']);
+
+                    // Get the valid images
+                    $images = $this->getValidImages($images);
+
+                    $products[$i]['images'] = array();
+
+                    if (isset($images[0])) {
+                        $products[$i]['images'][]['path'] = $images[0];
+                    }
+                }
+
+                $this->returnData['success']  = 'true';
+                $this->returnData['products'] = $products;
+            } else {
+                $this->returnData['message'] = 'Products not found';
+            }
+
+            return $this->returnData;
+        } catch (Exception $e) {
+            return $this->returnData;
+        }
+    }
 }
