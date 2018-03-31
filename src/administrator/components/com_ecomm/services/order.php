@@ -293,34 +293,73 @@ class EcommOrderService
      * Function to get all the pending orders for given store
      * return array containig status as true and the order details
      */
-    public function ecommGetAllOrdersForShop($shopId)
+    public function ecommGetAllOrdersForShop($shopId, $startDate, $endDate, $status)
     {
         // Initialise the variables
         $orders = array();
 
-        // Load the model
-        JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_quick2cart/models');
-        $modelOrders = JModelLegacy::getInstance('Orders', 'Quick2cartModel');
+        try {
+            // Get the query instance
+            $innerQuery = $this->db->getQuery(true);
+            $query      = $this->db->getQuery(true);
 
-        // Get the order ids for the shop
-        $orderIds = $modelOrders->getOrderIds($shopId);
+            // Get the orderIds of orders for current store and status
+            $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
+            $innerQuery->from($this->db->quoteName('#__kart_order_item'));
+            $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
 
-        // If order id exists
-        if (!empty($orderIds)) {
-            $orderIds = explode(',', $orderIds);
+            // Get the sum of amount of given order ids
+            $query->select('id');
+            $query->from($this->db->quoteName('#__kart_orders'));
+            $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
 
-            // Get the details of each order id
-            foreach ($orderIds as $orderId) {
-                $order    = $this->comquick2cartHelper->getorderinfo($orderId, $shopId);
-                $order    = $this->getFormattedSingleOrderDetails($order['order_info'][0]);
-                $orders[] = $order;
+            // If status is provided
+            if ($status) {
+                $query->where($this->db->quoteName('status') . ' =  "' . $status . '"');
             }
 
-            $this->returnData['success'] = 'true';
-            $this->returnData['orders']  = $orders;
-        }
+            // If start date is provided
+            if ($startDate) {
+                $query->where($this->db->quoteName('cdate') . ' >=  "' . $startDate . '"');
+            }
 
-        return $this->returnData;
+            // If end date is provided
+            if ($endDate) {
+                $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
+            }
+
+            // Set the query and get the result
+            $this->db->setQuery($query);
+            $orderIds = $this->db->loadAssocList();
+
+            // If order id exists
+            if (!empty($orderIds)) {
+                JLoader::register('comquick2cartHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
+                $comquick2cartHelper = new comquick2cartHelper;
+
+                // Get the details of each order id
+                foreach ($orderIds as $ordersData) {
+                    $order = $this->ecommGetSingleOrderDetails($shopId, $ordersData['id']);
+
+                    if ($order['success'] == 'true') {
+                        $orders[] = $order['orderDetails'];
+
+                        unset($this->returnData['success']);
+                        unset($this->returnData['orderDetails']);
+                    }
+                }
+
+                $this->returnData['success'] = 'true';
+                $this->returnData['orders']  = $orders;
+            } else {
+                $this->returnData['message'] = 'No orders found.';
+            }
+
+            return $this->returnData;
+        } catch (Exception $e) {
+            $this->returnData['message'] = 'Failed to get the orders.';
+            return $this->returnData;
+        }
     }
 
     /* User - ORDER
@@ -408,40 +447,11 @@ class EcommOrderService
         $singleOrderDetails['zipcode']    = $orderData->zipcode;
         $singleOrderDetails['phone']      = $orderData->phone;
         $singleOrderDetails['cdate']      = $orderData->cdate;
+        $singleOrderDetails['latitude']   = $orderData->latitude;
+        $singleOrderDetails['longitude']  = $orderData->latitude;
 
         return $singleOrderDetails;
 
-    }
-
-    /* VENDOR - ORDER
-     * Function to get orders for shop and status
-     * return array containig status as true and the order details
-     */
-    public function ecommGetOrdersForShopAndStatus($shopId, $status)
-    {
-        // Get all the orders for the shopId
-        $orders = $this->ecommGetAllOrdersForShop($shopId);
-
-        // If there are orders present and need only specific status orders
-        if ($orders['success'] == 'true' && !empty($orders['orders'])) {
-            $data     = array();
-            $statuses = explode(',', $status);
-
-            // Iterate over each order
-            foreach ($orders['orders'] as $order) {
-                if (in_array($order['order_info'][0]->status, $statuses)) {
-                    $data[] = $this->getFormattedSingleOrderDetails($order['order_info'][0]);
-                }
-            }
-        }
-
-        // If there are orders present
-        if (!empty($data)) {
-            $this->returnData['success'] = 'true';
-            $this->returnData['orders']  = $data;
-        }
-
-        return $this->returnData;
     }
 
     /* - ORDER
