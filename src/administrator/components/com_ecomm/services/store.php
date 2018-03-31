@@ -252,6 +252,9 @@ class EcommStoreService
      */
     public function ecommGetStoreTotalSale($shopId, $startDate, $endDate)
     {
+        $stauses           = array('P', 'C', 'S', 'D', 'E', 'RF');
+        $availableStatuses = $data = array();
+
         try {
             // Get the query instance
             $innerQuery = $this->db->getQuery(true);
@@ -278,11 +281,26 @@ class EcommStoreService
                 $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
             }
 
+            // Set the query and get the result
             $this->db->setQuery($query);
             $result = $this->db->loadAssocList();
 
+            // Build the data in proper format
+            foreach ($result as $sale) {
+                $availableStatuses[$sale['status']] = $sale['amount'];
+            }
+
+            // Itterate over each status
+            foreach ($stauses as $status) {
+                // If status not present then add status with value 0
+                if (!array_key_exists($status, $availableStatuses)) {
+                    $availableStatuses[$status] = '0';
+                }
+            }
+
+            // Return the success data
             $this->returnData['success']   = 'true';
-            $this->returnData['totalSale'] = $result;
+            $this->returnData['totalSale'] = $availableStatuses;
             return $this->returnData;
         } catch (Exception $e) {
             return $this->returnData;
