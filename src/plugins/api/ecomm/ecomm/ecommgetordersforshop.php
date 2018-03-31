@@ -18,7 +18,7 @@ jimport('joomla.user.helper');
  * @subpackage  com_tjlms-API-create course
  * @since       1.0
  */
-class EcommApiResourceEcommGetOrdersForShopAndStatus extends ApiResource
+class EcommApiResourceEcommGetOrdersForShop extends ApiResource
 {
     /**
      * API Plugin for get method
@@ -50,7 +50,7 @@ class EcommApiResourceEcommGetOrdersForShopAndStatus extends ApiResource
         $endDate   = $inputData['endDate'];
         $status    = $inputData['status'];
 
-        $data = $service->ecommGetAllOrdersForShop($shopId, $startDate, $endDate, $status);
+        $data = $service->ecommGetOrdersForShop($shopId, $startDate, $endDate, $status);
 
         $this->plugin->setResponse($data);
         return true;

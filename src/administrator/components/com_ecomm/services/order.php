@@ -293,7 +293,7 @@ class EcommOrderService
      * Function to get all the pending orders for given store
      * return array containig status as true and the order details
      */
-    public function ecommGetAllOrdersForShop($shopId, $startDate, $endDate, $status)
+    public function ecommGetOrdersForShop($shopId, $startDate, $endDate, $status)
     {
         // Initialise the variables
         $orders = array();
@@ -343,12 +343,13 @@ class EcommOrderService
 
                     if ($order['success'] == 'true') {
                         $orders[] = $order['orderDetails'];
-
                         unset($this->returnData['success']);
                         unset($this->returnData['orderDetails']);
                     }
                 }
+            }
 
+            if (!empty($orders)) {
                 $this->returnData['success'] = 'true';
                 $this->returnData['orders']  = $orders;
             } else {
