@@ -220,6 +220,9 @@ class EcommStoreService
         $input->set('paypalemail', $storeData['paypalEmail']);
         $input->set('otherPayMethod', $storeData['otherPayMethod']);
 
+        $storeAvatar =$shopId.'-'.$storeData['avatar'];
+        $input->set('avatar', $storeAvatar);
+
         // Hard coded for now
         $input->set('option', 'com_quick2cart');
         $input->set('task', 'vendor.save');
@@ -237,73 +240,81 @@ class EcommStoreService
         $result      = $storeHelper->saveVendorDetails($input);
 
         if ($result['store_id']) {
-            $this->returnData['success'] = 'true';
-            $this->returnData['message'] = 'Store details saved successfully';
-        } else {
-            $this->returnData['message'] = 'Failed to save the store details';
+
+            $tempPath = JPATH_SITE . '/tmp/' . $storeData['avatar'];
+
+            if (file_exists($tempPath)) {
+                $destinationPath      = JPATH_SITE . '/images/quick2cart/'.$storeAvatar;
+                // Move Image from temp to image folder.
+                rename($tempPath, $destinationPath);
+                $this->returnData['success'] = 'true';
+                $this->returnData['message'] = 'Store details saved successfully';
+            }
+            else {
+                $this->returnData['message'] = 'Failed to save the store details';
+            }
+        }
+        return $this->returnData;
+}
+
+/* VENDOR - STORE
+ * Function to get all orders income
+ * return array containig status as true and icome details
+ */
+function ecommGetStoreTotalSale($shopId, $startDate, $endDate)
+{
+    $stauses           = array('P', 'C', 'S', 'D', 'E', 'RF');
+    $availableStatuses = $data = array();
+
+    try {
+        // Get the query instance
+        $innerQuery = $this->db->getQuery(true);
+        $query      = $this->db->getQuery(true);
+
+        // Get the orderIds of orders for current store and status
+        $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
+        $innerQuery->from($this->db->quoteName('#__kart_order_item'));
+        $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
+
+        // Get the sum of amount of given order ids
+        $query->select('status, FORMAT(SUM(amount), 2) as amount');
+        $query->from($this->db->quoteName('#__kart_orders'));
+        $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
+        $query->group($this->db->quoteName('status'));
+
+        // If start date is provided
+        if ($startDate) {
+            $query->where($this->db->quoteName('cdate') . ' >=  "' . $startDate . '"');
         }
 
+        // If end date is provided
+        if ($endDate) {
+            $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
+        }
+
+        // Set the query and get the result
+        $this->db->setQuery($query);
+        $result = $this->db->loadAssocList();
+
+        // Build the data in proper format
+        foreach ($result as $sale) {
+            $availableStatuses[$sale['status']] = $sale['amount'];
+        }
+
+        // Itterate over each status
+        foreach ($stauses as $status) {
+            // If status not present then add status with value 0
+            if (!array_key_exists($status, $availableStatuses)) {
+                $availableStatuses[$status] = '0';
+            }
+        }
+
+        // Return the success data
+        $this->returnData['success']   = 'true';
+        $this->returnData['totalSale'] = $availableStatuses;
+        return $this->returnData;
+    } catch (Exception $e) {
         return $this->returnData;
     }
-
-    /* VENDOR - STORE
-     * Function to get all orders income
-     * return array containig status as true and icome details
-     */
-    public function ecommGetStoreTotalSale($shopId, $startDate, $endDate)
-    {
-        $stauses           = array('P', 'C', 'S', 'D', 'E', 'RF');
-        $availableStatuses = $data = array();
-
-        try {
-            // Get the query instance
-            $innerQuery = $this->db->getQuery(true);
-            $query      = $this->db->getQuery(true);
-
-            // Get the orderIds of orders for current store and status
-            $innerQuery->select('DISTINCT' . $this->db->quoteName('order_id'));
-            $innerQuery->from($this->db->quoteName('#__kart_order_item'));
-            $innerQuery->where($this->db->quoteName('store_id') . " = " . $shopId);
-
-            // Get the sum of amount of given order ids
-            $query->select('status, FORMAT(SUM(amount), 2) as amount');
-            $query->from($this->db->quoteName('#__kart_orders'));
-            $query->where($this->db->quoteName('id') . ' IN  (' . $innerQuery . ')');
-            $query->group($this->db->quoteName('status'));
-
-            // If start date is provided
-            if ($startDate) {
-                $query->where($this->db->quoteName('cdate') . ' >=  "' . $startDate . '"');
-            }
-
-            // If end date is provided
-            if ($endDate) {
-                $query->where($this->db->quoteName('cdate') . ' <=  "' . $endDate . '"');
-            }
-
-            // Set the query and get the result
-            $this->db->setQuery($query);
-            $result = $this->db->loadAssocList();
-
-            // Build the data in proper format
-            foreach ($result as $sale) {
-                $availableStatuses[$sale['status']] = $sale['amount'];
-            }
-
-            // Itterate over each status
-            foreach ($stauses as $status) {
-                // If status not present then add status with value 0
-                if (!array_key_exists($status, $availableStatuses)) {
-                    $availableStatuses[$status] = '0';
-                }
-            }
-
-            // Return the success data
-            $this->returnData['success']   = 'true';
-            $this->returnData['totalSale'] = $availableStatuses;
-            return $this->returnData;
-        } catch (Exception $e) {
-            return $this->returnData;
-        }
-    }
+}
 }

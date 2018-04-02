@@ -35,6 +35,13 @@
 				required="true"
 				/>
 		<field
+				name="store_image_prefix"
+				type="text"
+				label="Enter Prefix for Store Iamge"
+				description="Enter Prefix for Store Iamge"
+				required="true"
+				/>
+		<field
 				name="googleAddressKey"
 				type="text"
 				label="Google Address Key"
