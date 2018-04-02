@@ -45,7 +45,9 @@ class EcommApiResourceEcommGetCouponCodes extends ApiResource
         // Get the request body and convert it into array
         $inputData = json_decode(file_get_contents('php://input'), true);
 
-        $data = $service->ecommGetCouponCodes();
+        $shopId = $inputData['shopId'];
+
+        $data = $service->ecommGetCouponCodes($shopId);
 
         $this->plugin->setResponse($data);
 
