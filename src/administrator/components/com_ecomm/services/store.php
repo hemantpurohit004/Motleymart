@@ -75,9 +75,9 @@ class EcommStoreService
      * Function to get available coupon code list
      * return array containig status as true and the coupon code details
      */
-    public function ecommGetCouponCodes()
+    public function ecommGetCouponCodes($shopId=0)
     {
-        $offers = $this->ecommGetShopOffers($shopId = 3, $published = 1);
+        $offers = $this->ecommGetShopOffers($shopId, $published = 1);
 
         // Include helpers
         JLoader::import('promotion', JPATH_SITE . '/components/com_quick2cart/helpers');
