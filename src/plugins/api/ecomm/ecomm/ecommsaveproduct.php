@@ -41,6 +41,7 @@ class EcommApiResourceEcommSaveProduct extends ApiResource
         JLoader::register('EcommProductService', JPATH_ADMINISTRATOR . '/components/com_ecomm/services/product.php');
 
         $service = new EcommProductService();
+
         // Get the request body and convert it into array
         $inputData = json_decode(file_get_contents('php://input'), true);
 
