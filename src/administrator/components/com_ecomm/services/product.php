@@ -409,6 +409,7 @@ class EcommProductService
      */
     public function ecommSaveProduct($productData)
     {
+
         // Clear the previous responses
         $this->returnData            = array();
         $this->returnData['success'] = 'false';
@@ -438,6 +439,26 @@ class EcommProductService
         $input->set('view', 'product');
         $input->set('check', 'post');
         $input->set($token, '1');
+        $input->set('att_detail', $this->getAttributeData($productData));
+
+        /* Changes by Hemant for proct save*/
+        $input->set('youtube_link', '');
+        $input->set('item_slab', '0');
+        $input->set('min_item', '1');
+        $input->set('max_item', '100');
+        $input->set('metadesc', '');
+        $input->set('metakey', '');
+        $input->set('taxprofile_id', '');
+        $input->set('qtc_item_length', '0');
+        $input->set('qtc_item_width', '0');
+        $input->set('qtc_item_height', '0');
+        $input->set('length_class_id', '1');
+        $input->set('qtc_item_weight', '0');
+        $input->set('weigth_class_id', '1');
+        $input->set('qtc_shipProfile', '');
+        $input->set('saveAttri', '1');
+        $input->set('saveMedia', '1');
+        /*End Of change by hemant*/
 
         // Require helper file
         JLoader::register('comquick2cartHelper', JPATH_SITE . '/components/com_quick2cart/helpers');
@@ -454,6 +475,87 @@ class EcommProductService
         return $this->returnData;
     }
 
+    /* VENDOR - PRODUCT
+     * Function to get the product attributes from the inputdata
+     * return product attributes
+     */
+    public function getAttributeData($inputData) {
+        $attributeDetails =array();
+
+        $firstIndex = array(
+            "global_attribute_set" => 0,
+            "attri_name" =>"",
+            "attri_id" =>"",
+            "global_atrri_id" =>"",
+            "fieldType" => "Select",
+            "attri_opt" => array
+            ( array(
+                "id" =>"",
+                "globalOptionId" =>"",
+                "child_product_item_id" =>"",
+                "name" =>"",
+                "state" => 1,
+                "sku" => "",
+                "stock" =>"",
+                "prefix" => "+",
+                "mrp" => array( "INR" => 0 ),
+                "currency" => array ( "INR" =>"" ),
+                "order" => "1"
+                )
+            )
+        );
+
+        $attributeId = $inputData['attributeId'];
+        $attributeOptions = $inputData['attributeDetails'];
+        $attributesArray = array();
+
+
+        foreach ($attributeOptions as $attribute) {
+            $singleAttr = array();
+            $singleAttr['id'] = $attribute['id'];
+            $singleAttr['globalOptionId'] = '';
+            $singleAttr['child_product_item_id'] = '';
+            $singleAttr['name'] = $attribute['name'];
+            $singleAttr['state'] = 1;
+            $singleAttr['stock'] = '';
+            $singleAttr['sku'] = '';
+            $singleAttr['prefix'] = '+';
+            $singleAttr['mrp'] = array( 'INR' => $attribute['mrp']);
+            $singleAttr['currency'] = array( 'INR' => $attribute['price']);
+            $singleAttr['name'] = $attribute['name'];
+            $singleAttr['order'] = $attribute['order'];
+
+            $attributesArray[] = $singleAttr;
+        }
+
+        $attributesArray[] = array(
+            "id" =>"",
+            "globalOptionId" =>"",
+            "child_product_item_id" =>"",
+            "name" =>"",
+            "state" => 1,
+            "sku" => "",
+            "stock" =>"",
+            "prefix" => "+",
+            "mrp" => array( "INR" => 0 ),
+            "currency" => array ( "INR" =>"" ),
+            "order" => "1"
+            );
+
+        $secondIndex = array(
+            "global_attribute_set" => 0,
+            "attri_name" =>" Available In (Units)",
+            "attri_id" => $attributeId,
+            "global_atrri_id" => 0,
+            "fieldType" => "Select",
+            "attri_opt" => $attributesArray
+        );
+
+        $attributeDetails[] = $firstIndex;
+        $attributeDetails[] = $secondIndex;
+
+        return $attributeDetails;
+    }
     /* VENDOR - PRODUCT
      * Function to get product list
      * return array containig status as true and the product list
