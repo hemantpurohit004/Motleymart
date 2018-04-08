@@ -420,7 +420,6 @@ class EcommProductService
         $productId = empty($productData['productId']) ? 0 : $productData['productId'];
 
         $input->set('pid', $productId);
-
         $input->set('item_name', $productData['productName']);
         $input->set('item_alias', $productData['productAlias']);
         $input->set('qtc_product_type', 1);
@@ -432,7 +431,6 @@ class EcommProductService
         $input->set('store_id', $productData['storeId']);
         $input->set('multi_cur', array('INR' => $productData['productPrice']));
         $input->set('multi_dis_cur', array('INR' => $productData['discountPrice']));
-
         $input->set('option', 'com_quick2cart');
         $input->set('client', 'com_quick2cart');
         $input->set('task', 'product.save');
@@ -442,6 +440,8 @@ class EcommProductService
         $input->set('att_detail', $this->getAttributeData($productData));
 
         /* Changes by Hemant for proct save*/
+        /* For Image upload*/
+        $input->set('qtc_prodImg',array($productData['productImages']));
         $input->set('youtube_link', '');
         $input->set('item_slab', '0');
         $input->set('min_item', '1');
@@ -465,11 +465,32 @@ class EcommProductService
         $comquick2cartHelper = new comquick2cartHelper;
         $productId           = $comquick2cartHelper->saveProduct($input);
 
-        if ($productId > 0) {
+        // If Product not saved
+        if ($productId <= 0) {
+            $this->returnData['message'] = 'Failed to save the product details';
+            return $this->returnData;
+        }
+
+        // If image is not provided in case of edit.
+        if(!isset($productData['productImages']) || empty($productData['productImages'])){
             $this->returnData['success'] = 'true';
             $this->returnData['message'] = 'Product details saved successfully';
-        } else {
-            $this->returnData['message'] = 'Failed to save the product details';
+            return $this->returnData;
+            }
+
+        /*Store image to quick to cart folder*/
+        $tempPath = JPATH_SITE . '/tmp/' . $productData['productImages'];
+
+        if (file_exists($tempPath) && !empty($productData['productImages'])) {
+
+            $destinationPath      = JPATH_SITE . '/images/quick2cart/'.$productId.'-'.$productData['productImages'];
+            // Move Image from temp to image folder.
+            rename($tempPath, $destinationPath);
+            $this->returnData['success'] = 'true';
+            $this->returnData['message'] = 'Product details saved successfully';
+                }
+        else{
+            $this->returnData['message'] = 'Failed to save product image';
         }
 
         return $this->returnData;
